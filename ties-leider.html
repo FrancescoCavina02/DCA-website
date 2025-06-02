@@ -110,75 +110,88 @@
 
     /* Dropdown styles */
     .dropdown {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-    }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: var(--secondary);
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1003;
-      border-radius: 4px;
-      top: 100%;
-      left: 0;
-    }
-    .dropdown-content a {
-      color: var(--light);
-      padding: 12px 16px;
-      text-decoration: none;
       display: block;
-      margin: 0;
-      border-radius: 0;
-      transition: background-color 0.3s ease;
+      width: 100%;
     }
-    .dropdown-content a:hover {
-      background-color: var(--primary);
-      transform: none;
-      text-decoration: underline;
-    }
-    .dropdown-content a::before {
-      display: none;
-    }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
+    
     .dropdown > span {
-      margin-left: 1.5rem;
+      margin: 0;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: block;
+      width: 100%;
+      color: var(--light);
       font-weight: 500;
+      cursor: pointer;
       transition: all 0.3s ease;
       position: relative;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
       overflow: hidden;
-      color: var(--primary);
-      cursor: pointer;
     }
-    .dropdown > span:hover {
-      color: var(--light);
-      transform: scale(1.05);
-      background-color: rgba(211, 47, 47, 0.1);
-    }
+    
     .dropdown > span::before {
       content: '';
       position: absolute;
-      top: 50%;
-      left: 0.2rem;
-      width: 25px;
-      height: 25px;
-      background-image: url('pics/Ball.jpg');
-      background-size: cover;
-      background-position: center;
-      transform: translateY(-50%) scale(0);
-      transition: transform 0.3s ease;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #ff9800, #ffc107);
+      transition: left 0.3s ease;
       z-index: -1;
-      opacity: 0.8;
-      border-radius: 50%;
     }
+    
     .dropdown > span:hover::before {
-      transform: translateY(-50%) scale(1);
+      left: 0;
+    }
+    
+    .dropdown > span:hover {
+      transform: translateX(10px);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    .dropdown > span::after {
+      content: '▼';
+      float: right;
+      transition: transform 0.3s ease;
+      font-size: 0.8rem;
+    }
+    
+    .dropdown.active > span::after {
+      transform: rotate(180deg);
+    }
+    
+    .dropdown-content {
+      position: static;
+      display: none;
+      box-shadow: none;
+      background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+      border-radius: 0;
+      overflow: hidden;
+      animation: dropdownSlide 0.3s ease;
+    }
+    
+    @keyframes dropdownSlide {
+      from { max-height: 0; opacity: 0; }
+      to { max-height: 200px; opacity: 1; }
+    }
+    
+    .dropdown-content a {
+      padding: 0.8rem 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.8);
+      background: none;
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-content a:hover {
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      color: var(--light);
+      transform: translateX(15px);
+      padding-left: 3.5rem;
+    }
+    
+    .dropdown.active .dropdown-content {
+      display: block;
     }
 
     /* — Main Content — */
@@ -704,26 +717,87 @@
         display: block;
         width: 100%;
       }
+      
       .dropdown > span {
         margin: 0;
-        padding: 0.75rem 1.5rem;
-        border-top: 1px solid #222;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
         display: block;
         width: 100%;
+        color: var(--light);
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
       }
+      
+      .dropdown > span::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #ff9800, #ffc107);
+        transition: left 0.3s ease;
+        z-index: -1;
+      }
+      
+      .dropdown > span:hover::before {
+        left: 0;
+      }
+      
+      .dropdown > span:hover {
+        transform: translateX(10px);
+        text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      }
+      
+      .dropdown > span::after {
+        content: '▼';
+        float: right;
+        transition: transform 0.3s ease;
+        font-size: 0.8rem;
+      }
+      
+      .dropdown.active > span::after {
+        transform: rotate(180deg);
+      }
+      
       .dropdown-content {
         position: static;
         display: none;
         box-shadow: none;
-        background-color: #1a1a1a;
+        background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+        border-radius: 0;
+        overflow: hidden;
+        animation: dropdownSlide 0.3s ease;
       }
+      
+      @keyframes dropdownSlide {
+        from { max-height: 0; opacity: 0; }
+        to { max-height: 200px; opacity: 1; }
+      }
+      
       .dropdown-content a {
-        padding: 0.5rem 2rem;
-        border-top: 1px solid #444;
+        padding: 0.8rem 3rem;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        color: rgba(255,255,255,0.8);
+        background: none;
+        transition: all 0.3s ease;
       }
+      
+      .dropdown-content a:hover {
+        background: linear-gradient(45deg, var(--primary), #ff6b6b);
+        color: var(--light);
+        transform: translateX(15px);
+        padding-left: 3.5rem;
+      }
+      
       .dropdown.active .dropdown-content {
         display: block;
       }
+      
       /* show overlay when menu open */
       #overlay.active {
         display: block;
@@ -922,7 +996,7 @@
     /* Mobile breadcrumb adjustments */
     @media (max-width: 768px) {
       .breadcrumb-container {
-        top: 50px;
+        top: 65px; /* Increased from 50px to 65px for more spacing */
         padding: 0.5rem 0;
       }
       
@@ -933,6 +1007,11 @@
       
       .breadcrumb-item {
         padding: 0.2rem 0.3rem;
+      }
+      
+      /* Hide middle breadcrumb items on mobile for shorter navigation */
+      .breadcrumb-desktop {
+        display: none;
       }
     }
   </style>
@@ -979,19 +1058,19 @@
         Home
       </a>
       <span class="breadcrumb-separator">›</span>
-      <a href="about.html" class="breadcrumb-item">
+      <a href="about.html" class="breadcrumb-item breadcrumb-desktop">
         <span class="breadcrumb-icon">ℹ️</span>
         About
       </a>
-      <span class="breadcrumb-separator">›</span>
+      <span class="breadcrumb-separator breadcrumb-desktop">›</span>
       <a href="board.html" class="breadcrumb-item">
         <span class="breadcrumb-icon">🏆</span>
-        The Board
+        Board
       </a>
       <span class="breadcrumb-separator">›</span>
       <span class="breadcrumb-item active">
         <span class="breadcrumb-icon">🌟</span>
-        Ties Leider
+        Ties
       </span>
     </nav>
   </div>
@@ -1166,8 +1245,7 @@
       const btn = document.getElementById('menu-toggle');
       const nav = document.getElementById('nav-menu');
       const overlay = document.getElementById('overlay');
-      const dropdown = nav.querySelector('.dropdown');
-      const dropdownSpan = dropdown.querySelector('span');
+      const dropdowns = nav.querySelectorAll('.dropdown');
       
       function toggleMenu() {
         nav.classList.toggle('active');
@@ -1183,11 +1261,26 @@
         toggleMenu();
       });
 
-      // Handle dropdown click on mobile
-      dropdownSpan.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768) {
-          e.preventDefault();
-          dropdown.classList.toggle('active');
+      // Handle dropdown clicks on mobile
+      dropdowns.forEach(dropdown => {
+        const dropdownSpan = dropdown.querySelector('span');
+        if (dropdownSpan) {
+          dropdownSpan.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+              e.preventDefault();
+              e.stopPropagation();
+              
+              // Close other dropdowns first
+              dropdowns.forEach(otherDropdown => {
+                if (otherDropdown !== dropdown) {
+                  otherDropdown.classList.remove('active');
+                }
+              });
+              
+              // Toggle current dropdown
+              dropdown.classList.toggle('active');
+            }
+          });
         }
       });
 
