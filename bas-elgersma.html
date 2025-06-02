@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Bas Elgersma - Coach</title>
+  <title>Bas Elgersma - Head of FVDB Youth</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Google Font -->
@@ -60,18 +60,18 @@
       margin-left: 0.5rem;
     }
     .logo .ball-logo {
-      height: 2.8rem; /* Same size as XXX.png */
+      height: 2.8rem;
       vertical-align: middle;
-      margin-right: 0.5rem; /* Space between ball and DCA text */
+      margin-right: 0.5rem;
     }
     .adam-image {
-      height: 3.5rem; /* Set specific height to fit original menu bar */
+      height: 3.5rem;
       vertical-align: middle;
-      margin-left: 1rem; /* Close to logo but with some space */
+      margin-left: 1rem;
     }
     nav#nav-menu {
       display: flex;
-      align-items: center; /* Align items to center vertically */
+      align-items: center;
     }
     nav#nav-menu a {
       margin-left: 1.5rem;
@@ -108,228 +108,18 @@
       transform: translateY(-50%) scale(1);
     }
     .menu-toggle {
-      display: block;
-      font-size: 1.8rem;
-      padding: 0.8rem;
-      background: linear-gradient(45deg, var(--primary), #ff6b6b);
-      border-radius: 12px;
-      color: var(--light);
-      border: none;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .menu-toggle::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s;
-    }
-    
-    .menu-toggle:hover::before {
-      left: 100%;
-    }
-    
-    .menu-toggle:hover {
-      transform: scale(1.05) rotate(5deg);
-      box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
-    }
-    
-    .menu-toggle:active {
-      transform: scale(0.95);
-    }
-    
-    /* Modern Sidebar Navigation */
-    nav#nav-menu {
-      display: flex;
-      flex-direction: column;
-      background: linear-gradient(135deg, var(--secondary), #1a1a1a, var(--secondary));
-      position: fixed;
-      top: 0; 
-      left: -60%;
-      width: 60%; 
-      height: 100%;
-      padding-top: 4rem;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      z-index: 1001;
-      box-shadow: 5px 0 25px rgba(0,0,0,0.3);
-      backdrop-filter: blur(10px);
-    }
-    
-    /* Slide in when active with bounce */
-    nav#nav-menu.active {
-      left: 0;
-      animation: slideInBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    
-    @keyframes slideInBounce {
-      0% { left: -60%; }
-      70% { left: 2%; }
-      100% { left: 0; }
-    }
-    
-    /* Modern Navigation Links */
-    nav#nav-menu a {
-      margin: 0;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      color: var(--light);
-      font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    nav#nav-menu a::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, var(--primary), #ff6b6b);
-      transition: left 0.3s ease;
-      z-index: -1;
-    }
-    
-    nav#nav-menu a:hover::before {
-      left: 0;
-    }
-    
-    nav#nav-menu a:hover {
-      color: var(--light);
-      transform: translateX(10px);
-      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    }
-    
-    /* Modern Dropdown Styles */
-    .dropdown {
-      display: block;
-      width: 100%;
-    }
-    
-    .dropdown > span {
-      margin: 0;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      display: block;
-      width: 100%;
-      color: var(--light);
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .dropdown > span::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, #ff9800, #ffc107);
-      transition: left 0.3s ease;
-      z-index: -1;
-    }
-    
-    .dropdown > span:hover::before {
-      left: 0;
-    }
-    
-    .dropdown > span:hover {
-      transform: translateX(10px);
-      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    }
-    
-    .dropdown > span::after {
-      content: '▼';
-      float: right;
-      transition: transform 0.3s ease;
-      font-size: 0.8rem;
-    }
-    
-    .dropdown.active > span::after {
-      transform: rotate(180deg);
-    }
-    
-    .dropdown-content {
-      position: static;
       display: none;
-      box-shadow: none;
-      background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-      border-radius: 0;
-      overflow: hidden;
-      animation: dropdownSlide 0.3s ease;
-    }
-    
-    @keyframes dropdownSlide {
-      from { max-height: 0; opacity: 0; }
-      to { max-height: 200px; opacity: 1; }
-    }
-    
-    .dropdown-content a {
-      padding: 0.8rem 3rem;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      color: rgba(255,255,255,0.8);
       background: none;
-      transition: all 0.3s ease;
-    }
-    
-    .dropdown-content a:hover {
-      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      border: none;
+      font-size: 1.75rem;
       color: var(--light);
-      transform: translateX(15px);
-      padding-left: 3.5rem;
-    }
-    
-    .dropdown.active .dropdown-content {
-      display: block;
-    }
-    
-    /* Enhanced Overlay */
-    #overlay.active {
-      display: block;
-      animation: overlayFadeIn 0.3s ease;
-    }
-    
-    @keyframes overlayFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    /* Floating Menu Decoration */
-    nav#nav-menu::before {
-      content: '';
-      position: absolute;
-      top: 20%;
-      right: 10%;
-      width: 40px;
-      height: 40px;
-      background-image: url('pics/Ball.png');
-      background-size: cover;
-      border-radius: 50%;
-      opacity: 0.3;
-      animation: menuFloat 6s ease-in-out infinite;
-    }
-    
-    @keyframes menuFloat {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(180deg); }
+      cursor: pointer;
     }
 
     /* — Main Content — */
     main {
       padding: 2rem 1rem;
-      max-width: 1000px;
+      max-width: 800px;
       margin: 0 auto;
     }
 
@@ -341,7 +131,6 @@
       padding: 2rem;
       border-radius: 20px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      position: relative;
     }
     .profile-header h1 {
       font-size: 3rem;
@@ -352,147 +141,87 @@
     .profile-header .subtitle {
       font-size: 1.2rem;
       color: var(--accent);
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
     }
 
-    /* Floating circular images */
-    .floating-image {
+    /* Main Profile Image */
+    .profile-image {
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
       object-fit: cover;
+      margin: 0 auto 2rem;
+      display: block;
       box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: absolute;
-    }
-    .floating-image:hover {
-      transform: scale(1.1);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
     }
 
-    /* Ties1 - Most important, prominent position */
-    .ties1-image {
-      width: 240px;
-      height: 240px;
-      top: 5rem;
-      right: 1rem;
-      z-index: 10;
-    }
-
-    /* Profile Grid */
-    .profile-grid {
+    /* Content Section */
+    .content-section {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
       margin-bottom: 2rem;
-      position: relative;
-      padding-top: 60px;
-      padding-left: 60px;
-      padding-right: 100px;
     }
 
-    /* Ties2 - Second most important */
-    .ties2-image {
-      width: 200px;
-      height: 200px;
-      top: -90px;
-      left: -90px;
-      z-index: 5;
-    }
-
-    /* Ties3 - Third most important */
-    .ties3-image {
-      width: 200px;
-      height: 200px;
-      position: absolute;
-      top: 170px;
-      right: -170px;
-      left: auto;
-      z-index: 5;
-    }
-
-    /* Ties4 - Least important, bigger and rectangular */
-    .ties4-image {
-      width: 460px;
-      height: auto;
-      border-radius: 50%; /* Make ties4 oval on desktop */
-      position: absolute;
-      top: calc(100% + -2.5rem);
-      right: auto;
-      left: 700px;
-      z-index: 3;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    }
-
-    /* Card Styles */
-    .profile-card {
+    .content-card {
       background: var(--card-bg);
       border-radius: 20px;
       padding: 2rem;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      z-index: 2;
     }
-    .profile-card:hover {
+    .content-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 12px 40px rgba(0,0,0,0.15);
     }
 
-    .profile-card.intro {
+    .content-card.intro {
       background: linear-gradient(135deg, var(--primary), #ff5252);
       color: var(--light);
-      padding-right: 80px;
-      padding-left: 2rem;
     }
-    .profile-card.intro h2 {
+    .content-card.intro h2 {
       color: var(--light);
     }
 
-    .profile-card.passion {
+    .content-card.role {
       background: linear-gradient(135deg, #ff9800, #ffc107);
       color: var(--secondary);
-      position: relative;
-      padding-right: 80px;
-      padding-left: 2rem;
     }
 
-    .profile-card.personal {
+    .content-card.personal {
       background: linear-gradient(135deg, #2196f3, #03a9f4);
       color: var(--light);
-      padding-left: 80px;
-      padding-right: 2rem;
     }
-    .profile-card.personal h2 {
+    .content-card.personal h2 {
       color: var(--light);
     }
 
-    .profile-card h2 {
+    .content-card h2 {
       font-size: 1.8rem;
       margin-bottom: 1rem;
       color: var(--primary);
     }
-    .profile-card p {
+    .content-card p {
       font-size: 1.1rem;
       line-height: 1.8;
     }
 
-    /* Bottom section - Revert padding */
-    .bottom-section {
-      margin-top: 3rem;
-      padding: 2rem;
-      text-align: center;
-      padding-right: 1.5rem;
-      padding-left: 1.5rem;
+    /* Additional Images */
+    .additional-images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
     }
-
-    /* Remove old image gallery styles */
-    .image-gallery {
-      display: none;
+    .additional-image {
+      width: 100%;
+      height: 200px;
+      border-radius: 15px;
+      object-fit: cover;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
     }
-    .image-item {
-      display: none;
-    }
-    .feature-image {
-      display: none;
+    .additional-image:hover {
+      transform: scale(1.05);
     }
 
     /* Footer */
@@ -811,10 +540,259 @@
       }
     }
 
-    /* Hide mobile content on desktop */
-    @media (min-width: 769px) {
-      .mobile-content {
-        display: none !important;
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      /* Hide adam image on mobile */
+      .adam-image {
+        display: none;
+      }
+      
+      /* Modern Hamburger Menu */
+      .menu-toggle {
+        display: block;
+        font-size: 1.8rem;
+        padding: 0.8rem;
+        background: linear-gradient(45deg, var(--primary), #ff6b6b);
+        border-radius: 12px;
+        color: var(--light);
+        border: none;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .menu-toggle::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s;
+      }
+      
+      .menu-toggle:hover::before {
+        left: 100%;
+      }
+      
+      .menu-toggle:hover {
+        transform: scale(1.05) rotate(5deg);
+        box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
+      }
+      
+      .menu-toggle:active {
+        transform: scale(0.95);
+      }
+      
+      /* Modern Sidebar Navigation */
+      nav#nav-menu {
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(135deg, var(--secondary), #1a1a1a, var(--secondary));
+        position: fixed;
+        top: 0; 
+        left: -60%;
+        width: 60%; 
+        height: 100%;
+        padding-top: 4rem;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 1001;
+        box-shadow: 5px 0 25px rgba(0,0,0,0.3);
+        backdrop-filter: blur(10px);
+      }
+      
+      /* Slide in when active with bounce */
+      nav#nav-menu.active {
+        left: 0;
+        animation: slideInBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      
+      @keyframes slideInBounce {
+        0% { left: -60%; }
+        70% { left: 2%; }
+        100% { left: 0; }
+      }
+      
+      /* Modern Navigation Links */
+      nav#nav-menu a {
+        margin: 0;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        color: var(--light);
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      nav#nav-menu a::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, var(--primary), #ff6b6b);
+        transition: left 0.3s ease;
+        z-index: -1;
+      }
+      
+      nav#nav-menu a:hover::before {
+        left: 0;
+      }
+      
+      nav#nav-menu a:hover {
+        color: var(--light);
+        transform: translateX(10px);
+        text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      }
+      
+      /* Modern Dropdown Styles */
+      .dropdown {
+        display: block;
+        width: 100%;
+      }
+      
+      .dropdown > span {
+        margin: 0;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        display: block;
+        width: 100%;
+        color: var(--light);
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .dropdown > span::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #ff9800, #ffc107);
+        transition: left 0.3s ease;
+        z-index: -1;
+      }
+      
+      .dropdown > span:hover::before {
+        left: 0;
+      }
+      
+      .dropdown > span:hover {
+        transform: translateX(10px);
+        text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      }
+      
+      .dropdown > span::after {
+        content: '▼';
+        float: right;
+        transition: transform 0.3s ease;
+        font-size: 0.8rem;
+      }
+      
+      .dropdown.active > span::after {
+        transform: rotate(180deg);
+      }
+      
+      .dropdown-content {
+        position: static;
+        display: none;
+        box-shadow: none;
+        background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+        border-radius: 0;
+        overflow: hidden;
+        animation: dropdownSlide 0.3s ease;
+      }
+      
+      @keyframes dropdownSlide {
+        from { max-height: 0; opacity: 0; }
+        to { max-height: 200px; opacity: 1; }
+      }
+      
+      .dropdown-content a {
+        padding: 0.8rem 3rem;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        color: rgba(255,255,255,0.8);
+        background: none;
+        transition: all 0.3s ease;
+      }
+      
+      .dropdown-content a:hover {
+        background: linear-gradient(45deg, var(--primary), #ff6b6b);
+        color: var(--light);
+        transform: translateX(15px);
+        padding-left: 3.5rem;
+      }
+      
+      .dropdown.active .dropdown-content {
+        display: block;
+      }
+      
+      /* Enhanced Overlay */
+      #overlay.active {
+        display: block;
+        animation: overlayFadeIn 0.3s ease;
+      }
+      
+      @keyframes overlayFadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      /* Floating Menu Decoration */
+      nav#nav-menu::before {
+        content: '';
+        position: absolute;
+        top: 20%;
+        right: 10%;
+        width: 40px;
+        height: 40px;
+        background-image: url('pics/Ball.png');
+        background-size: cover;
+        border-radius: 50%;
+        opacity: 0.3;
+        animation: menuFloat 6s ease-in-out infinite;
+      }
+      
+      @keyframes menuFloat {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(180deg); }
+      }
+      
+      /* Mobile breadcrumb adjustments */
+      .breadcrumb-container {
+        top: 80px;
+        padding: 0.75rem 0;
+      }
+      
+      .breadcrumb {
+        padding: 0 1rem;
+        font-size: 0.8rem;
+      }
+      
+      .breadcrumb-item {
+        padding: 0.3rem 0.4rem;
+      }
+      
+      /* Hide middle breadcrumb items on mobile for shorter navigation */
+      .breadcrumb-desktop {
+        display: none;
+      }
+      
+      .profile-header h1 {
+        font-size: 2.5rem;
+      }
+      
+      .additional-images {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -959,28 +937,6 @@
       margin-right: 0.5rem;
       font-size: 0.8rem;
     }
-
-    /* Mobile breadcrumb adjustments */
-    @media (max-width: 768px) {
-      .breadcrumb-container {
-        top: 65px; /* Increased from 50px to 65px for more spacing */
-        padding: 0.5rem 0;
-      }
-      
-      .breadcrumb {
-        padding: 0 1rem;
-        font-size: 0.8rem;
-      }
-      
-      .breadcrumb-item {
-        padding: 0.2rem 0.3rem;
-      }
-      
-      /* Hide middle breadcrumb items on mobile for shorter navigation */
-      .breadcrumb-desktop {
-        display: none;
-      }
-    }
   </style>
 </head>
 
@@ -1046,74 +1002,39 @@
   <main>
     <!-- Profile Header -->
     <div class="profile-header">
-      <h1>Bas Elgersma #20</h1>
-      <p class="subtitle">🏋️‍♂️ Coach |  founding Member | 🎲 Boardgamer</p>
-      <!-- Bas1 - Most important, prominent position -->
-      <img src="pics/Bas/bas1.png" alt="Bas Elgersma Portrait" class="floating-image ties1-image">
+      <h1>Bas Elgersma #43</h1>
+      <p class="subtitle">🎯 Head of FVDB Youth | 💪 Training Specialist</p>
+      
+      <!-- Main Profile Image -->
+      <img src="pics/Bas/bas1.png" alt="Bas Elgersma Portrait" class="profile-image">
     </div>
 
-    <!-- Profile Grid -->
-    <div class="profile-grid">
-      <!-- Bas2 - Second most important -->
-      <img src="pics/Bas/bas2.png" alt="Bas Elgersma Action Shot" class="floating-image ties2-image">
-      
-      <!-- Intro Card -->
-      <div class="profile-card intro">
+    <!-- Content Section -->
+    <div class="content-section">
+      <!-- Introduction Card -->
+      <div class="content-card intro">
         <h2>Hey DCA! 👋</h2>
-        <p>Hey DCA. I'm Bas, 32 years old and one of the 3 founders of DCA. Started playing dodgeball in 2018. In the board I focus mainly on trainings</p>
+        <p>I'm Bas (26), and I've been playing dodgeball since 2016. As Head of FVDB Youth, I'm passionate about training the next generation of dodgeball champions and bringing fresh energy to our club!</p>
       </div>
 
-      <!-- Passion Card -->
-      <div class="profile-card passion">
-        <h2>Why Coaching? 🎯</h2>
-        <p>Started with wanting to train more, now I love sharing my passion and trying to infect others with this beautifull sport.</p>
-        <!-- Bas3 - Third most important -->
-        <img src="pics/Bas/bas3.png" alt="Bas Elgersma Dodgeball" class="floating-image ties3-image">
+      <!-- Role Card -->
+      <div class="content-card role">
+        <h2>My Role at DCA 🎯</h2>
+        <p>Leading FVDB Youth development and specializing in training programs. I love working with younger players and helping them discover the excitement and strategy of competitive dodgeball.</p>
       </div>
 
       <!-- Personal Card -->
-      <div class="profile-card personal">
+      <div class="content-card personal">
         <h2>Beyond Dodgeball 🌟</h2>
-        <p>Besides dodgeball I work at a small eventmanagement company in sport and love to spend evenings playing boardgames.</p>
+        <p>When I'm not on the court, I enjoy fitness training, strategic gaming, and exploring Amsterdam's sports scene. I believe that physical fitness and mental strategy go hand-in-hand in dodgeball excellence.</p>
       </div>
     </div>
 
-    <!-- Bas4 - Least important, bigger and rectangular -->
-    <img src="pics/Bas/bas4.png" alt="Bas Elgersma with Team" class="floating-image ties4-image">
-
-    <!-- Bottom section removed -->
-    
-    <!-- Mobile Content - Only visible on mobile -->
-    <div class="mobile-content">
-      <!-- Mobile: Bas1 Image -->
-      <img src="pics/Bas/bas1.png" alt="Bas Elgersma Portrait" class="mobile-image ties1">
-      
-      <!-- Mobile: Red Text Box -->
-      <div class="mobile-card intro">
-        <h2>Hey DCA! 👋</h2>
-        <p>Hey DCA. I'm Bas, 32 years old and one of the 3 founders of DCA. Started playing dodgeball in 2018. In the board I focus mainly on trainings</p>
-      </div>
-      
-      <!-- Mobile: Bas2 Image -->
-      <img src="pics/Bas/bas2.png" alt="Bas Elgersma Action Shot" class="mobile-image ties2">
-      
-      <!-- Mobile: Yellow Text Box -->
-      <div class="mobile-card passion">
-        <h2>Why Coaching? 🎯</h2>
-        <p>Started with wanting to train more, now I love sharing my passion and trying to infect others with this beautifull sport.</p>
-      </div>
-      
-      <!-- Mobile: Bas3 Image -->
-      <img src="pics/Bas/bas3.png" alt="Bas Elgersma Dodgeball" class="mobile-image ties3">
-      
-      <!-- Mobile: Blue Text Box -->
-      <div class="mobile-card personal">
-        <h2>Beyond Dodgeball 🌟</h2>
-        <p>Besides dodgeball I work at a small eventmanagement company in sport and love to spend evenings playing boardgames.</p>
-      </div>
-      
-      <!-- Mobile: Bas4 Image -->
-      <img src="pics/Bas/bas4.png" alt="Bas Elgersma with Team" class="mobile-image ties4">
+    <!-- Additional Images -->
+    <div class="additional-images">
+      <img src="pics/Bas/bas2.png" alt="Bas Elgersma Action Shot" class="additional-image">
+      <img src="pics/Bas/bas3.png" alt="Bas Elgersma with Team" class="additional-image">
+      <img src="pics/Bas/bas4.png" alt="Bas Elgersma Training" class="additional-image">
     </div>
 
   </main>
@@ -1208,6 +1129,7 @@
       const btn = document.getElementById('menu-toggle');
       const nav = document.getElementById('nav-menu');
       const overlay = document.getElementById('overlay');
+      const dropdowns = nav.querySelectorAll('.dropdown');
       
       function toggleMenu() {
         nav.classList.toggle('active');
@@ -1223,17 +1145,7 @@
         toggleMenu();
       });
 
-      const navLinks = nav.getElementsByTagName('a');
-      for (let link of navLinks) {
-        link.addEventListener('click', function() {
-          if (link.getAttribute('href').startsWith('#') || link.getAttribute('href').endsWith('.html')) {
-              toggleMenu();
-          }
-        });
-      }
-
       // Handle dropdown clicks on mobile
-      const dropdowns = document.querySelectorAll('.dropdown');
       dropdowns.forEach(dropdown => {
         const dropdownSpan = dropdown.querySelector('span');
         if (dropdownSpan) {
@@ -1255,6 +1167,15 @@
           });
         }
       });
+
+      const navLinks = nav.getElementsByTagName('a');
+      for (let link of navLinks) {
+        link.addEventListener('click', function() {
+          if (link.getAttribute('href').startsWith('#') || link.getAttribute('href').endsWith('.html')) {
+              toggleMenu();
+          }
+        });
+      }
     });
   </script>
 </body>
