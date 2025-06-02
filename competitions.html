@@ -943,7 +943,7 @@
       background-clip: text;
       opacity: 0;
       transform: translateY(20px);
-      animation: fadeInUp 0.8s ease-out forwards 1.2s;
+      animation: fadeInUp 0.8s ease-out forwards 1.4s;
     }
 
     .team-selection-subtitle {
@@ -1064,77 +1064,44 @@
     .team-card[data-delay="3"] { animation-delay: 2.2s; }
     .team-card[data-delay="4"] { animation-delay: 2.4s; }
 
-    /* Competition Timeline (initially hidden) */
+    /* Competition Timeline - Vertical Layout */
     .timeline {
       position: relative;
-      max-width: 900px;
+      max-width: 800px;
       margin: 0 auto;
+      padding: 0 2rem;
     }
 
+    /* Remove center line - not needed for vertical layout */
     .timeline::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 4px;
-      height: 100%;
-      background: linear-gradient(to bottom, var(--gold), var(--silver), var(--bronze));
-      border-radius: 2px;
-      z-index: 1;
+      display: none;
     }
 
     .timeline-item {
       position: relative;
-      margin-bottom: 4rem;
+      margin-bottom: 3rem;
       opacity: 0;
       transform: translateY(50px);
       animation: timelineItemEnter 0.8s ease-out forwards;
+      width: 100%;
     }
 
     .timeline-item[data-delay="0"] { animation-delay: 1.5s; }
     .timeline-item[data-delay="1"] { animation-delay: 1.8s; }
     .timeline-item[data-delay="2"] { animation-delay: 2.1s; }
 
-    .timeline-item:nth-child(odd) .timeline-content {
-      margin-left: 0;
-      margin-right: calc(50% + 2rem);
-      text-align: right;
-    }
-
+    /* Reset all positioning - make all items full width and left-aligned */
+    .timeline-item:nth-child(odd) .timeline-content,
     .timeline-item:nth-child(even) .timeline-content {
-      margin-left: calc(50% + 2rem);
+      margin-left: 0;
       margin-right: 0;
       text-align: left;
+      width: 100%;
     }
 
+    /* Remove timeline marker from center - medals will be beside date */
     .timeline-marker {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: var(--light);
-      z-index: 2;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-      animation: markerBounce 2s ease-in-out infinite;
-    }
-
-    .timeline-marker.gold {
-      background: linear-gradient(135deg, var(--gold), #ffed4e);
-    }
-
-    .timeline-marker.silver {
-      background: linear-gradient(135deg, var(--silver), #e8e8e8);
-      color: var(--secondary);
-    }
-
-    .timeline-marker.bronze {
-      background: linear-gradient(135deg, var(--bronze), #daa520);
+      display: none;
     }
 
     .timeline-content {
@@ -1147,6 +1114,7 @@
       overflow: hidden;
       box-shadow: 0 15px 35px rgba(0,0,0,0.1);
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      width: 100%;
     }
 
     .timeline-content:hover {
@@ -1169,9 +1137,16 @@
       left: 100%;
     }
 
+    /* Date and Medal Container */
+    .date-medal-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
     .competition-date {
-      position: absolute;
-      top: 5px;
+      position: static;
       background: linear-gradient(45deg, var(--primary), #ff6b6b);
       color: var(--light);
       padding: 0.5rem 1.5rem;
@@ -1179,14 +1154,44 @@
       font-weight: 700;
       font-size: 0.9rem;
       box-shadow: 0 8px 20px rgba(211, 47, 47, 0.3);
+      display: inline-block;
     }
 
-    .timeline-item:nth-child(odd) .competition-date {
-      right: 2rem;
-    }
-
+    /* Reset date positioning for all items */
+    .timeline-item:nth-child(odd) .competition-date,
     .timeline-item:nth-child(even) .competition-date {
-      left: 2rem;
+      position: static;
+      top: auto;
+      right: auto;
+      left: auto;
+    }
+
+    /* Medal beside date - smaller size */
+    .date-medal {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--light);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      animation: medalFloat 3s ease-in-out infinite;
+    }
+
+    .date-medal.gold {
+      background: linear-gradient(135deg, var(--gold), #ffed4e);
+      color: var(--secondary);
+    }
+
+    .date-medal.silver {
+      background: linear-gradient(135deg, var(--silver), #e8e8e8);
+      color: var(--secondary);
+    }
+
+    .date-medal.bronze {
+      background: linear-gradient(135deg, var(--bronze), #daa520);
     }
 
     .competition-header {
@@ -1196,11 +1201,8 @@
       margin-bottom: 1.5rem;
     }
 
-    .timeline-item:nth-child(odd) .competition-header {
-      justify-content: flex-end;
-      text-align: right;
-    }
-
+    /* Reset header alignment for all items */
+    .timeline-item:nth-child(odd) .competition-header,
     .timeline-item:nth-child(even) .competition-header {
       justify-content: flex-start;
       text-align: left;
@@ -1257,80 +1259,12 @@
     .competition-description {
       color: var(--accent);
       line-height: 1.7;
-      margin-top: 1rem;
     }
 
-    /* Dropdown styles */
-    .dropdown {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-    }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: var(--secondary);
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1003;
-      border-radius: 4px;
-      top: 100%;
-      left: 0;
-    }
-    .dropdown-content a {
-      color: var(--light);
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-      margin: 0;
-      border-radius: 0;
-      transition: background-color 0.3s ease;
-    }
-    .dropdown-content a:hover {
-      background-color: var(--primary);
-      transform: none;
-      text-decoration: underline;
-    }
-    .dropdown-content a::before {
-      display: none;
-    }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-    .dropdown > span {
-      margin-left: 1.5rem;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      overflow: hidden;
-      color: var(--primary);
-      cursor: pointer;
-    }
-    .dropdown > span:hover {
-      color: var(--light);
-      transform: scale(1.05);
-      background-color: rgba(211, 47, 47, 0.1);
-    }
-    .dropdown > span::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 0.2rem;
-      width: 25px;
-      height: 25px;
-      background-image: url('pics/Ball.jpg');
-      background-size: cover;
-      background-position: center;
-      transform: translateY(-50%) scale(0);
-      transition: transform 0.3s ease;
-      z-index: -1;
-      opacity: 0.8;
-      border-radius: 50%;
-    }
-    .dropdown > span:hover::before {
-      transform: translateY(-50%) scale(1);
+    /* Medal float animation */
+    @keyframes medalFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(5deg); }
     }
 
     /* Animations */
@@ -1377,16 +1311,6 @@
       25% { transform: translateY(-40px) rotate(90deg); }
       50% { transform: translateY(0px) rotate(180deg); }
       75% { transform: translateY(-25px) rotate(270deg); }
-    }
-
-    @keyframes markerBounce {
-      0%, 100% { transform: translateX(-50%) translateY(0px); }
-      50% { transform: translateX(-50%) translateY(-10px); }
-    }
-
-    @keyframes trophyGlow {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
     }
 
     @keyframes teamCardEnter {
@@ -1497,6 +1421,85 @@
       .breadcrumb-item {
         padding: 0.2rem 0.3rem;
       }
+    }
+
+    /* Dropdown styles */
+    .dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--secondary);
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1003;
+      border-radius: 4px;
+      top: 100%;
+      left: 0;
+    }
+    .dropdown-content a {
+      color: var(--light);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      margin: 0;
+      border-radius: 0;
+      transition: background-color 0.3s ease;
+    }
+    .dropdown-content a:hover {
+      background-color: var(--primary);
+      transform: none;
+      text-decoration: underline;
+    }
+    .dropdown-content a::before {
+      display: none;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .dropdown > span {
+      margin-left: 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      overflow: hidden;
+      color: var(--primary);
+      cursor: pointer;
+    }
+    .dropdown > span:hover {
+      color: var(--light);
+      transform: scale(1.05);
+      background-color: rgba(211, 47, 47, 0.1);
+    }
+    .dropdown > span::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0.2rem;
+      width: 25px;
+      height: 25px;
+      background-image: url('pics/Ball.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: translateY(-50%) scale(0);
+      transition: transform 0.3s ease;
+      z-index: -1;
+      opacity: 0.8;
+      border-radius: 50%;
+    }
+    .dropdown > span:hover::before {
+      transform: translateY(-50%) scale(1);
+    }
+
+    /* Trophy glow animation */
+    @keyframes trophyGlow {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
     }
   </style>
 </head>
@@ -1629,7 +1632,10 @@
           <div class="timeline-item" data-delay="0">
             <div class="timeline-marker silver">🥈</div>
             <div class="timeline-content">
-              <div class="competition-date">March 2024</div>
+              <div class="date-medal-container">
+                <div class="competition-date">March 2024</div>
+                <div class="date-medal silver">🥈</div>
+              </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
@@ -1653,7 +1659,10 @@
           <div class="timeline-item" data-delay="1">
             <div class="timeline-marker gold">🥇</div>
             <div class="timeline-content">
-              <div class="competition-date">January 2024</div>
+              <div class="date-medal-container">
+                <div class="competition-date">January 2024</div>
+                <div class="date-medal gold">🥇</div>
+              </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
@@ -1677,7 +1686,10 @@
           <div class="timeline-item" data-delay="2">
             <div class="timeline-marker bronze">🥉</div>
             <div class="timeline-content">
-              <div class="competition-date">November 2023</div>
+              <div class="date-medal-container">
+                <div class="competition-date">November 2023</div>
+                <div class="date-medal bronze">🥉</div>
+              </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
