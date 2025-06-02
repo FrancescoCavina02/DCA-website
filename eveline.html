@@ -192,7 +192,7 @@
     /* — Main Content — */
     main {
       padding: 2rem 1rem;
-      max-width: 1000px;
+      max-width: 800px;
       margin: 0 auto;
     }
 
@@ -204,7 +204,6 @@
       padding: 2rem;
       border-radius: 20px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      position: relative;
     }
     .profile-header h1 {
       font-size: 3rem;
@@ -215,148 +214,90 @@
     .profile-header .subtitle {
       font-size: 1.2rem;
       color: var(--accent);
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
     }
 
-    /* Floating circular images */
-    .floating-image {
+    /* Profile Image */
+    .profile-image {
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
       object-fit: cover;
+      margin: 0 auto 2rem;
+      display: block;
       box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: absolute;
-    }
-    .floating-image:hover {
-      transform: scale(1.1);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
     }
 
-    /* Ties1 - Most important, prominent position */
-    .ties1-image {
-      width: 240px;
-      height: 240px;
-      top: 5rem;
-      right: -1rem;
-      z-index: 10;
-    }
-
-    /* Profile Grid */
-    .profile-grid {
+    /* Content Cards */
+    .content-section {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
       margin-bottom: 2rem;
-      position: relative;
-      padding-top: 60px;
-      padding-left: 60px;
-      padding-right: 100px;
     }
 
-    /* Ties2 - Second most important */
-    .ties2-image {
-      width: 200px;
-      height: 200px;
-      top: -90px;
-      left: -90px;
-      z-index: 5;
-    }
-
-    /* Ties3 - Third most important */
-    .ties3-image {
-      width: 200px;
-      height: 200px;
-      position: absolute;
-      top: 190px;
-      right: -140px;
-      left: auto;
-      z-index: 5;
-    }
-
-    /* Ties4 - Least important, bigger and rectangular */
-    .ties4-image {
-      width: 450px;
-      height: auto;
-      border-radius: 50%; /* Make ties4 oval on desktop */
-      position: absolute;
-      top: calc(100% + 2rem);
-      right: auto;
-      left: 700px;
-      z-index: 3;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    }
-
-    /* Card Styles */
-    .profile-card {
+    .content-card {
       background: var(--card-bg);
       border-radius: 20px;
       padding: 2rem;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      z-index: 2;
     }
-    .profile-card:hover {
+    .content-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 12px 40px rgba(0,0,0,0.15);
     }
 
-    .profile-card.intro {
+    .content-card.intro {
       background: linear-gradient(135deg, var(--primary), #ff5252);
       color: var(--light);
-      padding-right: 80px;
-      padding-left: 2rem;
     }
-    .profile-card.intro h2 {
+    .content-card.intro h2 {
       color: var(--light);
     }
 
-    .profile-card.passion {
+    .content-card.role {
       background: linear-gradient(135deg, #ff9800, #ffc107);
       color: var(--secondary);
-      position: relative;
-      padding-right: 80px;
-      padding-left: 2rem;
     }
 
-    .profile-card.personal {
+    .content-card.personal {
       background: linear-gradient(135deg, #2196f3, #03a9f4);
       color: var(--light);
-      padding-left: 80px;
-      padding-right: 2rem;
     }
-    .profile-card.personal h2 {
+    .content-card.personal h2 {
       color: var(--light);
     }
 
-    .profile-card h2 {
+    .content-card h2 {
       font-size: 1.8rem;
       margin-bottom: 1rem;
       color: var(--primary);
     }
-    .profile-card p {
+    .content-card p {
       font-size: 1.1rem;
       line-height: 1.8;
     }
 
-    /* Bottom section - Revert padding */
-    .bottom-section {
-      margin-top: 3rem;
-      padding: 2rem;
-      text-align: center;
-      padding-right: 1.5rem;
-      padding-left: 1.5rem;
+    /* Additional Images */
+    .additional-images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .additional-image {
+      width: 100%;
+      height: 200px;
+      border-radius: 15px;
+      object-fit: cover;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .additional-image:hover {
+      transform: scale(1.05);
     }
 
-    /* Remove old image gallery styles */
-    .image-gallery {
-      display: none;
-    }
-    .image-item {
-      display: none;
-    }
-    .feature-image {
-      display: none;
-    }
+    /* Old floating image and profile card styles removed - replaced with simplified structure */
 
     /* Enhanced Footer System */
     footer {
@@ -994,6 +935,19 @@
         padding-right: 1.5rem;
         padding-left: 1.5rem;
       }
+      
+      /* Hide middle breadcrumb items on mobile for shorter navigation */
+      .breadcrumb-desktop {
+        display: none;
+      }
+      
+      .profile-header h1 {
+        font-size: 2.5rem;
+      }
+      
+      .additional-images {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* Hide mobile content on desktop */
@@ -1160,72 +1114,37 @@
     <div class="profile-header">
       <h1>Eveline Miedema #22</h1>
       <p class="subtitle">🎉 Socials Lead | 🎯 Dodgeball Enthusiast | 💪 Strong Thrower</p>
-      <!-- Eveline1 - Most important, prominent position -->
-      <img src="pics/Eveline/eveline1.png" alt="Eveline Miedema Portrait" class="floating-image ties1-image">
+      
+      <!-- Main Profile Image -->
+      <img src="pics/Eveline/eveline1.png" alt="Eveline Miedema Portrait" class="profile-image">
     </div>
 
-    <!-- Profile Grid -->
-    <div class="profile-grid">
-      <!-- Eveline2 - Second most important -->
-      <img src="pics/Eveline/eveline2.png" alt="Eveline Miedema Action Shot" class="floating-image ties2-image">
-      
-      <!-- Intro Card -->
-      <div class="profile-card intro">
+    <!-- Content Section -->
+    <div class="content-section">
+      <!-- Introduction Card -->
+      <div class="content-card intro">
         <h2>Meet Our Socials Lead! 🎉</h2>
-        <p>Hi DCA! I'm Eveline (30) and I have been playing Dodgeball since 2019.</p>
-        <p>I actually went to my first training as a joke, but fell in love and never left again. Now this sport is my obsession hahaha!</p>
+        <p>Hi DCA! I'm Eveline (30) and I have been playing Dodgeball since 2019. I actually went to my first training as a joke, but fell in love and never left again. Now this sport is my obsession hahaha!</p>
       </div>
 
-      <!-- Passion Card -->
-      <div class="profile-card passion">
+      <!-- Role Card -->
+      <div class="content-card role">
         <h2>Creating Connections 🤝</h2>
         <p>As the Socials Lead, I get to organize the events that bring our DCA family together outside the court. From movie nights to pub crawls, it's all about building those bonds that make us more than just a team!</p>
-        <!-- Eveline3 - Third most important -->
-        <img src="pics/Eveline/eveline3.png" alt="Eveline Miedema Dodgeball" class="floating-image ties3-image">
       </div>
 
       <!-- Personal Card -->
-      <div class="profile-card personal">
+      <div class="content-card personal">
         <h2>Beyond Dodgeball 🌟</h2>
         <p>When I'm not throwing balls or planning events, you'll find me exploring Amsterdam's food scene, trying new restaurants, or hanging out with friends. I love bringing people together and creating memorable moments!</p>
       </div>
     </div>
 
-    <!-- Eveline4 - Least important, bigger and rectangular -->
-    <img src="pics/Eveline/eveline4.png" alt="Eveline Miedema with Team" class="floating-image ties4-image">
-
-    <!-- Mobile Content - Only visible on mobile -->
-    <div class="mobile-content">
-      <!-- Mobile: Eveline1 Image -->
-      <img src="pics/Eveline/eveline1.png" alt="Eveline Miedema Portrait" class="mobile-image ties1">
-      
-      <!-- Mobile: Red Text Box -->
-      <div class="mobile-card intro">
-        <h2>Meet Our Socials Lead! 🎉</h2>
-        <p>Hi DCA! I'm Eveline (30) and I have been playing Dodgeball since 2019.</p>
-        <p>I actually went to my first training as a joke, but fell in love and never left again. Now this sport is my obsession hahaha!</p>
-      </div>
-      
-      <!-- Mobile: Eveline2 Image -->
-      <img src="pics/Eveline/eveline2.png" alt="Eveline Miedema Action Shot" class="mobile-image ties2">
-      
-      <!-- Mobile: Yellow Text Box -->
-      <div class="mobile-card passion">
-        <h2>Creating Connections 🤝</h2>
-        <p>As the Socials Lead, I get to organize the events that bring our DCA family together outside the court. From movie nights to pub crawls, it's all about building those bonds that make us more than just a team!</p>
-      </div>
-      
-      <!-- Mobile: Eveline3 Image -->
-      <img src="pics/Eveline/eveline3.png" alt="Eveline Miedema Dodgeball" class="mobile-image ties3">
-      
-      <!-- Mobile: Blue Text Box -->
-      <div class="mobile-card personal">
-        <h2>Beyond Dodgeball 🌟</h2>
-        <p>When I'm not throwing balls or planning events, you'll find me exploring Amsterdam's food scene, trying new restaurants, or hanging out with friends. I love bringing people together and creating memorable moments!</p>
-      </div>
-      
-      <!-- Mobile: Eveline4 Image -->
-      <img src="pics/Eveline/eveline4.png" alt="Eveline Miedema with Team" class="mobile-image ties4">
+    <!-- Additional Images -->
+    <div class="additional-images">
+      <img src="pics/Eveline/eveline2.png" alt="Eveline Miedema Action Shot" class="additional-image">
+      <img src="pics/Eveline/eveline3.png" alt="Eveline Miedema Social Event" class="additional-image">
+      <img src="pics/Eveline/eveline4.png" alt="Eveline Miedema with Team" class="additional-image">
     </div>
 
   </main>
