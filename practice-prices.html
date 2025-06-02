@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dodgeball Club Amsterdam - Practice & Prices</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* — CSS Variables & Reset — */
+    :root {
+      --primary: #d32f2f;
+      --secondary: #000;
+      --light: #fff;
+      --accent: #333;
+      --gold: #ffc107;
+      --green: #4caf50;
+      --blue: #2196f3;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: var(--secondary);
+      line-height: 1.6;
+    }
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* — Header & Nav — */
+    header {
+      background: var(--secondary);
+      color: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.3rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 1002;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .logo img {
+      height: 2.8rem;
+      vertical-align: middle;
+      margin-left: 0.5rem;
+    }
+    .logo .ball-logo {
+      height: 2.8rem;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+    }
+    .adam-image {
+      height: 3.5rem;
+      vertical-align: middle;
+      margin-left: 1rem;
+    }
+    nav#nav-menu {
+      display: flex;
+      align-items: center;
+    }
+    nav#nav-menu a {
+      margin-left: 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      overflow: hidden;
+      color: var(--primary);
+    }
+    nav#nav-menu a:hover {
+      color: var(--light);
+      transform: scale(1.05);
+      background-color: rgba(211, 47, 47, 0.1);
+    }
+    nav#nav-menu a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0.2rem;
+      width: 25px;
+      height: 25px;
+      background-image: url('pics/Ball.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: translateY(-50%) scale(0);
+      transition: transform 0.3s ease;
+      z-index: -1;
+      opacity: 0.8;
+      border-radius: 50%;
+    }
+    nav#nav-menu a:hover::before {
+      transform: translateY(-50%) scale(1);
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.75rem;
+      color: var(--light);
+      cursor: pointer;
+    }
+
+    /* — Main Content — */
+    main {
+      padding: 0;
+      margin: 0;
+    }
+
+    /* — Footer — */
+    footer {
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      color: var(--light);
+      margin-top: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('pics/Ball.png');
+      background-size: 80px 80px;
+      opacity: 0.03;
+      animation: footerBalls 60s linear infinite;
+    }
+
+    .footer-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 1rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-section {
+      animation: footerFadeIn 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .footer-section:nth-child(1) { animation-delay: 0.1s; }
+    .footer-section:nth-child(2) { animation-delay: 0.2s; }
+    .footer-section:nth-child(3) { animation-delay: 0.3s; }
+    .footer-section:nth-child(4) { animation-delay: 0.4s; }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .footer-ball {
+      width: 40px;
+      height: 40px;
+      margin-right: 0.75rem;
+      animation: footerBallSpin 8s linear infinite;
+      filter: drop-shadow(0 4px 8px rgba(211, 47, 47, 0.3));
+    }
+
+    .footer-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--light), #ff6b6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-tagline {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+      font-style: italic;
+    }
+
+    .footer-social {
+      margin-bottom: 1rem;
+    }
+
+    .social-text {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .social-link:hover {
+      background: var(--primary);
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 8px 20px rgba(211, 47, 47, 0.4);
+    }
+
+    .footer-heading {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      color: #ff6b6b;
+      position: relative;
+    }
+
+    .footer-heading::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 30px;
+      height: 2px;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      border-radius: 1px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--light);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      padding: 0.25rem 0;
+      border-radius: 4px;
+    }
+
+    .footer-links a:hover {
+      color: #ff6b6b;
+      padding-left: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .contact-info {
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-icon {
+      margin-right: 0.75rem;
+      font-size: 1.1rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .footer-cta {
+      display: inline-block;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      color: var(--light);
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+    }
+
+    .footer-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(211, 47, 47, 0.4);
+      background: linear-gradient(45deg, #ff6b6b, var(--primary));
+    }
+
+    .footer-divider {
+      display: flex;
+      align-items: center;
+      margin: 2rem 0;
+      opacity: 0.6;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--light), transparent);
+    }
+
+    .divider-ball {
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      animation: dividerPulse 2s ease-in-out infinite;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+    }
+
+    .footer-bottom-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-stats {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .stat-separator {
+      opacity: 0.5;
+    }
+
+    .footer-copyright {
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin: 0;
+      font-style: italic;
+    }
+
+    /* Footer Animations */
+    @keyframes footerFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes footerBallSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes footerBalls {
+      from { transform: translateX(0); }
+      to { transform: translateX(-80px); }
+    }
+
+    @keyframes dividerPulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+
+    /* Mobile Footer Styles */
+    @media (max-width: 768px) {
+      .footer-content {
+        padding: 2rem 1rem 1rem;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .footer-logo {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .footer-tagline,
+      .social-text {
+        text-align: center;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+
+      .footer-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .footer-bottom-content {
+        text-align: center;
+      }
+    }
+
+    /* — Overlay — */
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+
+    /* Hero Section with Dual Theme */
+    .hero-section {
+      position: relative;
+      padding: 6rem 1.5rem;
+      text-align: center;
+      color: var(--light);
+      width: 100%;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--blue), var(--primary), var(--gold), var(--green));
+      background-size: 300% 300%;
+      animation: heroGradientShift 8s ease-in-out infinite;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: rotateBackground 25s linear infinite;
+      z-index: 1;
+    }
+
+    .hero-section > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      opacity: 0;
+      transform: translateY(-30px) scale(0.8);
+      animation: heroTitleEnter 1.2s ease-out forwards 0.3s;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: heroSubtitleEnter 1s ease-out forwards 0.6s;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      margin-bottom: 2rem;
+    }
+
+    /* Floating Elements in Hero */
+    .floating-hero-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .floating-element {
+      position: absolute;
+      font-size: 2.5rem;
+      opacity: 0.7;
+      animation: heroFloat 12s ease-in-out infinite;
+    }
+
+    .element-1 { top: 15%; left: 10%; animation-delay: 0s; }
+    .element-2 { top: 25%; right: 15%; animation-delay: 2s; }
+    .element-3 { bottom: 30%; left: 20%; animation-delay: 4s; }
+    .element-4 { bottom: 20%; right: 10%; animation-delay: 6s; }
+    .element-5 { top: 50%; left: 5%; animation-delay: 8s; }
+    .element-6 { top: 60%; right: 5%; animation-delay: 10s; }
+
+    /* Dual Section Layout */
+    .content-container {
+      max-width: 1400px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* Practice Section */
+    .practice-section {
+      background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(33, 150, 243, 0.2));
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(33, 150, 243, 0.3);
+      border-radius: 30px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateX(-50px) scale(0.9);
+      animation: sectionSlideIn 1s ease-out forwards 1s;
+    }
+
+    .practice-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(33, 150, 243, 0.2), transparent);
+      transition: left 0.8s;
+    }
+
+    .practice-section:hover::before {
+      left: 100%;
+    }
+
+    /* Prices Section */
+    .prices-section {
+      background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.2));
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 193, 7, 0.3);
+      border-radius: 30px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateX(50px) scale(0.9);
+      animation: sectionSlideIn 1s ease-out forwards 1.2s;
+    }
+
+    .prices-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 193, 7, 0.2), transparent);
+      transition: left 0.8s;
+    }
+
+    .prices-section:hover::before {
+      left: 100%;
+    }
+
+    /* Section Headers */
+    .section-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: iconBounce 2s ease-in-out infinite;
+    }
+
+    .practice-section .section-icon {
+      color: var(--blue);
+    }
+
+    .prices-section .section-icon {
+      color: var(--gold);
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--accent);
+      opacity: 0.8;
+    }
+
+    /* Practice Content */
+    .practice-info {
+      position: relative;
+      z-index: 2;
+    }
+
+    .practice-schedule {
+      background: var(--light);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+    }
+
+    .practice-schedule:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(33, 150, 243, 0.2);
+    }
+
+    .schedule-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: linear-gradient(45deg, rgba(33, 150, 243, 0.05), rgba(33, 150, 243, 0.1));
+      border-radius: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .schedule-item:hover {
+      transform: translateX(10px);
+      background: linear-gradient(45deg, rgba(33, 150, 243, 0.1), rgba(33, 150, 243, 0.15));
+    }
+
+    .schedule-day {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--blue);
+      min-width: 120px;
+    }
+
+    .schedule-details {
+      flex: 1;
+    }
+
+    .schedule-time {
+      font-size: 1.1rem;
+      color: var(--secondary);
+      font-weight: 500;
+    }
+
+    .schedule-type {
+      font-size: 0.9rem;
+      color: var(--accent);
+      opacity: 0.8;
+    }
+
+    .location-info {
+      background: var(--light);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+    }
+
+    .location-info:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(33, 150, 243, 0.2);
+    }
+
+    .location-info h3 {
+      font-size: 1.4rem;
+      color: var(--blue);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .location-info p {
+      font-size: 1rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .location-info a {
+      color: var(--blue);
+      font-weight: 500;
+    }
+
+    /* Map Container */
+    .map-container {
+      text-align: center;
+      margin-top: 2rem;
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+    }
+
+    .map-container:hover {
+      transform: scale(1.02);
+      box-shadow: 0 20px 50px rgba(33, 150, 243, 0.2);
+    }
+
+    .map-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .map-container a {
+      display: block;
+      text-decoration: none;
+    }
+
+    .map-container a:hover img {
+      transform: scale(1.02);
+      box-shadow: 0 10px 30px rgba(33, 150, 243, 0.3);
+      filter: brightness(1.1);
+    }
+
+    /* Prices Content */
+    .pricing-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .pricing-card {
+      background: var(--light);
+      border-radius: 20px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .pricing-card.yearly::before {
+      background: linear-gradient(45deg, var(--green), #66bb6a);
+    }
+
+    .pricing-card.strip::before {
+      background: linear-gradient(45deg, var(--gold), #ffeb3b);
+    }
+
+    .pricing-card.dropin::before {
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    }
+
+    .pricing-card:hover::before {
+      height: 100%;
+      opacity: 0.05;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--secondary);
+    }
+
+    .card-price {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--primary), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-description {
+      font-size: 1rem;
+      color: var(--accent);
+      opacity: 0.8;
+      margin-bottom: 1rem;
+    }
+
+    .card-features {
+      list-style: none;
+      padding: 0;
+    }
+
+    .card-features li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--accent);
+    }
+
+    .card-features li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+
+    /* Free Trial Banner */
+    .free-trial-banner {
+      background: linear-gradient(135deg, var(--green), #66bb6a);
+      color: var(--light);
+      border-radius: 25px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 3rem;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(50px) scale(0.9);
+      animation: bannerEnter 1s ease-out forwards 1.5s;
+    }
+
+    .free-trial-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+      transform: translateX(-100%);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    .free-trial-banner h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .free-trial-banner p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Dropdown styles */
+    .dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--secondary);
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1003;
+      border-radius: 4px;
+      top: 100%;
+      left: 0;
+    }
+    .dropdown-content a {
+      color: var(--light);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      margin: 0;
+      border-radius: 0;
+      transition: background-color 0.3s ease;
+    }
+    .dropdown-content a:hover {
+      background-color: var(--primary);
+      transform: none;
+      text-decoration: underline;
+    }
+    .dropdown-content a::before {
+      display: none;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .dropdown > span {
+      margin-left: 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      overflow: hidden;
+      color: var(--primary);
+      cursor: pointer;
+    }
+    .dropdown > span:hover {
+      color: var(--light);
+      transform: scale(1.05);
+      background-color: rgba(211, 47, 47, 0.1);
+    }
+    .dropdown > span::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0.2rem;
+      width: 25px;
+      height: 25px;
+      background-image: url('pics/Ball.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: translateY(-50%) scale(0);
+      transition: transform 0.3s ease;
+      z-index: -1;
+      opacity: 0.8;
+      border-radius: 50%;
+    }
+    .dropdown > span:hover::before {
+      transform: translateY(-50%) scale(1);
+    }
+
+    /* Animations */
+    @keyframes heroGradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      25% { background-position: 100% 50%; }
+      50% { background-position: 50% 100%; }
+      75% { background-position: 50% 0%; }
+    }
+
+    @keyframes rotateBackground {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes heroTitleEnter {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes heroSubtitleEnter {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heroFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      25% { transform: translateY(-40px) rotate(90deg); }
+      50% { transform: translateY(0px) rotate(180deg); }
+      75% { transform: translateY(-25px) rotate(270deg); }
+    }
+
+    @keyframes sectionSlideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+
+    @keyframes iconBounce {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes bannerEnter {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb-container {
+      background: rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(211, 47, 47, 0.1);
+      padding: 0.75rem 0;
+      position: sticky;
+      top: 60px;
+      z-index: 999;
+      backdrop-filter: blur(5px);
+    }
+
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb-item {
+      display: flex;
+      align-items: center;
+      color: var(--accent);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .breadcrumb-item:hover {
+      color: var(--primary);
+      background: rgba(211, 47, 47, 0.1);
+    }
+
+    .breadcrumb-item.active {
+      color: var(--primary);
+      font-weight: 600;
+      pointer-events: none;
+    }
+
+    .breadcrumb-separator {
+      margin: 0 0.5rem;
+      color: var(--accent);
+      opacity: 0.6;
+    }
+
+    .breadcrumb-icon {
+      margin-right: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    /* Mobile breadcrumb adjustments */
+    @media (max-width: 768px) {
+      .breadcrumb-container {
+        top: 50px;
+        padding: 0.5rem 0;
+      }
+      
+      .breadcrumb {
+        padding: 0 1rem;
+        font-size: 0.8rem;
+      }
+      
+      .breadcrumb-item {
+        padding: 0.2rem 0.3rem;
+      }
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      /* Hide adam image on mobile */
+      .adam-image {
+        display: none;
+      }
+      
+      /* show hamburger */
+      .menu-toggle {
+        display: block;
+        font-size: 2rem; /* Make hamburger more visible */
+        padding: 0.5rem; /* Add padding for easier clicking */
+      }
+      /* sidebar nav */
+      nav#nav-menu {
+        display: flex;
+        flex-direction: column;
+        background: var(--secondary);
+        position: fixed;
+        top: 0; left: -50%;
+        width: 50%; height: 100%;
+        padding-top: 3rem; /* leave space under header */
+        transition: left 0.3s ease;
+        z-index: 1001;
+      }
+      /* slide in when active */
+      nav#nav-menu.active {
+        left: 0;
+      }
+      nav#nav-menu a {
+        margin: 0;
+        padding: 0.75rem 1.5rem;
+        border-top: 1px solid #222;
+      }
+      /* Mobile dropdown styles */
+      .dropdown {
+        display: block;
+        width: 100%;
+      }
+      .dropdown > span {
+        margin: 0;
+        padding: 0.75rem 1.5rem;
+        border-top: 1px solid #222;
+        display: block;
+        width: 100%;
+      }
+      .dropdown-content {
+        position: static;
+        display: none;
+        box-shadow: none;
+        background-color: #1a1a1a;
+      }
+      .dropdown-content a {
+        padding: 0.5rem 2rem;
+        border-top: 1px solid #444;
+      }
+      .dropdown.active .dropdown-content {
+        display: block;
+      }
+      /* show overlay when menu open */
+      #overlay.active {
+        display: block;
+      }
+      /* smaller hero text */
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+      .content-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin: 2rem auto;
+      }
+      .practice-section,
+      .prices-section {
+        padding: 2rem;
+        transform: none !important;
+        opacity: 1;
+        animation: none;
+      }
+      .floating-element {
+        font-size: 2rem;
+      }
+      .schedule-item {
+        flex-direction: column;
+        text-align: center;
+      }
+      .schedule-day {
+        min-width: auto;
+        margin-bottom: 0.5rem;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+      .section-icon {
+        font-size: 3rem;
+      }
+    }
+
+    header .logo a {
+      color: var(--light);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header + Nav -->
+  <header>
+    <div class="logo">
+      <a href="website.html"><img src="pics/Ball.png" alt="Ball Logo" class="ball-logo"></a>
+      <a href="website.html">DCA</a>
+      <a href="website.html"><img src="pics/XXX.png" alt="DCA Logo"></a>
+    </div>
+    <img src="pics/adam.png" alt="Adam" class="adam-image">
+    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
+    <nav id="nav-menu">
+      <a href="website.html">Home</a>
+      <div class="dropdown">
+        <span>About</span>
+        <div class="dropdown-content">
+          <a href="about.html">About DCA</a>
+          <a href="founders.html">Founders</a>
+          <a href="board.html">The Board</a>
+        </div>
+      </div>
+      <a href="practice-prices.html">Practice & Prices</a>
+      <a href="competitions.html">Competitions</a>
+      <div class="dropdown">
+        <span>Social</span>
+        <div class="dropdown-content">
+          <a href="social.html">Activities</a>
+          <a href="moments.html">Moments</a>
+          <a href="testimonials.html">Testimonials</a>
+        </div>
+      </div>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Overlay -->
+  <div id="overlay"></div>
+
+  <!-- Breadcrumb Navigation -->
+  <div class="breadcrumb-container">
+    <nav class="breadcrumb">
+      <a href="website.html" class="breadcrumb-item">
+        <span class="breadcrumb-icon">🏠</span>
+        Home
+      </a>
+      <span class="breadcrumb-separator">›</span>
+      <span class="breadcrumb-item active">
+        <span class="breadcrumb-icon">🎯</span>
+        Practice & Prices
+      </span>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <h1 class="hero-title">Practice & Prices</h1>
+      <p class="hero-subtitle">Where passion meets pocket-friendly! 🏐💰</p>
+      
+      <!-- Floating Elements -->
+      <div class="floating-hero-elements">
+        <div class="floating-element element-1">🏐</div>
+        <div class="floating-element element-2">⏰</div>
+        <div class="floating-element element-3">💰</div>
+        <div class="floating-element element-4">🎯</div>
+        <div class="floating-element element-5">📍</div>
+        <div class="floating-element element-6">🔥</div>
+      </div>
+    </section>
+
+    <!-- Dual Content Container -->
+    <div class="content-container">
+      <!-- Practice Section -->
+      <div class="practice-section">
+        <div class="section-header">
+          <div class="section-icon">🏃‍♂️</div>
+          <h2 class="section-title">Join the Action!</h2>
+          <p class="section-subtitle">Two chances a week to dodge, duck, dip, dive, and... dodge!</p>
+        </div>
+
+        <div class="practice-info">
+          <div class="practice-schedule">
+            <div class="schedule-item">
+              <div class="schedule-day">Tuesday</div>
+              <div class="schedule-details">
+                <div class="schedule-time">19:15 – 21:15</div>
+                <div class="schedule-type">Open Practice (All levels welcome!)</div>
+              </div>
+            </div>
+            <div class="schedule-item">
+              <div class="schedule-day">Thursday</div>
+              <div class="schedule-details">
+                <div class="schedule-time">19:15 – 21:15</div>
+                <div class="schedule-type">Advanced (Bring your A-game!)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="location-info">
+            <h3>📍 Find Us At:</h3>
+            <p>
+              <a href="https://maps.app.goo.gl/P6zf6jKa4zrjYjHK9" target="_blank">
+                Beethovenplein 2, 1077 WM Amsterdam
+              </a>
+            </p>
+            <p style="color: var(--accent); font-style: italic;">
+              (Inside St Nicolaaslyceum - follow the sounds of dodgeballs flying!)
+            </p>
+          </div>
+
+          <div class="map-container">
+            <a href="https://maps.app.goo.gl/1dqFEk4sGgfesVRm8" target="_blank" rel="noopener noreferrer">
+              <img src="pics/Map.jpg" alt="DCA Location Map" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prices Section -->
+      <div class="prices-section">
+        <div class="section-header">
+          <div class="section-icon">💎</div>
+          <h2 class="section-title">Choose Your Path!</h2>
+          <p class="section-subtitle">From casual to committed - we've got you covered!</p>
+        </div>
+
+        <div class="pricing-cards">
+          <div class="pricing-card yearly">
+            <div class="card-header">
+              <div class="card-title">🏆 1-Year Membership</div>
+              <div class="card-price">€220</div>
+            </div>
+            <div class="card-description">The ultimate dodgeball commitment!</div>
+            <ul class="card-features">
+              <li>Unlimited access to all practices</li>
+              <li>Priority in tournaments</li>
+              <li>Member-exclusive social events</li>
+              <li>Best value for serious dodgers</li>
+            </ul>
+          </div>
+
+          <div class="pricing-card strip">
+            <div class="card-header">
+              <div class="card-title">📝 Strip Card</div>
+              <div class="card-price">€50</div>
+            </div>
+            <div class="card-description">10 practices worth of pure fun!</div>
+            <ul class="card-features">
+              <li>10 training sessions to use anytime</li>
+              <li>Perfect for busy schedules</li>
+              <li>No expiration date</li>
+              <li>Great for trying us out</li>
+            </ul>
+          </div>
+
+          <div class="pricing-card dropin">
+            <div class="card-header">
+              <div class="card-title">⚡ Drop-In</div>
+              <div class="card-price">€7</div>
+            </div>
+            <div class="card-description">Single session, maximum impact!</div>
+            <ul class="card-features">
+              <li>One training session</li>
+              <li>Perfect for visitors</li>
+              <li>Try before you commit</li>
+              <li>Pay as you play</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Free Trial Banner -->
+    <div class="free-trial-banner">
+      <h3>🎉 First Practice is FREE! 🎉</h3>
+      <p>Thinking about joining? Your first practice is on us! Come give dodgeball a throw! 😉</p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <!-- Footer Top Section -->
+      <div class="footer-top">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <img src="pics/Ball.png" alt="DCA Ball" class="footer-ball">
+            <span class="footer-title">Dodgeball Club Amsterdam</span>
+          </div>
+          <p class="footer-tagline">Where dodgeball dreams come to life! 🎯</p>
+          <div class="footer-social">
+            <span class="social-text">Follow the action:</span>
+            <div class="social-links">
+              <a href="moments.html" class="social-link" title="Our Moments">📸</a>
+              <a href="social.html" class="social-link" title="Social Events">🎉</a>
+              <a href="competitions.html" class="social-link" title="Competitions">🏆</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Quick Start</h4>
+          <ul class="footer-links">
+            <li><a href="practice-prices.html">🎯 Join DCA</a></li>
+            <li><a href="practice-prices.html">💰 Prices & Training</a></li>
+            <li><a href="contact.html">📞 Get in Touch</a></li>
+            <li><a href="competitions.html">🏆 Competitions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Discover DCA</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">ℹ️ About Us</a></li>
+            <li><a href="founders.html">💡 Meet the Founders</a></li>
+            <li><a href="board.html">👥 The Board</a></li>
+            <li><a href="social.html">🎉 Social Activities</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Stay Connected</h4>
+          <div class="contact-info">
+            <p class="contact-item">
+              <span class="contact-icon">📍</span>
+              <span>Amsterdam, Netherlands</span>
+            </p>
+            <p class="contact-item">
+              <span class="contact-icon">⏰</span>
+              <span>Training: Tue & Thu</span>
+            </p>
+            <p class="contact-item">
+              <span class="contact-icon">🏆</span>
+              <span>Competing since 2020</span>
+            </p>
+          </div>
+          <a href="contact.html" class="footer-cta">Join Our Team! 🚀</a>
+        </div>
+      </div>
+
+      <!-- Footer Divider -->
+      <div class="footer-divider">
+        <div class="divider-line"></div>
+        <div class="divider-ball">⚡</div>
+        <div class="divider-line"></div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div class="footer-bottom-content">
+          <div class="footer-stats">
+            <span class="stat-item">🎯 <strong>5</strong> Teams</span>
+            <span class="stat-separator">•</span>
+            <span class="stat-item">👥 <strong>50+</strong> Members</span>
+            <span class="stat-separator">•</span>
+            <span class="stat-item">🏆 <strong>Endless</strong> Fun</span>
+          </div>
+          <p class="footer-copyright">© 2025 Dodgeball Club Amsterdam — All Dodge, No Tears.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('menu-toggle');
+      const nav = document.getElementById('nav-menu');
+      const overlay = document.getElementById('overlay');
+      const dropdowns = nav.querySelectorAll('.dropdown');
+      
+      // Toggle menu function
+      function toggleMenu() {
+        nav.classList.toggle('active');
+        overlay.classList.toggle('active');
+      }
+
+      // Event listeners
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleMenu();
+      });
+
+      overlay.addEventListener('click', function() {
+        toggleMenu();
+      });
+
+      // Handle dropdown clicks on mobile
+      dropdowns.forEach(dropdown => {
+        const dropdownSpan = dropdown.querySelector('span');
+        dropdownSpan.addEventListener('click', function(e) {
+          if (window.innerWidth <= 768) {
+            e.preventDefault();
+            dropdown.classList.toggle('active');
+          }
+        });
+      });
+
+      // Close menu when clicking a link
+      const navLinks = nav.getElementsByTagName('a');
+      for (let link of navLinks) {
+        link.addEventListener('click', function() {
+          if (link.getAttribute('href').startsWith('#') || link.getAttribute('href').endsWith('.html')) {
+              toggleMenu();
+          }
+        });
+      }
+
+      // Intersection Observer for scroll-triggered animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+          }
+        });
+      }, observerOptions);
+
+      // Observe pricing cards for hover effects
+      const pricingCards = document.querySelectorAll('.pricing-card');
+      pricingCards.forEach((card, index) => {
+        observer.observe(card);
+        
+        // Add staggered entrance animation
+        card.style.animationDelay = `${1.5 + (index * 0.2)}s`;
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px) scale(0.9)';
+        card.style.animation = 'sectionSlideIn 0.8s ease-out forwards';
+      });
+
+      // Add parallax effect to floating elements
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.5;
+        
+        document.querySelectorAll('.floating-element').forEach((element, index) => {
+          const speed = 0.5 + (index * 0.1);
+          element.style.transform = `translateY(${rate * speed}px) rotate(${scrolled * 0.1}deg)`;
+        });
+      });
+    });
+  </script>
+</body>
+</html> 

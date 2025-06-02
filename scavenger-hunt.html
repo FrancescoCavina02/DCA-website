@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DCA Scavenger Hunt - Mission Complete!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* — CSS Variables & Reset — */
+    :root {
+      --primary: #d32f2f;
+      --secondary: #000;
+      --light: #fff;
+      --accent: #333;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: var(--secondary);
+      line-height: 1.6;
+    }
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* — Header & Nav — */
+    header {
+      background: var(--secondary);
+      color: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.3rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 1002;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .logo img {
+      height: 2.8rem;
+      vertical-align: middle;
+      margin-left: 0.5rem;
+    }
+    .logo .ball-logo {
+      height: 2.8rem;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+    }
+    .adam-image {
+      height: 3.5rem;
+      vertical-align: middle;
+      margin-left: 1rem;
+    }
+    nav#nav-menu {
+      display: flex;
+      align-items: center;
+    }
+    nav#nav-menu a {
+      margin-left: 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      overflow: hidden;
+      color: var(--primary);
+    }
+    nav#nav-menu a:hover {
+      color: var(--light);
+      transform: scale(1.05);
+      background-color: rgba(211, 47, 47, 0.1);
+    }
+    nav#nav-menu a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0.2rem;
+      width: 25px;
+      height: 25px;
+      background-image: url('pics/Ball.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: translateY(-50%) scale(0);
+      transition: transform 0.3s ease;
+      z-index: -1;
+      opacity: 0.8;
+      border-radius: 50%;
+    }
+    nav#nav-menu a:hover::before {
+      transform: translateY(-50%) scale(1);
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.75rem;
+      color: var(--light);
+      cursor: pointer;
+    }
+
+    /* — Main Content Sections — */
+    main {
+      padding: 0;
+      margin: 0;
+    }
+    section {
+      margin-bottom: 3rem;
+    }
+
+    /* — Footer — */
+    footer {
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      color: var(--light);
+      margin-top: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('pics/Ball.png');
+      background-size: 80px 80px;
+      opacity: 0.03;
+      animation: footerBalls 60s linear infinite;
+    }
+
+    .footer-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 1rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-section {
+      animation: footerFadeIn 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .footer-section:nth-child(1) { animation-delay: 0.1s; }
+    .footer-section:nth-child(2) { animation-delay: 0.2s; }
+    .footer-section:nth-child(3) { animation-delay: 0.3s; }
+    .footer-section:nth-child(4) { animation-delay: 0.4s; }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .footer-ball {
+      width: 40px;
+      height: 40px;
+      margin-right: 0.75rem;
+      animation: footerBallSpin 8s linear infinite;
+      filter: drop-shadow(0 4px 8px rgba(211, 47, 47, 0.3));
+    }
+
+    .footer-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--light), #ff6b6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-tagline {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+      font-style: italic;
+    }
+
+    .footer-social {
+      margin-bottom: 1rem;
+    }
+
+    .social-text {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .social-link:hover {
+      background: var(--primary);
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 8px 20px rgba(211, 47, 47, 0.4);
+    }
+
+    .footer-heading {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      color: #ff6b6b;
+      position: relative;
+    }
+
+    .footer-heading::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 30px;
+      height: 2px;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      border-radius: 1px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--light);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      padding: 0.25rem 0;
+      border-radius: 4px;
+    }
+
+    .footer-links a:hover {
+      color: #ff6b6b;
+      padding-left: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .contact-info {
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-icon {
+      margin-right: 0.75rem;
+      font-size: 1.1rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .footer-cta {
+      display: inline-block;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      color: var(--light);
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+    }
+
+    .footer-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(211, 47, 47, 0.4);
+      background: linear-gradient(45deg, #ff6b6b, var(--primary));
+    }
+
+    .footer-divider {
+      display: flex;
+      align-items: center;
+      margin: 2rem 0;
+      opacity: 0.6;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--light), transparent);
+    }
+
+    .divider-ball {
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      animation: dividerPulse 2s ease-in-out infinite;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+    }
+
+    .footer-bottom-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-stats {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .stat-separator {
+      opacity: 0.5;
+    }
+
+    .footer-copyright {
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin: 0;
+      font-style: italic;
+    }
+
+    /* Footer Animations */
+    @keyframes footerFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes footerBallSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes footerBalls {
+      from { transform: translateX(0); }
+      to { transform: translateX(-80px); }
+    }
+
+    @keyframes dividerPulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+
+    /* Mobile Footer Styles */
+    @media (max-width: 768px) {
+      .footer-content {
+        padding: 2rem 1rem 1rem;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .footer-logo {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .footer-tagline,
+      .social-text {
+        text-align: center;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+
+      .footer-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .footer-bottom-content {
+        text-align: center;
+      }
+    }
+
+    /* — Overlay (hidden by default) — */
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+
+    /* — Mobile Styles — */
+    @media (max-width: 768px) {
+      /* Hide adam image on mobile */
+      .adam-image {
+        display: none;
+      }
+      
+      .menu-toggle {
+        display: block;
+        font-size: 2rem; /* Make hamburger more visible */
+        padding: 0.5rem; /* Add padding for easier clicking */
+      }
+      nav#nav-menu {
+        display: flex;
+        flex-direction: column;
+        background: var(--secondary);
+        position: fixed;
+        top: 0; left: -50%;
+        width: 50%; height: 100%;
+        padding-top: 3rem;
+        transition: left 0.3s ease;
+        z-index: 1001;
+      }
+      nav#nav-menu.active {
+        left: 0;
+      }
+      nav#nav-menu a {
+        margin: 0;
+        padding: 0.75rem 1.5rem;
+        border-top: 1px solid #222;
+      }
+      #overlay.active {
+        display: block;
+      }
+      .dropdown {
+        display: block;
+        width: 100%;
+      }
+      .dropdown > span {
+        margin: 0;
+        padding: 0.75rem 1.5rem;
+        border-top: 1px solid #222;
+        display: block;
+        width: 100%;
+      }
+      .dropdown-content {
+        position: static;
+        display: none;
+        box-shadow: none;
+        background-color: #1a1a1a;
+      }
+      .dropdown-content a {
+        padding: 0.5rem 2rem;
+        border-top: 1px solid #444;
+      }
+      .dropdown.active .dropdown-content {
+        display: block;
+      }
+    }
+
+    header .logo a {
+      color: var(--light);
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb-container {
+      background: rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(211, 47, 47, 0.1);
+      padding: 0.75rem 0;
+      position: sticky;
+      top: 60px;
+      z-index: 999;
+      backdrop-filter: blur(5px);
+    }
+
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb-item {
+      display: flex;
+      align-items: center;
+      color: var(--accent);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .breadcrumb-item:hover {
+      color: var(--primary);
+      background: rgba(211, 47, 47, 0.1);
+    }
+
+    .breadcrumb-item.active {
+      color: var(--primary);
+      font-weight: 600;
+      pointer-events: none;
+    }
+
+    .breadcrumb-separator {
+      margin: 0 0.5rem;
+      color: var(--accent);
+      opacity: 0.6;
+    }
+
+    .breadcrumb-icon {
+      margin-right: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    /* Mobile breadcrumb adjustments */
+    @media (max-width: 768px) {
+      .breadcrumb-container {
+        top: 50px;
+        padding: 0.5rem 0;
+      }
+      
+      .breadcrumb {
+        padding: 0 1rem;
+        font-size: 0.8rem;
+      }
+      
+      .breadcrumb-item {
+        padding: 0.2rem 0.3rem;
+      }
+    }
+
+    /* Hero Section with Enhanced Design */
+    .section-header-area {
+      position: relative;
+      padding: 6rem 1.5rem;
+      text-align: center;
+      color: var(--light);
+      width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ff9800, var(--primary), #ff6b6b);
+      background-size: 200% 200%;
+      animation: huntGradient 8s ease-in-out infinite;
+    }
+
+    .section-header-area::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: rotateBackground 20s linear infinite;
+      z-index: 1;
+    }
+
+    .section-header-area > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-header-area h2 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      opacity: 0;
+      transform: translateY(-30px);
+      animation: heroTitleEnter 1s ease-out forwards 0.3s;
+    }
+
+    .section-header-area p {
+      font-size: 1.4rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: heroSubtitleEnter 1s ease-out forwards 0.6s;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+
+    /* Floating Hunt Elements */
+    .floating-hunt-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .floating-element {
+      position: absolute;
+      font-size: 2.5rem;
+      opacity: 0.6;
+      animation: huntFloat 10s ease-in-out infinite;
+    }
+
+    .element-1 {
+      top: 15%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .element-2 {
+      top: 25%;
+      right: 15%;
+      animation-delay: 2.5s;
+    }
+
+    .element-3 {
+      bottom: 30%;
+      left: 20%;
+      animation-delay: 5s;
+    }
+
+    .element-4 {
+      bottom: 20%;
+      right: 10%;
+      animation-delay: 7.5s;
+    }
+
+    /* Content Container */
+    .hunt-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 2rem;
+      position: relative;
+    }
+
+    .story-section {
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 30px;
+      padding: 3rem;
+      margin-bottom: 4rem;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,152,0,0.05) 0%, transparent 70%);
+      animation: rotateReverse 25s linear infinite;
+      z-index: 1;
+    }
+
+    .story-section > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .story-title {
+      font-size: 2.5rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--primary), #ff9800, var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .story-text {
+      font-size: 1.2rem;
+      color: var(--accent);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .story-text.highlight {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--primary);
+      font-style: italic;
+    }
+
+    /* Enhanced Gallery */
+    .gallery-section {
+      margin-top: 4rem;
+    }
+
+    .gallery-title {
+      font-size: 2.5rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 3rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b, var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      opacity: 0;
+      transform: translateY(30px) scale(0.9);
+      animation: galleryItemEnter 0.8s ease-out forwards;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+    }
+
+    .gallery-item img,
+    .gallery-item video {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover img,
+    .gallery-item:hover video {
+      transform: scale(1.05);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-caption {
+      color: var(--light);
+      font-size: 1rem;
+      font-weight: 500;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    /* Video Container Styles */
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      background: #000;
+      border-radius: inherit;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    /* Adaptive Video Sizing Based on Orientation */
+    .video-container.horizontal {
+      aspect-ratio: 16/9;
+      height: auto;
+      min-height: 200px;
+    }
+
+    .video-container.vertical {
+      aspect-ratio: 9/16;
+      height: auto;
+      min-height: 300px;
+      max-height: 400px;
+    }
+
+    .video-container.horizontal video {
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .video-container.vertical video {
+      object-fit: contain;
+      object-position: center;
+    }
+
+    /* Custom Play Button */
+    .custom-play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      background: rgba(211, 47, 47, 0.9);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(211, 47, 47, 0.3);
+      backdrop-filter: blur(10px);
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .custom-play-button::before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 25px solid rgba(255, 255, 255, 0.95);
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      margin-left: 5px;
+    }
+
+    .custom-play-button:hover {
+      background: rgba(211, 47, 47, 1);
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 12px 35px rgba(211, 47, 47, 0.5);
+    }
+
+    .video-container.playing .custom-play-button {
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+
+    /* Video Controls */
+    .video-controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transform: translateY(100%);
+      transition: all 0.3s ease;
+      opacity: 0;
+      z-index: 4;
+    }
+
+    .video-container:hover .video-controls,
+    .video-container.playing .video-controls {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .play-button, .fullscreen-button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+    }
+
+    .play-button:hover, .fullscreen-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+
+    .play-icon {
+      width: 0;
+      height: 0;
+      border-left: 12px solid rgba(255, 255, 255, 0.95);
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      margin-left: 2px;
+    }
+
+    .play-button.paused .play-icon {
+      border-left: 12px solid rgba(255, 255, 255, 0.95);
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+    }
+
+    .play-button.playing .play-icon {
+      border: none;
+      width: 12px;
+      height: 12px;
+      background: none;
+      position: relative;
+      margin-left: 0;
+    }
+
+    .play-button.playing .play-icon::before,
+    .play-button.playing .play-icon::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .play-button.playing .play-icon::before {
+      left: 0;
+    }
+
+    .play-button.playing .play-icon::after {
+      right: 0;
+    }
+
+    .video-progress {
+      flex: 1;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 3px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      border-radius: 3px;
+      width: 0%;
+      transition: width 0.1s ease;
+      position: relative;
+    }
+
+    .progress-bar::after {
+      content: '';
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .video-progress:hover .progress-bar::after {
+      opacity: 1;
+    }
+
+    /* Video Loading State */
+    .video-loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      z-index: 6;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .video-container.loading .video-loading {
+      opacity: 1;
+    }
+
+    .video-container.loading .custom-play-button {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    /* Error State */
+    .video-container.error::before {
+      content: '⚠️ Video unavailable';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      z-index: 6;
+    }
+
+    /* Hover Effects */
+    .video-container:hover video {
+      transform: scale(1.02);
+    }
+
+    .video-container:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    /* Mobile Video Styles */
+    @media (max-width: 768px) {
+      .custom-play-button {
+        width: 60px;
+        height: 60px;
+      }
+
+      .custom-play-button::before {
+        border-left: 18px solid rgba(255, 255, 255, 0.95);
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        margin-left: 3px;
+      }
+
+      .video-controls {
+        padding: 0.75rem;
+        gap: 0.5rem;
+      }
+
+      .play-button, .fullscreen-button {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+      }
+
+      .video-progress {
+        height: 8px;
+      }
+
+      .progress-bar::after {
+        width: 16px;
+        height: 16px;
+        right: -8px;
+      }
+    }
+
+    /* Animations */
+    @keyframes huntGradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes rotateBackground {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes rotateReverse {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+
+    @keyframes heroTitleEnter {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heroSubtitleEnter {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes galleryItemEnter {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes huntFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      25% { transform: translateY(-30px) rotate(90deg); }
+      50% { transform: translateY(0px) rotate(180deg); }
+      75% { transform: translateY(-20px) rotate(270deg); }
+    }
+
+    /* Dropdown styles */
+    .dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--secondary);
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1003;
+      border-radius: 4px;
+      top: 100%;
+      left: 0;
+    }
+    .dropdown-content a {
+      color: var(--light);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      margin: 0;
+      border-radius: 0;
+      transition: background-color 0.3s ease;
+    }
+    .dropdown-content a:hover {
+      background-color: var(--primary);
+      transform: none;
+      text-decoration: underline;
+    }
+    .dropdown-content a::before {
+      display: none;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .dropdown > span {
+      margin-left: 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      overflow: hidden;
+      color: var(--primary);
+      cursor: pointer;
+    }
+    .dropdown > span:hover {
+      color: var(--light);
+      transform: scale(1.05);
+      background-color: rgba(211, 47, 47, 0.1);
+    }
+    .dropdown > span::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0.2rem;
+      width: 25px;
+      height: 25px;
+      background-image: url('pics/Ball.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: translateY(-50%) scale(0);
+      transition: transform 0.3s ease;
+      z-index: -1;
+      opacity: 0.8;
+      border-radius: 50%;
+    }
+    .dropdown > span:hover::before {
+      transform: translateY(-50%) scale(1);
+    }
+
+    /* Floating Balls */
+    .floating-balls {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .floating-ball {
+      position: absolute;
+      width: 35px;
+      height: 35px;
+      opacity: 0.3;
+      animation: ballFloat 8s ease-in-out infinite;
+      background-image: url('pics/Ball.png');
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .ball-1 {
+      top: 20%;
+      left: 5%;
+      animation-delay: 0s;
+      animation-duration: 9s;
+    }
+
+    .ball-2 {
+      top: 70%;
+      right: 8%;
+      animation-delay: 3s;
+      animation-duration: 11s;
+    }
+
+    .ball-3 {
+      bottom: 25%;
+      left: 12%;
+      animation-delay: 6s;
+      animation-duration: 13s;
+    }
+
+    /* Staggered animation delays */
+    .gallery-item[data-delay="0"] { animation-delay: 1.2s; }
+    .gallery-item[data-delay="1"] { animation-delay: 1.4s; }
+    .gallery-item[data-delay="2"] { animation-delay: 1.6s; }
+    .gallery-item[data-delay="3"] { animation-delay: 1.8s; }
+    .gallery-item[data-delay="4"] { animation-delay: 2.0s; }
+    .gallery-item[data-delay="5"] { animation-delay: 2.2s; }
+    .gallery-item[data-delay="6"] { animation-delay: 2.4s; }
+    .gallery-item[data-delay="7"] { animation-delay: 2.6s; }
+
+    @keyframes ballFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      25% { transform: translateY(-25px) rotate(90deg); }
+      50% { transform: translateY(0px) rotate(180deg); }
+      75% { transform: translateY(-15px) rotate(270deg); }
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .section-header-area {
+        padding: 4rem 1rem;
+      }
+
+      .section-header-area h2 {
+        font-size: 2.5rem;
+      }
+
+      .hunt-content {
+        padding: 2rem 1rem;
+      }
+
+      .story-section {
+        padding: 2rem;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .gallery-title {
+        font-size: 2rem;
+      }
+
+      .story-title {
+        font-size: 2rem;
+      }
+
+      .story-text {
+        font-size: 1rem;
+      }
+
+      .floating-element {
+        font-size: 2rem;
+      }
+
+      .gallery-item img,
+      .gallery-item video {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header + Nav -->
+  <header>
+    <div class="logo"><a href="website.html"><img src="pics/Ball.png" alt="Ball Logo" class="ball-logo">DCA <img src="pics/XXX.png" alt="DCA Logo"></a></div>
+    <img src="pics/adam.png" alt="Adam" class="adam-image">
+    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
+    <nav id="nav-menu">
+      <a href="website.html">Home</a>
+      <div class="dropdown">
+        <span>About</span>
+        <div class="dropdown-content">
+          <a href="about.html">About DCA</a>
+          <a href="founders.html">Founders</a>
+          <a href="board.html">The Board</a>
+        </div>
+      </div>
+      <a href="practice-prices.html">Practice & Prices</a>
+      <a href="competitions.html">Competitions</a>
+      <div class="dropdown">
+        <span>Social</span>
+        <div class="dropdown-content">
+          <a href="social.html">Activities</a>
+          <a href="moments.html">Moments</a>
+          <a href="testimonials.html">Testimonials</a>
+        </div>
+      </div>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Overlay -->
+  <div id="overlay"></div>
+
+  <!-- Breadcrumb Navigation -->
+  <div class="breadcrumb-container">
+    <nav class="breadcrumb">
+      <a href="website.html" class="breadcrumb-item">
+        <span class="breadcrumb-icon">🏠</span>
+        Home
+      </a>
+      <span class="breadcrumb-separator">›</span>
+      <a href="social.html" class="breadcrumb-item">
+        <span class="breadcrumb-icon">🎉</span>
+        Social
+      </a>
+      <span class="breadcrumb-separator">›</span>
+      <span class="breadcrumb-item active">
+        <span class="breadcrumb-icon">🔍</span>
+        Scavenger Hunt
+      </span>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+    <section>
+      <div class="section-header-area">
+        <h2>Mission Complete! 💥</h2>
+        <p>The ultimate Amsterdam scavenger hunt adventure!</p>
+        
+        <!-- Floating Hunt Elements -->
+        <div class="floating-hunt-elements">
+          <div class="floating-element element-1">🔍</div>
+          <div class="floating-element element-2">🏃‍♀️</div>
+          <div class="floating-element element-3">🎯</div>
+          <div class="floating-element element-4">🏆</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hunt Content -->
+    <div class="hunt-content">
+      <div class="story-section">
+        <h2 class="story-title">DCA Scavenger Hunt – What. A. Day.</h2>
+        
+        <p class="story-text">It's been a week since we turned the streets of Amsterdam into our dodgeball court. For those who sadly missed it, here's a little recap:</p>
+
+        <p class="story-text highlight">What. A. Day.</p>
+
+        <p class="story-text">From stickers everywhere, to romantic (???) dodgeball poses and pick-up lines, penguin and baby elephant mascots, questionable paprika-dodgeballs, a not-so-successful attempt at youth recruitment (yes, someone might have made a child cry)… and many more highlights - the day was packed with chaos in the best way.</p>
+
+        <p class="story-text">Again congrats to the winning team - led with almost German-like efficiency and time management skills (nope, not talking about myself). Meanwhile, the other team fully embraced the snacking with ice-cream and hot dog stops along the way 😬</p>
+
+        <p class="story-text">Thanks again to everyone who showed up and brought the DCA spirit. Can't wait to see many of you at the next social event! ♥️</p>
+      </div>
+
+      <div class="gallery-section">
+        <h3 class="gallery-title">Hunt Highlights</h3>
+        
+        <div class="gallery">
+          <div class="gallery-item" data-delay="0">
+            <img src="pics/Scavenger hunt/Head-image.jpeg" alt="Scavenger Hunt Participants">
+            <div class="gallery-overlay">
+              <div class="gallery-caption">The brave hunters ready for action!</div>
+            </div>
+          </div>
+          
+          <div class="gallery-item" data-delay="1">
+            <img src="pics/Scavenger hunt/WhatsApp Image 2025-05-25 at 22.01.52.jpeg" alt="Scavenger Hunt Photo">
+            <div class="gallery-overlay">
+              <div class="gallery-caption">Mission in progress - teamwork at its finest!</div>
+            </div>
+          </div>
+          
+          <div class="gallery-item" data-delay="2">
+            <img src="pics/Scavenger hunt/WhatsApp Image 2025-05-25 at 22.01.51.jpeg" alt="Scavenger Hunt Photo">
+            <div class="gallery-overlay">
+              <div class="gallery-caption">Amsterdam streets become our playground!</div>
+            </div>
+          </div>
+          
+          <div class="gallery-item" data-delay="3">
+            <img src="pics/Scavenger hunt/WhatsApp Image 2025-05-25 at 22.01.42.jpeg" alt="Scavenger Hunt Photo">
+            <div class="gallery-overlay">
+              <div class="gallery-caption">Victory poses and celebration time!</div>
+            </div>
+          </div>
+          
+          <div class="gallery-item" data-delay="4">
+            <div class="video-container">
+              <video preload="metadata">
+                <source src="pics/Scavenger hunt/WhatsApp Video 2025-05-25 at 22.01.49.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="custom-play-button"></div>
+              <div class="video-controls">
+                <button class="play-button">
+                  <div class="play-icon"></div>
+                </button>
+                <div class="video-progress">
+                  <div class="progress-bar"></div>
+                </div>
+                <button class="fullscreen-button">⛶</button>
+              </div>
+              <div class="video-loading">Loading...</div>
+            </div>
+          </div>
+          
+          <div class="gallery-item" data-delay="5">
+            <div class="video-container">
+              <video preload="metadata">
+                <source src="pics/Scavenger hunt/WhatsApp Video 2025-05-25 at 22.01.48.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="custom-play-button"></div>
+              <div class="video-controls">
+                <button class="play-button">
+                  <div class="play-icon"></div>
+                </button>
+                <div class="video-progress">
+                  <div class="progress-bar"></div>
+                </div>
+                <button class="fullscreen-button">⛶</button>
+              </div>
+              <div class="video-loading">Loading...</div>
+            </div>
+          </div>
+          
+          <div class="gallery-item" data-delay="6">
+            <div class="video-container">
+              <video preload="metadata">
+                <source src="pics/Scavenger hunt/WhatsApp Video 2025-05-25 at 22.01.47.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="custom-play-button"></div>
+              <div class="video-controls">
+                <button class="play-button">
+                  <div class="play-icon"></div>
+                </button>
+                <div class="video-progress">
+                  <div class="progress-bar"></div>
+                </div>
+                <button class="fullscreen-button">⛶</button>
+              </div>
+              <div class="video-loading">Loading...</div>
+            </div>
+          </div>
+          
+          <div class="gallery-item" data-delay="7">
+            <div class="video-container">
+              <video preload="metadata">
+                <source src="pics/Scavenger hunt/WhatsApp Video 2025-05-25 at 22.01.44.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="custom-play-button"></div>
+              <div class="video-controls">
+                <button class="play-button">
+                  <div class="play-icon"></div>
+                </button>
+                <div class="video-progress">
+                  <div class="progress-bar"></div>
+                </div>
+                <button class="fullscreen-button">⛶</button>
+              </div>
+              <div class="video-loading">Loading...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Balls -->
+      <div class="floating-balls">
+        <div class="floating-ball ball-1"></div>
+        <div class="floating-ball ball-2"></div>
+        <div class="floating-ball ball-3"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <!-- Footer Top Section -->
+      <div class="footer-top">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <img src="pics/Ball.png" alt="DCA Ball" class="footer-ball">
+            <span class="footer-title">Dodgeball Club Amsterdam</span>
+          </div>
+          <p class="footer-tagline">Where dodgeball dreams come to life! 🎯</p>
+          <div class="footer-social">
+            <span class="social-text">Follow the action:</span>
+            <div class="social-links">
+              <a href="moments.html" class="social-link" title="Our Moments">📸</a>
+              <a href="social.html" class="social-link" title="Social Events">🎉</a>
+              <a href="competitions.html" class="social-link" title="Competitions">🏆</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Quick Start</h4>
+          <ul class="footer-links">
+            <li><a href="practice-prices.html">🎯 Join DCA</a></li>
+            <li><a href="practice-prices.html">💰 Prices & Training</a></li>
+            <li><a href="contact.html">📞 Get in Touch</a></li>
+            <li><a href="competitions.html">🏆 Competitions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Discover DCA</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">ℹ️ About Us</a></li>
+            <li><a href="founders.html">💡 Meet the Founders</a></li>
+            <li><a href="board.html">👥 The Board</a></li>
+            <li><a href="social.html">🎉 Social Activities</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Stay Connected</h4>
+          <div class="contact-info">
+            <p class="contact-item">
+              <span class="contact-icon">📍</span>
+              <span>Amsterdam, Netherlands</span>
+            </p>
+            <p class="contact-item">
+              <span class="contact-icon">⏰</span>
+              <span>Training: Tue & Thu</span>
+            </p>
+            <p class="contact-item">
+              <span class="contact-icon">🏆</span>
+              <span>Competing since 2020</span>
+            </p>
+          </div>
+          <a href="contact.html" class="footer-cta">Join Our Team! 🚀</a>
+        </div>
+      </div>
+
+      <!-- Footer Divider -->
+      <div class="footer-divider">
+        <div class="divider-line"></div>
+        <div class="divider-ball">⚡</div>
+        <div class="divider-line"></div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div class="footer-bottom-content">
+          <div class="footer-stats">
+            <span class="stat-item">🎯 <strong>5</strong> Teams</span>
+            <span class="stat-separator">•</span>
+            <span class="stat-item">👥 <strong>50+</strong> Members</span>
+            <span class="stat-separator">•</span>
+            <span class="stat-item">🏆 <strong>Endless</strong> Fun</span>
+          </div>
+          <p class="footer-copyright">© 2025 Dodgeball Club Amsterdam — All Dodge, No Tears.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Inline JS for Hamburger + Overlay -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('menu-toggle');
+      const nav = document.getElementById('nav-menu');
+      const overlay = document.getElementById('overlay');
+      const dropdowns = nav.querySelectorAll('.dropdown');
+      
+      // Toggle menu function
+      function toggleMenu() {
+        nav.classList.toggle('active');
+        overlay.classList.toggle('active');
+      }
+
+      // Event listeners
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleMenu();
+      });
+
+      overlay.addEventListener('click', function() {
+        toggleMenu();
+      });
+
+      // Handle dropdown clicks on mobile
+      dropdowns.forEach(dropdown => {
+        const dropdownSpan = dropdown.querySelector('span');
+        dropdownSpan.addEventListener('click', function(e) {
+          if (window.innerWidth <= 768) {
+            e.preventDefault();
+            dropdown.classList.toggle('active');
+          }
+        });
+      });
+
+      // Close menu when clicking a link
+      const navLinks = nav.getElementsByTagName('a');
+      for (let link of navLinks) {
+        link.addEventListener('click', function() {
+          if (link.getAttribute('href').startsWith('#') || link.getAttribute('href').endsWith('.html')) {
+              toggleMenu();
+          }
+        });
+      }
+
+      // Enhanced Video Player Functionality  
+      function initializeVideoPlayers() {
+        const videos = document.querySelectorAll('.video-container video');
+        
+        videos.forEach(video => {
+          const container = video.closest('.video-container');
+          const playButton = container.querySelector('.play-button');
+          const customPlayButton = container.querySelector('.custom-play-button');
+          const progressBar = container.querySelector('.progress-bar');
+          const progressContainer = container.querySelector('.video-progress');
+          const fullscreenButton = container.querySelector('.fullscreen-button');
+          
+          // Detect video orientation and apply appropriate class
+          video.addEventListener('loadedmetadata', function() {
+            const aspectRatio = video.videoWidth / video.videoHeight;
+            
+            // Remove existing orientation classes
+            container.classList.remove('horizontal', 'vertical');
+            
+            // Apply orientation class based on aspect ratio
+            if (aspectRatio > 1.2) {
+              container.classList.add('horizontal');
+            } else if (aspectRatio < 0.8) {
+              container.classList.add('vertical');
+            } else {
+              // For near-square videos, default to horizontal
+              container.classList.add('horizontal');
+            }
+            
+            // Set video to first frame for preview
+            video.currentTime = 0.1;
+          });
+          
+          // Handle video loading errors
+          video.addEventListener('error', function() {
+            container.classList.add('error');
+            console.warn('Video failed to load:', video.src);
+          });
+          
+          // Loading states
+          video.addEventListener('loadstart', function() {
+            container.classList.add('loading');
+          });
+          
+          video.addEventListener('canplay', function() {
+            container.classList.remove('loading');
+          });
+          
+          // Play/Pause functionality
+          function togglePlay() {
+            if (video.paused || video.ended) {
+              // Pause all other videos first
+              videos.forEach(otherVideo => {
+                if (otherVideo !== video && !otherVideo.paused) {
+                  otherVideo.pause();
+                  const otherContainer = otherVideo.closest('.video-container');
+                  const otherPlayButton = otherContainer.querySelector('.play-button');
+                  otherContainer.classList.remove('playing');
+                  if (otherPlayButton) {
+                    otherPlayButton.classList.remove('playing');
+                    otherPlayButton.classList.add('paused');
+                  }
+                }
+              });
+              
+              video.play().then(() => {
+                container.classList.add('playing');
+                if (playButton) {
+                  playButton.classList.add('playing');
+                  playButton.classList.remove('paused');
+                }
+              }).catch(e => {
+                console.warn('Error playing video:', e);
+                container.classList.add('error');
+              });
+            } else {
+              video.pause();
+              container.classList.remove('playing');
+              if (playButton) {
+                playButton.classList.remove('playing');
+                playButton.classList.add('paused');
+              }
+            }
+          }
+          
+          // Update progress bar
+          function updateProgress() {
+            if (video.duration) {
+              const progressPercent = (video.currentTime / video.duration) * 100;
+              progressBar.style.width = progressPercent + '%';
+            }
+          }
+          
+          // Seek functionality
+          function seek(e) {
+            if (video.duration) {
+              const rect = progressContainer.getBoundingClientRect();
+              const clickX = e.clientX - rect.left;
+              const width = rect.width;
+              const clickPercent = Math.max(0, Math.min(1, clickX / width));
+              
+              video.currentTime = clickPercent * video.duration;
+              updateProgress();
+            }
+          }
+          
+          // Fullscreen functionality
+          function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+              container.requestFullscreen().catch(err => {
+                console.warn('Error attempting to enable fullscreen:', err);
+              });
+            } else {
+              document.exitFullscreen();
+            }
+          }
+          
+          // Event listeners
+          if (customPlayButton) {
+            customPlayButton.addEventListener('click', togglePlay);
+          }
+          
+          if (playButton) {
+            playButton.addEventListener('click', togglePlay);
+            playButton.classList.add('paused'); // Start in paused state
+          }
+          
+          video.addEventListener('click', togglePlay);
+          video.addEventListener('timeupdate', updateProgress);
+          
+          if (progressContainer) {
+            progressContainer.addEventListener('click', seek);
+          }
+          
+          if (fullscreenButton) {
+            fullscreenButton.addEventListener('click', toggleFullscreen);
+          }
+          
+          // Reset when video ends
+          video.addEventListener('ended', function() {
+            container.classList.remove('playing');
+            if (playButton) {
+              playButton.classList.remove('playing');
+              playButton.classList.add('paused');
+            }
+            // Reset to beginning
+            video.currentTime = 0.1; // Show first frame
+            updateProgress();
+          });
+          
+          // Pause when user leaves the page
+          document.addEventListener('visibilitychange', function() {
+            if (document.hidden && !video.paused) {
+              video.pause();
+              container.classList.remove('playing');
+              if (playButton) {
+                playButton.classList.remove('playing');
+                playButton.classList.add('paused');
+              }
+            }
+          });
+          
+          // Initialize progress bar
+          updateProgress();
+        });
+      }
+      
+      // Initialize video players
+      initializeVideoPlayers();
+    });
+  </script>
+</body>
+</html> 

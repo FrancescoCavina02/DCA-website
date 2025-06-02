@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Marcos Ross #55 - Treasurer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* — CSS Variables & Reset — */
+    :root {
+      --primary: #d32f2f;
+      --secondary: #000;
+      --light: #fff;
+      --accent: #333;
+      --bg-light: #fafafa;
+      --card-bg: #ffffff;
+      --red-light: #ffebee;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: var(--secondary);
+      line-height: 1.6;
+      background: linear-gradient(135deg, var(--bg-light), var(--red-light));
+      min-height: 100vh;
+    }
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* — Header & Nav — */
+    header {
+      background: var(--secondary);
+      color: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.3rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 1002;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .logo img {
+      height: 2.8rem;
+      vertical-align: middle;
+      margin-left: 0.5rem;
+    }
+    .logo .ball-logo {
+      height: 2.8rem; /* Same size as XXX.png */
+      vertical-align: middle;
+      margin-right: 0.5rem; /* Space between ball and DCA text */
+    }
+    .adam-image {
+      height: 3.5rem;
+      vertical-align: middle;
+      margin-left: 1rem;
+    }
+    nav#nav-menu {
+      display: flex;
+      align-items: center;
+    }
+    nav#nav-menu a {
+      margin-left: 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      overflow: hidden;
+      color: var(--primary);
+    }
+    nav#nav-menu a:hover {
+      color: var(--light);
+      transform: scale(1.05);
+      background-color: rgba(211, 47, 47, 0.1);
+    }
+    nav#nav-menu a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0.2rem;
+      width: 25px;
+      height: 25px;
+      background-image: url('pics/Ball.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: translateY(-50%) scale(0);
+      transition: transform 0.3s ease;
+      z-index: -1;
+      opacity: 0.8;
+      border-radius: 50%;
+    }
+    nav#nav-menu a:hover::before {
+      transform: translateY(-50%) scale(1);
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.75rem;
+      color: var(--light);
+      cursor: pointer;
+    }
+
+    /* — Main Content — */
+    main {
+      padding: 2rem 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Profile Header */
+    .profile-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .profile-header h1 {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    .profile-header .subtitle {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    /* Floating circular images */
+    .floating-image {
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: absolute;
+    }
+    .floating-image:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    /* Ties1 - Most important, prominent position */
+    .ties1-image {
+      width: 240px;
+      height: 240px;
+      top: 5rem;
+      right: -1rem;
+      z-index: 10;
+    }
+
+    /* Profile Grid */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      padding-top: 60px;
+      padding-left: 60px;
+      padding-right: 100px;
+    }
+
+    /* Ties2 - Second most important */
+    .ties2-image {
+      width: 200px;
+      height: 200px;
+      top: -90px;
+      left: -90px;
+      z-index: 5;
+    }
+
+    /* Ties3 - Third most important */
+    .ties3-image {
+      width: 200px;
+      height: 200px;
+      position: absolute;
+      top: 170px;
+      right: -140px;
+      left: auto;
+      z-index: 5;
+    }
+
+    /* Ties4 - Least important, bigger and rectangular */
+    .ties4-image {
+      width: 460px;
+      height: auto;
+      border-radius: 50%; /* Make ties4 oval on desktop */
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: auto;
+      left: 700px;
+      z-index: 3;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+
+    /* Card Styles */
+    .profile-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+    .profile-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    .profile-card.intro {
+      background: linear-gradient(135deg, var(--primary), #ff5252);
+      color: var(--light);
+      padding-right: 80px;
+      padding-left: 2rem;
+    }
+    .profile-card.intro h2 {
+      color: var(--light);
+    }
+
+    .profile-card.passion {
+      background: linear-gradient(135deg, #ff9800, #ffc107);
+      color: var(--secondary);
+      position: relative;
+      padding-right: 80px;
+      padding-left: 2rem;
+    }
+
+    .profile-card.personal {
+      background: linear-gradient(135deg, #2196f3, #03a9f4);
+      color: var(--light);
+      padding-left: 80px;
+      padding-right: 2rem;
+    }
+    .profile-card.personal h2 {
+      color: var(--light);
+    }
+
+    .profile-card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    .profile-card p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    /* Bottom section - Revert padding */
+    .bottom-section {
+      margin-top: 3rem;
+      padding: 2rem;
+      text-align: center;
+      padding-right: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    /* Remove old image gallery styles */
+    .image-gallery {
+      display: none;
+    }
+    .image-item {
+      display: none;
+    }
+    .feature-image {
+      display: none;
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      color: var(--light);
+      margin-top: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('pics/Ball.png');
+      background-size: 80px 80px;
+      opacity: 0.03;
+      animation: footerBalls 60s linear infinite;
+    }
+
+    .footer-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 1rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-section {
+      animation: footerFadeIn 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .footer-section:nth-child(1) { animation-delay: 0.1s; }
+    .footer-section:nth-child(2) { animation-delay: 0.2s; }
+    .footer-section:nth-child(3) { animation-delay: 0.3s; }
+    .footer-section:nth-child(4) { animation-delay: 0.4s; }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .footer-ball {
+      width: 40px;
+      height: 40px;
+      margin-right: 0.75rem;
+      animation: footerBallSpin 8s linear infinite;
+      filter: drop-shadow(0 4px 8px rgba(211, 47, 47, 0.3));
+    }
+
+    .footer-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--light), #ff6b6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-tagline {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+      font-style: italic;
+    }
+
+    .footer-social {
+      margin-bottom: 1rem;
+    }
+
+    .social-text {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .social-link:hover {
+      background: var(--primary);
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 8px 20px rgba(211, 47, 47, 0.4);
+    }
+
+    .footer-heading {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      color: #ff6b6b;
+      position: relative;
+    }
+
+    .footer-heading::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 30px;
+      height: 2px;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      border-radius: 1px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--light);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      padding: 0.25rem 0;
+      border-radius: 4px;
+    }
+
+    .footer-links a:hover {
+      color: #ff6b6b;
+      padding-left: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .contact-info {
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-icon {
+      margin-right: 0.75rem;
+      font-size: 1.1rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .footer-cta {
+      display: inline-block;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      color: var(--light);
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+    }
+
+    .footer-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(211, 47, 47, 0.4);
+      background: linear-gradient(45deg, #ff6b6b, var(--primary));
+    }
+
+    .footer-divider {
+      display: flex;
+      align-items: center;
+      margin: 2rem 0;
+      opacity: 0.6;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--light), transparent);
+    }
+
+    .divider-ball {
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      animation: dividerPulse 2s ease-in-out infinite;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+    }
+
+    .footer-bottom-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-stats {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .stat-separator {
+      opacity: 0.5;
+    }
+
+    .footer-copyright {
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin: 0;
+      font-style: italic;
+    }
+
+    /* Footer Animations */
+    @keyframes footerFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes footerBallSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes footerBalls {
+      from { transform: translateX(0); }
+      to { transform: translateX(-80px); }
+    }
+
+    @keyframes dividerPulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+
+    /* Mobile Footer Styles */
+    @media (max-width: 768px) {
+      .footer-content {
+        padding: 2rem 1rem 1rem;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .footer-logo {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .footer-tagline,
+      .social-text {
+        text-align: center;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+
+      .footer-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .footer-bottom-content {
+        text-align: center;
+      }
+    }
+
+    /* Overlay */
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+    #overlay.active {
+      display: block;
+    }
+
+    /* Dropdown styles */
+    .dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--secondary);
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1003;
+      border-radius: 4px;
+      top: 100%;
+      left: 0;
+    }
+    .dropdown-content a {
+      color: var(--light);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      margin: 0;
+      border-radius: 0;
+      transition: background-color 0.3s ease;
+    }
+    .dropdown-content a:hover {
+      background-color: var(--primary);
+      transform: none;
+      text-decoration: underline;
+    }
+    .dropdown-content a::before {
+      display: none;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .dropdown > span {
+      margin-left: 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      overflow: hidden;
+      color: var(--primary);
+      cursor: pointer;
+    }
+    .dropdown > span:hover {
+      color: var(--light);
+      transform: scale(1.05);
+      background-color: rgba(211, 47, 47, 0.1);
+    }
+    .dropdown > span::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0.2rem;
+      width: 25px;
+      height: 25px;
+      background-image: url('pics/Ball.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: translateY(-50%) scale(0);
+      transition: transform 0.3s ease;
+      z-index: -1;
+      opacity: 0.8;
+      border-radius: 50%;
+    }
+    .dropdown > span:hover::before {
+      transform: translateY(-50%) scale(1);
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      /* Hide adam image on mobile */
+      .adam-image {
+        display: none;
+      }
+      
+      .menu-toggle {
+        display: block;
+        font-size: 2rem; /* Make hamburger more visible */
+        padding: 0.5rem; /* Add padding for easier clicking */
+      }
+      /* sidebar nav */
+      nav#nav-menu {
+        display: flex;
+        flex-direction: column;
+        background: var(--secondary);
+        position: fixed;
+        top: 0; left: -50%;
+        width: 50%; height: 100%;
+        padding-top: 3rem; /* leave space under header */
+        transition: left 0.3s ease;
+        z-index: 1001;
+      }
+      /* slide in when active */
+      nav#nav-menu.active {
+        left: 0;
+      }
+      nav#nav-menu a {
+        margin: 0;
+        padding: 0.75rem 1.5rem;
+        border-top: 1px solid #222;
+      }
+      /* Mobile dropdown styles */
+      .dropdown {
+        display: block;
+        width: 100%;
+      }
+      .dropdown > span {
+        margin: 0;
+        padding: 0.75rem 1.5rem;
+        border-top: 1px solid #222;
+        display: block;
+        width: 100%;
+      }
+      .dropdown-content {
+        position: static;
+        display: none;
+        box-shadow: none;
+        background-color: #1a1a1a;
+      }
+      .dropdown-content a {
+        padding: 0.5rem 2rem;
+        border-top: 1px solid #444;
+      }
+      .dropdown.active .dropdown-content {
+        display: block;
+      }
+      /* show overlay when menu open */
+      #overlay.active {
+        display: block;
+      }
+      .profile-header h1 {
+        font-size: 2.5rem;
+      }
+      
+      /* Hide desktop floating images and grid on mobile */
+      .floating-image {
+        display: none;
+      }
+      .profile-grid {
+        display: none;
+      }
+      
+      /* Show mobile content */
+      .mobile-content {
+        display: block;
+      }
+      
+      /* Mobile profile header adjustments */
+      .profile-header {
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+      }
+      
+      /* Mobile images */
+      .mobile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        margin: 2rem auto;
+        display: block;
+      }
+      
+      .mobile-image.ties1 {
+        transform: rotate(-3deg);
+      }
+      
+      .mobile-image.ties2 {
+        transform: rotate(2deg);
+      }
+      
+      .mobile-image.ties3 {
+        transform: rotate(-2deg);
+      }
+      
+      .mobile-image.ties4 {
+        width: 250px;
+        height: auto;
+        border-radius: 50%;
+        transform: none;
+      }
+      
+      /* Mobile cards */
+      .mobile-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        margin: 2rem auto;
+        max-width: 350px;
+        text-align: center;
+      }
+      
+      .mobile-card.intro {
+        background: linear-gradient(135deg, var(--primary), #ff5252);
+        color: var(--light);
+      }
+      .mobile-card.intro h2 {
+        color: var(--light);
+      }
+      
+      .mobile-card.passion {
+        background: linear-gradient(135deg, #ff9800, #ffc107);
+        color: var(--secondary);
+      }
+      
+      .mobile-card.personal {
+        background: linear-gradient(135deg, #2196f3, #03a9f4);
+        color: var(--light);
+      }
+      
+      .mobile-card.personal h2 {
+        color: var(--light);
+      }
+      
+      .mobile-card h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+      .mobile-card p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 0.8rem;
+      }
+      
+      /* Adjust padding on cards for mobile */
+      .profile-card.intro,
+      .profile-card.passion,
+      .profile-card.personal,
+      .bottom-section {
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+      }
+    }
+
+    /* Hide mobile content on desktop */
+    @media (min-width: 769px) {
+      .mobile-content {
+        display: none;
+      }
+    }
+
+    header .logo a {
+      color: var(--light);
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb-container {
+      background: rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(211, 47, 47, 0.1);
+      padding: 0.75rem 0;
+      position: sticky;
+      top: 60px;
+      z-index: 999;
+      backdrop-filter: blur(5px);
+    }
+
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb-item {
+      display: flex;
+      align-items: center;
+      color: var(--accent);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .breadcrumb-item:hover {
+      color: var(--primary);
+      background: rgba(211, 47, 47, 0.1);
+    }
+
+    .breadcrumb-item.active {
+      color: var(--primary);
+      font-weight: 600;
+      pointer-events: none;
+    }
+
+    .breadcrumb-separator {
+      margin: 0 0.5rem;
+      color: var(--accent);
+      opacity: 0.6;
+    }
+
+    .breadcrumb-icon {
+      margin-right: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    /* Mobile breadcrumb adjustments */
+    @media (max-width: 768px) {
+      .breadcrumb-container {
+        top: 50px;
+        padding: 0.5rem 0;
+      }
+      
+      .breadcrumb {
+        padding: 0 1rem;
+        font-size: 0.8rem;
+      }
+      
+      .breadcrumb-item {
+        padding: 0.2rem 0.3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header + Nav -->
+  <header>
+    <div class="logo"><a href="website.html"><img src="pics/Ball.png" alt="Ball Logo" class="ball-logo">DCA <img src="pics/XXX.png" alt="DCA Logo"></a></div>
+    <img src="pics/adam.png" alt="Adam" class="adam-image">
+    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
+    <nav id="nav-menu">
+      <a href="website.html">Home</a>
+      <div class="dropdown">
+        <span>About</span>
+        <div class="dropdown-content">
+          <a href="about.html">About DCA</a>
+          <a href="founders.html">Founders</a>
+          <a href="board.html">The Board</a>
+        </div>
+      </div>
+      <a href="practice-prices.html">Practice & Prices</a>
+      <a href="competitions.html">Competitions</a>
+      <div class="dropdown">
+        <span>Social</span>
+        <div class="dropdown-content">
+          <a href="social.html">Activities</a>
+          <a href="moments.html">Moments</a>
+          <a href="testimonials.html">Testimonials</a>
+        </div>
+      </div>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Overlay -->
+  <div id="overlay"></div>
+
+  <!-- Breadcrumb Navigation -->
+  <div class="breadcrumb-container">
+    <nav class="breadcrumb">
+      <a href="website.html" class="breadcrumb-item">
+        <span class="breadcrumb-icon">🏠</span>
+        Home
+      </a>
+      <span class="breadcrumb-separator">›</span>
+      <a href="about.html" class="breadcrumb-item">
+        <span class="breadcrumb-icon">ℹ️</span>
+        About
+      </a>
+      <span class="breadcrumb-separator">›</span>
+      <a href="board.html" class="breadcrumb-item">
+        <span class="breadcrumb-icon">🏆</span>
+        The Board
+      </a>
+      <span class="breadcrumb-separator">›</span>
+      <span class="breadcrumb-item active">
+        <span class="breadcrumb-icon">🌟</span>
+        Marcos Ross
+      </span>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <h1>Marcos Ross #55</h1>
+      <p class="subtitle">💰 Treasurer | 🎓 PhD Researcher | 🎵 Music Producer</p>
+      <!-- Marcos1 - Most important, prominent position -->
+      <img src="pics/Marcos/marcos1.png" alt="Marcos Ross Portrait" class="floating-image ties1-image">
+    </div>
+
+    <!-- Profile Grid -->
+    <div class="profile-grid">
+      <!-- Marcos2 - Second most important -->
+      <img src="pics/Marcos/marcos2.png" alt="Marcos Ross Action Shot" class="floating-image ties2-image">
+      
+      <!-- Intro Card -->
+      <div class="profile-card intro">
+        <h2>Hey DCA! 👋</h2>
+        <p>Hey DCA, I'm Marcos! I'm 29 and I started playing dodgeball in September 2024. I'll be your new penningmeester.</p>
+      </div>
+
+      <!-- Passion Card -->
+      <div class="profile-card passion">
+        <h2>Falling in Love with Dodgeball 🎯</h2>
+        <p>I immediately fell in love with the sport and the people. I can't imagine a life without dodgeball anymore.</p>
+        <!-- Marcos3 - Third most important -->
+        <img src="pics/Marcos/marcos3.png" alt="Marcos Ross Dodgeball" class="floating-image ties3-image">
+      </div>
+
+      <!-- Personal Card -->
+      <div class="profile-card personal">
+        <h2>Beyond Dodgeball 🌟</h2>
+        <p>Besides dodgeball, I'm doing a PhD in stress and digital health, I make music you can hear on Spotify, I'm the host of a podcast called Stress Navigation, and I like to play video- and boardgames. I also love hiking and cooking.</p>
+      </div>
+    </div>
+
+    <!-- Marcos4 - Least important, bigger and rectangular -->
+    <img src="pics/Marcos/marcos4.png" alt="Marcos Ross with Team" class="floating-image ties4-image">
+
+    <!-- Bottom section removed -->
+    
+    <!-- Mobile Content - Only visible on mobile -->
+    <div class="mobile-content">
+      <!-- Mobile: Marcos1 Image -->
+      <img src="pics/Marcos/marcos1.png" alt="Marcos Ross Portrait" class="mobile-image ties1">
+      
+      <!-- Mobile: Red Text Box -->
+      <div class="mobile-card intro">
+        <h2>Hey DCA! 👋</h2>
+        <p>Hey DCA, I'm Marcos! I'm 29 and I started playing dodgeball in September 2024. I'll be your new penningmeester.</p>
+      </div>
+      
+      <!-- Mobile: Marcos2 Image -->
+      <img src="pics/Marcos/marcos2.png" alt="Marcos Ross Action Shot" class="mobile-image ties2">
+      
+      <!-- Mobile: Yellow Text Box -->
+      <div class="mobile-card passion">
+        <h2>Falling in Love with Dodgeball 🎯</h2>
+        <p>I immediately fell in love with the sport and the people. I can't imagine a life without dodgeball anymore.</p>
+      </div>
+      
+      <!-- Mobile: Marcos3 Image -->
+      <img src="pics/Marcos/marcos3.png" alt="Marcos Ross Dodgeball" class="mobile-image ties3">
+      
+      <!-- Mobile: Blue Text Box -->
+      <div class="mobile-card personal">
+        <h2>Beyond Dodgeball 🌟</h2>
+        <p>Besides dodgeball, I'm doing a PhD in stress and digital health, I make music you can hear on Spotify, I'm the host of a podcast called Stress Navigation, and I like to play video- and boardgames. I also love hiking and cooking.</p>
+      </div>
+      
+      <!-- Mobile: Marcos4 Image -->
+      <img src="pics/Marcos/marcos4.png" alt="Marcos Ross with Team" class="mobile-image ties4">
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <!-- Footer Top Section -->
+      <div class="footer-top">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <img src="pics/Ball.png" alt="DCA Ball" class="footer-ball">
+            <span class="footer-title">Dodgeball Club Amsterdam</span>
+          </div>
+          <p class="footer-tagline">Where dodgeball dreams come to life! 🎯</p>
+          <div class="footer-social">
+            <span class="social-text">Follow the action:</span>
+            <div class="social-links">
+              <a href="moments.html" class="social-link" title="Our Moments">📸</a>
+              <a href="social.html" class="social-link" title="Social Events">🎉</a>
+              <a href="competitions.html" class="social-link" title="Competitions">🏆</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Quick Start</h4>
+          <ul class="footer-links">
+            <li><a href="practice-prices.html">🎯 Join DCA</a></li>
+            <li><a href="practice-prices.html">💰 Prices & Training</a></li>
+            <li><a href="contact.html">📞 Get in Touch</a></li>
+            <li><a href="competitions.html">🏆 Competitions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Discover DCA</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">ℹ️ About Us</a></li>
+            <li><a href="founders.html">💡 Meet the Founders</a></li>
+            <li><a href="board.html">👥 The Board</a></li>
+            <li><a href="social.html">🎉 Social Activities</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Stay Connected</h4>
+          <div class="contact-info">
+            <p class="contact-item">
+              <span class="contact-icon">📍</span>
+              <span>Amsterdam, Netherlands</span>
+            </p>
+            <p class="contact-item">
+              <span class="contact-icon">⏰</span>
+              <span>Training: Tue & Thu</span>
+            </p>
+            <p class="contact-item">
+              <span class="contact-icon">🏆</span>
+              <span>Competing since 2020</span>
+            </p>
+          </div>
+          <a href="contact.html" class="footer-cta">Join Our Team! 🚀</a>
+        </div>
+      </div>
+
+      <!-- Footer Divider -->
+      <div class="footer-divider">
+        <div class="divider-line"></div>
+        <div class="divider-ball">⚡</div>
+        <div class="divider-line"></div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div class="footer-bottom-content">
+          <div class="footer-stats">
+            <span class="stat-item">🎯 <strong>5</strong> Teams</span>
+            <span class="stat-separator">•</span>
+            <span class="stat-item">👥 <strong>50+</strong> Members</span>
+            <span class="stat-separator">•</span>
+            <span class="stat-item">🏆 <strong>Endless</strong> Fun</span>
+          </div>
+          <p class="footer-copyright">© 2025 Dodgeball Club Amsterdam — All Dodge, No Tears.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('menu-toggle');
+      const nav = document.getElementById('nav-menu');
+      const overlay = document.getElementById('overlay');
+      const dropdowns = nav.querySelectorAll('.dropdown');
+      
+      function toggleMenu() {
+        nav.classList.toggle('active');
+        overlay.classList.toggle('active');
+      }
+
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleMenu();
+      });
+
+      overlay.addEventListener('click', function() {
+        toggleMenu();
+      });
+
+      // Handle dropdown clicks on mobile
+      dropdowns.forEach(dropdown => {
+        const dropdownSpan = dropdown.querySelector('span');
+        dropdownSpan.addEventListener('click', function(e) {
+          if (window.innerWidth <= 768) {
+            e.preventDefault();
+            dropdown.classList.toggle('active');
+          }
+        });
+      });
+
+      const navLinks = nav.getElementsByTagName('a');
+      for (let link of navLinks) {
+        link.addEventListener('click', function() {
+          if (link.getAttribute('href').startsWith('#') || link.getAttribute('href').endsWith('.html')) {
+              toggleMenu();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html> 

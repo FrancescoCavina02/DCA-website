@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DCA Movie Night</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* — CSS Variables & Reset — */
+    :root {
+      --primary: #d32f2f;
+      --secondary: #000;
+      --light: #fff;
+      --accent: #333;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: var(--secondary);
+      line-height: 1.6;
+    }
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* — Header & Nav — */
+    header {
+      background: var(--secondary);
+      color: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.3rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 1002;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .logo img {
+      height: 2.8rem;
+      vertical-align: middle;
+      margin-left: 0.5rem;
+    }
+    .logo .ball-logo {
+      height: 2.8rem;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+    }
+    .adam-image {
+      height: 3.5rem;
+      vertical-align: middle;
+      margin-left: 1rem;
+    }
+    nav#nav-menu {
+      display: flex;
+      align-items: center;
+    }
+    nav#nav-menu a {
+      margin-left: 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      overflow: hidden;
+      color: var(--primary);
+    }
+    nav#nav-menu a:hover {
+      color: var(--light);
+      transform: scale(1.05);
+      background-color: rgba(211, 47, 47, 0.1);
+    }
+    nav#nav-menu a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0.2rem;
+      width: 25px;
+      height: 25px;
+      background-image: url('pics/Ball.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: translateY(-50%) scale(0);
+      transition: transform 0.3s ease;
+      z-index: -1;
+      opacity: 0.8;
+      border-radius: 50%;
+    }
+    nav#nav-menu a:hover::before {
+      transform: translateY(-50%) scale(1);
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.75rem;
+      color: var(--light);
+      cursor: pointer;
+    }
+
+    /* Dropdown Styles */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--secondary);
+      min-width: 200px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1003;
+      border-radius: 8px;
+      overflow: hidden;
+      top: 100%;
+      left: 0;
+    }
+    .dropdown-content a {
+      color: var(--light);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      margin: 0;
+      border-radius: 0;
+      transition: background-color 0.3s ease;
+    }
+    .dropdown-content a:hover {
+      background-color: var(--primary);
+      transform: none;
+      text-decoration: underline;
+    }
+    .dropdown-content a::before {
+      display: none;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .dropdown > span {
+      margin-left: 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      overflow: hidden;
+      color: var(--primary);
+      cursor: pointer;
+    }
+    .dropdown > span:hover {
+      color: var(--light);
+      transform: scale(1.05);
+      background-color: rgba(211, 47, 47, 0.1);
+    }
+    .dropdown > span::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0.2rem;
+      width: 25px;
+      height: 25px;
+      background-image: url('pics/Ball.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: translateY(-50%) scale(0);
+      transition: transform 0.3s ease;
+      z-index: -1;
+      opacity: 0.8;
+      border-radius: 50%;
+    }
+    .dropdown > span:hover::before {
+      transform: translateY(-50%) scale(1);
+    }
+
+    /* Loading Screen */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    #loading-screen.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .loading-ball {
+      width: 60px;
+      height: 60px;
+      background-image: url('pics/Ball.png');
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      animation: loadingRotate 1s linear infinite;
+    }
+
+    @keyframes loadingRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('pics/Ball.png');
+      background-size: 100px 100px;
+      opacity: 0.05;
+      animation: floatingBalls 20s linear infinite;
+    }
+
+    @keyframes floatingBalls {
+      from { transform: translateX(0) translateY(0) rotate(0deg); }
+      to { transform: translateX(-100px) translateY(-100px) rotate(360deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      background: linear-gradient(45deg, #fff, #f0f0f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    /* Featured Video Section */
+    .featured-video {
+      padding: 4rem 1.5rem;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      text-align: center;
+    }
+
+    .featured-video h2 {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 3rem;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Custom Video Player Styles */
+    .video-container {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      background: #000;
+    }
+
+    .custom-video {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: pointer;
+      border-radius: 20px;
+    }
+
+    /* Play button overlay for featured video */
+    .play-button-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      background: rgba(211, 47, 47, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(211, 47, 47, 0.3);
+      backdrop-filter: blur(10px);
+      z-index: 3;
+    }
+
+    .play-button-overlay:hover {
+      background: rgba(211, 47, 47, 1);
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 12px 35px rgba(211, 47, 47, 0.5);
+    }
+
+    .play-button-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .play-icon {
+      font-size: 2rem;
+      color: white;
+      margin-left: 3px;
+    }
+
+    .video-controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 2;
+    }
+
+    .video-container:hover .video-controls,
+    .video-container.playing .video-controls {
+      opacity: 1;
+    }
+
+    .play-pause-btn {
+      background: var(--primary);
+      border: none;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .play-pause-btn:hover {
+      background: #ff6b6b;
+      transform: scale(1.1);
+    }
+
+    .progress-container {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 3px;
+      width: 0%;
+      transition: width 0.1s ease;
+    }
+
+    .volume-control {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .volume-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .volume-slider {
+      width: 80px;
+      height: 4px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .time-display {
+      color: white;
+      font-size: 0.9rem;
+      min-width: 80px;
+    }
+
+    /* Enhanced gallery video styles */
+    .gallery-item video {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      border-radius: 15px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+      background: linear-gradient(135deg, #f8f9fa, #ffffff);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+    }
+
+    .gallery-item:hover img, .gallery-item:hover video {
+      transform: scale(1.1);
+    }
+
+    /* Video loading state */
+    .video-loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 1rem;
+    }
+
+    /* Content Section */
+    .content {
+      padding: 4rem 1.5rem;
+      background: var(--light);
+    }
+
+    .content-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .content h2 {
+      font-size: 3rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 3rem;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .story-text {
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+
+    .story-text p {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .gallery-item img, .gallery-item video {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: var(--light);
+      padding: 1.5rem;
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+
+    .gallery-overlay h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .gallery-overlay p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* Staggered animations */
+    .gallery-item {
+      animation: fadeInUp 0.8s ease-out both;
+    }
+
+    .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+    .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+    .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+    .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+    .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+    .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Enhanced Footer */
+    footer {
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      color: var(--light);
+      margin-top: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('pics/Ball.png');
+      background-size: 80px 80px;
+      opacity: 0.03;
+      animation: footerBalls 60s linear infinite;
+    }
+
+    .footer-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 1rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-section {
+      animation: footerFadeIn 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .footer-section:nth-child(1) { animation-delay: 0.1s; }
+    .footer-section:nth-child(2) { animation-delay: 0.2s; }
+    .footer-section:nth-child(3) { animation-delay: 0.3s; }
+    .footer-section:nth-child(4) { animation-delay: 0.4s; }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .footer-ball {
+      width: 40px;
+      height: 40px;
+      margin-right: 0.75rem;
+      animation: footerBallSpin 8s linear infinite;
+      filter: drop-shadow(0 4px 8px rgba(211, 47, 47, 0.3));
+    }
+
+    .footer-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--light), #ff6b6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-tagline {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+      font-style: italic;
+    }
+
+    .footer-social {
+      margin-bottom: 1rem;
+    }
+
+    .social-text {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .social-link:hover {
+      background: var(--primary);
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 8px 20px rgba(211, 47, 47, 0.4);
+    }
+
+    .footer-heading {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      color: #ff6b6b;
+      position: relative;
+    }
+
+    .footer-heading::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 30px;
+      height: 2px;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      border-radius: 1px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--light);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      padding: 0.25rem 0;
+      border-radius: 4px;
+    }
+
+    .footer-links a:hover {
+      color: #ff6b6b;
+      padding-left: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .contact-info {
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-icon {
+      margin-right: 0.75rem;
+      font-size: 1.1rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .footer-cta {
+      display: inline-block;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      color: var(--light);
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+    }
+
+    .footer-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(211, 47, 47, 0.4);
+      background: linear-gradient(45deg, #ff6b6b, var(--primary));
+    }
+
+    .footer-divider {
+      display: flex;
+      align-items: center;
+      margin: 2rem 0;
+      opacity: 0.6;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--light), transparent);
+    }
+
+    .divider-ball {
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      animation: dividerPulse 2s ease-in-out infinite;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+    }
+
+    .footer-bottom-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-stats {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .stat-separator {
+      opacity: 0.5;
+    }
+
+    .footer-copyright {
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin: 0;
+      font-style: italic;
+    }
+
+    /* Footer Animations */
+    @keyframes footerFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes footerBallSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes footerBalls {
+      from { transform: translateX(0); }
+      to { transform: translateX(-80px); }
+    }
+
+    @keyframes dividerPulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+
+    /* Mobile Footer Styles */
+    @media (max-width: 768px) {
+      .footer-content {
+        padding: 2rem 1rem 1rem;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .footer-logo {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .footer-tagline,
+      .social-text {
+        text-align: center;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+
+      .footer-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .footer-bottom-content {
+        text-align: center;
+      }
+    }
+
+    /* — Overlay (hidden by default) — */
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+
+    /* — Mobile Styles — */
+    @media (max-width: 768px) {
+      /* Hide adam image on mobile */
+      .adam-image {
+        display: none;
+      }
+      
+      /* show hamburger */
+      .menu-toggle {
+        display: block;
+        font-size: 2rem; /* Make hamburger more visible */
+        padding: 0.5rem; /* Add padding for easier clicking */
+      }
+      /* sidebar nav */
+      nav#nav-menu {
+        display: flex;
+        flex-direction: column;
+        background: var(--secondary);
+        position: fixed;
+        top: 0; left: -50%;
+        width: 50%; height: 100%;
+        padding-top: 3rem; /* leave space under header */
+        transition: left 0.3s ease;
+        z-index: 1001;
+      }
+      /* slide in when active */
+      nav#nav-menu.active {
+        left: 0;
+      }
+      nav#nav-menu a {
+        margin: 0;
+        padding: 0.75rem 1.5rem;
+        border-top: 1px solid #222;
+      }
+      /* Mobile dropdown styles */
+      .dropdown {
+        display: block;
+        width: 100%;
+      }
+      .dropdown > span {
+        margin: 0;
+        padding: 0.75rem 1.5rem;
+        border-top: 1px solid #222;
+        display: block;
+        width: 100%;
+      }
+      .dropdown-content {
+        position: static;
+        display: none;
+        box-shadow: none;
+        background-color: #1a1a1a;
+      }
+      .dropdown-content a {
+        padding: 0.5rem 2rem;
+        border-top: 1px solid #444;
+      }
+      .dropdown.active .dropdown-content {
+        display: block;
+      }
+      /* show overlay when menu open */
+      #overlay.active {
+        display: block;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .content h2, .featured-video h2 {
+        font-size: 2rem;
+      }
+
+      .volume-control {
+        display: none;
+      }
+
+      .video-controls {
+        padding: 0.5rem;
+      }
+
+      .play-pause-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+    }
+
+    header .logo a {
+      color: var(--light);
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb-container {
+      background: rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(211, 47, 47, 0.1);
+      padding: 0.75rem 0;
+      position: sticky;
+      top: 60px;
+      z-index: 999;
+      backdrop-filter: blur(5px);
+    }
+
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb-item {
+      display: flex;
+      align-items: center;
+      color: var(--accent);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .breadcrumb-item:hover {
+      color: var(--primary);
+      background: rgba(211, 47, 47, 0.1);
+    }
+
+    .breadcrumb-item.active {
+      color: var(--primary);
+      font-weight: 600;
+      pointer-events: none;
+    }
+
+    .breadcrumb-separator {
+      margin: 0 0.5rem;
+      color: var(--accent);
+      opacity: 0.6;
+    }
+
+    .breadcrumb-icon {
+      margin-right: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    /* Mobile breadcrumb adjustments */
+    @media (max-width: 768px) {
+      .breadcrumb-container {
+        top: 50px;
+        padding: 0.5rem 0;
+      }
+      
+      .breadcrumb {
+        padding: 0 1rem;
+        font-size: 0.8rem;
+      }
+      
+      .breadcrumb-item {
+        padding: 0.2rem 0.3rem;
+      }
+    }
+
+    /* Gallery Video Container Styles */
+    .gallery .video-container {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      background: #000;
+      border-radius: inherit;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .gallery .video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    /* Adaptive Video Sizing Based on Orientation for Gallery Videos */
+    .gallery .video-container.horizontal {
+      aspect-ratio: 16/9;
+      height: auto;
+      min-height: 200px;
+    }
+
+    .gallery .video-container.vertical {
+      aspect-ratio: 9/16;
+      height: auto;
+      min-height: 300px;
+      max-height: 400px;
+    }
+
+    .gallery .video-container.horizontal video {
+      object-fit: contain;
+      background: #000;
+    }
+
+    .gallery .video-container.vertical video {
+      object-fit: contain;
+      background: #000;
+    }
+
+    .gallery-item:hover .video-container video {
+      transform: scale(1.05);
+    }
+
+    /* Custom Play Button for Gallery Videos */
+    .gallery .custom-play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      background: rgba(211, 47, 47, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      z-index: 10;
+    }
+
+    .gallery .custom-play-button:hover {
+      background: rgba(211, 47, 47, 1);
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 10px 30px rgba(211, 47, 47, 0.4);
+    }
+
+    .gallery .custom-play-button::before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 25px solid white;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      margin-left: 5px;
+    }
+
+    .gallery .video-container.playing .custom-play-button {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Video Controls for Gallery Videos */
+    .gallery .video-controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      padding: 1rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .gallery .video-container:hover .video-controls,
+    .gallery .video-container.playing .video-controls {
+      opacity: 1;
+    }
+
+    .gallery .play-button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: background 0.3s ease;
+    }
+
+    .gallery .play-button:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .gallery .play-icon {
+      width: 0;
+      height: 0;
+      border-left: 12px solid white;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+    }
+
+    .gallery .play-button.playing .play-icon {
+      border: none;
+      width: 12px;
+      height: 12px;
+      background: white;
+      position: relative;
+    }
+
+    .gallery .play-button.playing .play-icon::before,
+    .gallery .play-button.playing .play-icon::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 3px;
+      height: 12px;
+      background: #000;
+    }
+
+    .gallery .play-button.playing .play-icon::before { left: 2px; }
+    .gallery .play-button.playing .play-icon::after { right: 2px; }
+
+    .gallery .video-progress {
+      flex: 1;
+      height: 4px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .gallery .progress-bar {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.1s ease;
+    }
+
+    .gallery .fullscreen-button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 4px;
+      font-size: 1.2rem;
+      transition: background 0.3s ease;
+    }
+
+    .gallery .fullscreen-button:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* Loading state for Gallery Videos */
+    .gallery .video-loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      background: rgba(0,0,0,0.7);
+      padding: 1rem 2rem;
+      border-radius: 25px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .gallery .video-container.loading .video-loading {
+      opacity: 1;
+    }
+
+    .gallery .video-container.loading::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top: 3px solid white;
+      border-radius: 50%;
+      animation: galleryVideoSpin 1s linear infinite;
+      margin-top: 60px;
+    }
+
+    @keyframes galleryVideoSpin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loading-ball"></div>
+  </div>
+
+  <!-- Header + Nav -->
+  <header>
+    <div class="logo"><a href="website.html"><img src="pics/Ball.png" alt="Ball Logo" class="ball-logo">DCA <img src="pics/XXX.png" alt="DCA Logo"></a></div>
+    <img src="pics/adam.png" alt="Adam" class="adam-image">
+    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
+    <nav id="nav-menu">
+      <a href="website.html">Home</a>
+      <div class="dropdown">
+        <span>About</span>
+        <div class="dropdown-content">
+          <a href="about.html">About DCA</a>
+          <a href="founders.html">Founders</a>
+          <a href="board.html">The Board</a>
+        </div>
+      </div>
+      <a href="practice-prices.html">Practice & Prices</a>
+      <a href="competitions.html">Competitions</a>
+      <div class="dropdown">
+        <span>Social</span>
+        <div class="dropdown-content">
+          <a href="social.html">Activities</a>
+          <a href="moments.html">Moments</a>
+          <a href="testimonials.html">Testimonials</a>
+        </div>
+      </div>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Overlay -->
+  <div id="overlay"></div>
+
+  <!-- Breadcrumb Navigation -->
+  <div class="breadcrumb-container">
+    <nav class="breadcrumb">
+      <a href="website.html" class="breadcrumb-item">
+        <span class="breadcrumb-icon">🏠</span>
+        Home
+      </a>
+      <span class="breadcrumb-separator">›</span>
+      <a href="social.html" class="breadcrumb-item">
+        <span class="breadcrumb-icon">🎉</span>
+        Social
+      </a>
+      <span class="breadcrumb-separator">›</span>
+      <span class="breadcrumb-item active">
+        <span class="breadcrumb-icon">🎬</span>
+        Movie Night
+      </span>
+    </nav>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Movie Night</h1>
+      <p>Cinematic adventures with your DCA family</p>
+    </div>
+  </section>
+
+  <!-- Featured Video Section -->
+  <section class="featured-video">
+    <h2>Featured Experience</h2>
+    <div class="video-container">
+      <video class="custom-video" preload="metadata" id="featuredVideo">
+        <source src="pics/Activities/Movie night/main.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="play-button-overlay" id="playOverlay">
+        <div class="play-icon">▶</div>
+      </div>
+      <div class="video-controls" id="videoControls">
+        <button class="play-pause-btn" id="playPauseBtn">▶</button>
+        <div class="progress-container" id="progressContainer">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="volume-control">
+          <button class="volume-btn" id="volumeBtn">🔊</button>
+          <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50">
+        </div>
+        <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="content">
+    <div class="content-inner">
+      <h2>Movie Magic with DCA</h2>
+      <div class="story-text">
+        <p>Step into our world of cinematic wonder! Every movie night is a journey through different worlds, emotions, and experiences. From heart-pounding thrillers to tear-jerking dramas, side-splitting comedies to mind-bending sci-fi – we explore it all together.</p>
+        <p>Picture this: cozy blankets, unlimited popcorn, your favorite DCA teammates, and a carefully curated film that sparks conversations long after the credits roll. It's not just about watching movies; it's about creating shared memories, inside jokes, and those "remember when..." moments that bind us together.</p>
+      </div>
+
+      <!-- Gallery -->
+      <div class="gallery">
+        <div class="gallery-item">
+          <div class="video-container">
+            <video class="gallery-video" preload="metadata">
+              <source src="pics/Activities/Movie night/20250410_212813.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div class="custom-play-button"></div>
+            <div class="video-controls">
+              <button class="play-button">
+                <div class="play-icon"></div>
+              </button>
+              <div class="video-progress">
+                <div class="progress-bar"></div>
+              </div>
+              <button class="fullscreen-button">⛶</button>
+            </div>
+            <div class="video-loading">Loading...</div>
+          </div>
+          <div class="gallery-overlay">
+            <h3>Behind the Scenes</h3>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="pics/Activities/Movie night/head.png" alt="Movie Night Setup">
+          <div class="gallery-overlay">
+            <h3>Movie Night Setup</h3>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="video-container">
+            <video class="gallery-video" preload="metadata">
+              <source src="pics/Activities/Movie night/20250410_211239.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div class="custom-play-button"></div>
+            <div class="video-controls">
+              <button class="play-button">
+                <div class="play-icon"></div>
+              </button>
+              <div class="video-progress">
+                <div class="progress-bar"></div>
+              </div>
+              <button class="fullscreen-button">⛶</button>
+            </div>
+            <div class="video-loading">Loading...</div>
+          </div>
+          <div class="gallery-overlay">
+            <h3>Movie Night Crowd</h3>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="video-container">
+            <video class="gallery-video" preload="metadata">
+              <source src="pics/Activities/Movie night/20250410_211152.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div class="custom-play-button"></div>
+            <div class="video-controls">
+              <button class="play-button">
+                <div class="play-icon"></div>
+              </button>
+              <div class="video-progress">
+                <div class="progress-bar"></div>
+              </div>
+              <button class="fullscreen-button">⛶</button>
+            </div>
+            <div class="video-loading">Loading...</div>
+          </div>
+          <div class="gallery-overlay">
+            <h3>Snack Time</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <!-- Footer Top Section -->
+      <div class="footer-top">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <img src="pics/Ball.png" alt="DCA Ball" class="footer-ball">
+            <span class="footer-title">Dodgeball Club Amsterdam</span>
+          </div>
+          <p class="footer-tagline">Where dodgeball dreams come to life! 🎯</p>
+          <div class="footer-social">
+            <span class="social-text">Follow the action:</span>
+            <div class="social-links">
+              <a href="moments.html" class="social-link" title="Our Moments">📸</a>
+              <a href="social.html" class="social-link" title="Social Events">🎉</a>
+              <a href="competitions.html" class="social-link" title="Competitions">🏆</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Quick Start</h4>
+          <ul class="footer-links">
+            <li><a href="practice-prices.html">🎯 Join DCA</a></li>
+            <li><a href="practice-prices.html">💰 Prices & Training</a></li>
+            <li><a href="contact.html">📞 Get in Touch</a></li>
+            <li><a href="competitions.html">🏆 Competitions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Discover DCA</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">ℹ️ About Us</a></li>
+            <li><a href="founders.html">💡 Meet the Founders</a></li>
+            <li><a href="board.html">👥 The Board</a></li>
+            <li><a href="social.html">🎉 Social Activities</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Stay Connected</h4>
+          <div class="contact-info">
+            <p class="contact-item">
+              <span class="contact-icon">📍</span>
+              <span>Amsterdam, Netherlands</span>
+            </p>
+            <p class="contact-item">
+              <span class="contact-icon">⏰</span>
+              <span>Training: Tue & Thu</span>
+            </p>
+            <p class="contact-item">
+              <span class="contact-icon">🏆</span>
+              <span>Competing since 2020</span>
+            </p>
+          </div>
+          <a href="contact.html" class="footer-cta">Join Our Team! 🚀</a>
+        </div>
+      </div>
+
+      <!-- Footer Divider -->
+      <div class="footer-divider">
+        <div class="divider-line"></div>
+        <div class="divider-ball">⚡</div>
+        <div class="divider-line"></div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div class="footer-bottom-content">
+          <div class="footer-stats">
+            <span class="stat-item">🎯 <strong>5</strong> Teams</span>
+            <span class="stat-separator">•</span>
+            <span class="stat-item">👥 <strong>50+</strong> Members</span>
+            <span class="stat-separator">•</span>
+            <span class="stat-item">🏆 <strong>Endless</strong> Fun</span>
+          </div>
+          <p class="footer-copyright">© 2025 Dodgeball Club Amsterdam — All Dodge, No Tears.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Loading screen management
+    let loadingTimeout;
+    let pageLoaded = false;
+
+    // Show loading screen for slow connections
+    function showLoadingIfSlow() {
+      loadingTimeout = setTimeout(() => {
+        if (!pageLoaded) {
+          document.getElementById('loading-screen').classList.add('show');
+        }
+      }, 500);
+    }
+
+    function hideLoading() {
+      pageLoaded = true;
+      clearTimeout(loadingTimeout);
+      document.getElementById('loading-screen').classList.remove('show');
+    }
+
+    // Start loading detection
+    showLoadingIfSlow();
+
+    // Hide loading when page is fully loaded
+    window.addEventListener('load', hideLoading);
+
+    // Custom Video Player Functionality
+    function initCustomVideoPlayer() {
+      const video = document.getElementById('featuredVideo');
+      const playPauseBtn = document.getElementById('playPauseBtn');
+      const playOverlay = document.getElementById('playOverlay');
+      const progressContainer = document.getElementById('progressContainer');
+      const progressBar = document.getElementById('progressBar');
+      const volumeBtn = document.getElementById('volumeBtn');
+      const volumeSlider = document.getElementById('volumeSlider');
+      const timeDisplay = document.getElementById('timeDisplay');
+      const videoContainer = document.querySelector('.video-container');
+
+      // Show first frame when metadata loads
+      video.addEventListener('loadedmetadata', () => {
+        // This will show the first frame as preview
+        video.currentTime = 0.1;
+      });
+
+      // Play/Pause functionality
+      function togglePlay() {
+        if (video.paused) {
+          video.play();
+          playPauseBtn.textContent = '⏸';
+          playOverlay.classList.add('hidden');
+          videoContainer.classList.add('playing');
+        } else {
+          video.pause();
+          playPauseBtn.textContent = '▶';
+          playOverlay.classList.remove('hidden');
+          videoContainer.classList.remove('playing');
+        }
+      }
+
+      // Event listeners for play/pause
+      playPauseBtn.addEventListener('click', togglePlay);
+      playOverlay.addEventListener('click', togglePlay);
+      video.addEventListener('click', togglePlay);
+
+      // Update progress bar and time display
+      video.addEventListener('timeupdate', () => {
+        if (video.duration) {
+          const progress = (video.currentTime / video.duration) * 100;
+          progressBar.style.width = `${progress}%`;
+          
+          // Update time display
+          const currentMinutes = Math.floor(video.currentTime / 60);
+          const currentSeconds = Math.floor(video.currentTime % 60);
+          const durationMinutes = Math.floor(video.duration / 60);
+          const durationSeconds = Math.floor(video.duration % 60);
+          
+          timeDisplay.textContent = `${currentMinutes}:${currentSeconds.toString().padStart(2, '0')} / ${durationMinutes}:${durationSeconds.toString().padStart(2, '0')}`;
+        }
+      });
+
+      // Click progress bar to seek
+      progressContainer.addEventListener('click', (e) => {
+        if (video.duration) {
+          const clickX = e.offsetX;
+          const width = progressContainer.offsetWidth;
+          const duration = video.duration;
+          
+          video.currentTime = (clickX / width) * duration;
+        }
+      });
+
+      // Volume control
+      volumeSlider.addEventListener('input', (e) => {
+        video.volume = e.target.value / 100;
+        
+        if (video.volume === 0) {
+          volumeBtn.textContent = '🔇';
+        } else if (video.volume < 0.5) {
+          volumeBtn.textContent = '🔉';
+        } else {
+          volumeBtn.textContent = '🔊';
+        }
+      });
+
+      // Mute/unmute
+      volumeBtn.addEventListener('click', () => {
+        if (video.muted) {
+          video.muted = false;
+          volumeBtn.textContent = '🔊';
+          volumeSlider.value = video.volume * 100;
+        } else {
+          video.muted = true;
+          volumeBtn.textContent = '🔇';
+        }
+      });
+
+      // Video ended event
+      video.addEventListener('ended', () => {
+        playPauseBtn.textContent = '▶';
+        playOverlay.classList.remove('hidden');
+        videoContainer.classList.remove('playing');
+        video.currentTime = 0;
+      });
+
+      // Error handling
+      video.addEventListener('error', (e) => {
+        console.error('Video error:', e);
+        timeDisplay.textContent = 'Error loading video';
+      });
+
+      // Can play event
+      video.addEventListener('canplay', () => {
+        // Video is ready to play
+        console.log('Video can play');
+      });
+
+      // Set initial volume
+      video.volume = 0.5;
+    }
+
+    // Hide loading when DOM is ready (fallback)
+    document.addEventListener('DOMContentLoaded', function() {
+      // Small delay to ensure everything is rendered
+      setTimeout(hideLoading, 100);
+
+      // Initialize custom video player
+      initCustomVideoPlayer();
+
+      const btn = document.getElementById('menu-toggle');
+      const nav = document.getElementById('nav-menu');
+      const overlay = document.getElementById('overlay');
+      const dropdowns = nav.querySelectorAll('.dropdown');
+
+      // Toggle menu function
+      function toggleMenu() {
+        nav.classList.toggle('active');
+        overlay.classList.toggle('active');
+      }
+
+      // Event listeners
+      btn.addEventListener('click', toggleMenu);
+      overlay.addEventListener('click', toggleMenu);
+
+      // Mobile dropdown functionality
+      dropdowns.forEach(dropdown => {
+        const span = dropdown.querySelector('span');
+        if (span) {
+          span.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+              e.preventDefault();
+              dropdown.classList.toggle('active');
+            }
+          });
+        }
+      });
+
+      // Enhanced Gallery Video Player Functionality  
+      function initGalleryVideoPlayers() {
+        const galleryVideos = document.querySelectorAll('.gallery-video');
+        
+        galleryVideos.forEach(video => {
+          const container = video.closest('.video-container');
+          const playButton = container.querySelector('.play-button');
+          const customPlayButton = container.querySelector('.custom-play-button');
+          const progressBar = container.querySelector('.progress-bar');
+          const progressContainer = container.querySelector('.video-progress');
+          const fullscreenButton = container.querySelector('.fullscreen-button');
+          
+          // Detect video orientation and apply appropriate class
+          video.addEventListener('loadedmetadata', () => {
+            const aspectRatio = video.videoWidth / video.videoHeight;
+            
+            if (aspectRatio > 1.2) {
+              // Horizontal video
+              container.classList.add('horizontal');
+              container.classList.remove('vertical');
+            } else if (aspectRatio < 0.8) {
+              // Vertical video
+              container.classList.add('vertical');
+              container.classList.remove('horizontal');
+            } else {
+              // Square or near-square video - treat as horizontal
+              container.classList.add('horizontal');
+              container.classList.remove('vertical');
+            }
+
+            // Show first frame as preview
+            video.currentTime = 0.1;
+            container.classList.remove('loading');
+          });
+          
+          // Play/Pause functionality
+          function togglePlay() {
+            if (video.paused) {
+              // Pause all other gallery videos first
+              galleryVideos.forEach(otherVideo => {
+                if (otherVideo !== video && !otherVideo.paused) {
+                  otherVideo.pause();
+                  const otherContainer = otherVideo.closest('.video-container');
+                  otherContainer.classList.remove('playing');
+                  const otherPlayBtn = otherContainer.querySelector('.play-button');
+                  if (otherPlayBtn) otherPlayBtn.classList.remove('playing');
+                }
+              });
+
+              video.play();
+              container.classList.add('playing');
+              if (playButton) playButton.classList.add('playing');
+            } else {
+              video.pause();
+              container.classList.remove('playing');
+              if (playButton) playButton.classList.remove('playing');
+            }
+          }
+          
+          // Update progress bar
+          function updateProgress() {
+            if (video.duration) {
+              const progress = (video.currentTime / video.duration) * 100;
+              if (progressBar) progressBar.style.width = progress + '%';
+            }
+          }
+          
+          // Seek functionality
+          function seek(e) {
+            if (video.duration) {
+              const rect = progressContainer.getBoundingClientRect();
+              const clickX = e.clientX - rect.left;
+              const clickPercentage = clickX / rect.width;
+              video.currentTime = clickPercentage * video.duration;
+            }
+          }
+          
+          // Fullscreen functionality
+          function toggleFullscreen() {
+            if (document.fullscreenElement) {
+              document.exitFullscreen();
+            } else {
+              container.requestFullscreen();
+            }
+          }
+          
+          // Event listeners
+          if (playButton) playButton.addEventListener('click', togglePlay);
+          if (customPlayButton) customPlayButton.addEventListener('click', togglePlay);
+          video.addEventListener('click', togglePlay);
+          video.addEventListener('timeupdate', updateProgress);
+          if (progressContainer) progressContainer.addEventListener('click', seek);
+          if (fullscreenButton) fullscreenButton.addEventListener('click', toggleFullscreen);
+          
+          // Video ended
+          video.addEventListener('ended', () => {
+            container.classList.remove('playing');
+            if (playButton) playButton.classList.remove('playing');
+            video.currentTime = 0.1; // Return to first frame
+          });
+          
+          // Error handling
+          video.addEventListener('error', (e) => {
+            console.error('Gallery video error:', e);
+            container.classList.remove('loading');
+          });
+          
+          // Loading states
+          video.addEventListener('waiting', () => {
+            container.classList.add('loading');
+          });
+          
+          video.addEventListener('canplay', () => {
+            container.classList.remove('loading');
+          });
+
+          video.addEventListener('loadstart', () => {
+            container.classList.add('loading');
+          });
+        });
+      }
+
+      // Initialize gallery video players
+      initGalleryVideoPlayers();
+    });
+  </script>
+</body>
+</html> 
