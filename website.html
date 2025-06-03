@@ -1564,7 +1564,7 @@
         toggleMenu();
       });
 
-      // Mobile dropdown functionality with accordion system
+      // Mobile dropdown functionality with accordion system and content pushing
       dropdowns.forEach(dropdown => {
         const dropdownSpan = dropdown.querySelector('span');
         const dropdownContent = dropdown.querySelector('.dropdown-content');
@@ -1574,9 +1574,11 @@
             e.preventDefault();
             e.stopPropagation();
             
-            // Close other dropdowns first
+            const isCurrentlyActive = dropdown.classList.contains('active');
+            
+            // First, close all other dropdowns and reset all menu items
             dropdowns.forEach(otherDropdown => {
-              if (otherDropdown !== dropdown && otherDropdown.classList.contains('active')) {
+              if (otherDropdown.classList.contains('active')) {
                 otherDropdown.classList.remove('active');
                 const otherContent = otherDropdown.querySelector('.dropdown-content');
                 if (otherContent) {
@@ -1591,29 +1593,16 @@
               }
             });
             
-            // Toggle current dropdown with smooth accordion animation
-            const isActive = dropdown.classList.contains('active');
+            // Reset all menu items positions
+            const allMenuItems = nav.children;
+            Array.from(allMenuItems).forEach(item => {
+              item.style.transform = '';
+              item.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
             
-            if (isActive) {
-              // Close dropdown
-              dropdown.classList.remove('active');
-              dropdownContent.style.maxHeight = '0';
-              dropdownContent.style.opacity = '0';
-              
-              // Add bounce effect
-              dropdownSpan.style.transform = 'scale(0.95)';
-              setTimeout(() => {
-                dropdownSpan.style.transform = '';
-              }, 150);
-              
-              // Reset animation for child links
-              dropdownContent.querySelectorAll('a').forEach(link => {
-                link.style.opacity = '0';
-                link.style.transform = 'translateX(-20px)';
-              });
-              
-            } else {
-              // Open dropdown
+            // If the clicked dropdown was not active, open it
+            if (!isCurrentlyActive) {
+              // Open the dropdown
               dropdown.classList.add('active');
               
               // Calculate content height dynamically
@@ -1627,6 +1616,18 @@
                 dropdownSpan.style.transform = '';
               }, 200);
               
+              // Find all menu items that come after this dropdown
+              const allMenuItems = Array.from(nav.children);
+              const currentDropdownIndex = allMenuItems.indexOf(dropdown);
+              const itemsToMove = allMenuItems.slice(currentDropdownIndex + 1);
+              
+              // Push down all items that come after this dropdown
+              setTimeout(() => {
+                itemsToMove.forEach(item => {
+                  item.style.transform = `translateY(${contentHeight}px)`;
+                });
+              }, 50); // Small delay to ensure smooth animation
+              
               // Trigger staggered animation for dropdown items
               const dropdownLinks = dropdownContent.querySelectorAll('a');
               dropdownLinks.forEach((link, index) => {
@@ -1639,8 +1640,15 @@
                 setTimeout(() => {
                   link.style.opacity = '1';
                   link.style.transform = 'translateX(0)';
-                }, 100 + (index * 100));
+                }, 150 + (index * 100));
               });
+              
+            } else {
+              // If it was active, we already closed it above, just add bounce effect
+              dropdownSpan.style.transform = 'scale(0.95)';
+              setTimeout(() => {
+                dropdownSpan.style.transform = '';
+              }, 150);
             }
           }
         });
