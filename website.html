@@ -1564,13 +1564,84 @@
         toggleMenu();
       });
 
-      // Mobile dropdown functionality
+      // Mobile dropdown functionality with accordion system
       dropdowns.forEach(dropdown => {
         const dropdownSpan = dropdown.querySelector('span');
+        const dropdownContent = dropdown.querySelector('.dropdown-content');
+        
         dropdownSpan.addEventListener('click', function(e) {
           if (window.innerWidth <= 768) {
             e.preventDefault();
-            dropdown.classList.toggle('active');
+            e.stopPropagation();
+            
+            // Close other dropdowns first
+            dropdowns.forEach(otherDropdown => {
+              if (otherDropdown !== dropdown && otherDropdown.classList.contains('active')) {
+                otherDropdown.classList.remove('active');
+                const otherContent = otherDropdown.querySelector('.dropdown-content');
+                if (otherContent) {
+                  otherContent.style.maxHeight = '0';
+                  otherContent.style.opacity = '0';
+                  // Reset animation for child links
+                  otherContent.querySelectorAll('a').forEach(link => {
+                    link.style.opacity = '0';
+                    link.style.transform = 'translateX(-20px)';
+                  });
+                }
+              }
+            });
+            
+            // Toggle current dropdown with smooth accordion animation
+            const isActive = dropdown.classList.contains('active');
+            
+            if (isActive) {
+              // Close dropdown
+              dropdown.classList.remove('active');
+              dropdownContent.style.maxHeight = '0';
+              dropdownContent.style.opacity = '0';
+              
+              // Add bounce effect
+              dropdownSpan.style.transform = 'scale(0.95)';
+              setTimeout(() => {
+                dropdownSpan.style.transform = '';
+              }, 150);
+              
+              // Reset animation for child links
+              dropdownContent.querySelectorAll('a').forEach(link => {
+                link.style.opacity = '0';
+                link.style.transform = 'translateX(-20px)';
+              });
+              
+            } else {
+              // Open dropdown
+              dropdown.classList.add('active');
+              
+              // Calculate content height dynamically
+              const contentHeight = dropdownContent.scrollHeight;
+              dropdownContent.style.maxHeight = contentHeight + 'px';
+              dropdownContent.style.opacity = '1';
+              
+              // Add celebration effect
+              dropdownSpan.style.transform = 'scale(1.05)';
+              setTimeout(() => {
+                dropdownSpan.style.transform = '';
+              }, 200);
+              
+              // Trigger staggered animation for dropdown items
+              const dropdownLinks = dropdownContent.querySelectorAll('a');
+              dropdownLinks.forEach((link, index) => {
+                // Start with hidden state
+                link.style.opacity = '0';
+                link.style.transform = 'translateX(-20px)';
+                link.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                
+                // Animate in with staggered delay
+                setTimeout(() => {
+                  link.style.opacity = '1';
+                  link.style.transform = 'translateX(0)';
+                }, 100 + (index * 100));
+              });
+            }
           }
         });
       });
