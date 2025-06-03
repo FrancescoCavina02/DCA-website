@@ -960,7 +960,15 @@
       border-radius: 50%;
     }
     .dropdown > span:hover::before {
-      transform: translateY(-50%) scale(1);
+      left: 0;
+    }
+    .dropdown.active > span::before {
+      left: 0;
+    }
+    .dropdown > span:hover {
+      color: var(--light);
+      transform: translateX(10px);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
 
     /* Animations */
@@ -1583,7 +1591,7 @@
             <li><a href="practice-prices.html">🎯 Join DCA</a></li>
             <li><a href="practice-prices.html">💰 Prices & Training</a></li>
             <li><a href="contact.html">📞 Get in Touch</a></li>
-            <li><a href="competitions.html">�� Competitions</a></li>
+            <li><a href="competitions.html">🏆 Competitions</a></li>
           </ul>
         </div>
 
