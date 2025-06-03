@@ -663,17 +663,26 @@
       
       .dropdown-content {
         position: static;
-        display: none;
+        display: block;
         box-shadow: none;
-        background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+        background: linear-gradient(135deg, 
+          rgba(42,42,42,0.95) 0%, 
+          rgba(26,26,26,0.98) 50%, 
+          rgba(42,42,42,0.95) 100%);
         border-radius: 0;
         overflow: hidden;
-        animation: dropdownSlide 0.3s ease;
+        max-height: 0;
+        opacity: 0;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border-left: 3px solid transparent;
+        backdrop-filter: blur(10px);
       }
       
-      @keyframes dropdownSlide {
-        from { max-height: 0; opacity: 0; }
-        to { max-height: 200px; opacity: 1; }
+      /* Remove auto-expansion - JavaScript will control this */
+      .dropdown.active .dropdown-content {
+        /* Don't auto-expand - let JavaScript handle it */
+        border-left-color: var(--primary);
+        animation: dropdownGlow 0.6s ease-out;
       }
       
       .dropdown-content a {
@@ -689,10 +698,6 @@
         color: var(--light);
         transform: translateX(15px);
         padding-left: 3.5rem;
-      }
-      
-      .dropdown.active .dropdown-content {
-        display: block;
       }
       
       /* Enhanced Overlay */
@@ -1576,78 +1581,89 @@
             
             const isCurrentlyActive = dropdown.classList.contains('active');
             
-            // First, close all other dropdowns and reset all menu items
+            // First, close all dropdowns and reset all positions immediately
             dropdowns.forEach(otherDropdown => {
-              if (otherDropdown.classList.contains('active')) {
-                otherDropdown.classList.remove('active');
-                const otherContent = otherDropdown.querySelector('.dropdown-content');
-                if (otherContent) {
-                  otherContent.style.maxHeight = '0';
-                  otherContent.style.opacity = '0';
-                  // Reset animation for child links
-                  otherContent.querySelectorAll('a').forEach(link => {
-                    link.style.opacity = '0';
-                    link.style.transform = 'translateX(-20px)';
-                  });
-                }
+              otherDropdown.classList.remove('active');
+              const otherContent = otherDropdown.querySelector('.dropdown-content');
+              if (otherContent) {
+                otherContent.style.maxHeight = '0px';
+                otherContent.style.opacity = '0';
+                // Reset child links
+                otherContent.querySelectorAll('a').forEach(link => {
+                  link.style.opacity = '0';
+                  link.style.transform = 'translateX(-20px)';
+                });
               }
             });
             
-            // Reset all menu items positions
-            const allMenuItems = nav.children;
-            Array.from(allMenuItems).forEach(item => {
+            // Reset ALL menu item positions immediately
+            const allMenuItems = Array.from(nav.children);
+            allMenuItems.forEach(item => {
               item.style.transform = '';
               item.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
             });
             
-            // If the clicked dropdown was not active, open it
+            // Force layout recalculation
+            nav.offsetHeight;
+            
+            // If clicking on an inactive dropdown, open it
             if (!isCurrentlyActive) {
-              // FIRST: Calculate content height while dropdown is hidden
-              dropdownContent.style.maxHeight = 'none';
-              dropdownContent.style.opacity = '0';
-              dropdownContent.style.visibility = 'hidden';
-              const contentHeight = dropdownContent.scrollHeight;
-              dropdownContent.style.maxHeight = '0';
-              dropdownContent.style.visibility = '';
               
-              // SECOND: Find all menu items that come after this dropdown
-              const allMenuItems = Array.from(nav.children);
+              // Step 1: Measure content height while completely hidden
+              dropdownContent.style.position = 'absolute';
+              dropdownContent.style.visibility = 'hidden';
+              dropdownContent.style.maxHeight = 'none';
+              dropdownContent.style.opacity = '1';
+              const contentHeight = dropdownContent.scrollHeight;
+              
+              // Step 2: Hide it again immediately
+              dropdownContent.style.position = '';
+              dropdownContent.style.visibility = '';
+              dropdownContent.style.maxHeight = '0px';
+              dropdownContent.style.opacity = '0';
+              
+              // Step 3: Find items to move
               const currentDropdownIndex = allMenuItems.indexOf(dropdown);
               const itemsToMove = allMenuItems.slice(currentDropdownIndex + 1);
               
-              // THIRD: Simultaneously open dropdown AND push content down
-              dropdown.classList.add('active');
-              dropdownContent.style.maxHeight = contentHeight + 'px';
-              dropdownContent.style.opacity = '1';
-              
-              // Push down all items that come after this dropdown (immediately)
-              itemsToMove.forEach(item => {
-                item.style.transform = `translateY(${contentHeight}px)`;
-              });
-              
-              // Add celebration effect
-              dropdownSpan.style.transform = 'scale(1.05)';
-              setTimeout(() => {
-                dropdownSpan.style.transform = '';
-              }, 200);
-              
-              // Trigger staggered animation for dropdown items
-              const dropdownLinks = dropdownContent.querySelectorAll('a');
-              dropdownLinks.forEach((link, index) => {
-                // Start with hidden state
-                link.style.opacity = '0';
-                link.style.transform = 'translateX(-20px)';
-                link.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+              // Step 4: Use requestAnimationFrame to ensure proper timing
+              requestAnimationFrame(() => {
+                // FIRST: Move items down (content pushing)
+                itemsToMove.forEach(item => {
+                  item.style.transform = `translateY(${contentHeight}px)`;
+                });
                 
-                // Animate in with staggered delay
-                setTimeout(() => {
-                  link.style.opacity = '1';
-                  link.style.transform = 'translateX(0)';
-                }, 150 + (index * 100));
+                // SECOND: Activate dropdown class for styling
+                dropdown.classList.add('active');
+                
+                // THIRD: Make dropdown content visible
+                requestAnimationFrame(() => {
+                  dropdownContent.style.maxHeight = contentHeight + 'px';
+                  dropdownContent.style.opacity = '1';
+                  
+                  // Celebration effect
+                  dropdownSpan.style.transform = 'scale(1.05)';
+                  setTimeout(() => {
+                    dropdownSpan.style.transform = '';
+                  }, 200);
+                  
+                  // Animate dropdown items
+                  const dropdownLinks = dropdownContent.querySelectorAll('a');
+                  dropdownLinks.forEach((link, index) => {
+                    link.style.opacity = '0';
+                    link.style.transform = 'translateX(-20px)';
+                    link.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                    
+                    setTimeout(() => {
+                      link.style.opacity = '1';
+                      link.style.transform = 'translateX(0)';
+                    }, 100 + (index * 80));
+                  });
+                });
               });
               
             } else {
-              // If it was active, we already closed it above, just add bounce effect
+              // Just add bounce effect for closing
               dropdownSpan.style.transform = 'scale(0.95)';
               setTimeout(() => {
                 dropdownSpan.style.transform = '';
