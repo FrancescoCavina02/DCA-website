@@ -848,45 +848,6 @@
       .floating-element {
         font-size: 2rem;
       }
-      
-      /* Simple Mobile Timeline Layout Fix - Keep Functionality */
-      .timeline {
-        padding: 0 1rem;
-      }
-      
-      .timeline::before {
-        display: none;
-      }
-      
-      .timeline-item {
-        margin-bottom: 2rem;
-      }
-      
-      .timeline-marker {
-        display: none;
-      }
-      
-      .timeline-item:nth-child(odd) .timeline-content,
-      .timeline-item:nth-child(even) .timeline-content {
-        margin: 0;
-        padding: 1.5rem;
-        width: 100%;
-        max-width: none;
-        text-align: left;
-      }
-      
-      .timeline-content::after {
-        display: none;
-      }
-      
-      .date-medal-container {
-        justify-content: flex-start;
-      }
-      
-      .competition-header {
-        justify-content: flex-start;
-        text-align: left;
-      }
     }
 
     header .logo a {
@@ -907,261 +868,554 @@
       animation: competitionGradient 10s ease-in-out infinite;
     }
 
+    .section-header-area::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+      animation: rotateBackground 25s linear infinite;
+      z-index: 1;
+    }
+
+    .section-header-area > * {
+      position: relative;
+      z-index: 2;
+    }
+
     .section-header-area h2 {
-      font-size: 2.5rem;
+      font-size: 4rem;
       margin-bottom: 1rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      opacity: 0;
+      transform: translateY(-30px);
+      animation: heroTitleEnter 1s ease-out forwards 0.3s;
     }
 
     .section-header-area p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
+      font-size: 1.4rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: heroSubtitleEnter 1s ease-out forwards 0.6s;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
     }
 
+    /* Floating Competition Elements */
     .floating-competition-elements {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
     }
 
     .floating-element {
-      font-size: 2rem;
+      position: absolute;
+      font-size: 2.5rem;
+      opacity: 0.7;
+      animation: competitionFloat 12s ease-in-out infinite;
     }
 
+    .element-1 {
+      top: 15%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .element-2 {
+      top: 25%;
+      right: 15%;
+      animation-delay: 0.4s;
+    }
+
+    .element-3 {
+      bottom: 30%;
+      left: 20%;
+      animation-delay: 0.8s;
+    }
+
+    .element-4 {
+      bottom: 20%;
+      right: 10%;
+      animation-delay: 1.2s;
+    }
+
+    /* Competition Content */
     .competition-content {
-      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 2rem;
+      position: relative;
     }
 
     .intro-text {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-    }
-
-    .team-selection-section {
-      margin-bottom: 2rem;
-    }
-
-    .team-selection-title {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .team-selection-subtitle {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-
-    .team-grid {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .team-card {
-      background-color: var(--secondary);
-      padding: 1rem;
-      border-radius: 8px;
       text-align: center;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .team-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .team-icon {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .team-card h3 {
       font-size: 1.2rem;
-      margin-bottom: 0.5rem;
+      color: var(--accent);
+      margin-bottom: 4rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards 0.9s;
     }
 
-    .team-card p {
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .team-badge {
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.9rem;
-    }
-
-    .premium {
-      background-color: var(--primary);
-      color: var(--light);
-    }
-
-    .standard {
-      background-color: var(--accent);
-      color: var(--light);
-    }
-
+    /* Timeline Section */
     .timeline-section {
-      margin-bottom: 2rem;
+      margin-bottom: 4rem;
     }
 
     .timeline-title {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
+      font-size: 2.8rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 3rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--gold), var(--primary), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards 1.2s;
     }
 
+    /* Team Selection Section */
+    .team-selection-section {
+      margin-bottom: 4rem;
+    }
+
+    .team-selection-title {
+      font-size: 2.8rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--gold), var(--primary), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards 1.4s;
+    }
+
+    .team-selection-subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards 1.4s;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      perspective: 1000px;
+    }
+
+    .team-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.25));
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 25px;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(50px) scale(0.9);
+      animation: teamCardEnter 0.8s ease-out forwards;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .team-card:hover::before {
+      left: 100%;
+    }
+
+    .team-card:hover {
+      transform: translateY(-15px) scale(1.05);
+      box-shadow: 0 25px 50px rgba(211, 47, 47, 0.2);
+      border-color: var(--gold);
+    }
+
+    .team-card.active {
+      border-color: var(--primary);
+      background: linear-gradient(135deg, rgba(211,47,47,0.1), rgba(255,107,107,0.1));
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(211, 47, 47, 0.3);
+    }
+
+    .team-card.active .team-icon {
+      transform: scale(1.1);
+      color: var(--primary);
+    }
+
+    .team-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      animation: teamIconFloat 3s ease-in-out infinite;
+    }
+
+    .team-card h3 {
+      font-size: 1.6rem;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .team-card p {
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .team-badge {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.5rem 1rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .team-badge.premium {
+      background: linear-gradient(45deg, var(--gold), #ffed4e);
+      color: var(--secondary);
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .team-badge.standard {
+      background: linear-gradient(45deg, var(--silver), #e8e8e8);
+      color: var(--secondary);
+      box-shadow: 0 4px 15px rgba(192, 192, 192, 0.3);
+    }
+
+    /* Staggered animation delays for team cards */
+    .team-card[data-delay="0"] { animation-delay: 1.6s; }
+    .team-card[data-delay="1"] { animation-delay: 1.8s; }
+    .team-card[data-delay="2"] { animation-delay: 2.0s; }
+    .team-card[data-delay="3"] { animation-delay: 2.2s; }
+    .team-card[data-delay="4"] { animation-delay: 2.4s; }
+
+    /* Competition Timeline - Vertical Layout */
     .timeline {
       position: relative;
-      max-width: 1200px;
+      max-width: 800px;
       margin: 0 auto;
-      padding: 2rem 0;
+      padding: 0 2rem;
     }
 
+    /* Center vertical line */
     .timeline::before {
       content: '';
       position: absolute;
-      width: 6px;
-      background: linear-gradient(to bottom, var(--primary), var(--gold), var(--primary));
+      width: 4px;
+      background: linear-gradient(135deg, var(--primary), var(--gold));
       top: 0;
       bottom: 0;
       left: 50%;
-      margin-left: -3px;
-      border-radius: 3px;
+      margin-left: -2px;
+      border-radius: 2px;
       box-shadow: 0 0 20px rgba(211, 47, 47, 0.3);
-      animation: timelinePulse 3s ease-in-out infinite;
     }
 
     .timeline-item {
       position: relative;
-      background-color: transparent;
-      margin: 3rem 0;
+      margin-bottom: 3rem;
       opacity: 0;
       transform: translateY(50px);
       animation: timelineItemEnter 0.8s ease-out forwards;
+      width: 100%;
     }
 
-    .timeline-item:nth-child(1) { animation-delay: 0.2s; }
-    .timeline-item:nth-child(2) { animation-delay: 0.4s; }
-    .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+    .timeline-item[data-delay="0"] { animation-delay: 1.5s; }
+    .timeline-item[data-delay="1"] { animation-delay: 1.8s; }
+    .timeline-item[data-delay="2"] { animation-delay: 2.1s; }
 
+    /* Odd items (left side) */
+    .timeline-item:nth-child(odd) .timeline-content {
+      margin-left: 0;
+      margin-right: 50%;
+      text-align: right;
+      padding-right: 3rem;
+      width: 50%;
+    }
+
+    /* Even items (right side) */
+    .timeline-item:nth-child(even) .timeline-content {
+      margin-left: 50%;
+      margin-right: 0;
+      text-align: left;
+      padding-left: 3rem;
+      width: 50%;
+    }
+
+    /* Timeline marker on the center line */
     .timeline-marker {
       position: absolute;
-      width: 25px;
-      height: 25px;
-      background: var(--light);
-      border: 4px solid var(--primary);
-      top: 15px;
-      border-radius: 50%;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 2;
-      box-shadow: 0 0 15px rgba(211, 47, 47, 0.4);
+      width: 60px;
+      height: 60px;
+      background: var(--light);
+      border: 4px solid;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      z-index: 10;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
       animation: markerPulse 2s ease-in-out infinite;
     }
 
+    .timeline-marker.gold {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, var(--gold), #ffed4e);
+      color: var(--secondary);
+    }
+
+    .timeline-marker.silver {
+      border-color: var(--silver);
+      background: linear-gradient(135deg, var(--silver), #e8e8e8);
+      color: var(--secondary);
+    }
+
+    .timeline-marker.bronze {
+      border-color: var(--bronze);
+      background: linear-gradient(135deg, var(--bronze), #daa520);
+      color: var(--light);
+    }
+
+    @keyframes markerPulse {
+      0%, 100% { 
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      }
+      50% { 
+        transform: translateX(-50%) scale(1.1);
+        box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+      }
+    }
+
     .timeline-content {
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 25px;
+      padding: 2.5rem;
       position: relative;
-      background: linear-gradient(135deg, var(--light), #f8f8f8);
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      border: 2px solid rgba(211, 47, 47, 0.1);
-      transition: all 0.3s ease;
-      width: 45%;
-      max-width: 500px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .timeline-content:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-      border-color: var(--primary);
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
     }
 
-    /* Left side positioning */
-    .timeline-item:nth-child(odd) .timeline-content {
-      left: 0;
-      margin-right: auto;
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+      transition: left 0.6s;
     }
 
-    /* Right side positioning */
-    .timeline-item:nth-child(even) .timeline-content {
-      left: 55%;
-      margin-left: auto;
+    .timeline-content:hover::before {
+      left: 100%;
     }
 
-    /* Arrow pointing to timeline */
+    /* Arrow pointing to center line */
     .timeline-content::after {
       content: '';
       position: absolute;
-      top: 20px;
+      top: 30px;
       width: 0;
       height: 0;
-      border-style: solid;
+      border: 12px solid transparent;
     }
 
-    /* Left side arrow (pointing right) */
+    /* Left side items - arrow points right */
     .timeline-item:nth-child(odd) .timeline-content::after {
-      right: -15px;
-      border-left: 15px solid var(--light);
-      border-top: 15px solid transparent;
-      border-bottom: 15px solid transparent;
+      right: -24px;
+      border-left-color: rgba(255,255,255,0.9);
     }
 
-    /* Right side arrow (pointing left) */
+    /* Right side items - arrow points left */
     .timeline-item:nth-child(even) .timeline-content::after {
-      left: -15px;
-      border-right: 15px solid var(--light);
-      border-top: 15px solid transparent;
-      border-bottom: 15px solid transparent;
+      left: -24px;
+      border-right-color: rgba(255,255,255,0.9);
     }
 
+    /* Date and Medal Container */
     .date-medal-container {
       display: flex;
       align-items: center;
-      margin-bottom: 0.5rem;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Left side items - right aligned */
+    .timeline-item:nth-child(odd) .date-medal-container {
+      justify-content: flex-end;
+    }
+
+    /* Right side items - left aligned */
+    .timeline-item:nth-child(even) .date-medal-container {
+      justify-content: flex-start;
     }
 
     .competition-date {
+      position: static;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      color: var(--light);
+      padding: 0.5rem 1.5rem;
+      border-radius: 20px;
+      font-weight: 700;
       font-size: 0.9rem;
-      margin-right: 0.5rem;
+      box-shadow: 0 8px 20px rgba(211, 47, 47, 0.3);
+      display: inline-block;
     }
 
+    /* Reset date positioning for all items */
+    .timeline-item:nth-child(odd) .competition-date,
+    .timeline-item:nth-child(even) .competition-date {
+      position: static;
+      top: auto;
+      right: auto;
+      left: auto;
+    }
+
+    /* Medal beside date - smaller size */
     .date-medal {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 1.2rem;
+      color: var(--light);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      animation: medalFloat 3s ease-in-out infinite;
+    }
+
+    .date-medal.gold {
+      background: linear-gradient(135deg, var(--gold), #ffed4e);
+      color: var(--secondary);
+    }
+
+    .date-medal.silver {
+      background: linear-gradient(135deg, var(--silver), #e8e8e8);
+      color: var(--secondary);
+    }
+
+    .date-medal.bronze {
+      background: linear-gradient(135deg, var(--bronze), #daa520);
     }
 
     .competition-header {
       display: flex;
       align-items: center;
-      margin-bottom: 0.5rem;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Left side items - right aligned */
+    .timeline-item:nth-child(odd) .competition-header {
+      justify-content: flex-end;
+      text-align: right;
+    }
+
+    /* Right side items - left aligned */
+    .timeline-item:nth-child(even) .competition-header {
+      justify-content: flex-start;
+      text-align: left;
     }
 
     .trophy-icon {
-      font-size: 1.5rem;
-      margin-right: 0.5rem;
+      font-size: 3rem;
+      animation: trophyGlow 3s ease-in-out infinite;
     }
 
-    .competition-info {
-      font-size: 1rem;
+    .competition-info h3 {
+      font-size: 1.6rem;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .venue {
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-style: italic;
     }
 
     .competition-details {
-      margin-top: 0.5rem;
+      margin-top: 1.5rem;
     }
 
     .result-badge {
-      background-color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .result-badge.gold {
+      background: linear-gradient(45deg, var(--gold), #ffed4e);
+      color: var(--secondary);
+    }
+
+    .result-badge.silver {
+      background: linear-gradient(45deg, var(--silver), #e8e8e8);
+      color: var(--secondary);
+    }
+
+    .result-badge.bronze {
+      background: linear-gradient(45deg, var(--bronze), #daa520);
       color: var(--light);
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      margin-bottom: 0.5rem;
     }
 
     .competition-description {
-      font-size: 0.9rem;
-      line-height: 1.5;
+      color: var(--accent);
+      line-height: 1.7;
     }
 
     /* Medal float animation */
@@ -1403,29 +1657,6 @@
     @keyframes trophyGlow {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.1); }
-    }
-
-    /* Timeline Animations */
-    @keyframes timelinePulse {
-      0%, 100% { 
-        box-shadow: 0 0 20px rgba(211, 47, 47, 0.3);
-        background: linear-gradient(to bottom, var(--primary), var(--gold), var(--primary));
-      }
-      50% { 
-        box-shadow: 0 0 30px rgba(211, 47, 47, 0.6);
-        background: linear-gradient(to bottom, var(--gold), var(--primary), var(--gold));
-      }
-    }
-
-    @keyframes markerPulse {
-      0%, 100% { 
-        transform: translateX(-50%) scale(1);
-        box-shadow: 0 0 15px rgba(211, 47, 47, 0.4);
-      }
-      50% { 
-        transform: translateX(-50%) scale(1.1);
-        box-shadow: 0 0 25px rgba(211, 47, 47, 0.7);
-      }
     }
   </style>
 </head>
