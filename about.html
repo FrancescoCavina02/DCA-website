@@ -111,6 +111,16 @@
       cursor: pointer;
     }
 
+    /* — Overlay — */
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+
     /* — Hero Section — */
     .hero {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -483,16 +493,6 @@
       }
     }
 
-    /* — Overlay (hidden by default) — */
-    #overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
-    }
-
     /* — Mobile Styles — */
     @media (max-width: 768px) {
       /* Hide adam image on mobile */
@@ -733,6 +733,33 @@
       
       .breadcrumb-item {
         padding: 0.3rem 0.4rem;
+      }
+
+      .about-navigation {
+        margin: 2rem 1rem 0;
+        padding: 2rem 1rem;
+      }
+
+      .nav-cards {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .nav-card {
+        padding: 2rem;
+      }
+
+      .about-navigation h3 {
+        font-size: 1.8rem;
+      }
+
+      .nav-card:hover {
+        transform: translateY(-5px) scale(1.01);
+      }
+
+      .floating-ball {
+        width: 30px;
+        height: 30px;
       }
     }
 
@@ -1061,36 +1088,6 @@
       50% { transform: translateY(-8px); }
     }
 
-    /* Mobile responsiveness for navigation section */
-    @media (max-width: 768px) {
-      .about-navigation {
-        margin: 2rem 1rem 0;
-        padding: 2rem 1rem;
-      }
-
-      .nav-cards {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-
-      .nav-card {
-        padding: 2rem;
-      }
-
-      .about-navigation h3 {
-        font-size: 1.8rem;
-      }
-
-      .nav-card:hover {
-        transform: translateY(-5px) scale(1.01);
-      }
-
-      .floating-ball {
-        width: 30px;
-        height: 30px;
-      }
-    }
-
     /* Floating Balls */
     .floating-balls {
       position: absolute;
@@ -1393,36 +1390,7 @@
 
   <!-- Inline JS for Hamburger + Overlay -->
   <script>
-    // Loading screen management
-    let loadingTimeout;
-    let pageLoaded = false;
-
-    // Show loading screen for slow connections
-    function showLoadingIfSlow() {
-      loadingTimeout = setTimeout(() => {
-        if (!pageLoaded) {
-          document.getElementById('loading-screen').classList.add('show');
-        }
-      }, 500); // Show loading if page takes more than 500ms
-    }
-
-    function hideLoading() {
-      pageLoaded = true;
-      clearTimeout(loadingTimeout);
-      document.getElementById('loading-screen').classList.remove('show');
-    }
-
-    // Start loading detection
-    showLoadingIfSlow();
-
-    // Hide loading when page is fully loaded
-    window.addEventListener('load', hideLoading);
-
-    // Hide loading when DOM is ready (fallback)
     document.addEventListener('DOMContentLoaded', function() {
-      // Small delay to ensure everything is rendered
-      setTimeout(hideLoading, 100);
-
       const btn = document.getElementById('menu-toggle');
       const nav = document.getElementById('nav-menu');
       const overlay = document.getElementById('overlay');
@@ -1447,24 +1415,12 @@
       // Handle dropdown clicks on mobile
       dropdowns.forEach(dropdown => {
         const dropdownSpan = dropdown.querySelector('span');
-        if (dropdownSpan) {
-          dropdownSpan.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768) {
-              e.preventDefault();
-              e.stopPropagation();
-              
-              // Close other dropdowns first
-              dropdowns.forEach(otherDropdown => {
-                if (otherDropdown !== dropdown) {
-                  otherDropdown.classList.remove('active');
-                }
-              });
-              
-              // Toggle current dropdown
-              dropdown.classList.toggle('active');
-            }
-          });
-        }
+        dropdownSpan.addEventListener('click', function(e) {
+          if (window.innerWidth <= 768) {
+            e.preventDefault();
+            dropdown.classList.toggle('active');
+          }
+        });
       });
 
       // Close menu when clicking a link
