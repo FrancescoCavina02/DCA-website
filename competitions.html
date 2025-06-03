@@ -1014,47 +1014,107 @@
 
     .timeline {
       position: relative;
-      padding: 1rem;
-      background-color: var(--secondary);
-      border-radius: 8px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 0;
     }
 
     .timeline::before {
       content: '';
       position: absolute;
+      width: 6px;
+      background: linear-gradient(to bottom, var(--primary), var(--gold), var(--primary));
       top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('pics/Ball.png');
-      background-size: 80px 80px;
-      opacity: 0.03;
-      animation: footerBalls 60s linear infinite;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+      border-radius: 3px;
+      box-shadow: 0 0 20px rgba(211, 47, 47, 0.3);
+      animation: timelinePulse 3s ease-in-out infinite;
     }
 
     .timeline-item {
       position: relative;
-      margin-bottom: 1rem;
+      background-color: transparent;
+      margin: 3rem 0;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: timelineItemEnter 0.8s ease-out forwards;
     }
+
+    .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+    .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+    .timeline-item:nth-child(3) { animation-delay: 0.6s; }
 
     .timeline-marker {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 20px;
-      height: 20px;
+      width: 25px;
+      height: 25px;
+      background: var(--light);
+      border: 4px solid var(--primary);
+      top: 15px;
       border-radius: 50%;
-      background-color: var(--light);
-      border: 2px solid var(--primary);
-      transform: translateY(-50%);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      box-shadow: 0 0 15px rgba(211, 47, 47, 0.4);
+      animation: markerPulse 2s ease-in-out infinite;
     }
 
     .timeline-content {
       position: relative;
-      padding: 1rem;
-      background-color: var(--accent);
-      border-radius: 4px;
-      margin-left: 20px;
+      background: linear-gradient(135deg, var(--light), #f8f8f8);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border: 2px solid rgba(211, 47, 47, 0.1);
+      transition: all 0.3s ease;
+      width: 45%;
+      max-width: 500px;
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      border-color: var(--primary);
+    }
+
+    /* Left side positioning */
+    .timeline-item:nth-child(odd) .timeline-content {
+      left: 0;
+      margin-right: auto;
+    }
+
+    /* Right side positioning */
+    .timeline-item:nth-child(even) .timeline-content {
+      left: 55%;
+      margin-left: auto;
+    }
+
+    /* Arrow pointing to timeline */
+    .timeline-content::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+
+    /* Left side arrow (pointing right) */
+    .timeline-item:nth-child(odd) .timeline-content::after {
+      right: -15px;
+      border-left: 15px solid var(--light);
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+    }
+
+    /* Right side arrow (pointing left) */
+    .timeline-item:nth-child(even) .timeline-content::after {
+      left: -15px;
+      border-right: 15px solid var(--light);
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
     }
 
     .date-medal-container {
@@ -1343,6 +1403,29 @@
     @keyframes trophyGlow {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.1); }
+    }
+
+    /* Timeline Animations */
+    @keyframes timelinePulse {
+      0%, 100% { 
+        box-shadow: 0 0 20px rgba(211, 47, 47, 0.3);
+        background: linear-gradient(to bottom, var(--primary), var(--gold), var(--primary));
+      }
+      50% { 
+        box-shadow: 0 0 30px rgba(211, 47, 47, 0.6);
+        background: linear-gradient(to bottom, var(--gold), var(--primary), var(--gold));
+      }
+    }
+
+    @keyframes markerPulse {
+      0%, 100% { 
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 15px rgba(211, 47, 47, 0.4);
+      }
+      50% { 
+        transform: translateX(-50%) scale(1.1);
+        box-shadow: 0 0 25px rgba(211, 47, 47, 0.7);
+      }
     }
   </style>
 </head>
