@@ -1510,7 +1510,7 @@
   <section class="featured-video">
     <h2>Featured Experience</h2>
     <div class="video-container">
-      <video class="custom-video" preload="metadata" id="featuredVideo">
+      <video class="custom-video" preload="auto" loading="eager" id="featuredVideo">
         <source src="pics/Activities/Movie night/main.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
@@ -1544,7 +1544,7 @@
       <div class="gallery">
         <div class="gallery-item">
           <div class="video-container">
-            <video class="gallery-video" preload="metadata">
+            <video class="gallery-video" preload="auto" loading="eager">
               <source src="pics/Activities/Movie night/20250410_212813.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -1574,7 +1574,7 @@
 
         <div class="gallery-item">
           <div class="video-container">
-            <video class="gallery-video" preload="metadata">
+            <video class="gallery-video" preload="auto" loading="eager">
               <source src="pics/Activities/Movie night/20250410_211239.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -1597,7 +1597,7 @@
 
         <div class="gallery-item">
           <div class="video-container">
-            <video class="gallery-video" preload="metadata">
+            <video class="gallery-video" preload="auto" loading="eager">
               <source src="pics/Activities/Movie night/20250410_211152.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -1732,22 +1732,43 @@
     // Hide loading when page is fully loaded
     window.addEventListener('load', hideLoading);
 
-    // Custom Video Player Functionality
+    // Initialize custom video player with optimized loading
     function initCustomVideoPlayer() {
       const video = document.getElementById('featuredVideo');
-      const playPauseBtn = document.getElementById('playPauseBtn');
       const playOverlay = document.getElementById('playOverlay');
+      const videoControls = document.getElementById('videoControls');
+      const playPauseBtn = document.getElementById('playPauseBtn');
       const progressContainer = document.getElementById('progressContainer');
       const progressBar = document.getElementById('progressBar');
       const volumeBtn = document.getElementById('volumeBtn');
       const volumeSlider = document.getElementById('volumeSlider');
       const timeDisplay = document.getElementById('timeDisplay');
-      const videoContainer = document.querySelector('.video-container');
+      const videoContainer = video.closest('.video-container');
 
+      if (!video) return;
+
+      // Force load video for faster startup
+      video.load();
+      
+      // Optimize loading with timeout
+      let loadingTimeout = setTimeout(() => {
+        console.log('Featured video loading timeout - proceeding anyway');
+      }, window.innerWidth <= 768 ? 2000 : 3000); // 2 seconds for mobile, 3 for desktop
+      
       // Show first frame when metadata loads
       video.addEventListener('loadedmetadata', () => {
-        // This will show the first frame as preview
+        clearTimeout(loadingTimeout);
         video.currentTime = 0.1;
+        updateTimeDisplay();
+      });
+
+      // Faster loading detection
+      video.addEventListener('canplaythrough', () => {
+        clearTimeout(loadingTimeout);
+      });
+      
+      video.addEventListener('canplay', () => {
+        clearTimeout(loadingTimeout);
       });
 
       // Play/Pause functionality
@@ -1889,11 +1910,17 @@
         });
       });
 
-      // Enhanced Gallery Video Player Functionality  
+      // Enhanced Gallery Video Player Functionality with Optimized Loading
       function initGalleryVideoPlayers() {
         const galleryVideos = document.querySelectorAll('.gallery-video');
         
-        galleryVideos.forEach(video => {
+        // Preload gallery videos for faster startup
+        galleryVideos.forEach((video, index) => {
+          // Stagger video loading to prevent bandwidth congestion
+          setTimeout(() => {
+            video.load(); // Force load the video
+          }, index * 300); // 300ms delay between each gallery video
+          
           const container = video.closest('.video-container');
           const playButton = container.querySelector('.play-button');
           const customPlayButton = container.querySelector('.custom-play-button');
@@ -1901,8 +1928,15 @@
           const progressContainer = container.querySelector('.video-progress');
           const fullscreenButton = container.querySelector('.fullscreen-button');
           
+          // Optimize loading with timeout
+          let loadingTimeout = setTimeout(() => {
+            container.classList.remove('loading');
+            console.log('Gallery video loading timeout - proceeding anyway');
+          }, window.innerWidth <= 768 ? 2000 : 3000); // 2 seconds for mobile, 3 for desktop
+          
           // Detect video orientation and apply appropriate class
           video.addEventListener('loadedmetadata', () => {
+            clearTimeout(loadingTimeout);
             const aspectRatio = video.videoWidth / video.videoHeight;
             
             if (aspectRatio > 1.2) {
@@ -1924,6 +1958,17 @@
             container.classList.remove('loading');
           });
           
+          // Faster loading detection
+          video.addEventListener('canplaythrough', () => {
+            clearTimeout(loadingTimeout);
+            container.classList.remove('loading');
+          });
+          
+          video.addEventListener('canplay', () => {
+            clearTimeout(loadingTimeout);
+            container.classList.remove('loading');
+          });
+
           // Play/Pause functionality
           function togglePlay() {
             if (video.paused) {

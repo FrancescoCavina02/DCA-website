@@ -1072,9 +1072,18 @@
       padding: 0 2rem;
     }
 
-    /* Remove center line - not needed for vertical layout */
+    /* Center vertical line */
     .timeline::before {
-      display: none;
+      content: '';
+      position: absolute;
+      width: 4px;
+      background: linear-gradient(135deg, var(--primary), var(--gold));
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+      border-radius: 2px;
+      box-shadow: 0 0 20px rgba(211, 47, 47, 0.3);
     }
 
     .timeline-item {
@@ -1090,18 +1099,70 @@
     .timeline-item[data-delay="1"] { animation-delay: 1.8s; }
     .timeline-item[data-delay="2"] { animation-delay: 2.1s; }
 
-    /* Reset all positioning - make all items full width and left-aligned */
-    .timeline-item:nth-child(odd) .timeline-content,
-    .timeline-item:nth-child(even) .timeline-content {
+    /* Odd items (left side) */
+    .timeline-item:nth-child(odd) .timeline-content {
       margin-left: 0;
-      margin-right: 0;
-      text-align: left;
-      width: 100%;
+      margin-right: 50%;
+      text-align: right;
+      padding-right: 3rem;
+      width: 50%;
     }
 
-    /* Remove timeline marker from center - medals will be beside date */
+    /* Even items (right side) */
+    .timeline-item:nth-child(even) .timeline-content {
+      margin-left: 50%;
+      margin-right: 0;
+      text-align: left;
+      padding-left: 3rem;
+      width: 50%;
+    }
+
+    /* Timeline marker on the center line */
     .timeline-marker {
-      display: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
+      background: var(--light);
+      border: 4px solid;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      z-index: 10;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      animation: markerPulse 2s ease-in-out infinite;
+    }
+
+    .timeline-marker.gold {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, var(--gold), #ffed4e);
+      color: var(--secondary);
+    }
+
+    .timeline-marker.silver {
+      border-color: var(--silver);
+      background: linear-gradient(135deg, var(--silver), #e8e8e8);
+      color: var(--secondary);
+    }
+
+    .timeline-marker.bronze {
+      border-color: var(--bronze);
+      background: linear-gradient(135deg, var(--bronze), #daa520);
+      color: var(--light);
+    }
+
+    @keyframes markerPulse {
+      0%, 100% { 
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      }
+      50% { 
+        transform: translateX(-50%) scale(1.1);
+        box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+      }
     }
 
     .timeline-content {
@@ -1114,7 +1175,6 @@
       overflow: hidden;
       box-shadow: 0 15px 35px rgba(0,0,0,0.1);
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      width: 100%;
     }
 
     .timeline-content:hover {
@@ -1137,12 +1197,44 @@
       left: 100%;
     }
 
+    /* Arrow pointing to center line */
+    .timeline-content::after {
+      content: '';
+      position: absolute;
+      top: 30px;
+      width: 0;
+      height: 0;
+      border: 12px solid transparent;
+    }
+
+    /* Left side items - arrow points right */
+    .timeline-item:nth-child(odd) .timeline-content::after {
+      right: -24px;
+      border-left-color: rgba(255,255,255,0.9);
+    }
+
+    /* Right side items - arrow points left */
+    .timeline-item:nth-child(even) .timeline-content::after {
+      left: -24px;
+      border-right-color: rgba(255,255,255,0.9);
+    }
+
     /* Date and Medal Container */
     .date-medal-container {
       display: flex;
       align-items: center;
       gap: 1rem;
       margin-bottom: 1.5rem;
+    }
+
+    /* Left side items - right aligned */
+    .timeline-item:nth-child(odd) .date-medal-container {
+      justify-content: flex-end;
+    }
+
+    /* Right side items - left aligned */
+    .timeline-item:nth-child(even) .date-medal-container {
+      justify-content: flex-start;
     }
 
     .competition-date {
@@ -1201,8 +1293,13 @@
       margin-bottom: 1.5rem;
     }
 
-    /* Reset header alignment for all items */
-    .timeline-item:nth-child(odd) .competition-header,
+    /* Left side items - right aligned */
+    .timeline-item:nth-child(odd) .competition-header {
+      justify-content: flex-end;
+      text-align: right;
+    }
+
+    /* Right side items - left aligned */
     .timeline-item:nth-child(even) .competition-header {
       justify-content: flex-start;
       text-align: left;

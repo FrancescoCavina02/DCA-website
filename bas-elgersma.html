@@ -119,7 +119,7 @@
     /* — Main Content — */
     main {
       padding: 2rem 1rem;
-      max-width: 800px;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
@@ -131,6 +131,7 @@
       padding: 2rem;
       border-radius: 20px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      position: relative;
     }
     .profile-header h1 {
       font-size: 3rem;
@@ -141,87 +142,158 @@
     .profile-header .subtitle {
       font-size: 1.2rem;
       color: var(--accent);
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
 
-    /* Main Profile Image */
-    .profile-image {
-      width: 200px;
-      height: 200px;
+    /* Floating circular images */
+    .floating-image {
       border-radius: 50%;
       object-fit: cover;
-      margin: 0 auto 2rem;
-      display: block;
       box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: absolute;
+    }
+    .floating-image:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
     }
 
-    /* Content Section */
-    .content-section {
+    /* Bas1 - Most important, prominent position */
+    .bas1-image {
+      width: 240px;
+      height: 240px;
+      top: 5rem;
+      right: -1rem;
+      z-index: 10;
+    }
+
+    /* Profile Grid */
+    .profile-grid {
       display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
       margin-bottom: 2rem;
+      position: relative;
+      padding-top: 60px;
+      padding-left: 60px;
+      padding-right: 100px;
     }
 
-    .content-card {
+    /* Bas2 - Second most important */
+    .bas2-image {
+      width: 200px;
+      height: 200px;
+      top: -90px;
+      left: -90px;
+      z-index: 5;
+    }
+
+    /* Bas3 - Third most important */
+    .bas3-image {
+      width: 200px;
+      height: 200px;
+      position: absolute;
+      top: 190px;
+      right: -140px;
+      left: auto;
+      z-index: 5;
+    }
+
+    /* Bas4 - Least important, bigger and rectangular */
+    .bas4-image {
+      width: 500px;
+      height: auto;
+      border-radius: 50%; /* Make bas4 oval on desktop */
+      position: absolute;
+      top: calc(100% + 2rem);
+      right: auto;
+      left: 700px;
+      z-index: 3;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+
+    /* Card Styles */
+    .profile-card {
       background: var(--card-bg);
       border-radius: 20px;
       padding: 2rem;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      z-index: 2;
     }
-    .content-card:hover {
+    .profile-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 12px 40px rgba(0,0,0,0.15);
     }
 
-    .content-card.intro {
+    .profile-card.intro {
       background: linear-gradient(135deg, var(--primary), #ff5252);
       color: var(--light);
+      padding-right: 80px;
+      padding-left: 2rem;
     }
-    .content-card.intro h2 {
+    .profile-card.intro h2 {
       color: var(--light);
     }
 
-    .content-card.role {
+    .profile-card.passion {
       background: linear-gradient(135deg, #ff9800, #ffc107);
       color: var(--secondary);
+      position: relative;
+      padding-right: 80px;
+      padding-left: 2rem;
     }
 
-    .content-card.personal {
+    .profile-card.personal {
       background: linear-gradient(135deg, #2196f3, #03a9f4);
       color: var(--light);
+      padding-left: 80px;
+      padding-right: 2rem;
     }
-    .content-card.personal h2 {
+    .profile-card.personal h2 {
       color: var(--light);
     }
 
-    .content-card h2 {
+    .profile-card h2 {
       font-size: 1.8rem;
       margin-bottom: 1rem;
       color: var(--primary);
     }
-    .content-card p {
+    .profile-card p {
       font-size: 1.1rem;
       line-height: 1.8;
     }
 
-    /* Additional Images */
+    /* Bottom section - Revert padding */
+    .bottom-section {
+      margin-top: 3rem;
+      padding: 2rem;
+      text-align: center;
+      padding-right: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    /* Hide mobile content on desktop */
+    .mobile-content {
+      display: none;
+    }
+
+    /* Remove old styles that are no longer needed */
+    .profile-image {
+      display: none;
+    }
+    .content-section {
+      display: none;
+    }
+    .content-card {
+      display: none;
+    }
     .additional-images {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin: 2rem 0;
+      display: none;
     }
     .additional-image {
-      width: 100%;
-      height: 200px;
-      border-radius: 15px;
-      object-fit: cover;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-    .additional-image:hover {
-      transform: scale(1.05);
+      display: none;
     }
 
     /* Footer */
@@ -791,8 +863,113 @@
         font-size: 2.5rem;
       }
       
-      .additional-images {
-        grid-template-columns: 1fr;
+      /* Hide desktop floating images and grid on mobile */
+      .floating-image {
+        display: none;
+      }
+      .profile-grid {
+        display: none;
+      }
+      
+      /* Show mobile content */
+      .mobile-content {
+        display: block;
+      }
+      
+      /* Mobile profile header adjustments */
+      .profile-header {
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+      }
+      
+      /* Mobile images */
+      .mobile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        margin: 2rem auto;
+        display: block;
+      }
+      
+      .mobile-image.bas1 {
+        transform: rotate(-3deg);
+      }
+      
+      .mobile-image.bas2 {
+        transform: rotate(2deg);
+      }
+      
+      .mobile-image.bas3 {
+        transform: rotate(-2deg);
+      }
+      
+      .mobile-image.bas4 {
+        width: 250px;
+        height: auto;
+        border-radius: 50%;
+        transform: none; /* No rotation for bas4 */
+      }
+      
+      /* Mobile cards */
+      .mobile-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        margin: 2rem auto;
+        max-width: 350px;
+        text-align: center;
+      }
+      
+      .mobile-card.intro {
+        background: linear-gradient(135deg, var(--primary), #ff5252);
+        color: var(--light);
+      }
+      .mobile-card.intro h2 {
+        color: var(--light);
+      }
+      
+      .mobile-card.passion {
+        background: linear-gradient(135deg, #ff9800, #ffc107);
+        color: var(--secondary);
+      }
+      
+      .mobile-card.personal {
+        background: linear-gradient(135deg, #2196f3, #03a9f4);
+        color: var(--light);
+      }
+      
+      .mobile-card.personal h2 {
+        color: var(--light);
+      }
+      
+      .mobile-card h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+      .mobile-card p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 0.8rem;
+      }
+      
+      /* Adjust padding on cards for mobile */
+      .profile-card.intro,
+      .profile-card.passion,
+      .profile-card.personal,
+      .bottom-section {
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+      }
+    }
+
+    /* Hide mobile content on desktop */
+    @media (min-width: 769px) {
+      .mobile-content {
+        display: none;
       }
     }
 
@@ -1005,36 +1182,70 @@
       <h1>Bas Elgersma #43</h1>
       <p class="subtitle">🎯 Head of FVDB Youth | 💪 Training Specialist</p>
       
-      <!-- Main Profile Image -->
-      <img src="pics/Bas/bas1.png" alt="Bas Elgersma Portrait" class="profile-image">
+      <!-- Bas1 - Most important, prominent position -->
+      <img src="pics/Bas/bas1.png" alt="Bas Elgersma Portrait" class="floating-image bas1-image">
     </div>
 
-    <!-- Content Section -->
-    <div class="content-section">
+    <!-- Profile Grid -->
+    <div class="profile-grid">
+      <!-- Bas2 - Second most important -->
+      <img src="pics/Bas/bas2.png" alt="Bas Elgersma Action Shot" class="floating-image bas2-image">
+
       <!-- Introduction Card -->
-      <div class="content-card intro">
+      <div class="profile-card intro">
         <h2>Hey DCA! 👋</h2>
         <p>I'm Bas (26), and I've been playing dodgeball since 2016. As Head of FVDB Youth, I'm passionate about training the next generation of dodgeball champions and bringing fresh energy to our club!</p>
       </div>
 
       <!-- Role Card -->
-      <div class="content-card role">
+      <div class="profile-card passion">
         <h2>My Role at DCA 🎯</h2>
         <p>Leading FVDB Youth development and specializing in training programs. I love working with younger players and helping them discover the excitement and strategy of competitive dodgeball.</p>
+        <!-- Bas3 - Third most important -->
+        <img src="pics/Bas/bas3.png" alt="Bas Elgersma with Team" class="floating-image bas3-image">
       </div>
 
       <!-- Personal Card -->
-      <div class="content-card personal">
+      <div class="profile-card personal">
         <h2>Beyond Dodgeball 🌟</h2>
         <p>When I'm not on the court, I enjoy fitness training, strategic gaming, and exploring Amsterdam's sports scene. I believe that physical fitness and mental strategy go hand-in-hand in dodgeball excellence.</p>
       </div>
     </div>
 
-    <!-- Additional Images -->
-    <div class="additional-images">
-      <img src="pics/Bas/bas2.png" alt="Bas Elgersma Action Shot" class="additional-image">
-      <img src="pics/Bas/bas3.png" alt="Bas Elgersma with Team" class="additional-image">
-      <img src="pics/Bas/bas4.png" alt="Bas Elgersma Training" class="additional-image">
+    <!-- Bas4 - Least important, bigger and rectangular -->
+    <img src="pics/Bas/bas4.png" alt="Bas Elgersma Training" class="floating-image bas4-image">
+
+    <!-- Mobile Content - Only visible on mobile -->
+    <div class="mobile-content">
+      <!-- Mobile: Bas1 Image -->
+      <img src="pics/Bas/bas1.png" alt="Bas Elgersma Portrait" class="mobile-image bas1">
+      
+      <!-- Mobile: Red Text Box -->
+      <div class="mobile-card intro">
+        <h2>Hey DCA! 👋</h2>
+        <p>I'm Bas (26), and I've been playing dodgeball since 2016. As Head of FVDB Youth, I'm passionate about training the next generation of dodgeball champions and bringing fresh energy to our club!</p>
+      </div>
+      
+      <!-- Mobile: Bas2 Image -->
+      <img src="pics/Bas/bas2.png" alt="Bas Elgersma Action Shot" class="mobile-image bas2">
+      
+      <!-- Mobile: Yellow Text Box -->
+      <div class="mobile-card passion">
+        <h2>My Role at DCA 🎯</h2>
+        <p>Leading FVDB Youth development and specializing in training programs. I love working with younger players and helping them discover the excitement and strategy of competitive dodgeball.</p>
+      </div>
+      
+      <!-- Mobile: Bas3 Image -->
+      <img src="pics/Bas/bas3.png" alt="Bas Elgersma with Team" class="mobile-image bas3">
+      
+      <!-- Mobile: Blue Text Box -->
+      <div class="mobile-card personal">
+        <h2>Beyond Dodgeball 🌟</h2>
+        <p>When I'm not on the court, I enjoy fitness training, strategic gaming, and exploring Amsterdam's sports scene. I believe that physical fitness and mental strategy go hand-in-hand in dodgeball excellence.</p>
+      </div>
+      
+      <!-- Mobile: Bas4 Image -->
+      <img src="pics/Bas/bas4.png" alt="Bas Elgersma Training" class="mobile-image bas4">
     </div>
 
   </main>

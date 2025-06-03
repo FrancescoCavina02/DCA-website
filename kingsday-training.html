@@ -1226,7 +1226,7 @@
 
         <div class="gallery-item">
           <div class="video-container">
-            <video class="main-video" preload="metadata">
+            <video class="main-video" preload="auto" loading="eager">
               <source src="pics/Activities/Kingsday training/20250422_202255.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -1256,7 +1256,7 @@
 
         <div class="gallery-item">
           <div class="video-container">
-            <video class="main-video" preload="metadata">
+            <video class="main-video" preload="auto" loading="eager">
               <source src="pics/Activities/Kingsday training/20250422_202431.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -1286,7 +1286,7 @@
 
         <div class="gallery-item">
           <div class="video-container">
-            <video class="main-video" preload="metadata">
+            <video class="main-video" preload="auto" loading="eager">
               <source src="pics/Activities/Kingsday training/20250422_203611.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -1473,10 +1473,16 @@
         }
       });
 
-      // Enhanced Video Player Functionality
+      // Enhanced Video Player Functionality with Optimized Loading
       const videos = document.querySelectorAll('.main-video');
       
-      videos.forEach(video => {
+      // Preload videos for faster startup
+      videos.forEach((video, index) => {
+        // Stagger video loading to prevent bandwidth congestion
+        setTimeout(() => {
+          video.load(); // Force load the video
+        }, index * 200); // 200ms delay between each video
+        
         const container = video.closest('.video-container');
         const playButton = container.querySelector('.play-button');
         const customPlayButton = container.querySelector('.custom-play-button');
@@ -1484,8 +1490,15 @@
         const progressContainer = container.querySelector('.video-progress');
         const fullscreenButton = container.querySelector('.fullscreen-button');
         
+        // Optimize loading with timeout
+        let loadingTimeout = setTimeout(() => {
+          container.classList.remove('loading');
+          console.log('Video loading timeout - proceeding anyway');
+        }, window.innerWidth <= 768 ? 2000 : 3000); // 2 seconds for mobile, 3 for desktop
+        
         // Detect video orientation and apply appropriate class
         video.addEventListener('loadedmetadata', () => {
+          clearTimeout(loadingTimeout);
           const aspectRatio = video.videoWidth / video.videoHeight;
           
           if (aspectRatio > 1.2) {
@@ -1507,6 +1520,17 @@
           container.classList.remove('loading');
         });
         
+        // Faster loading detection
+        video.addEventListener('canplaythrough', () => {
+          clearTimeout(loadingTimeout);
+          container.classList.remove('loading');
+        });
+        
+        video.addEventListener('canplay', () => {
+          clearTimeout(loadingTimeout);
+          container.classList.remove('loading');
+        });
+
         // Play/Pause functionality
         function togglePlay() {
           if (video.paused) {
