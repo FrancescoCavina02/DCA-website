@@ -849,105 +849,43 @@
         font-size: 2rem;
       }
       
-      /* COMPLETE Mobile Timeline Override - Fix Broken Display */
+      /* Simple Mobile Timeline Layout Fix - Keep Functionality */
       .timeline {
-        position: static !important;
-        max-width: none !important;
-        margin: 0 !important;
-        padding: 0 1rem !important;
+        padding: 0 1rem;
       }
       
       .timeline::before {
-        display: none !important;
+        display: none;
       }
       
       .timeline-item {
-        position: static !important;
-        margin: 0 0 2rem 0 !important;
-        width: 100% !important;
-        transform: none !important;
+        margin-bottom: 2rem;
+      }
+      
+      .timeline-marker {
+        display: none;
       }
       
       .timeline-item:nth-child(odd) .timeline-content,
       .timeline-item:nth-child(even) .timeline-content {
-        position: static !important;
-        margin: 0 !important;
-        padding: 1.5rem !important;
-        width: 100% !important;
-        max-width: none !important;
-        text-align: left !important;
-        transform: none !important;
-        left: auto !important;
-        right: auto !important;
-        top: auto !important;
-        bottom: auto !important;
+        margin: 0;
+        padding: 1.5rem;
+        width: 100%;
+        max-width: none;
+        text-align: left;
       }
       
-      .timeline-marker {
-        display: none !important;
+      .timeline-content::after {
+        display: none;
       }
       
-      .timeline-content::before,
-      .timeline-content::after,
-      .timeline-item:nth-child(odd) .timeline-content::after,
-      .timeline-item:nth-child(even) .timeline-content::after {
-        display: none !important;
+      .date-medal-container {
+        justify-content: flex-start;
       }
       
-      .timeline-content {
-        position: static !important;
-        border-radius: 15px !important;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
-        margin-bottom: 1rem !important;
-      }
-      
-      /* Fix content alignment */
-      .date-medal-container,
-      .timeline-item:nth-child(odd) .date-medal-container,
-      .timeline-item:nth-child(even) .date-medal-container {
-        justify-content: flex-start !important;
-        margin-bottom: 1rem !important;
-      }
-      
-      .competition-header,
-      .timeline-item:nth-child(odd) .competition-header,
-      .timeline-item:nth-child(even) .competition-header {
-        justify-content: flex-start !important;
-        text-align: left !important;
-      }
-      
-      /* Responsive sizing */
-      .trophy-icon {
-        font-size: 2rem !important;
-      }
-      
-      .competition-info h3 {
-        font-size: 1.3rem !important;
-      }
-      
-      .venue {
-        font-size: 0.9rem !important;
-      }
-      
-      .competition-date {
-        font-size: 0.8rem !important;
-        padding: 0.4rem 1rem !important;
-      }
-      
-      .date-medal {
-        width: 30px !important;
-        height: 30px !important;
-        font-size: 1rem !important;
-      }
-      
-      .result-badge {
-        font-size: 0.8rem !important;
-        padding: 0.5rem 1rem !important;
-      }
-      
-      .competition-description {
-        font-size: 0.9rem !important;
-        line-height: 1.5 !important;
+      .competition-header {
+        justify-content: flex-start;
+        text-align: left;
       }
     }
 
