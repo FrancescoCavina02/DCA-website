@@ -628,14 +628,6 @@
         50% { background-position: 100% 50%; }
       }
 
-      /* Hide desktop floating images and grid on mobile */
-      .floating-image {
-        display: none;
-      }
-      .profile-grid {
-        display: none;
-      }
-
       /* Show mobile content */
       .mobile-content {
         display: block;
@@ -716,6 +708,15 @@
       /* Adjust padding on cards for mobile */
       .mobile-card {
         padding: 1.25rem;
+      }
+      
+      /* IMPORTANT: Hide desktop content on mobile - moved to end for specificity */
+      .profile-grid {
+        display: none !important;
+      }
+      
+      .floating-image {
+        display: none !important;
       }
     }
 

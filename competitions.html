@@ -848,6 +848,62 @@
       .floating-element {
         font-size: 2rem;
       }
+      
+      /* Mobile Timeline Styles - Simple Vertical Layout */
+      .timeline::before {
+        left: 20px; /* Move center line to left side */
+        margin-left: 0;
+      }
+      
+      .timeline-item:nth-child(odd) .timeline-content,
+      .timeline-item:nth-child(even) .timeline-content {
+        margin-left: 60px; /* Consistent left margin */
+        margin-right: 0;
+        text-align: left;
+        padding-left: 2rem;
+        padding-right: 1.5rem;
+        width: calc(100% - 60px); /* Full width minus margin */
+      }
+      
+      .timeline-marker {
+        left: 20px; /* Align with moved center line */
+        transform: translateX(-50%);
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+      
+      /* Mobile timeline arrows - all point right */
+      .timeline-item:nth-child(odd) .timeline-content::after,
+      .timeline-item:nth-child(even) .timeline-content::after {
+        left: -12px;
+        right: auto;
+        border: 8px solid transparent;
+        border-right-color: rgba(255,255,255,0.9);
+        border-left-color: transparent;
+      }
+      
+      /* Mobile date-medal containers - all left aligned */
+      .timeline-item:nth-child(odd) .date-medal-container,
+      .timeline-item:nth-child(even) .date-medal-container {
+        justify-content: flex-start;
+      }
+      
+      /* Mobile competition headers - all left aligned */
+      .timeline-item:nth-child(odd) .competition-header,
+      .timeline-item:nth-child(even) .competition-header {
+        text-align: left;
+      }
+      
+      /* Mobile timeline adjustments */
+      .timeline {
+        padding: 0 1rem;
+      }
+      
+      .timeline-content {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+      }
     }
 
     header .logo a {
