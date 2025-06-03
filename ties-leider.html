@@ -979,6 +979,106 @@
       .breadcrumb-desktop {
         display: none;
       }
+      
+      /* Hide desktop content on mobile */
+      .profile-grid,
+      .floating-image {
+        display: none;
+      }
+      
+      /* Show mobile content */
+      .mobile-content {
+        display: block;
+      }
+      
+      /* Mobile profile header adjustments */
+      .profile-header {
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+      }
+      
+      /* Mobile images */
+      .mobile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        margin: 2rem auto;
+        display: block;
+      }
+      
+      .mobile-image.ties1 {
+        transform: rotate(-3deg);
+      }
+      
+      .mobile-image.ties2 {
+        transform: rotate(2deg);
+      }
+      
+      .mobile-image.ties3 {
+        transform: rotate(-2deg);
+      }
+      
+      .mobile-image.ties4 {
+        width: 250px;
+        height: auto;
+        border-radius: 50%;
+        transform: none; /* No rotation for ties4 */
+      }
+      
+      /* Mobile cards */
+      .mobile-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        margin: 2rem auto;
+        max-width: 350px;
+        text-align: center;
+      }
+      
+      .mobile-card.intro {
+        background: linear-gradient(135deg, var(--primary), #ff5252);
+        color: var(--light);
+      }
+      .mobile-card.intro h2 {
+        color: var(--light);
+      }
+      
+      .mobile-card.passion {
+        background: linear-gradient(135deg, #ff9800, #ffc107);
+        color: var(--secondary);
+      }
+      
+      .mobile-card.personal {
+        background: linear-gradient(135deg, #2196f3, #03a9f4);
+        color: var(--light);
+      }
+      
+      .mobile-card.personal h2 {
+        color: var(--light);
+      }
+      
+      .mobile-card h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+      .mobile-card p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 0.8rem;
+      }
+      
+      /* Adjust padding on cards for mobile */
+      .profile-card.intro,
+      .profile-card.passion,
+      .profile-card.personal,
+      .bottom-section {
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+      }
     }
   </style>
 </head>

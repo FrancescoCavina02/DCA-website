@@ -625,7 +625,7 @@
         padding: 0.3rem 0.4rem;
       }
       
-      /* Mobile Competition Timeline - Complete Redesign */
+      /* Mobile Competition Timeline - Simple Vertical Format */
       .timeline {
         max-width: 100%;
         margin: 0;
@@ -637,7 +637,7 @@
         display: none;
       }
       
-      /* Mobile timeline items - single column layout */
+      /* Mobile timeline items - simple vertical layout */
       .timeline-item {
         margin-bottom: 2rem;
         position: relative;
@@ -647,16 +647,22 @@
         animation: none;
       }
       
-      /* Reset all positioning for mobile */
+      /* Reset all positioning for mobile - simple vertical layout */
       .timeline-item:nth-child(odd) .timeline-content,
       .timeline-item:nth-child(even) .timeline-content {
         margin-left: 0;
         margin-right: 0;
         text-align: left;
         width: 100%;
+        padding: 1.5rem;
       }
       
-      /* Mobile timeline marker - positioned at top-left */
+      /* Remove arrows on mobile */
+      .timeline-content::after {
+        display: none;
+      }
+      
+      /* Mobile timeline marker - simple centered design */
       .timeline-marker {
         position: relative;
         left: auto;
@@ -671,7 +677,7 @@
         animation: none;
       }
       
-      /* Mobile timeline content */
+      /* Mobile timeline content - simple card design */
       .timeline-content {
         padding: 1.5rem;
         margin-top: 0;
@@ -685,13 +691,23 @@
         transform: translateY(-3px);
       }
       
+      /* Mobile date and medal container - simple layout */
+      .date-medal-container {
+        justify-content: flex-start;
+        margin-bottom: 1rem;
+      }
+      
+      .timeline-item:nth-child(odd) .date-medal-container,
+      .timeline-item:nth-child(even) .date-medal-container {
+        justify-content: flex-start;
+      }
+      
       /* Mobile competition date */
       .competition-date {
         position: relative;
         top: auto;
         right: auto;
         left: auto;
-        margin-bottom: 1rem;
         display: inline-block;
         padding: 0.4rem 1rem;
         font-size: 0.8rem;
@@ -703,22 +719,21 @@
         top: auto;
         right: auto;
         left: auto;
-        margin-bottom: 1rem;
       }
       
-      /* Mobile competition header */
+      /* Mobile competition header - simple layout */
       .competition-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.5rem;
+        justify-content: flex-start;
+        text-align: left;
+        gap: 1rem;
         margin-bottom: 1rem;
       }
       
       .timeline-item:nth-child(odd) .competition-header,
       .timeline-item:nth-child(even) .competition-header {
-        justify-content: center;
-        text-align: center;
-        flex-direction: column;
+        justify-content: flex-start;
+        text-align: left;
+        flex-direction: row;
       }
       
       .trophy-icon {
