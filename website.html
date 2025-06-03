@@ -1602,31 +1602,34 @@
             
             // If the clicked dropdown was not active, open it
             if (!isCurrentlyActive) {
-              // Open the dropdown
-              dropdown.classList.add('active');
-              
-              // Calculate content height dynamically
+              // FIRST: Calculate content height while dropdown is hidden
+              dropdownContent.style.maxHeight = 'none';
+              dropdownContent.style.opacity = '0';
+              dropdownContent.style.visibility = 'hidden';
               const contentHeight = dropdownContent.scrollHeight;
+              dropdownContent.style.maxHeight = '0';
+              dropdownContent.style.visibility = '';
+              
+              // SECOND: Find all menu items that come after this dropdown
+              const allMenuItems = Array.from(nav.children);
+              const currentDropdownIndex = allMenuItems.indexOf(dropdown);
+              const itemsToMove = allMenuItems.slice(currentDropdownIndex + 1);
+              
+              // THIRD: Simultaneously open dropdown AND push content down
+              dropdown.classList.add('active');
               dropdownContent.style.maxHeight = contentHeight + 'px';
               dropdownContent.style.opacity = '1';
+              
+              // Push down all items that come after this dropdown (immediately)
+              itemsToMove.forEach(item => {
+                item.style.transform = `translateY(${contentHeight}px)`;
+              });
               
               // Add celebration effect
               dropdownSpan.style.transform = 'scale(1.05)';
               setTimeout(() => {
                 dropdownSpan.style.transform = '';
               }, 200);
-              
-              // Find all menu items that come after this dropdown
-              const allMenuItems = Array.from(nav.children);
-              const currentDropdownIndex = allMenuItems.indexOf(dropdown);
-              const itemsToMove = allMenuItems.slice(currentDropdownIndex + 1);
-              
-              // Push down all items that come after this dropdown
-              setTimeout(() => {
-                itemsToMove.forEach(item => {
-                  item.style.transform = `translateY(${contentHeight}px)`;
-                });
-              }, 50); // Small delay to ensure smooth animation
               
               // Trigger staggered animation for dropdown items
               const dropdownLinks = dropdownContent.querySelectorAll('a');
