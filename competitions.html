@@ -848,6 +848,62 @@
       .floating-element {
         font-size: 2rem;
       }
+
+      /* Mobile Timeline Layout Overrides */
+      .timeline {
+        padding: 0 1rem;
+        max-width: none;
+      }
+
+      /* Hide the center vertical line on mobile */
+      .timeline::before {
+        display: none;
+      }
+
+      /* Reset all timeline items to full width */
+      .timeline-item {
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+
+      /* Make all timeline content span full width */
+      .timeline-item:nth-child(odd) .timeline-content,
+      .timeline-item:nth-child(even) .timeline-content {
+        margin-left: 0;
+        margin-right: 0;
+        text-align: left;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        width: 100%;
+      }
+
+      /* Hide the timeline marker (center circle) on mobile */
+      .timeline-marker {
+        display: none;
+      }
+
+      /* Remove the arrows pointing to center line */
+      .timeline-content::after {
+        display: none;
+      }
+
+      /* Reset date-medal container alignment for mobile */
+      .timeline-item:nth-child(odd) .date-medal-container,
+      .timeline-item:nth-child(even) .date-medal-container {
+        justify-content: flex-start;
+      }
+
+      /* Reset competition header alignment for mobile */
+      .timeline-item:nth-child(odd) .competition-header,
+      .timeline-item:nth-child(even) .competition-header {
+        justify-content: flex-start;
+        text-align: left;
+      }
+
+      /* Adjust timeline content padding for mobile */
+      .timeline-content {
+        padding: 2rem 1.5rem;
+      }
     }
 
     header .logo a {
@@ -1577,6 +1633,84 @@
       
       .breadcrumb-item {
         padding: 0.2rem 0.3rem;
+      }
+
+      .hero-section {
+        padding: 4rem 1rem;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .competitions-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+      }
+
+      .competition-card {
+        margin: 0;
+      }
+
+      .floating-element {
+        font-size: 2rem;
+      }
+
+      /* Mobile Timeline Layout Overrides */
+      .timeline {
+        padding: 0 1rem;
+        max-width: none;
+      }
+
+      /* Hide the center vertical line on mobile */
+      .timeline::before {
+        display: none;
+      }
+
+      /* Reset all timeline items to full width */
+      .timeline-item {
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+
+      /* Make all timeline content span full width */
+      .timeline-item:nth-child(odd) .timeline-content,
+      .timeline-item:nth-child(even) .timeline-content {
+        margin-left: 0;
+        margin-right: 0;
+        text-align: left;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        width: 100%;
+      }
+
+      /* Hide the timeline marker (center circle) on mobile */
+      .timeline-marker {
+        display: none;
+      }
+
+      /* Remove the arrows pointing to center line */
+      .timeline-content::after {
+        display: none;
+      }
+
+      /* Reset date-medal container alignment for mobile */
+      .timeline-item:nth-child(odd) .date-medal-container,
+      .timeline-item:nth-child(even) .date-medal-container {
+        justify-content: flex-start;
+      }
+
+      /* Reset competition header alignment for mobile */
+      .timeline-item:nth-child(odd) .competition-header,
+      .timeline-item:nth-child(even) .competition-header {
+        justify-content: flex-start;
+        text-align: left;
+      }
+
+      /* Adjust timeline content padding for mobile */
+      .timeline-content {
+        padding: 2rem 1.5rem;
       }
     }
 
