@@ -1707,6 +1707,293 @@
         padding: 0.2rem 0.3rem;
       }
     }
+
+    /* Dynamic Founders Action Section */
+    .founders-action-section {
+      max-width: 1200px;
+      margin: 6rem auto;
+      padding: 0 1.5rem;
+      position: relative;
+    }
+
+    .action-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(211, 47, 47, 0.05), rgba(255, 107, 107, 0.03));
+      border-radius: 30px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    }
+
+    .action-content::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(211, 47, 47, 0.08) 0%, transparent 70%);
+      animation: rotateBackground 30s linear infinite;
+      z-index: 1;
+    }
+
+    .action-content > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .action-image-container {
+      position: relative;
+      border-radius: 25px;
+      overflow: hidden;
+      transform: perspective(1000px) rotateY(-5deg);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .action-image-container:hover {
+      transform: perspective(1000px) rotateY(0deg) scale(1.02);
+      box-shadow: 0 25px 70px rgba(211, 47, 47, 0.3);
+    }
+
+    .action-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      transition: all 0.4s ease;
+      filter: contrast(1.1) saturate(1.1);
+    }
+
+    .action-image-container:hover .action-image {
+      transform: scale(1.05);
+      filter: contrast(1.2) saturate(1.2);
+    }
+
+    .action-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 0%, rgba(211, 47, 47, 0.1) 50%, transparent 100%);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .action-image-container:hover .action-overlay {
+      opacity: 1;
+    }
+
+    .action-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      color: var(--light);
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 25px rgba(211, 47, 47, 0.4);
+      animation: actionBadgePulse 2s ease-in-out infinite;
+    }
+
+    .floating-action-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .action-element {
+      position: absolute;
+      font-size: 2rem;
+      animation: actionFloat 6s ease-in-out infinite;
+      opacity: 0.7;
+    }
+
+    .action-element.element-1 {
+      top: 15%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .action-element.element-2 {
+      bottom: 25%;
+      right: 15%;
+      animation-delay: 2s;
+    }
+
+    .action-element.element-3 {
+      top: 60%;
+      left: 15%;
+      animation-delay: 4s;
+    }
+
+    .action-text {
+      padding: 2rem 0;
+    }
+
+    .action-text h3 {
+      font-size: 2.8rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b, var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .action-text p {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+      font-weight: 500;
+    }
+
+    .action-stats {
+      display: flex;
+      gap: 2rem;
+      justify-content: flex-start;
+    }
+
+    .stat {
+      text-align: center;
+      position: relative;
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+      animation: statCounter 2s ease-out forwards;
+    }
+
+    .stat-label {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 0.5rem;
+    }
+
+    /* Action Section Animations */
+    @keyframes actionBadgePulse {
+      0%, 100% { 
+        transform: scale(1); 
+        box-shadow: 0 8px 25px rgba(211, 47, 47, 0.4);
+      }
+      50% { 
+        transform: scale(1.05); 
+        box-shadow: 0 12px 35px rgba(211, 47, 47, 0.6);
+      }
+    }
+
+    @keyframes actionFloat {
+      0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+        opacity: 0.7;
+      }
+      25% { 
+        transform: translateY(-20px) rotate(90deg); 
+        opacity: 1;
+      }
+      50% { 
+        transform: translateY(0px) rotate(180deg); 
+        opacity: 0.8;
+      }
+      75% { 
+        transform: translateY(-15px) rotate(270deg); 
+        opacity: 0.9;
+      }
+    }
+
+    @keyframes statCounter {
+      0% { 
+        transform: scale(0.5); 
+        opacity: 0;
+      }
+      60% { 
+        transform: scale(1.1); 
+        opacity: 1;
+      }
+      100% { 
+        transform: scale(1); 
+        opacity: 1;
+      }
+    }
+
+    /* Mobile Styles for Action Section */
+    @media (max-width: 768px) {
+      .founders-action-section {
+        margin: 3rem auto;
+        padding: 0 1rem;
+      }
+
+      .action-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 2rem 1.5rem;
+      }
+
+      .action-image-container {
+        transform: none;
+        order: 2;
+      }
+
+      .action-image {
+        height: 300px;
+      }
+
+      .action-text {
+        order: 1;
+        text-align: center;
+        padding: 1rem 0;
+      }
+
+      .action-text h3 {
+        font-size: 2.2rem;
+      }
+
+      .action-text p {
+        font-size: 1.1rem;
+      }
+
+      .action-stats {
+        justify-content: center;
+        gap: 1.5rem;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+      }
+
+      .action-badge {
+        top: 15px;
+        right: 15px;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.8rem;
+      }
+
+      .action-element {
+        font-size: 1.5rem;
+      }
+    }
   </style>
 </head>
 
@@ -1801,7 +2088,7 @@
           <div class="founder-content">
             <h3>The Spark</h3>
             <h4>Bas</h4>
-            <p>"This distance sparked an idea: there was a clear opportunity to build a dodgeball community right here, closer to home."</p>
+            <p>"The nearest practice location was in Haarlem, while we all lived in Amsterdam, the biggest city in the Netherlands. This distance sparked an idea: there was a clear opportunity to build a dodgeball community right here, closer to home. We focused on building the club's foundation by inviting people from our existing sports communities."</p>
           </div>
         </div>
 
@@ -1825,7 +2112,42 @@
           <div class="founder-content">
             <h3>The Vision</h3>
             <h4>Wouter</h4>
-            <p>"Looking toward the future, I see a growing, loving, and enthusiastic community of friends, and I can't wait to discover where we'll be in another five years!"</p>
+            <p>"When I compare those first few training sessions with our close friends to the professional organization we are today, I feel overwhelming pride. The club has grown far beyond the people who founded it. Looking toward the future, I see a growing, loving, and enthusiastic community of friends!"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Group Photo Section -->
+    <div class="founders-action-section">
+      <div class="action-content">
+        <div class="action-image-container">
+          <img src="pics/Founders/3ofthem.jpg" alt="The three founders in action during a dodgeball game" class="action-image">
+          <div class="action-overlay">
+            <div class="action-badge">⚡ LIVE IN ACTION ⚡</div>
+          </div>
+          <div class="floating-action-elements">
+            <div class="action-element element-1">🎯</div>
+            <div class="action-element element-2">💥</div>
+            <div class="action-element element-3">🔥</div>
+          </div>
+        </div>
+        <div class="action-text">
+          <h3>From Vision to Reality</h3>
+          <p>Here they are—the three visionaries who turned a simple idea into Amsterdam's most dynamic dodgeball community! This is where passion meets action, where founders become players, and where the dream of DCA comes alive on the court. 🏆</p>
+          <div class="action-stats">
+            <div class="stat">
+              <span class="stat-number">3</span>
+              <span class="stat-label">Founders</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">1</span>
+              <span class="stat-label">Dream</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">∞</span>
+              <span class="stat-label">Impact</span>
+            </div>
           </div>
         </div>
       </div>
