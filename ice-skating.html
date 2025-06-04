@@ -221,7 +221,7 @@
 
     .video-container {
       position: relative;
-      max-width: 800px;
+      max-width: 600px;
       margin: 0 auto;
       border-radius: 25px;
       overflow: hidden;
@@ -281,9 +281,12 @@
       transition: transform 0.4s ease;
     }
 
-    .gallery-item:hover img,
-    .gallery-item:hover video {
-      transform: scale(1.1);
+    /* Special handling for vertical videos on desktop */
+    @media (min-width: 769px) {
+      .gallery-item:nth-child(2) video {
+        height: 350px;
+        object-fit: cover;
+      }
     }
 
     .gallery-overlay {
@@ -681,6 +684,322 @@
         padding: 0.2rem 0.3rem;
       }
     }
+
+    /* — Footer — */
+    footer {
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      color: var(--light);
+      margin-top: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('pics/Ball.png');
+      background-size: 80px 80px;
+      opacity: 0.03;
+      animation: footerBalls 60s linear infinite;
+    }
+
+    .footer-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 1rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-section {
+      animation: footerFadeIn 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .footer-section:nth-child(1) { animation-delay: 0.1s; }
+    .footer-section:nth-child(2) { animation-delay: 0.2s; }
+    .footer-section:nth-child(3) { animation-delay: 0.3s; }
+    .footer-section:nth-child(4) { animation-delay: 0.4s; }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .footer-ball {
+      width: 40px;
+      height: 40px;
+      margin-right: 0.75rem;
+      animation: footerBallSpin 8s linear infinite;
+      filter: drop-shadow(0 4px 8px rgba(211, 47, 47, 0.3));
+    }
+
+    .footer-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--light), #ff6b6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-tagline {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+      font-style: italic;
+    }
+
+    .footer-social {
+      margin-bottom: 1rem;
+    }
+
+    .social-text {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .social-link:hover {
+      background: var(--primary);
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 8px 20px rgba(211, 47, 47, 0.4);
+    }
+
+    .footer-heading {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      color: #ff6b6b;
+      position: relative;
+    }
+
+    .footer-heading::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 30px;
+      height: 2px;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      border-radius: 1px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--light);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      padding: 0.25rem 0;
+      border-radius: 4px;
+    }
+
+    .footer-links a:hover {
+      color: #ff6b6b;
+      padding-left: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .contact-info {
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-icon {
+      margin-right: 0.75rem;
+      font-size: 1.1rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .footer-cta {
+      display: inline-block;
+      background: linear-gradient(45deg, var(--primary), #ff6b6b);
+      color: var(--light);
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+    }
+
+    .footer-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(211, 47, 47, 0.4);
+      background: linear-gradient(45deg, #ff6b6b, var(--primary));
+    }
+
+    .footer-divider {
+      display: flex;
+      align-items: center;
+      margin: 2rem 0;
+      opacity: 0.6;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--light), transparent);
+    }
+
+    .divider-ball {
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      animation: dividerPulse 2s ease-in-out infinite;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+    }
+
+    .footer-bottom-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-stats {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .stat-separator {
+      opacity: 0.5;
+    }
+
+    .footer-copyright {
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin: 0;
+      font-style: italic;
+    }
+
+    /* Footer Animations */
+    @keyframes footerFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes footerBallSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes footerBalls {
+      from { transform: translateX(0); }
+      to { transform: translateX(-80px); }
+    }
+
+    @keyframes dividerPulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+
+    /* Mobile Footer Styles */
+    @media (max-width: 768px) {
+      .footer-content {
+        padding: 2rem 1rem 1rem;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .footer-logo {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .footer-tagline,
+      .social-text {
+        text-align: center;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+
+      .footer-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .footer-bottom-content {
+        text-align: center;
+      }
+    }
   </style>
 </head>
 
@@ -833,17 +1152,86 @@
   </main>
 
   <!-- Footer -->
-  <footer style="background: linear-gradient(135deg, var(--secondary), var(--accent)); color: var(--light); margin-top: 4rem; position: relative; overflow: hidden; padding: 3rem 1.5rem 1rem;">
-    <div style="text-align: center;">
-      <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #ff6b6b;">Dodgeball Club Amsterdam</h3>
-      <p style="margin-bottom: 2rem; opacity: 0.9;">Where dodgeball dreams come to life! 🎯</p>
-      <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem;">
-        <a href="website.html" style="color: var(--light); transition: color 0.3s ease;">🏠 Home</a>
-        <a href="about.html" style="color: var(--light); transition: color 0.3s ease;">ℹ️ About</a>
-        <a href="social.html" style="color: var(--light); transition: color 0.3s ease;">🎉 Social</a>
-        <a href="contact.html" style="color: var(--light); transition: color 0.3s ease;">📞 Contact</a>
+  <footer>
+    <div class="footer-content">
+      <!-- Footer Top Section -->
+      <div class="footer-top">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <img src="pics/Ball.png" alt="DCA Ball" class="footer-ball">
+            <span class="footer-title">Dodgeball Club Amsterdam</span>
+          </div>
+          <p class="footer-tagline">Where dodgeball dreams come to life! 🎯</p>
+          <div class="footer-social">
+            <span class="social-text">Follow the action:</span>
+            <div class="social-links">
+              <a href="moments.html" class="social-link" title="Our Moments">📸</a>
+              <a href="social.html" class="social-link" title="Social Events">🎉</a>
+              <a href="competitions.html" class="social-link" title="Competitions">🏆</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Quick Start</h4>
+          <ul class="footer-links">
+            <li><a href="practice-prices.html">🎯 Join DCA</a></li>
+            <li><a href="practice-prices.html">💰 Prices & Training</a></li>
+            <li><a href="contact.html">📞 Get in Touch</a></li>
+            <li><a href="competitions.html">🏆 Competitions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Discover DCA</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">ℹ️ About Us</a></li>
+            <li><a href="founders.html">💡 Meet the Founders</a></li>
+            <li><a href="board.html">👥 The Board</a></li>
+            <li><a href="social.html">🎉 Social Activities</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Stay Connected</h4>
+          <div class="contact-info">
+            <p class="contact-item">
+              <span class="contact-icon">📍</span>
+              <span>Amsterdam, Netherlands</span>
+            </p>
+            <p class="contact-item">
+              <span class="contact-icon">⏰</span>
+              <span>Training: Tue & Thu</span>
+            </p>
+            <p class="contact-item">
+              <span class="contact-icon">🏆</span>
+              <span>Competing since 2020</span>
+            </p>
+          </div>
+          <a href="contact.html" class="footer-cta">Join Our Team! 🚀</a>
+        </div>
       </div>
-      <p style="font-size: 0.9rem; opacity: 0.8; font-style: italic;">© 2025 Dodgeball Club Amsterdam — All Dodge, No Tears.</p>
+
+      <!-- Footer Divider -->
+      <div class="footer-divider">
+        <div class="divider-line"></div>
+        <div class="divider-ball">⚡</div>
+        <div class="divider-line"></div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div class="footer-bottom-content">
+          <div class="footer-stats">
+            <span class="stat-item">🎯 <strong>5</strong> Teams</span>
+            <span class="stat-separator">•</span>
+            <span class="stat-item">👥 <strong>50+</strong> Members</span>
+            <span class="stat-separator">•</span>
+            <span class="stat-item">🏆 <strong>Endless</strong> Fun</span>
+          </div>
+          <p class="footer-copyright">© 2025 Dodgeball Club Amsterdam — All Dodge, No Tears.</p>
+        </div>
+      </div>
     </div>
   </footer>
 
