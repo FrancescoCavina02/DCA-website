@@ -1881,7 +1881,7 @@
           
           <div class="gallery-item" data-delay="4">
             <div class="video-container">
-              <video preload="metadata">
+              <video preload="metadata" muted playsinline webkit-playsinline>
                 <source src="pics/Scavenger hunt/WhatsApp Video 2025-05-25 at 22.01.49.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
@@ -1901,7 +1901,7 @@
           
           <div class="gallery-item" data-delay="5">
             <div class="video-container">
-              <video preload="metadata">
+              <video preload="metadata" muted playsinline webkit-playsinline>
                 <source src="pics/Scavenger hunt/WhatsApp Video 2025-05-25 at 22.01.48.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
@@ -1921,7 +1921,7 @@
           
           <div class="gallery-item" data-delay="6">
             <div class="video-container">
-              <video preload="metadata">
+              <video preload="metadata" muted playsinline webkit-playsinline>
                 <source src="pics/Scavenger hunt/WhatsApp Video 2025-05-25 at 22.01.47.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
@@ -1941,7 +1941,7 @@
           
           <div class="gallery-item" data-delay="7">
             <div class="video-container">
-              <video preload="metadata">
+              <video preload="metadata" muted playsinline webkit-playsinline>
                 <source src="pics/Scavenger hunt/WhatsApp Video 2025-05-25 at 22.01.44.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
@@ -2191,6 +2191,180 @@
           }
         });
       }
+
+      // ========== VIDEO FUNCTIONALITY ==========
+      // Initialize all video containers
+      const videoContainers = document.querySelectorAll('.video-container');
+      
+      videoContainers.forEach((container, index) => {
+        const video = container.querySelector('video');
+        const customPlayButton = container.querySelector('.custom-play-button');
+        const playButton = container.querySelector('.play-button');
+        const playIcon = container.querySelector('.play-icon');
+        const progressContainer = container.querySelector('.video-progress');
+        const progressBar = container.querySelector('.progress-bar');
+        const fullscreenButton = container.querySelector('.fullscreen-button');
+        const loadingIndicator = container.querySelector('.video-loading');
+        
+        if (!video) return;
+
+        // Set video attributes for better preview and performance
+        video.setAttribute('preload', 'metadata');
+        video.setAttribute('muted', 'muted'); // Muted videos can autoplay
+        video.setAttribute('playsinline', 'playsinline'); // Better mobile support
+        
+        // Try to load the first frame as poster
+        video.addEventListener('loadedmetadata', function() {
+          // Set video to first frame
+          video.currentTime = 0.1;
+          container.classList.remove('loading');
+        });
+
+        video.addEventListener('loadstart', function() {
+          container.classList.add('loading');
+        });
+
+        video.addEventListener('canplay', function() {
+          container.classList.remove('loading');
+        });
+
+        video.addEventListener('error', function() {
+          container.classList.add('error');
+          container.classList.remove('loading');
+        });
+
+        // Function to toggle play/pause
+        function togglePlayPause() {
+          if (video.paused) {
+            // Pause all other videos first
+            videoContainers.forEach(otherContainer => {
+              const otherVideo = otherContainer.querySelector('video');
+              if (otherVideo && !otherVideo.paused && otherVideo !== video) {
+                otherVideo.pause();
+                otherContainer.classList.remove('playing');
+                const otherPlayButton = otherContainer.querySelector('.play-button');
+                if (otherPlayButton) {
+                  otherPlayButton.classList.remove('playing');
+                  otherPlayButton.classList.add('paused');
+                }
+              }
+            });
+
+            // Play current video
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.then(() => {
+                container.classList.add('playing');
+                playButton.classList.remove('paused');
+                playButton.classList.add('playing');
+              }).catch(error => {
+                console.log('Play failed:', error);
+                // Try playing muted if autoplay was blocked
+                video.muted = true;
+                video.play().then(() => {
+                  container.classList.add('playing');
+                  playButton.classList.remove('paused');
+                  playButton.classList.add('playing');
+                }).catch(err => {
+                  console.log('Muted play also failed:', err);
+                });
+              });
+            }
+          } else {
+            video.pause();
+            container.classList.remove('playing');
+            playButton.classList.remove('playing');
+            playButton.classList.add('paused');
+          }
+        }
+
+        // Event listeners for play buttons
+        customPlayButton.addEventListener('click', togglePlayPause);
+        playButton.addEventListener('click', togglePlayPause);
+
+        // Video click to toggle play/pause
+        video.addEventListener('click', togglePlayPause);
+
+        // Update progress bar
+        video.addEventListener('timeupdate', function() {
+          if (video.duration) {
+            const progress = (video.currentTime / video.duration) * 100;
+            progressBar.style.width = progress + '%';
+          }
+        });
+
+        // Progress bar click to seek
+        progressContainer.addEventListener('click', function(e) {
+          const rect = progressContainer.getBoundingClientRect();
+          const pos = (e.clientX - rect.left) / rect.width;
+          video.currentTime = pos * video.duration;
+        });
+
+        // Video ended
+        video.addEventListener('ended', function() {
+          container.classList.remove('playing');
+          playButton.classList.remove('playing');
+          playButton.classList.add('paused');
+          progressBar.style.width = '0%';
+          video.currentTime = 0;
+        });
+
+        // Fullscreen functionality
+        fullscreenButton.addEventListener('click', function() {
+          if (video.requestFullscreen) {
+            video.requestFullscreen();
+          } else if (video.webkitRequestFullscreen) {
+            video.webkitRequestFullscreen();
+          } else if (video.mozRequestFullScreen) {
+            video.mozRequestFullScreen();
+          } else if (video.msRequestFullscreen) {
+            video.msRequestFullscreen();
+          }
+        });
+
+        // Determine video orientation for better display
+        video.addEventListener('loadedmetadata', function() {
+          const aspectRatio = video.videoWidth / video.videoHeight;
+          
+          if (aspectRatio > 1.5) {
+            // Wide/landscape video
+            container.classList.add('horizontal');
+            container.classList.remove('vertical');
+          } else if (aspectRatio < 0.8) {
+            // Tall/portrait video
+            container.classList.add('vertical');
+            container.classList.remove('horizontal');
+          } else {
+            // Square-ish video
+            container.classList.add('horizontal');
+            container.classList.remove('vertical');
+          }
+        });
+
+        // Initialize play button state
+        playButton.classList.add('paused');
+        
+        // Load video metadata immediately
+        video.load();
+      });
+
+      // Global pause all videos when page loses focus
+      document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+          videoContainers.forEach(container => {
+            const video = container.querySelector('video');
+            if (video && !video.paused) {
+              video.pause();
+              container.classList.remove('playing');
+              const playButton = container.querySelector('.play-button');
+              if (playButton) {
+                playButton.classList.remove('playing');
+                playButton.classList.add('paused');
+              }
+            }
+          });
+        }
+      });
     });
   </script>
 </body>
