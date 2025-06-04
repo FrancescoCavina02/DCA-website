@@ -626,6 +626,11 @@
         display: none;
       }
 
+      /* Hide desktop profile cards on mobile */
+      .profile-card {
+        display: none !important;
+      }
+
       /* Show mobile content */
       .mobile-content {
         display: block;
@@ -711,10 +716,7 @@
         margin-bottom: 0.8rem;
       }
 
-      /* Adjust padding on cards for mobile */
-      .profile-card.intro,
-      .profile-card.passion,
-      .profile-card.personal,
+      /* Mobile adjustments for proper spacing */
       .bottom-section {
         padding-right: 1.5rem;
         padding-left: 1.5rem;
