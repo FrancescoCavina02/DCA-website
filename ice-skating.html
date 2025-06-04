@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DCA Ice Skating Adventure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* — CSS Variables & Reset — */
+    :root {
+      --primary: #d32f2f;
+      --secondary: #000;
+      --light: #fff;
+      --accent: #333;
+      --ice-blue: #87ceeb;
+      --winter-white: #f0f8ff;
+      --frost: #e6f3ff;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: var(--secondary);
+      line-height: 1.6;
+      background: linear-gradient(135deg, var(--winter-white), var(--frost));
+    }
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* — Header & Nav — */
+    header {
+      background: var(--secondary);
+      color: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.3rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 1002;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .logo img {
+      height: 2.8rem;
+      vertical-align: middle;
+      margin-left: 0.5rem;
+    }
+    .logo .ball-logo {
+      height: 2.8rem;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+    }
+    .adam-image {
+      height: 3.5rem;
+      vertical-align: middle;
+      margin-left: 1rem;
+    }
+    nav#nav-menu {
+      display: flex;
+      align-items: center;
+    }
+    nav#nav-menu a {
+      margin-left: 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      overflow: hidden;
+      color: var(--primary);
+    }
+    nav#nav-menu a:hover {
+      color: var(--light);
+      transform: scale(1.05);
+      background-color: rgba(211, 47, 47, 0.1);
+    }
+    nav#nav-menu a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0.2rem;
+      width: 25px;
+      height: 25px;
+      background-image: url('pics/Ball.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: translateY(-50%) scale(0);
+      transition: transform 0.3s ease;
+      z-index: -1;
+      opacity: 0.8;
+      border-radius: 50%;
+    }
+    nav#nav-menu a:hover::before {
+      transform: translateY(-50%) scale(1);
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.75rem;
+      color: var(--light);
+      cursor: pointer;
+    }
+
+    /* — Main Content Sections — */
+    main {
+      padding: 0;
+      margin: 0;
+    }
+
+    /* Winter Hero Section */
+    .hero-section {
+      background: linear-gradient(135deg, #87ceeb 0%, #4682b4 50%, #1e90ff 100%);
+      color: var(--light);
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="20">❄️</text></svg>');
+      background-size: 100px 100px;
+      opacity: 0.1;
+      animation: snowfall 20s linear infinite;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      opacity: 0;
+      transform: translateY(-30px);
+      animation: heroEnter 1s ease-out forwards 0.3s;
+    }
+
+    .hero-subtitle {
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: heroEnter 1s ease-out forwards 0.6s;
+    }
+
+    .ice-emoji-float {
+      position: absolute;
+      font-size: 3rem;
+      opacity: 0.7;
+      animation: iceFloat 8s ease-in-out infinite;
+    }
+
+    .ice-1 { top: 20%; left: 10%; animation-delay: 0s; }
+    .ice-2 { top: 60%; right: 15%; animation-delay: 2s; }
+    .ice-3 { bottom: 30%; left: 20%; animation-delay: 4s; }
+
+    /* Story Section */
+    .story-section {
+      max-width: 1000px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    .story-title {
+      font-size: 2.5rem;
+      color: var(--ice-blue);
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+
+    .story-content {
+      background: rgba(255,255,255,0.9);
+      border-radius: 25px;
+      padding: 3rem;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(135,206,235,0.3);
+    }
+
+    .story-text {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    /* Featured Video Section */
+    .featured-video {
+      text-align: center;
+      margin: 4rem 0;
+      padding: 0 2rem;
+    }
+
+    .featured-video h2 {
+      font-size: 2.5rem;
+      color: var(--ice-blue);
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+
+    .video-container {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .custom-video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+      margin: 6rem 0;
+      padding: 0 2rem;
+    }
+
+    .gallery-title {
+      font-size: 2.5rem;
+      color: var(--ice-blue);
+      text-align: center;
+      margin-bottom: 3rem;
+      font-weight: 700;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      perspective: 1000px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(50px) scale(0.9);
+      animation: galleryItemEnter 0.8s ease-out forwards;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(135,206,235,0.3);
+    }
+
+    .gallery-item img,
+    .gallery-item video {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img,
+    .gallery-item:hover video {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: var(--light);
+      padding: 2rem 1.5rem 1.5rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+
+    .gallery-caption {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    /* Video Controls */
+    .video-controls {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.7);
+      border-radius: 10px;
+      padding: 0.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .video-container:hover .video-controls,
+    .video-container.playing .video-controls {
+      opacity: 1;
+    }
+
+    /* Animation delays for gallery items */
+    .gallery-item[data-delay="0"] { animation-delay: 0.5s; }
+    .gallery-item[data-delay="1"] { animation-delay: 0.7s; }
+    .gallery-item[data-delay="2"] { animation-delay: 0.9s; }
+
+    /* Fun Facts Section */
+    .fun-facts {
+      background: linear-gradient(135deg, rgba(135,206,235,0.1), rgba(240,248,255,0.3));
+      border-radius: 30px;
+      padding: 4rem 2rem;
+      margin: 4rem auto;
+      max-width: 1000px;
+      text-align: center;
+    }
+
+    .fun-facts h3 {
+      font-size: 2.2rem;
+      color: var(--ice-blue);
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .fact-card {
+      background: var(--light);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .fact-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .fact-emoji {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .fact-text {
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* Animations */
+    @keyframes heroEnter {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes galleryItemEnter {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes iceFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      25% { transform: translateY(-20px) rotate(90deg); }
+      50% { transform: translateY(0px) rotate(180deg); }
+      75% { transform: translateY(-15px) rotate(270deg); }
+    }
+
+    @keyframes snowfall {
+      from { transform: translateY(-100px); }
+      to { transform: translateY(calc(100vh + 100px)); }
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .adam-image {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .story-content {
+        padding: 2rem;
+      }
+
+      .story-text {
+        font-size: 1rem;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .gallery-item img,
+      .gallery-item video {
+        height: 200px;
+      }
+
+      .facts-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      /* Mobile Menu Styles */
+      .menu-toggle {
+        display: block;
+        font-size: 1.6rem;
+        padding: 0.8rem 1rem;
+        background: linear-gradient(135deg, var(--primary), #ff6b6b, var(--primary));
+        background-size: 200% 200%;
+        border-radius: 20px;
+        color: var(--light);
+        border: 2px solid rgba(255,255,255,0.2);
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 
+          0 8px 25px rgba(211, 47, 47, 0.4),
+          inset 0 1px 0 rgba(255,255,255,0.2);
+        position: relative;
+        overflow: hidden;
+        animation: menuPulse 3s ease-in-out infinite;
+      }
+
+      nav#nav-menu {
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(135deg, 
+          rgba(0,0,0,0.95) 0%, 
+          rgba(26,26,26,0.98) 30%, 
+          rgba(0,0,0,0.95) 100%);
+        position: fixed;
+        top: 0; 
+        left: -70%;
+        width: 70%; 
+        height: 100%;
+        padding: 5rem 0 2rem 0;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 1001;
+        box-shadow: 
+          10px 0 40px rgba(0,0,0,0.5),
+          inset -1px 0 0 rgba(211, 47, 47, 0.3);
+        backdrop-filter: blur(20px);
+        border-right: 2px solid rgba(211, 47, 47, 0.2);
+        overflow-y: auto;
+      }
+
+      nav#nav-menu.active {
+        left: 0;
+      }
+
+      nav#nav-menu > a {
+        margin: 0;
+        padding: 1.2rem 2rem;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        color: rgba(255,255,255,0.9);
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.5px;
+      }
+
+      nav#nav-menu > a:hover {
+        color: var(--light);
+        transform: translateX(15px) scale(1.02);
+        text-shadow: 0 0 20px rgba(255,255,255,0.5);
+        border-color: rgba(255,255,255,0.3);
+      }
+    }
+
+    /* — Overlay (hidden by default) — */
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+
+    #overlay.active {
+      display: block;
+    }
+
+    @keyframes menuPulse {
+      0%, 100% { 
+        box-shadow: 0 8px 25px rgba(211, 47, 47, 0.4);
+        background-position: 0% 50%;
+      }
+      50% { 
+        box-shadow: 0 12px 35px rgba(211, 47, 47, 0.6);
+        background-position: 100% 50%;
+      }
+    }
+
+    /* Dropdown styles */
+    .dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--secondary);
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1003;
+      border-radius: 4px;
+      top: 100%;
+      left: 0;
+    }
+    .dropdown-content a {
+      color: var(--light);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      margin: 0;
+      border-radius: 0;
+      transition: background-color 0.3s ease;
+    }
+    .dropdown-content a:hover {
+      background-color: var(--primary);
+      transform: none;
+      text-decoration: underline;
+    }
+    .dropdown-content a::before {
+      display: none;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .dropdown > span {
+      margin-left: 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      overflow: hidden;
+      color: var(--primary);
+      cursor: pointer;
+    }
+    .dropdown > span:hover {
+      color: var(--light);
+      transform: scale(1.05);
+      background-color: rgba(211, 47, 47, 0.1);
+    }
+    .dropdown > span::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0.2rem;
+      width: 25px;
+      height: 25px;
+      background-image: url('pics/Ball.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: translateY(-50%) scale(0);
+      transition: transform 0.3s ease;
+      z-index: -1;
+      opacity: 0.8;
+      border-radius: 50%;
+    }
+    .dropdown > span:hover::before {
+      transform: translateY(-50%) scale(1);
+    }
+
+    /* Added style to make the logo link white */
+    header .logo a {
+      color: var(--light);
+    }
+
+    /* Breadcrumb Navigation */
+    .breadcrumb-container {
+      background: rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(211, 47, 47, 0.1);
+      padding: 0.75rem 0;
+      position: sticky;
+      top: 60px;
+      z-index: 999;
+      backdrop-filter: blur(5px);
+    }
+
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb-item {
+      display: flex;
+      align-items: center;
+      color: var(--accent);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .breadcrumb-item:hover {
+      color: var(--primary);
+      background: rgba(211, 47, 47, 0.1);
+    }
+
+    .breadcrumb-item.active {
+      color: var(--primary);
+      font-weight: 600;
+      pointer-events: none;
+    }
+
+    .breadcrumb-separator {
+      margin: 0 0.5rem;
+      color: var(--accent);
+      opacity: 0.6;
+    }
+
+    .breadcrumb-icon {
+      margin-right: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    /* Mobile breadcrumb adjustments */
+    @media (max-width: 768px) {
+      .breadcrumb-container {
+        top: 65px;
+        padding: 0.5rem 0;
+      }
+      
+      .breadcrumb {
+        padding: 0 1rem;
+        font-size: 0.8rem;
+      }
+      
+      .breadcrumb-item {
+        padding: 0.2rem 0.3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header + Nav -->
+  <header>
+    <div class="logo"><a href="website.html"><img src="pics/Ball.png" alt="Ball Logo" class="ball-logo">DCA <img src="pics/XXX.png" alt="DCA Logo"></a></div>
+    <img src="pics/adam.png" alt="Adam" class="adam-image">
+    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
+    <nav id="nav-menu">
+      <a href="website.html">Home</a>
+      <div class="dropdown">
+        <span>About</span>
+        <div class="dropdown-content">
+          <a href="about.html">About DCA</a>
+          <a href="founders.html">Founders</a>
+          <a href="board.html">The Board</a>
+        </div>
+      </div>
+      <a href="practice-prices.html">Practice & Prices</a>
+      <a href="competitions.html">Competitions</a>
+      <div class="dropdown">
+        <span>Social</span>
+        <div class="dropdown-content">
+          <a href="social.html">Activities</a>
+          <a href="moments.html">Moments</a>
+          <a href="testimonials.html">Testimonials</a>
+        </div>
+      </div>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Overlay -->
+  <div id="overlay"></div>
+
+  <!-- Breadcrumb Navigation -->
+  <div class="breadcrumb-container">
+    <nav class="breadcrumb">
+      <a href="website.html" class="breadcrumb-item">
+        <span class="breadcrumb-icon">🏠</span>
+        Home
+      </a>
+      <span class="breadcrumb-separator">›</span>
+      <a href="social.html" class="breadcrumb-item">
+        <span class="breadcrumb-icon">🎉</span>
+        Social
+      </a>
+      <span class="breadcrumb-separator">›</span>
+      <span class="breadcrumb-item active">
+        <span class="breadcrumb-icon">⛸️</span>
+        Ice Skating
+      </span>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="ice-emoji-float ice-1">⛸️</div>
+      <div class="ice-emoji-float ice-2">❄️</div>
+      <div class="ice-emoji-float ice-3">🧊</div>
+      
+      <h1 class="hero-title">Ice Skating Adventure!</h1>
+      <p class="hero-subtitle">When DCA trades dodgeballs for ice skates - chaos and fun guaranteed! ⛸️</p>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+      <h2 class="story-title">From Court to Ice Rink</h2>
+      <div class="story-content">
+        <p class="story-text">
+          What happens when a dodgeball team decides to swap their rubber balls for ice skates? 
+          Pure entertainment! Our ice skating adventure was filled with wobbly first steps, 
+          epic tumbles, and surprisingly graceful moments. Who knew dodgeball agility could 
+          (sometimes) translate to ice? Watch our team navigate the slippery world of ice skating 
+          with the same enthusiasm we bring to dodgeball - just with a lot more falling! 🤣
+        </p>
+      </div>
+    </section>
+
+    <!-- Featured Video Section -->
+    <section class="featured-video">
+      <h2>Highlight Reel</h2>
+      <div class="video-container">
+        <video class="custom-video" controls preload="metadata">
+          <source src="pics/Ice skating/8eabca54-7a0c-4476-859a-8c1434e8b4d2.MP4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+      <h2 class="gallery-title">Ice Skating Memories</h2>
+      <div class="gallery">
+        <div class="gallery-item" data-delay="0">
+          <img src="pics/Ice skating/head.jpeg" alt="Ice Skating Fun">
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Ready to conquer the ice!</div>
+          </div>
+        </div>
+        <div class="gallery-item" data-delay="1">
+          <video controls preload="metadata">
+            <source src="pics/Ice skating/01aa89aa-15cc-400e-a88f-e56ae47adea4.MP4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Epic skating moments caught on camera</div>
+          </div>
+        </div>
+        <div class="gallery-item" data-delay="2">
+          <img src="pics/Ice skating/E95A936B-5E95-4EC2-8CA3-E1BB79015023_1_105_c.jpeg" alt="Group Ice Skating">
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Team bonding on ice!</div>
+          </div>
+        </div>
+        <div class="gallery-item" data-delay="3">
+          <img src="pics/Ice skating/IMG_4564.jpg" alt="Ice Skating Adventure">
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Making memories one glide at a time</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fun Facts Section -->
+    <section class="fun-facts">
+      <h3>Ice Skating Stats & Fun Facts</h3>
+      <div class="facts-grid">
+        <div class="fact-card">
+          <div class="fact-emoji">🤕</div>
+          <div class="fact-text">Only 2 minor bruises - a new DCA record!</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-emoji">⛸️</div>
+          <div class="fact-text">15+ DCA members discovered ice skating skills</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-emoji">😂</div>
+          <div class="fact-text">Countless laughs and epic fail moments</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-emoji">🏆</div>
+          <div class="fact-text">Everyone was a winner (at staying upright)</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer style="background: linear-gradient(135deg, var(--secondary), var(--accent)); color: var(--light); margin-top: 4rem; position: relative; overflow: hidden; padding: 3rem 1.5rem 1rem;">
+    <div style="text-align: center;">
+      <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #ff6b6b;">Dodgeball Club Amsterdam</h3>
+      <p style="margin-bottom: 2rem; opacity: 0.9;">Where dodgeball dreams come to life! 🎯</p>
+      <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem;">
+        <a href="website.html" style="color: var(--light); transition: color 0.3s ease;">🏠 Home</a>
+        <a href="about.html" style="color: var(--light); transition: color 0.3s ease;">ℹ️ About</a>
+        <a href="social.html" style="color: var(--light); transition: color 0.3s ease;">🎉 Social</a>
+        <a href="contact.html" style="color: var(--light); transition: color 0.3s ease;">📞 Contact</a>
+      </div>
+      <p style="font-size: 0.9rem; opacity: 0.8; font-style: italic;">© 2025 Dodgeball Club Amsterdam — All Dodge, No Tears.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('menu-toggle');
+      const nav = document.getElementById('nav-menu');
+      const overlay = document.getElementById('overlay');
+      
+      function toggleMenu() {
+        nav.classList.toggle('active');
+        overlay.classList.toggle('active');
+      }
+
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleMenu();
+      });
+
+      overlay.addEventListener('click', function() {
+        toggleMenu();
+      });
+
+      // Close menu when clicking a link
+      const navLinks = nav.getElementsByTagName('a');
+      for (let link of navLinks) {
+        link.addEventListener('click', function() {
+          if (link.getAttribute('href').startsWith('#') || link.getAttribute('href').endsWith('.html')) {
+              toggleMenu();
+          }
+        });
+      }
+
+      // Video lazy loading and optimization
+      const videos = document.querySelectorAll('video');
+      videos.forEach(video => {
+        video.addEventListener('loadstart', function() {
+          this.style.opacity = '0.7';
+        });
+        video.addEventListener('canplay', function() {
+          this.style.opacity = '1';
+        });
+      });
+    });
+  </script>
+</body>
+</html> 
