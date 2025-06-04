@@ -2196,6 +2196,13 @@
       // Initialize all video containers
       const videoContainers = document.querySelectorAll('.video-container');
       
+      // Mobile detection function
+      function isMobileDevice() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+               (navigator.maxTouchPoints && navigator.maxTouchPoints > 2 && /MacIntel/.test(navigator.platform)) ||
+               window.innerWidth <= 768;
+      }
+      
       videoContainers.forEach((container, index) => {
         const video = container.querySelector('video');
         const customPlayButton = container.querySelector('.custom-play-button');
@@ -2210,7 +2217,7 @@
 
         // Set video attributes for better preview and performance
         video.setAttribute('preload', 'metadata');
-        video.setAttribute('muted', 'muted'); // Muted videos can autoplay
+        video.setAttribute('muted', 'muted'); // Start muted for autoplay compliance
         video.setAttribute('playsinline', 'playsinline'); // Better mobile support
         
         // Try to load the first frame as poster
@@ -2233,8 +2240,25 @@
           container.classList.remove('loading');
         });
 
+        // Function to enter fullscreen
+        function enterFullscreen() {
+          if (video.requestFullscreen) {
+            return video.requestFullscreen();
+          } else if (video.webkitRequestFullscreen) {
+            return video.webkitRequestFullscreen();
+          } else if (video.mozRequestFullScreen) {
+            return video.mozRequestFullScreen();
+          } else if (video.msRequestFullscreen) {
+            return video.msRequestFullscreen();
+          } else if (video.webkitEnterFullscreen) {
+            // iOS Safari specific
+            return video.webkitEnterFullscreen();
+          }
+          return Promise.reject('Fullscreen not supported');
+        }
+
         // Function to toggle play/pause
-        function togglePlayPause() {
+        function togglePlayPause(fromCustomButton = false) {
           if (video.paused) {
             // Pause all other videos first
             videoContainers.forEach(otherContainer => {
@@ -2250,25 +2274,63 @@
               }
             });
 
-            // Play current video
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-              playPromise.then(() => {
-                container.classList.add('playing');
-                playButton.classList.remove('paused');
-                playButton.classList.add('playing');
-              }).catch(error => {
-                console.log('Play failed:', error);
-                // Try playing muted if autoplay was blocked
-                video.muted = true;
+            // Unmute video when user actively plays it (restores audio)
+            video.muted = false;
+
+            // For mobile: Enter fullscreen when custom play button is clicked
+            if (fromCustomButton && isMobileDevice()) {
+              // Try to enter fullscreen first, then play
+              const fullscreenPromise = enterFullscreen();
+              if (fullscreenPromise && fullscreenPromise.then) {
+                fullscreenPromise.then(() => {
+                  // Fullscreen successful, now play
+                  return video.play();
+                }).then(() => {
+                  container.classList.add('playing');
+                  playButton.classList.remove('paused');
+                  playButton.classList.add('playing');
+                }).catch(error => {
+                  console.log('Fullscreen failed, playing normally:', error);
+                  // Fallback: play without fullscreen
+                  video.play().then(() => {
+                    container.classList.add('playing');
+                    playButton.classList.remove('paused');
+                    playButton.classList.add('playing');
+                  }).catch(playError => {
+                    console.log('Play also failed:', playError);
+                  });
+                });
+              } else {
+                // Fullscreen not supported, just play
                 video.play().then(() => {
                   container.classList.add('playing');
                   playButton.classList.remove('paused');
                   playButton.classList.add('playing');
-                }).catch(err => {
-                  console.log('Muted play also failed:', err);
+                }).catch(error => {
+                  console.log('Play failed:', error);
                 });
-              });
+              }
+            } else {
+              // Desktop or control button click - play normally
+              const playPromise = video.play();
+              if (playPromise !== undefined) {
+                playPromise.then(() => {
+                  container.classList.add('playing');
+                  playButton.classList.remove('paused');
+                  playButton.classList.add('playing');
+                }).catch(error => {
+                  console.log('Play failed:', error);
+                  // Fallback: try playing muted if needed
+                  video.muted = true;
+                  video.play().then(() => {
+                    container.classList.add('playing');
+                    playButton.classList.remove('paused');
+                    playButton.classList.add('playing');
+                  }).catch(err => {
+                    console.log('Muted play also failed:', err);
+                  });
+                });
+              }
             }
           } else {
             video.pause();
@@ -2279,11 +2341,11 @@
         }
 
         // Event listeners for play buttons
-        customPlayButton.addEventListener('click', togglePlayPause);
-        playButton.addEventListener('click', togglePlayPause);
+        customPlayButton.addEventListener('click', () => togglePlayPause(true)); // Custom button gets fullscreen on mobile
+        playButton.addEventListener('click', () => togglePlayPause(false)); // Control button plays normally
 
-        // Video click to toggle play/pause
-        video.addEventListener('click', togglePlayPause);
+        // Video click to toggle play/pause (no fullscreen)
+        video.addEventListener('click', () => togglePlayPause(false));
 
         // Update progress bar
         video.addEventListener('timeupdate', function() {
@@ -2309,17 +2371,11 @@
           video.currentTime = 0;
         });
 
-        // Fullscreen functionality
+        // Fullscreen functionality for the fullscreen button
         fullscreenButton.addEventListener('click', function() {
-          if (video.requestFullscreen) {
-            video.requestFullscreen();
-          } else if (video.webkitRequestFullscreen) {
-            video.webkitRequestFullscreen();
-          } else if (video.mozRequestFullScreen) {
-            video.mozRequestFullScreen();
-          } else if (video.msRequestFullscreen) {
-            video.msRequestFullscreen();
-          }
+          enterFullscreen().catch(error => {
+            console.log('Fullscreen failed:', error);
+          });
         });
 
         // Determine video orientation for better display
