@@ -884,6 +884,374 @@
       50% { transform: translateY(-10px); }
     }
 
+    /* See More Button Styles */
+    .see-more-container {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .see-more-btn {
+      background: linear-gradient(135deg, var(--primary), #ff6b6b, #8e24aa);
+      background-size: 200% 200%;
+      color: var(--light);
+      border: none;
+      padding: 1.2rem 2.5rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 30px rgba(211, 47, 47, 0.3);
+      animation: buttonGradientShift 4s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 0 auto;
+    }
+
+    .see-more-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.6s;
+    }
+
+    .see-more-btn:hover::before {
+      left: 100%;
+    }
+
+    .see-more-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(211, 47, 47, 0.5);
+      background-position: 100% 100%;
+    }
+
+    .see-more-icon {
+      font-size: 1.3rem;
+      animation: iconPulse 2s ease-in-out infinite;
+    }
+
+    .see-more-text {
+      letter-spacing: 0.5px;
+    }
+
+    /* Extended Gallery Styles */
+    .extended-gallery {
+      background: linear-gradient(135deg, rgba(248, 249, 250, 0.98), rgba(233, 236, 239, 0.95));
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      border: 2px solid rgba(211, 47, 47, 0.1);
+      margin-top: 2rem;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    }
+
+    .extended-gallery.active {
+      max-height: 700px;
+      opacity: 1;
+    }
+
+    .gallery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 3rem;
+      background: linear-gradient(135deg, rgba(211, 47, 47, 0.05), rgba(142, 36, 170, 0.05));
+      border-bottom: 1px solid rgba(211, 47, 47, 0.1);
+    }
+
+    .gallery-header h3 {
+      color: var(--primary);
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0;
+      background: linear-gradient(45deg, var(--primary), #8e24aa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .gallery-close {
+      background: none;
+      border: 2px solid rgba(211, 47, 47, 0.2);
+      color: var(--primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .gallery-close:hover {
+      background: var(--primary);
+      color: var(--light);
+      transform: rotate(90deg) scale(1.1);
+      box-shadow: 0 5px 15px rgba(211, 47, 47, 0.3);
+    }
+
+    .gallery-container {
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 2rem;
+      overflow: hidden;
+      height: 500px;
+    }
+
+    .gallery-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      width: 100%;
+      height: 100%;
+    }
+
+    .gallery-item {
+      flex: 0 0 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 2rem;
+      opacity: 0.7;
+      transform: scale(0.9);
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .gallery-item.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .gallery-item img,
+    .gallery-item .video-container {
+      max-width: 90%;
+      max-height: 400px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(211, 47, 47, 0.2);
+      transition: all 0.4s ease;
+    }
+
+    .gallery-item img {
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .gallery-item .video-container {
+      background: #000;
+      position: relative;
+      width: auto;
+      height: 400px;
+    }
+
+    .gallery-item .video-container video {
+      width: auto;
+      height: 100%;
+      max-height: 400px;
+      object-fit: contain;
+    }
+
+    .gallery-item:hover img,
+    .gallery-item:hover .video-container {
+      transform: scale(1.02);
+      box-shadow: 0 30px 80px rgba(211, 47, 47, 0.4);
+    }
+
+    .gallery-item-overlay {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.85), rgba(211, 47, 47, 0.7));
+      backdrop-filter: blur(15px);
+      padding: 1rem 1.5rem;
+      border-radius: 15px;
+      text-align: center;
+      opacity: 0;
+      transition: all 0.4s ease;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      max-width: 80%;
+    }
+
+    .gallery-item.active .gallery-item-overlay {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .gallery-item-overlay h4 {
+      color: var(--light);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0 0 0.3rem 0;
+    }
+
+    .gallery-item-overlay p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .gallery-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(135deg, var(--primary), #ff6b6b);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: var(--light);
+      font-size: 2rem;
+      font-weight: bold;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      box-shadow: 0 8px 25px rgba(211, 47, 47, 0.3);
+    }
+
+    .gallery-prev {
+      left: 1rem;
+    }
+
+    .gallery-next {
+      right: 1rem;
+    }
+
+    .gallery-nav:hover {
+      background: linear-gradient(135deg, #ff6b6b, var(--primary));
+      transform: translateY(-50%) scale(1.15);
+      box-shadow: 0 12px 30px rgba(211, 47, 47, 0.5);
+    }
+
+    .gallery-nav:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .gallery-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+    }
+
+    .gallery-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-indicator.active {
+      background: var(--primary);
+      transform: scale(1.3);
+      box-shadow: 0 0 20px rgba(211, 47, 47, 0.5);
+    }
+
+    .gallery-indicator:hover {
+      background: rgba(255, 255, 255, 0.6);
+      transform: scale(1.1);
+    }
+
+    /* Animations */
+    @keyframes buttonGradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes iconPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .extended-gallery.active {
+        max-height: 600px;
+      }
+
+      .gallery-header {
+        padding: 1.5rem 1rem;
+      }
+
+      .gallery-header h3 {
+        font-size: 1.5rem;
+      }
+
+      .gallery-container {
+        padding: 1rem;
+        height: 400px;
+      }
+
+      .gallery-item {
+        padding: 1rem;
+      }
+
+      .gallery-item img,
+      .gallery-item .video-container {
+        max-height: 300px;
+      }
+
+      .gallery-item .video-container {
+        height: 300px;
+      }
+
+      .gallery-item .video-container video {
+        max-height: 300px;
+      }
+
+      .gallery-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+      }
+
+      .gallery-prev {
+        left: 0.5rem;
+      }
+
+      .gallery-next {
+        right: 0.5rem;
+      }
+
+      .see-more-btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+      }
+
+      .gallery-item-overlay {
+        bottom: 0.5rem;
+        padding: 0.75rem 1rem;
+        max-width: 90%;
+      }
+
+      .gallery-item-overlay h4 {
+        font-size: 1rem;
+      }
+
+      .gallery-item-overlay p {
+        font-size: 0.8rem;
+      }
+    }
+
     /* Video Container Styles */
     .video-container {
       position: relative;
@@ -1677,9 +2045,6 @@
         <div class="media-gallery">
           <div class="media-item" data-delay="0">
             <img src="pics/Random/IMG_2627.jpg" alt="DCA Training Session">
-            <div class="media-overlay">
-              <div class="media-caption">Precision in action - every throw counts!</div>
-            </div>
           </div>
           
           <div class="media-item" data-delay="1">
@@ -1722,6 +2087,82 @@
             </div>
           </div>
         </div>
+
+        <!-- See More Button -->
+        <div class="see-more-container">
+          <button class="see-more-btn" data-section="training">
+            <span class="see-more-text">See More Training Moments</span>
+            <span class="see-more-icon">🚀</span>
+          </button>
+        </div>
+
+        <!-- Extended Gallery -->
+        <div class="extended-gallery" id="training-gallery">
+          <div class="gallery-header">
+            <h3>Training Intensity Gallery</h3>
+            <button class="gallery-close">✕</button>
+          </div>
+          <div class="gallery-container">
+            <button class="gallery-nav gallery-prev">‹</button>
+            <div class="gallery-track">
+              <div class="gallery-item">
+                <img src="pics/Random/IMG_2627.jpg" alt="DCA Training Session">
+                <div class="gallery-item-overlay">
+                  <h4>Intense Focus</h4>
+                  <p>Training session highlights</p>
+                </div>
+              </div>
+              <div class="gallery-item">
+                <div class="video-container">
+                  <video preload="metadata">
+                    <source src="pics/Random/WhatsApp Video 2025-05-30 at 15.10.12 (1).mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                  <div class="custom-play-button"></div>
+                  <div class="video-controls">
+                    <button class="control-btn play-pause">▶</button>
+                    <div class="progress-container">
+                      <div class="progress-bar">
+                        <div class="progress"></div>
+                      </div>
+                    </div>
+                    <button class="control-btn fullscreen">⛶</button>
+                  </div>
+                  <div class="video-loading">Loading...</div>
+                </div>
+                <div class="gallery-item-overlay">
+                  <h4>Action Shots</h4>
+                  <p>Training in motion</p>
+                </div>
+              </div>
+              <div class="gallery-item">
+                <div class="video-container">
+                  <video preload="metadata">
+                    <source src="pics/Random/WhatsApp Video 2025-05-30 at 15.10.12.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                  <div class="custom-play-button"></div>
+                  <div class="video-controls">
+                    <button class="control-btn play-pause">▶</button>
+                    <div class="progress-container">
+                      <div class="progress-bar">
+                        <div class="progress"></div>
+                      </div>
+                    </div>
+                    <button class="control-btn fullscreen">⛶</button>
+                  </div>
+                  <div class="video-loading">Loading...</div>
+                </div>
+                <div class="gallery-item-overlay">
+                  <h4>Team Coordination</h4>
+                  <p>Practice makes perfect</p>
+                </div>
+              </div>
+            </div>
+            <button class="gallery-nav gallery-next">›</button>
+          </div>
+          <div class="gallery-indicators"></div>
+        </div>
       </div>
 
       <!-- Team Spirit Section -->
@@ -1735,26 +2176,59 @@
         <div class="media-gallery">
           <div class="media-item" data-delay="0">
             <img src="pics/Random/0BE978E8-FB0B-486F-950F-090EB57C2D8F_1_105_c.jpeg" alt="DCA Team Moment">
-            <div class="media-overlay">
-              <div class="media-caption">Team bonding - stronger together!</div>
-            </div>
           </div>
           
-          <!-- Placeholder for future content -->
-          <div class="media-item" data-delay="1" style="background: linear-gradient(135deg, #f0f0f0, #e0e0e0); display: flex; align-items: center; justify-content: center; min-height: 250px;">
-            <div style="text-align: center; color: #666;">
-              <div style="font-size: 3rem; margin-bottom: 1rem;">📷</div>
-              <p>More amazing moments<br>coming soon!</p>
-            </div>
+          <div class="media-item" data-delay="0">
+            <img src="pics/Moments/Team/pablo1.jpeg" alt="DCA Team Moment">
           </div>
           
-          <!-- Placeholder for future content -->
-          <div class="media-item" data-delay="2" style="background: linear-gradient(135deg, #f0f0f0, #e0e0e0); display: flex; align-items: center; justify-content: center; min-height: 250px;">
-            <div style="text-align: center; color: #666;">
-              <div style="font-size: 3rem; margin-bottom: 1rem;">🎥</div>
-              <p>Your memories<br>could be here!</p>
-            </div>
+          <div class="media-item" data-delay="0">
+            <img src="pics/Moments/Team/pablo2.jpeg" alt="DCA Team Moment">
           </div>
+        </div>
+
+        <!-- See More Button -->
+        <div class="see-more-container">
+          <button class="see-more-btn" data-section="team">
+            <span class="see-more-text">See More Team Moments</span>
+            <span class="see-more-icon">❤️</span>
+          </button>
+        </div>
+
+        <!-- Extended Gallery -->
+        <div class="extended-gallery" id="team-gallery">
+          <div class="gallery-header">
+            <h3>Team Spirit Gallery</h3>
+            <button class="gallery-close">✕</button>
+          </div>
+          <div class="gallery-container">
+            <button class="gallery-nav gallery-prev">‹</button>
+            <div class="gallery-track">
+              <div class="gallery-item">
+                <img src="pics/Random/0BE978E8-FB0B-486F-950F-090EB57C2D8F_1_105_c.jpeg" alt="DCA Team Moment">
+                <div class="gallery-item-overlay">
+                  <h4>Team Unity</h4>
+                  <p>Together we are stronger</p>
+                </div>
+              </div>
+              <div class="gallery-item">
+                <img src="pics/Moments/Team/pablo1.jpeg" alt="DCA Team Moment">
+                <div class="gallery-item-overlay">
+                  <h4>Victory Celebration</h4>
+                  <p>Sharing the joy of success</p>
+                </div>
+              </div>
+              <div class="gallery-item">
+                <img src="pics/Moments/Team/pablo2.jpeg" alt="DCA Team Moment">
+                <div class="gallery-item-overlay">
+                  <h4>DCA Family</h4>
+                  <p>Creating memories together</p>
+                </div>
+              </div>
+            </div>
+            <button class="gallery-nav gallery-next">›</button>
+          </div>
+          <div class="gallery-indicators"></div>
         </div>
       </div>
 
@@ -2078,8 +2552,314 @@
         });
       }
       
+      // Extended Gallery Functionality
+      function initializeExtendedGalleries() {
+        const seeMoreBtns = document.querySelectorAll('.see-more-btn');
+        const galleries = document.querySelectorAll('.extended-gallery');
+        
+        // Gallery state
+        const galleryStates = new Map();
+        
+        // Initialize each gallery
+        galleries.forEach(gallery => {
+          const galleryId = gallery.id;
+          const items = gallery.querySelectorAll('.gallery-item');
+          const track = gallery.querySelector('.gallery-track');
+          const prevBtn = gallery.querySelector('.gallery-prev');
+          const nextBtn = gallery.querySelector('.gallery-next');
+          const closeBtn = gallery.querySelector('.gallery-close');
+          const indicators = gallery.querySelector('.gallery-indicators');
+          
+          // Initialize gallery state
+          galleryStates.set(galleryId, {
+            currentIndex: 0,
+            totalItems: items.length,
+            isOpen: false
+          });
+          
+          // Create indicators
+          for (let i = 0; i < items.length; i++) {
+            const indicator = document.createElement('div');
+            indicator.className = 'gallery-indicator';
+            if (i === 0) indicator.classList.add('active');
+            indicator.addEventListener('click', () => goToSlide(galleryId, i));
+            indicators.appendChild(indicator);
+          }
+          
+          // Set initial active item
+          if (items[0]) items[0].classList.add('active');
+          
+          // Navigation event listeners
+          prevBtn.addEventListener('click', () => previousSlide(galleryId));
+          nextBtn.addEventListener('click', () => nextSlide(galleryId));
+          closeBtn.addEventListener('click', () => closeGallery(galleryId));
+          
+          // Close on escape key
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && galleryStates.get(galleryId).isOpen) {
+              closeGallery(galleryId);
+            }
+          });
+          
+                     // Close on background click (removed for inline gallery)
+        });
+        
+        // See more button functionality
+        seeMoreBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const section = btn.dataset.section;
+            const galleryId = section + '-gallery';
+            openGallery(galleryId);
+          });
+        });
+        
+                 function openGallery(galleryId) {
+           const gallery = document.getElementById(galleryId);
+           const state = galleryStates.get(galleryId);
+           
+           if (gallery && state) {
+             gallery.classList.add('active');
+             state.isOpen = true;
+             
+             // Reinitialize video players in gallery
+             setTimeout(() => {
+               initializeVideoPlayersInGallery(gallery);
+             }, 300);
+             
+             // Smooth scroll to gallery
+             setTimeout(() => {
+               gallery.scrollIntoView({ 
+                 behavior: 'smooth', 
+                 block: 'start' 
+               });
+             }, 200);
+           }
+         }
+        
+                 function closeGallery(galleryId) {
+           const gallery = document.getElementById(galleryId);
+           const state = galleryStates.get(galleryId);
+           
+           if (gallery && state) {
+             gallery.classList.remove('active');
+             state.isOpen = false;
+             
+             // Pause all videos in gallery
+             const videos = gallery.querySelectorAll('video');
+             videos.forEach(video => {
+               video.pause();
+               const container = video.closest('.video-container');
+               if (container) {
+                 container.classList.remove('playing');
+                 const playBtn = container.querySelector('.play-pause');
+                 if (playBtn) playBtn.textContent = '▶';
+               }
+             });
+           }
+         }
+        
+        function goToSlide(galleryId, index) {
+          const gallery = document.getElementById(galleryId);
+          const state = galleryStates.get(galleryId);
+          
+          if (!gallery || !state || index < 0 || index >= state.totalItems) return;
+          
+          state.currentIndex = index;
+          updateGalleryDisplay(galleryId);
+        }
+        
+        function previousSlide(galleryId) {
+          const state = galleryStates.get(galleryId);
+          if (!state) return;
+          
+          const newIndex = state.currentIndex === 0 ? state.totalItems - 1 : state.currentIndex - 1;
+          goToSlide(galleryId, newIndex);
+        }
+        
+        function nextSlide(galleryId) {
+          const state = galleryStates.get(galleryId);
+          if (!state) return;
+          
+          const newIndex = state.currentIndex === state.totalItems - 1 ? 0 : state.currentIndex + 1;
+          goToSlide(galleryId, newIndex);
+        }
+        
+        function updateGalleryDisplay(galleryId) {
+          const gallery = document.getElementById(galleryId);
+          const state = galleryStates.get(galleryId);
+          
+          if (!gallery || !state) return;
+          
+          const track = gallery.querySelector('.gallery-track');
+          const items = gallery.querySelectorAll('.gallery-item');
+          const indicators = gallery.querySelectorAll('.gallery-indicator');
+          
+          // Update track position
+          track.style.transform = `translateX(-${state.currentIndex * 100}%)`;
+          
+          // Update active states
+          items.forEach((item, index) => {
+            item.classList.toggle('active', index === state.currentIndex);
+          });
+          
+          indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === state.currentIndex);
+          });
+          
+          // Pause all videos except current
+          const videos = gallery.querySelectorAll('video');
+          videos.forEach((video, videoIndex) => {
+            const container = video.closest('.video-container');
+            const itemIndex = Array.from(items).findIndex(item => item.contains(video));
+            
+            if (itemIndex !== state.currentIndex && !video.paused) {
+              video.pause();
+              if (container) {
+                container.classList.remove('playing');
+                const playBtn = container.querySelector('.play-pause');
+                if (playBtn) playBtn.textContent = '▶';
+              }
+            }
+          });
+        }
+        
+                 function initializeVideoPlayersInGallery(gallery) {
+           const videos = gallery.querySelectorAll('.video-container video');
+           
+           videos.forEach(video => {
+             const container = video.closest('.video-container');
+             
+             // Simple video orientation detection
+             video.addEventListener('loadedmetadata', () => {
+               const aspectRatio = video.videoWidth / video.videoHeight;
+               
+               if (aspectRatio > 1.2) {
+                 container.classList.add('horizontal');
+                 container.classList.remove('vertical');
+               } else if (aspectRatio < 0.8) {
+                 container.classList.add('vertical');
+                 container.classList.remove('horizontal');
+               } else {
+                 container.classList.add('horizontal');
+                 container.classList.remove('vertical');
+               }
+               
+               // Show first frame
+               video.currentTime = 0.1;
+               container.classList.remove('loading');
+             });
+             
+             // Apply existing video functionality
+             const playPauseBtn = container.querySelector('.play-pause');
+             const customPlayButton = container.querySelector('.custom-play-button');
+             const progressBar = container.querySelector('.progress');
+             const progressContainer = container.querySelector('.progress-container');
+             const fullscreenBtn = container.querySelector('.fullscreen');
+             
+             // Use the same video player initialization
+             initializeVideoPlayer(video, container, playPauseBtn, customPlayButton, progressBar, progressContainer, fullscreenBtn, videos);
+           });
+         }
+        
+        function initializeVideoPlayer(video, container, playPauseBtn, customPlayButton, progressBar, progressContainer, fullscreenBtn, allVideos) {
+          // Detect video orientation
+          video.addEventListener('loadedmetadata', () => {
+            const aspectRatio = video.videoWidth / video.videoHeight;
+            
+            if (aspectRatio > 1.2) {
+              container.classList.add('horizontal');
+              container.classList.remove('vertical');
+            } else if (aspectRatio < 0.8) {
+              container.classList.add('vertical');
+              container.classList.remove('horizontal');
+            } else {
+              container.classList.add('horizontal');
+              container.classList.remove('vertical');
+            }
+
+            video.currentTime = 0.1;
+            container.classList.remove('loading');
+          });
+          
+          function togglePlay() {
+            if (video.paused) {
+              // Pause all other videos
+              allVideos.forEach(otherVideo => {
+                if (otherVideo !== video && !otherVideo.paused) {
+                  otherVideo.pause();
+                  const otherContainer = otherVideo.closest('.video-container');
+                  otherContainer.classList.remove('playing');
+                  const otherPlayBtn = otherContainer.querySelector('.play-pause');
+                  if (otherPlayBtn) otherPlayBtn.textContent = '▶';
+                }
+              });
+
+              video.play();
+              container.classList.add('playing');
+              if (playPauseBtn) playPauseBtn.textContent = '⏸';
+            } else {
+              video.pause();
+              container.classList.remove('playing');
+              if (playPauseBtn) playPauseBtn.textContent = '▶';
+            }
+          }
+          
+          function updateProgress() {
+            if (video.duration) {
+              const progressPercent = (video.currentTime / video.duration) * 100;
+              if (progressBar) progressBar.style.width = `${progressPercent}%`;
+            }
+          }
+          
+          function seek(e) {
+            if (video.duration) {
+              const rect = progressContainer.getBoundingClientRect();
+              const clickX = e.clientX - rect.left;
+              const clickPercent = clickX / rect.width;
+              video.currentTime = clickPercent * video.duration;
+            }
+          }
+          
+          function toggleFullscreen() {
+            if (document.fullscreenElement) {
+              document.exitFullscreen();
+            } else {
+              container.requestFullscreen();
+            }
+          }
+          
+          // Event listeners
+          if (customPlayButton) customPlayButton.addEventListener('click', togglePlay);
+          if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlay);
+          video.addEventListener('click', togglePlay);
+          video.addEventListener('timeupdate', updateProgress);
+          if (progressContainer) progressContainer.addEventListener('click', seek);
+          if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
+          
+          // Loading states
+          video.addEventListener('loadstart', () => container.classList.add('loading'));
+          video.addEventListener('canplay', () => container.classList.remove('loading'));
+          video.addEventListener('waiting', () => container.classList.add('loading'));
+          
+          // Reset on video end
+          video.addEventListener('ended', () => {
+            container.classList.remove('playing');
+            if (playPauseBtn) playPauseBtn.textContent = '▶';
+            video.currentTime = 0.1;
+          });
+
+          video.addEventListener('error', (e) => {
+            console.error('Video error:', e);
+            container.classList.remove('loading');
+          });
+        }
+      }
+      
       // Initialize video players
       initializeVideoPlayers();
+
+      // Initialize extended galleries
+      initializeExtendedGalleries();
     });
   </script>
 </body>
