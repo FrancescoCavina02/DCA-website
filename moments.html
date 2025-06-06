@@ -706,7 +706,14 @@
       box-shadow: 0 25px 50px rgba(0,0,0,0.2);
     }
 
-    .media-item img,
+    .media-item img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      transition: all 0.3s ease;
+      border-radius: 20px;
+    }
+
     .media-item video {
       width: 100%;
       height: 250px;
@@ -2107,11 +2114,10 @@
             <div class="gallery-track">
               
               <div class="gallery-item">
+                <img src="pics/Moments/Trainings/nick2.png" alt="DCA Training Session">
+              </div>
+              <div class="gallery-item">
                 <img src="pics/Random/IMG_2627.jpg" alt="DCA Training Session">
-                <div class="gallery-item-overlay">
-                  <h4>Intense Focus</h4>
-                  <p>Training session highlights</p>
-                </div>
               </div>
               <div class="gallery-item">
                 <div class="video-container">
@@ -2130,10 +2136,6 @@
                     <button class="control-btn fullscreen">⛶</button>
                   </div>
                   <div class="video-loading">Loading...</div>
-                </div>
-                <div class="gallery-item-overlay">
-                  <h4>Action Shots</h4>
-                  <p>Training in motion</p>
                 </div>
               </div>
               <div class="gallery-item">
@@ -2154,10 +2156,6 @@
                   </div>
                   <div class="video-loading">Loading...</div>
                 </div>
-                <div class="gallery-item-overlay">
-                  <h4>Team Coordination</h4>
-                  <p>Practice makes perfect</p>
-                </div>
               </div>
             </div>
             <button class="gallery-nav gallery-next">›</button>
@@ -2176,7 +2174,7 @@
         
         <div class="media-gallery">
           <div class="media-item" data-delay="0">
-            <img src="pics/Random/0BE978E8-FB0B-486F-950F-090EB57C2D8F_1_105_c.jpeg" alt="DCA Team Moment">
+            <img src="pics/Moments/Team/nick3.png" alt="DCA Team Moment">
           </div>
           
           <div class="media-item" data-delay="0">
@@ -2207,24 +2205,15 @@
             <div class="gallery-track">
               <div class="gallery-item">
                 <img src="pics/Random/0BE978E8-FB0B-486F-950F-090EB57C2D8F_1_105_c.jpeg" alt="DCA Team Moment">
-                <div class="gallery-item-overlay">
-                  <h4>Team Unity</h4>
-                  <p>Together we are stronger</p>
-                </div>
+              </div>
+              <div class="gallery-item">
+                <img src="pics/Moments/Team/nick3.png" alt="DCA Team Moment">
               </div>
               <div class="gallery-item">
                 <img src="pics/Moments/Team/pablo1.jpeg" alt="DCA Team Moment">
-                <div class="gallery-item-overlay">
-                  <h4>Victory Celebration</h4>
-                  <p>Sharing the joy of success</p>
-                </div>
               </div>
               <div class="gallery-item">
                 <img src="pics/Moments/Team/pablo2.jpeg" alt="DCA Team Moment">
-                <div class="gallery-item-overlay">
-                  <h4>DCA Family</h4>
-                  <p>Creating memories together</p>
-                </div>
               </div>
             </div>
             <button class="gallery-nav gallery-next">›</button>
@@ -2729,6 +2718,16 @@
            
            videos.forEach(video => {
              const container = video.closest('.video-container');
+             const playPauseBtn = container.querySelector('.play-pause');
+             const customPlayButton = container.querySelector('.custom-play-button');
+             const progressBar = container.querySelector('.progress');
+             const progressContainer = container.querySelector('.progress-container');
+             const fullscreenBtn = container.querySelector('.fullscreen');
+             
+             // Remove any existing event listeners to prevent duplicates
+             const newVideo = video.cloneNode(true);
+             video.parentNode.replaceChild(newVideo, video);
+             video = newVideo;
              
              // Simple video orientation detection
              video.addEventListener('loadedmetadata', () => {
@@ -2750,110 +2749,94 @@
                container.classList.remove('loading');
              });
              
-             // Apply existing video functionality
-             const playPauseBtn = container.querySelector('.play-pause');
-             const customPlayButton = container.querySelector('.custom-play-button');
-             const progressBar = container.querySelector('.progress');
-             const progressContainer = container.querySelector('.progress-container');
-             const fullscreenBtn = container.querySelector('.fullscreen');
+             // Play/Pause functionality
+             function togglePlay() {
+               if (video.paused) {
+                 // Pause all other videos first
+                 videos.forEach(otherVideo => {
+                   if (otherVideo !== video && !otherVideo.paused) {
+                     otherVideo.pause();
+                     const otherContainer = otherVideo.closest('.video-container');
+                     otherContainer.classList.remove('playing');
+                     const otherPlayBtn = otherContainer.querySelector('.play-pause');
+                     if (otherPlayBtn) otherPlayBtn.textContent = '▶';
+                   }
+                 });
+
+                 video.play();
+                 container.classList.add('playing');
+                 if (playPauseBtn) playPauseBtn.textContent = '⏸';
+               } else {
+                 video.pause();
+                 container.classList.remove('playing');
+                 if (playPauseBtn) playPauseBtn.textContent = '▶';
+               }
+             }
              
-             // Use the same video player initialization
-             initializeVideoPlayer(video, container, playPauseBtn, customPlayButton, progressBar, progressContainer, fullscreenBtn, videos);
+             // Update progress bar
+             function updateProgress() {
+               if (video.duration) {
+                 const progressPercent = (video.currentTime / video.duration) * 100;
+                 if (progressBar) progressBar.style.width = `${progressPercent}%`;
+               }
+             }
+             
+             // Seek functionality
+             function seek(e) {
+               if (video.duration) {
+                 const rect = progressContainer.getBoundingClientRect();
+                 const clickX = e.clientX - rect.left;
+                 const clickPercent = clickX / rect.width;
+                 video.currentTime = clickPercent * video.duration;
+               }
+             }
+             
+             // Fullscreen functionality
+             function toggleFullscreen() {
+               if (document.fullscreenElement) {
+                 document.exitFullscreen();
+               } else {
+                 container.requestFullscreen();
+               }
+             }
+             
+             // Event listeners
+             if (customPlayButton) customPlayButton.addEventListener('click', togglePlay);
+             if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlay);
+             video.addEventListener('click', togglePlay);
+             video.addEventListener('timeupdate', updateProgress);
+             if (progressContainer) progressContainer.addEventListener('click', seek);
+             if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
+             
+             // Loading states
+             video.addEventListener('loadstart', () => {
+               container.classList.add('loading');
+             });
+             
+             video.addEventListener('canplay', () => {
+               container.classList.remove('loading');
+             });
+
+             video.addEventListener('waiting', () => {
+               container.classList.add('loading');
+             });
+             
+             // Reset on video end
+             video.addEventListener('ended', () => {
+               container.classList.remove('playing');
+               if (playPauseBtn) playPauseBtn.textContent = '▶';
+               video.currentTime = 0.1; // Return to first frame
+             });
+
+             // Error handling
+             video.addEventListener('error', (e) => {
+               console.error('Video error:', e);
+               container.classList.remove('loading');
+             });
            });
          }
         
-        function initializeVideoPlayer(video, container, playPauseBtn, customPlayButton, progressBar, progressContainer, fullscreenBtn, allVideos) {
-          // Detect video orientation
-          video.addEventListener('loadedmetadata', () => {
-            const aspectRatio = video.videoWidth / video.videoHeight;
-            
-            if (aspectRatio > 1.2) {
-              container.classList.add('horizontal');
-              container.classList.remove('vertical');
-            } else if (aspectRatio < 0.8) {
-              container.classList.add('vertical');
-              container.classList.remove('horizontal');
-            } else {
-              container.classList.add('horizontal');
-              container.classList.remove('vertical');
-            }
 
-            video.currentTime = 0.1;
-            container.classList.remove('loading');
-          });
-          
-          function togglePlay() {
-            if (video.paused) {
-              // Pause all other videos
-              allVideos.forEach(otherVideo => {
-                if (otherVideo !== video && !otherVideo.paused) {
-                  otherVideo.pause();
-                  const otherContainer = otherVideo.closest('.video-container');
-                  otherContainer.classList.remove('playing');
-                  const otherPlayBtn = otherContainer.querySelector('.play-pause');
-                  if (otherPlayBtn) otherPlayBtn.textContent = '▶';
-                }
-              });
-
-              video.play();
-              container.classList.add('playing');
-              if (playPauseBtn) playPauseBtn.textContent = '⏸';
-            } else {
-              video.pause();
-              container.classList.remove('playing');
-              if (playPauseBtn) playPauseBtn.textContent = '▶';
-            }
-          }
-          
-          function updateProgress() {
-            if (video.duration) {
-              const progressPercent = (video.currentTime / video.duration) * 100;
-              if (progressBar) progressBar.style.width = `${progressPercent}%`;
-            }
-          }
-          
-          function seek(e) {
-            if (video.duration) {
-              const rect = progressContainer.getBoundingClientRect();
-              const clickX = e.clientX - rect.left;
-              const clickPercent = clickX / rect.width;
-              video.currentTime = clickPercent * video.duration;
-            }
-          }
-          
-          function toggleFullscreen() {
-            if (document.fullscreenElement) {
-              document.exitFullscreen();
-            } else {
-              container.requestFullscreen();
-            }
-          }
-          
-          // Event listeners
-          if (customPlayButton) customPlayButton.addEventListener('click', togglePlay);
-          if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlay);
-          video.addEventListener('click', togglePlay);
-          video.addEventListener('timeupdate', updateProgress);
-          if (progressContainer) progressContainer.addEventListener('click', seek);
-          if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
-          
-          // Loading states
-          video.addEventListener('loadstart', () => container.classList.add('loading'));
-          video.addEventListener('canplay', () => container.classList.remove('loading'));
-          video.addEventListener('waiting', () => container.classList.add('loading'));
-          
-          // Reset on video end
-          video.addEventListener('ended', () => {
-            container.classList.remove('playing');
-            if (playPauseBtn) playPauseBtn.textContent = '▶';
-            video.currentTime = 0.1;
-          });
-
-          video.addEventListener('error', (e) => {
-            console.error('Video error:', e);
-            container.classList.remove('loading');
-          });
-        }
       }
       
       // Initialize video players
