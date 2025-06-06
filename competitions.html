@@ -1593,6 +1593,20 @@
       background: linear-gradient(90deg, transparent, rgba(231, 76, 60, 0.1), transparent);
     }
 
+    .match-item.draw {
+      background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 152, 0, 0.05));
+      border-color: rgba(255, 152, 0, 0.2);
+    }
+
+    .match-item.draw:hover {
+      background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(255, 152, 0, 0.1));
+      border-color: rgba(255, 152, 0, 0.3);
+    }
+
+    .match-item.draw::before {
+      background: linear-gradient(90deg, transparent, rgba(255, 193, 7, 0.1), transparent);
+    }
+
     .match-item:hover::before {
       left: 100%;
     }
@@ -1641,6 +1655,11 @@
     .match-item.loss .score {
       background: rgba(192, 57, 43, 0.1);
       color: #c0392b;
+    }
+
+    .match-item.draw .score {
+      background: rgba(255, 193, 7, 0.1);
+      color: #ff9800;
     }
 
     .result-icon {
@@ -2287,7 +2306,7 @@
               <div class="competition-details">
                 <div class="result-badge wins-losses">
                   <span>⚡</span>
-                  <span>3 Wins, 1 Loss</span>
+                  <span>1 Win, 1 Draw</span>
                 </div>
                 <div class="results-list">
                   <h4 class="results-title">Match Results</h4>
@@ -2297,10 +2316,10 @@
                       <span class="score">25 - 7</span>
                       <span class="result-icon">✅</span>
                     </li>
-                    <li class="match-item win">
+                    <li class="match-item draw">
                       <span class="teams">DCA2 vs Utrecht</span>
                       <span class="score">15 - 15</span>
-                      <span class="result-icon">✅</span>
+                      <span class="result-icon">⚖️</span>
                     </li>
                   </ul>
                 </div>
