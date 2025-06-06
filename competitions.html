@@ -1474,9 +1474,184 @@
       color: var(--light);
     }
 
+    .result-badge.wins-losses {
+      background: linear-gradient(135deg, #4a90e2, #357abd, #2c5aa0);
+      color: var(--light);
+      box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-badge.wins-losses::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.6s;
+    }
+
+    .result-badge.wins-losses:hover::before {
+      left: 100%;
+    }
+
+    .result-badge.wins-losses:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(74, 144, 226, 0.4);
+    }
+
     .competition-description {
       color: var(--accent);
       line-height: 1.7;
+    }
+
+    /* Modern Results List Styling */
+    .results-list {
+      margin-top: 1.5rem;
+    }
+
+    .results-title {
+      font-size: 1.1rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .results-title::before {
+      content: '📊';
+      font-size: 1rem;
+    }
+
+    .match-results {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .match-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(5px);
+      border: 1px solid transparent;
+    }
+
+    .match-item.win {
+      background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(39, 174, 96, 0.05));
+      border-color: rgba(39, 174, 96, 0.2);
+    }
+
+    .match-item.loss {
+      background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(192, 57, 43, 0.05));
+      border-color: rgba(192, 57, 43, 0.2);
+    }
+
+    .match-item:hover {
+      transform: translateX(8px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .match-item.win:hover {
+      background: linear-gradient(135deg, rgba(46, 204, 113, 0.15), rgba(39, 174, 96, 0.1));
+      border-color: rgba(39, 174, 96, 0.3);
+    }
+
+    .match-item.loss:hover {
+      background: linear-gradient(135deg, rgba(231, 76, 60, 0.15), rgba(192, 57, 43, 0.1));
+      border-color: rgba(192, 57, 43, 0.3);
+    }
+
+    .match-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      transition: left 0.5s;
+    }
+
+    .match-item.win::before {
+      background: linear-gradient(90deg, transparent, rgba(46, 204, 113, 0.1), transparent);
+    }
+
+    .match-item.loss::before {
+      background: linear-gradient(90deg, transparent, rgba(231, 76, 60, 0.1), transparent);
+    }
+
+    .match-item:hover::before {
+      left: 100%;
+    }
+
+    .teams {
+      font-weight: 600;
+      color: var(--secondary);
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .teams::before {
+      content: '';
+      width: 18px;
+      height: 18px;
+      background-image: url('pics/Ball.png');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin-right: 0.5rem;
+      display: inline-block;
+      vertical-align: middle;
+      border-radius: 50%;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+      aspect-ratio: 1/1;
+      flex-shrink: 0;
+    }
+
+    .score {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent);
+      min-width: 80px;
+      text-align: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      backdrop-filter: blur(5px);
+    }
+
+    .match-item.win .score {
+      background: rgba(39, 174, 96, 0.1);
+      color: #27ae60;
+    }
+
+    .match-item.loss .score {
+      background: rgba(192, 57, 43, 0.1);
+      color: #c0392b;
+    }
+
+    .result-icon {
+      font-size: 1.2rem;
+      margin-left: 1rem;
+      animation: resultIconPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes resultIconPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
     }
 
     /* Medal float animation */
@@ -1925,83 +2100,190 @@
         
         <!-- Man 1 Timeline -->
         <div class="timeline" id="timeline-man1" style="display: none;">
-          <!-- March 2024 - Silver -->
+          <!-- March 2025 - Silver -->
           <div class="timeline-item" data-delay="0">
-            <div class="timeline-marker silver">🥈</div>
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">March 2024</div>
-                <div class="date-medal silver">🥈</div>
+                <div class="competition-date">23 March 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>Amsterdam Arena Championship</h3>
-                  <p class="venue">Amsterdam Arena Complex</p>
+                  <h3>4th Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
                 </div>
               </div>
               <div class="competition-details">
-                <div class="result-badge silver">
-                  <span>🥈</span>
-                  <span>2nd Place - Silver Medal</span>
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins, 1 Loss</span>
                 </div>
-                <p class="competition-description">
-                  An incredible performance at the prestigious Amsterdam Arena Complex! Our team showcased exceptional teamwork and skill, securing a well-deserved silver medal against fierce competition from across the Netherlands.
-                </p>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Utrecht</span>
+                      <span class="score">23 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Delft</span>
+                      <span class="score">26 - 6</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA1 vs Haarlem</span>
+                      <span class="score">12 - 16</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Hacten</span>
+                      <span class="score">14 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- January 2024 - Gold -->
+          <!-- February 2025 -->
           <div class="timeline-item" data-delay="1">
-            <div class="timeline-marker gold">🥇</div>
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">January 2024</div>
-                <div class="date-medal gold">🥇</div>
+                <div class="competition-date">08 February 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>Rotterdam Regional Championship</h3>
-                  <p class="venue">Rotterdam Sports Center</p>
+                  <h3>3rd Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Eindhoven</p>
                 </div>
               </div>
               <div class="competition-details">
-                <div class="result-badge gold">
-                  <span>🥇</span>
-                  <span>1st Place - Gold Medal</span>
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins, 1 Loss</span>
                 </div>
-                <p class="competition-description">
-                  Our finest hour! DCA dominated the Rotterdam Regional Championship with flawless execution and unstoppable teamwork. Every player contributed to this golden victory that will be remembered for years to come.
-                </p>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Utrecht</span>
+                      <span class="score">23 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Delft</span>
+                      <span class="score">26 - 6</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA1 vs Haarlem</span>
+                      <span class="score">12 - 16</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Hacten</span>
+                      <span class="score">14 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- November 2023 - Bronze -->
+          <!-- December 2024 -->
           <div class="timeline-item" data-delay="2">
-            <div class="timeline-marker bronze">🥉</div>
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">November 2023</div>
-                <div class="date-medal bronze">🥉</div>
+                <div class="competition-date">15 December 2024</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>Utrecht Autumn Tournament</h3>
-                  <p class="venue">Utrecht Dodgeball Stadium</p>
+                  <h3>2nd Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Drachten</p>
                 </div>
               </div>
               <div class="competition-details">
-                <div class="result-badge bronze">
-                  <span>🥉</span>
-                  <span>3rd Place - Bronze Medal</span>
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins, 1 Loss</span>
                 </div>
-                <p class="competition-description">
-                  Our competitive debut! This bronze medal marked the beginning of DCA's journey into serious competition. The experience gained here laid the foundation for all our future successes.
-                </p>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Utrecht</span>
+                      <span class="score">23 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Delft</span>
+                      <span class="score">26 - 6</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA1 vs Haarlem</span>
+                      <span class="score">12 - 16</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Hacten</span>
+                      <span class="score">14 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- November 2024 - Additional Competition -->
+          <div class="timeline-item" data-delay="3">
+            <div class="timeline-content">
+              <div class="date-medal-container">
+                <div class="competition-date">09 November 2024</div>
+              </div>
+              <div class="competition-header">
+                <div class="trophy-icon">🏆</div>
+                <div class="competition-info">
+                    <h3>1st Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
+                </div>
+              </div>
+              <div class="competition-details">
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins, 1 Loss</span>
+                </div>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Utrecht</span>
+                      <span class="score">23 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Delft</span>
+                      <span class="score">26 - 6</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA1 vs Haarlem</span>
+                      <span class="score">12 - 16</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Hacten</span>
+                      <span class="score">14 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -2009,56 +2291,180 @@
 
         <!-- Man 2 Timeline -->
         <div class="timeline" id="timeline-man2" style="display: none;">
-          <!-- April 2024 - Bronze -->
+          <!-- March 2025 - Silver -->
           <div class="timeline-item" data-delay="0">
-            <div class="timeline-marker bronze">🥉</div>
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">April 2024</div>
-                <div class="date-medal bronze">🥉</div>
+                <div class="competition-date">23 March 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>The Hague Spring Challenge</h3>
-                  <p class="venue">The Hague Sports Complex</p>
+                  <h3>4th Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
                 </div>
               </div>
               <div class="competition-details">
-                <div class="result-badge bronze">
-                  <span>🥉</span>
-                  <span>3rd Place - Bronze Medal</span>
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins, 1 Loss</span>
                 </div>
-                <p class="competition-description">
-                  Man 2 showed tremendous heart and determination in The Hague! This bronze medal represents the growing strength and competitive spirit of our second men's team.
-                </p>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Utrecht</span>
+                      <span class="score">23 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Delft</span>
+                      <span class="score">26 - 6</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA2 vs Haarlem</span>
+                      <span class="score">12 - 16</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Hacten</span>
+                      <span class="score">14 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- February 2024 - Participation -->
+          <!-- February 2025 -->
           <div class="timeline-item" data-delay="1">
-            <div class="timeline-marker silver">🎯</div>
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">February 2024</div>
-                <div class="date-medal silver">🎯</div>
+                <div class="competition-date">08 February 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>Eindhoven Winter Cup</h3>
-                  <p class="venue">Eindhoven Arena</p>
+                  <h3>3rd Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Eindhoven</p>
                 </div>
               </div>
               <div class="competition-details">
-                <div class="result-badge standard">
-                  <span>🎯</span>
-                  <span>Strong Performance</span>
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>2 Wins</span>
                 </div>
-                <p class="competition-description">
-                  A valuable learning experience for Man 2! While they didn't place in the top 3, the team gained crucial experience and showed impressive improvement throughout the tournament.
-                </p>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Utrecht</span>
+                      <span class="score">20 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Delft</span>
+                      <span class="score">21 - 11</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- December 2024 -->
+          <div class="timeline-item" data-delay="2">
+            <div class="timeline-content">
+              <div class="date-medal-container">
+                <div class="competition-date">15 December 2024</div>
+              </div>
+              <div class="competition-header">
+                <div class="trophy-icon">🏆</div>
+                <div class="competition-info">
+                  <h3>2nd Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Drachten</p>
+                </div>
+              </div>
+              <div class="competition-details">
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins, 1 Loss</span>
+                </div>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Utrecht</span>
+                      <span class="score">23 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Delft</span>
+                      <span class="score">26 - 6</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA2 vs Haarlem</span>
+                      <span class="score">12 - 16</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Hacten</span>
+                      <span class="score">14 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- November 2024 - Additional Competition -->
+          <div class="timeline-item" data-delay="3">
+            <div class="timeline-content">
+              <div class="date-medal-container">
+                <div class="competition-date">09 November 2024</div>
+              </div>
+              <div class="competition-header">
+                <div class="trophy-icon">🏆</div>
+                <div class="competition-info">
+                  <h3>1st Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
+                </div>
+              </div>
+              <div class="competition-details">
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins, 1 Loss</span>
+                </div>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Utrecht</span>
+                      <span class="score">23 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Delft</span>
+                      <span class="score">26 - 6</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA2 vs Haarlem</span>
+                      <span class="score">12 - 16</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Hacten</span>
+                      <span class="score">14 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -2066,56 +2472,185 @@
 
         <!-- Women Timeline -->
         <div class="timeline" id="timeline-women" style="display: none;">
-          <!-- May 2024 - Gold -->
+          <!-- March 2025 -->
           <div class="timeline-item" data-delay="0">
-            <div class="timeline-marker gold">🥇</div>
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">May 2024</div>
-                <div class="date-medal gold">🥇</div>
+                <div class="competition-date">23 March 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>Women's National Championship</h3>
-                  <p class="venue">Amsterdam Olympic Stadium</p>
+                  <h3>4th Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
                 </div>
               </div>
               <div class="competition-details">
-                <div class="result-badge gold">
-                  <span>🥇</span>
-                  <span>1st Place - Gold Medal</span>
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins, 1 Loss</span>
                 </div>
-                <p class="competition-description">
-                  Historic victory! Our women's team dominated the National Championship with unparalleled skill and teamwork. A golden moment that will inspire future generations of female dodgeball players.
-                </p>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA Women vs Utrecht</span>
+                      <span class="score">23 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA Women vs Delft</span>
+                      <span class="score">26 - 6</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA Women vs Haarlem</span>
+                      <span class="score">12 - 16</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA Women vs Hacten</span>
+                      <span class="score">14 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- March 2024 - Silver -->
+          <!-- February 2025 -->
           <div class="timeline-item" data-delay="1">
-            <div class="timeline-marker silver">🥈</div>
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">March 2024</div>
-                <div class="date-medal silver">🥈</div>
+                <div class="competition-date">08 February 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>Utrecht Women's League</h3>
-                  <p class="venue">Utrecht Sports Center</p>
+                  <h3>3rd Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Eindhoven</p>
                 </div>
               </div>
               <div class="competition-details">
-                <div class="result-badge silver">
-                  <span>🥈</span>
-                  <span>2nd Place - Silver Medal</span>
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>2 Wins, 1 Loss</span>
                 </div>
-                <p class="competition-description">
-                  An outstanding display of skill and determination! The women's team showcased their growing prowess with this well-earned silver medal performance.
-                </p>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA Women vs Utrecht</span>
+                      <span class="score">18 - 12</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA Women vs Drengelo</span>
+                      <span class="score">16 - 14</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA Women vs Haarlem</span>
+                      <span class="score">5 - 27</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- December 2024 -->
+          <div class="timeline-item" data-delay="2">
+            <div class="timeline-content">
+              <div class="date-medal-container">
+                <div class="competition-date">15 December 2024</div>
+              </div>
+              <div class="competition-header">
+                <div class="trophy-icon">🏆</div>
+                <div class="competition-info">
+                  <h3>2nd Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Drachten</p>
+                </div>
+              </div>
+              <div class="competition-details">
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins, 1 Loss</span>
+                </div>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA Women vs Utrecht</span>
+                      <span class="score">23 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA Women vs Delft</span>
+                      <span class="score">26 - 6</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA Women vs Haarlem</span>
+                      <span class="score">12 - 16</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA Women vs Hacten</span>
+                      <span class="score">14 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- November 2024 -->
+          <div class="timeline-item" data-delay="3">
+            <div class="timeline-content">
+              <div class="date-medal-container">
+                <div class="competition-date">09 November 2024</div>
+              </div>
+              <div class="competition-header">
+                <div class="trophy-icon">🏆</div>
+                <div class="competition-info">
+                  <h3>1st Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
+                </div>
+              </div>
+              <div class="competition-details">
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins, 1 Loss</span>
+                </div>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA Women vs Utrecht</span>
+                      <span class="score">23 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA Women vs Delft</span>
+                      <span class="score">26 - 6</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA Women vs Haarlem</span>
+                      <span class="score">12 - 16</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA Women vs Hacten</span>
+                      <span class="score">14 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -2123,56 +2658,185 @@
 
         <!-- Mixed 1 Timeline -->
         <div class="timeline" id="timeline-mixed1" style="display: none;">
-          <!-- June 2024 - Silver -->
+          <!-- March 2025 -->
           <div class="timeline-item" data-delay="0">
-            <div class="timeline-marker silver">🥈</div>
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">June 2024</div>
-                <div class="date-medal silver">🥈</div>
+                <div class="competition-date">09 March 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>Mixed Teams Championship</h3>
-                  <p class="venue">Rotterdam Convention Center</p>
+                  <h3>4th Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
                 </div>
               </div>
               <div class="competition-details">
-                <div class="result-badge silver">
-                  <span>🥈</span>
-                  <span>2nd Place - Silver Medal</span>
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>2 Wins, 1 Loss</span>
                 </div>
-                <p class="competition-description">
-                  Perfect teamwork between men and women! Mixed 1 demonstrated the power of balanced collaboration with this impressive silver medal finish.
-                </p>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Drachten</span>
+                      <span class="score">26 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Utrecht</span>
+                      <span class="score">24 - 8</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA1 vs Haarlem</span>
+                      <span class="score">4 - 30</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- April 2024 - Bronze -->
+          <!-- January 2025 -->
           <div class="timeline-item" data-delay="1">
-            <div class="timeline-marker bronze">🥉</div>
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">April 2024</div>
-                <div class="date-medal bronze">🥉</div>
+                <div class="competition-date">18 January 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>Spring Mixed Tournament</h3>
-                  <p class="venue">Groningen Sports Hall</p>
+                  <h3>3rd Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Eindhoven</p>
                 </div>
               </div>
               <div class="competition-details">
-                <div class="result-badge bronze">
-                  <span>🥉</span>
-                  <span>3rd Place - Bronze Medal</span>
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins, 1 Loss</span>
                 </div>
-                <p class="competition-description">
-                  A solid performance that showed the potential of our mixed format! This bronze medal laid the groundwork for even greater successes to come.
-                </p>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Utrecht</span>
+                      <span class="score">23 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Delft</span>
+                      <span class="score">26 - 6</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA1 vs Haarlem</span>
+                      <span class="score">12 - 16</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Hacten</span>
+                      <span class="score">14 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- November 2024 -->
+          <div class="timeline-item" data-delay="2">
+            <div class="timeline-content">
+              <div class="date-medal-container">
+                <div class="competition-date">24 November 2024</div>
+              </div>
+              <div class="competition-header">
+                <div class="trophy-icon">🏆</div>
+                <div class="competition-info">
+                  <h3>2nd Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Drachten</p>
+                </div>
+              </div>
+              <div class="competition-details">
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins, 1 Loss</span>
+                </div>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Utrecht</span>
+                      <span class="score">23 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Delft</span>
+                      <span class="score">26 - 6</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA1 vs Haarlem</span>
+                      <span class="score">12 - 16</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Hacten</span>
+                      <span class="score">14 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- October 2024 -->
+          <div class="timeline-item" data-delay="3">
+            <div class="timeline-content">
+              <div class="date-medal-container">
+                <div class="competition-date">12 October 2024</div>
+              </div>
+              <div class="competition-header">
+                <div class="trophy-icon">🏆</div>
+                <div class="competition-info">
+                  <h3>1st Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
+                </div>
+              </div>
+              <div class="competition-details">
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins, 1 Loss</span>
+                </div>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Utrecht</span>
+                      <span class="score">23 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                        <span class="teams">DCA1 vs Delft</span>
+                      <span class="score">26 - 6</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA1 vs Haarlem</span>
+                      <span class="score">12 - 16</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA1 vs Hacten</span>
+                      <span class="score">14 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -2180,56 +2844,180 @@
 
         <!-- Mixed 2 Timeline -->
         <div class="timeline" id="timeline-mixed2" style="display: none;">
-          <!-- July 2024 - Participation -->
+          <!-- March 2025 -->
           <div class="timeline-item" data-delay="0">
-            <div class="timeline-marker silver">🎯</div>
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">July 2024</div>
-                <div class="date-medal silver">🎯</div>
+                <div class="competition-date">09 March 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>Summer League Debut</h3>
-                  <p class="venue">Tilburg Sports Complex</p>
+                  <h3>4th Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
                 </div>
               </div>
               <div class="competition-details">
-                <div class="result-badge standard">
-                  <span>🎯</span>
-                  <span>Tournament Debut</span>
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>2 Wins</span>
                 </div>
-                <p class="competition-description">
-                  The exciting debut of Mixed 2! While they're still building their competitive experience, the team showed great potential and team spirit in their first major tournament.
-                </p>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Eindhoven</span>
+                      <span class="score">19 - 7</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Hengelo</span>
+                      <span class="score">18 - 14</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- June 2024 - Learning Experience -->
+          <!-- January 2025 -->
           <div class="timeline-item" data-delay="1">
-            <div class="timeline-marker bronze">📚</div>
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">June 2024</div>
-                <div class="date-medal bronze">📚</div>
+                <div class="competition-date">18 January 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>Regional Training Tournament</h3>
-                  <p class="venue">Breda Training Center</p>
+                  <h3>3rd Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Eindhoven</p>
                 </div>
               </div>
               <div class="competition-details">
-                <div class="result-badge standard">
-                  <span>📚</span>
-                  <span>Training Experience</span>
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins, 1 Loss</span>
                 </div>
-                <p class="competition-description">
-                  An invaluable training opportunity! Mixed 2 used this tournament to develop their skills and team chemistry. Every match was a learning experience that strengthened the team.
-                </p>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Utrecht</span>
+                      <span class="score">23 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Delft</span>
+                      <span class="score">26 - 6</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA2 vs Haarlem</span>
+                      <span class="score">12 - 16</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Hacten</span>
+                      <span class="score">14 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- December 2024 -->
+          <div class="timeline-item" data-delay="2">
+            <div class="timeline-content">
+              <div class="date-medal-container">
+                <div class="competition-date">24 November 2024</div>
+              </div>
+              <div class="competition-header">
+                <div class="trophy-icon">🏆</div>
+                <div class="competition-info">
+                  <h3>2nd Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Drachten</p>
+                </div>
+              </div>
+              <div class="competition-details">
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins, 1 Loss</span>
+                </div>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Utrecht</span>
+                      <span class="score">23 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Delft</span>
+                      <span class="score">26 - 6</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA2 vs Haarlem</span>
+                      <span class="score">12 - 16</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Hacten</span>
+                      <span class="score">14 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- October 2024 -->
+          <div class="timeline-item" data-delay="3">
+            <div class="timeline-content">
+              <div class="date-medal-container">
+                <div class="competition-date">12 October 2024</div>
+              </div>
+              <div class="competition-header">
+                <div class="trophy-icon">🏆</div>
+                <div class="competition-info">
+                  <h3>1st Competition Day of the Season</h3>
+                  <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
+                </div>
+              </div>
+              <div class="competition-details">
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins, 1 Loss</span>
+                </div>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Utrecht</span>
+                      <span class="score">23 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Delft</span>
+                      <span class="score">26 - 6</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA2 vs Haarlem</span>
+                      <span class="score">12 - 16</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA2 vs Hacten</span>
+                      <span class="score">14 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
