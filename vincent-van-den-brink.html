@@ -1458,6 +1458,97 @@
         50% { transform: translateY(-20px) rotate(180deg); }
       }
       
+      /* Hide desktop floating images */
+      .floating-image {
+        display: none;
+      }
+
+      /* Show mobile content */
+      .mobile-content {
+        display: block;
+      }
+
+      /* Mobile profile header adjustments */
+      .profile-header {
+        margin-bottom: 1rem;
+      }
+
+      /* Mobile images */
+      .mobile-image {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        border-radius: 50%;
+        margin: 1rem auto;
+        display: block;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      }
+
+      .mobile-image.ties1 {
+        max-width: 250px;
+        border-radius: 50%;
+      }
+
+      .mobile-image.ties2 {
+        max-width: 280px;
+        border-radius: 50%;
+      }
+
+      .mobile-image.ties3 {
+        max-width: 280px;
+        border-radius: 50%;
+      }
+
+      .mobile-image.ties4 {
+        max-width: 320px;
+        border-radius: 50%;
+      }
+
+      /* Mobile cards */
+      .mobile-card {
+        background: var(--card-bg);
+        padding: 1.5rem;
+        margin: 1rem auto;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        max-width: 350px;
+      }
+
+      .mobile-card.intro {
+        background: linear-gradient(135deg, #ffebee, #ffcdd2);
+      }
+
+      .mobile-card.intro h2 {
+        color: var(--primary);
+      }
+
+      .mobile-card.passion {
+        background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+      }
+
+      .mobile-card.personal {
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      }
+
+      .mobile-card.personal h2 {
+        color: #1976d2;
+      }
+
+      .mobile-card h2 {
+        font-size: 1.3rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .mobile-card p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      /* Adjust padding on cards for mobile */
+      .mobile-card {
+        padding: 1.25rem;
+      }
+
       /* Mobile breadcrumb adjustments */
       .breadcrumb-container {
         top: 80px; /* Increased spacing from menu bar */
@@ -1472,6 +1563,18 @@
       .breadcrumb-item {
         padding: 0.3rem 0.4rem;
       }
+    }
+
+    /* Hide mobile content on desktop */
+    @media (min-width: 769px) {
+      .mobile-content {
+        display: none;
+      }
+    }
+
+    /* Hide mobile content on desktop by default */
+    .mobile-content {
+      display: none;
     }
   </style>
 </head>
