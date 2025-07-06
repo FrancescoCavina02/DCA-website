@@ -923,6 +923,11 @@
         padding: 1.25rem;
       }
 
+      /* Show mobile content on mobile */
+      .mobile-content {
+        display: block;
+      }
+
       /* Mobile breadcrumb adjustments */
       .breadcrumb-container {
         top: 80px; /* Increased spacing from menu bar */
@@ -939,16 +944,16 @@
       }
     }
 
+    /* Hide mobile content on desktop by default */
+    .mobile-content {
+      display: none;
+    }
+
     /* Hide mobile content on desktop */
     @media (min-width: 769px) {
       .mobile-content {
         display: none;
       }
-    }
-
-    /* Hide mobile content on desktop by default */
-    .mobile-content {
-      display: none;
     }
 
     header .logo a {
