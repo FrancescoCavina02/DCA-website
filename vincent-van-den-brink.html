@@ -1463,9 +1463,9 @@
         display: none;
       }
 
-      /* Show mobile content */
+      /* CRITICAL: Show mobile content on mobile devices - must override desktop hide */
       .mobile-content {
-        display: block;
+        display: block !important;
       }
 
       /* Mobile profile header adjustments */

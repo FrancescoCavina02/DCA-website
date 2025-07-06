@@ -67,35 +67,7 @@
       margin-left: 1rem;
     }
     
-    nav#nav-menu {
-      display: flex;
-      align-items: center;
-    }
-    
-    nav#nav-menu a {
-      margin-left: 1.5rem;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      color: var(--primary);
-    }
-    
-    nav#nav-menu a:hover {
-      color: var(--light);
-      transform: scale(1.05);
-      background-color: rgba(211, 47, 47, 0.1);
-    }
-    
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 1.75rem;
-      color: var(--light);
-      cursor: pointer;
-    }
+    /* Navigation styles are now in external CSS file */
 
     /* Logo link styling */
     .logo a {
@@ -103,15 +75,7 @@
       text-decoration: none;
     }
 
-    /* Overlay */
-    #overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
-    }
+    /* Overlay styles are now in external CSS file */
 
     /* Loading Screen */
     #loading-screen {
@@ -151,78 +115,7 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Dropdown Styles */
-    .dropdown {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-    }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: var(--secondary);
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1003;
-      border-radius: 4px;
-      top: 100%;
-      left: 0;
-    }
-    .dropdown-content a {
-      color: var(--light);
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-      margin: 0;
-      border-radius: 0;
-      transition: background-color 0.3s ease;
-    }
-    .dropdown-content a:hover {
-      background-color: var(--primary);
-      transform: none;
-      text-decoration: underline;
-    }
-    .dropdown-content a::before {
-      display: none;
-    }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-    .dropdown > span {
-      margin-left: 1.5rem;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      overflow: hidden;
-      color: var(--primary);
-      cursor: pointer;
-    }
-    .dropdown > span:hover {
-      color: var(--light);
-      transform: scale(1.05);
-      background-color: rgba(211, 47, 47, 0.1);
-    }
-    .dropdown > span::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 0.2rem;
-      width: 25px;
-      height: 25px;
-      background-image: url('pics/Ball.png');
-      background-size: cover;
-      background-position: center;
-      transform: translateY(-50%) scale(0);
-      transition: transform 0.3s ease;
-      z-index: -1;
-      opacity: 0.8;
-      border-radius: 50%;
-    }
-    .dropdown > span:hover::before {
-      transform: translateY(-50%) scale(1);
-    }
+    /* Dropdown styles are now in external CSS file */
     
     /* Hero Section */
     .hero {
