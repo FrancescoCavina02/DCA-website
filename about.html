@@ -338,7 +338,9 @@
         backdrop-filter: blur(10px);
       }
       
+      /* Remove auto-expansion - JavaScript will control this */
       .dropdown.active .dropdown-content {
+        /* Don't auto-expand - let JavaScript handle it */
         border-left-color: var(--primary);
         animation: dropdownGlow 0.6s ease-out;
       }
