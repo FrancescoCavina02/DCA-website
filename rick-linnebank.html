@@ -420,19 +420,20 @@
         50% { transform: translateY(-20px) rotate(180deg); }
       }
       
-      /* Hide desktop floating images */
-      .floating-image {
-        display: none;
+      /* CRITICAL: Hide ALL desktop content on mobile */
+      .floating-image,
+      .profile-grid,
+      .profile-card,
+      .ties1-image,
+      .ties2-image,
+      .ties3-image,
+      .ties4-image {
+        display: none !important;
       }
 
-      /* Hide desktop profile grid on mobile */
-      .profile-grid {
-        display: none;
-      }
-
-      /* Show mobile content */
+      /* CRITICAL: Show mobile content on mobile devices */
       .mobile-content {
-        display: block;
+        display: block !important;
       }
 
       /* Mobile profile header adjustments */
