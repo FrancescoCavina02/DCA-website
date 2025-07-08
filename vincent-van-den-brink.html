@@ -353,7 +353,7 @@
     /* — Main Content — */
     main {
       padding: 2rem 1rem;
-      max-width: 1000px;
+      max-width: 800px;
       margin: 0 auto;
     }
 
@@ -365,7 +365,6 @@
       padding: 2rem;
       border-radius: 20px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      position: relative;
     }
     .profile-header h1 {
       font-size: 3rem;
@@ -377,6 +376,98 @@
       font-size: 1.2rem;
       color: var(--accent);
       margin-bottom: 1rem;
+    }
+
+    /* Centered Content Layout */
+    .content-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Profile Images - Now centered and responsive */
+    .profile-image {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: block;
+      margin: 0 auto;
+    }
+    .profile-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    /* Vincent4 - Make it slightly larger and more rectangular */
+    .profile-image.vincent4 {
+      width: 400px;
+      height: 300px;
+      border-radius: 20px; /* Less rounded for vincent4 */
+    }
+
+    /* Card Styles - Simplified and centered */
+    .profile-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+    }
+    .profile-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    .profile-card.intro {
+      background: linear-gradient(135deg, var(--primary), #ff5252);
+      color: var(--light);
+    }
+    .profile-card.intro h2 {
+      color: var(--light);
+    }
+
+    .profile-card.passion {
+      background: linear-gradient(135deg, #ff9800, #ffc107);
+      color: var(--secondary);
+    }
+
+    .profile-card.personal {
+      background: linear-gradient(135deg, #2196f3, #03a9f4);
+      color: var(--light);
+    }
+    .profile-card.personal h2 {
+      color: var(--light);
+    }
+
+    .profile-card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    .profile-card p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    /* Remove old styles */
+    .image-gallery {
+      display: none;
+    }
+    .image-item {
+      display: none;
+    }
+    .feature-image {
+      display: none;
     }
 
     /* Floating circular images */
@@ -1648,72 +1739,39 @@
     <div class="profile-header">
       <h1>Vincent van den Brink #22</h1>
       <p class="subtitle">📝 Secretary | 👨‍👧‍👧 Dad of Two | 🏕️ Outdoors Enthusiast</p>
-      <!-- Vincent1 - Most important, prominent position -->
-      <img src="pics/Vincent/vincent1.png" alt="Vincent van den Brink Portrait" class="floating-image ties1-image">
     </div>
 
-    <!-- Profile Grid -->
-    <div class="profile-grid">
-      <!-- Vincent2 - Second most important -->
-      <img src="pics/Vincent/vincent2.png" alt="Vincent van den Brink Action Shot" class="floating-image ties2-image">
+    <!-- Centered Content Layout -->
+    <div class="content-container">
+      <!-- Vincent1 - First main image -->
+      <img src="pics/Vincent/vincent1.png" alt="Vincent van den Brink Portrait" class="profile-image vincent1">
       
-      <!-- Intro Card -->
+      <!-- First text box -->
       <div class="profile-card intro">
         <h2>Hey DCA! 👋</h2>
         <p>Hey DCA! I'm Vincent, 37 years old. I've been playing dodgeball since the end of 2021, and I'm your new secretary.</p>
       </div>
-
-      <!-- Passion Card -->
+      
+      <!-- Vincent2 - Second image -->
+      <img src="pics/Vincent/vincent2.png" alt="Vincent van den Brink Action Shot" class="profile-image vincent2">
+      
+      <!-- Second text box -->
       <div class="profile-card passion">
         <h2>Why Dodgeball? 🎯</h2>
         <p>I started playing dodgeball because I missed team sports. I love playing together and was intrigued by how new dodgeball is.</p>
-        <!-- Vincent3 - Third most important -->
-        <img src="pics/Vincent/vincent3.png" alt="Vincent van den Brink Dodgeball" class="floating-image ties3-image">
       </div>
-
-      <!-- Personal Card -->
+      
+      <!-- Vincent3 - Third image -->
+      <img src="pics/Vincent/vincent3.png" alt="Vincent van den Brink Dodgeball" class="profile-image vincent3">
+      
+      <!-- Third text box -->
       <div class="profile-card personal">
         <h2>Beyond Dodgeball 🌟</h2>
         <p>Besides dodgeball, I'm a proud dad of two girls (4 & 6). I freelance as a designer and developer, and love camping, mountain biking, and traveling.</p>
       </div>
-    </div>
-
-    <!-- Vincent4 - Least important, bigger and rectangular -->
-    <img src="pics/Vincent/vincent4.png" alt="Vincent van den Brink with Team" class="floating-image ties4-image">
-
-    <!-- Bottom section removed -->
-    
-    <!-- Mobile Content - Only visible on mobile -->
-    <div class="mobile-content">
-      <!-- Mobile: Vincent1 Image -->
-      <img src="pics/Vincent/vincent1.png" alt="Vincent van den Brink Portrait" class="mobile-image ties1">
       
-      <!-- Mobile: Red Text Box -->
-      <div class="mobile-card intro">
-        <h2>Hey DCA! 👋</h2>
-        <p>Hey DCA! I'm Vincent, 37 years old. I've been playing dodgeball since the end of 2021, and I'm your new secretary.</p>
-      </div>
-      
-      <!-- Mobile: Vincent2 Image -->
-      <img src="pics/Vincent/vincent2.png" alt="Vincent van den Brink Action Shot" class="mobile-image ties2">
-      
-      <!-- Mobile: Yellow Text Box -->
-      <div class="mobile-card passion">
-        <h2>Why Dodgeball? 🎯</h2>
-        <p>I started playing dodgeball because I missed team sports. I love playing together and was intrigued by how new dodgeball is.</p>
-      </div>
-      
-      <!-- Mobile: Vincent3 Image -->
-      <img src="pics/Vincent/vincent3.png" alt="Vincent van den Brink Dodgeball" class="mobile-image ties3">
-      
-      <!-- Mobile: Blue Text Box -->
-      <div class="mobile-card personal">
-        <h2>Beyond Dodgeball 🌟</h2>
-        <p>Besides dodgeball, I'm a proud dad of two girls (4 & 6). I freelance as a designer and developer, and love camping, mountain biking, and traveling.</p>
-      </div>
-      
-      <!-- Mobile: Vincent4 Image -->
-      <img src="pics/Vincent/vincent4.png" alt="Vincent van den Brink with Team" class="mobile-image ties4">
+      <!-- Vincent4 - Fourth image -->
+      <img src="pics/Vincent/vincent4.png" alt="Vincent van den Brink with Team" class="profile-image vincent4">
     </div>
 
   </main>

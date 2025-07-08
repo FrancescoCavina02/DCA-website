@@ -192,7 +192,7 @@
     /* — Main Content — */
     main {
       padding: 2rem 1rem;
-      max-width: 1000px;
+      max-width: 800px;
       margin: 0 auto;
     }
 
@@ -204,7 +204,6 @@
       padding: 2rem;
       border-radius: 20px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      position: relative;
     }
     .profile-header h1 {
       font-size: 3rem;
@@ -218,82 +217,49 @@
       margin-bottom: 1rem;
     }
 
-    /* Floating circular images */
-    .floating-image {
+    /* Centered Content Layout */
+    .content-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Profile Images - Now centered and responsive */
+    .profile-image {
+      width: 300px;
+      height: 300px;
       border-radius: 50%;
       object-fit: cover;
       box-shadow: 0 8px 32px rgba(0,0,0,0.2);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: absolute;
+      display: block;
+      margin: 0 auto;
     }
-    .floating-image:hover {
-      transform: scale(1.1);
+    .profile-image:hover {
+      transform: scale(1.05);
       box-shadow: 0 12px 40px rgba(0,0,0,0.3);
     }
 
-    /* Eveline1 - Most important, prominent position */
-    .eveline1-image {
-      width: 240px;
-      height: 240px;
-      top: 5rem;
-      right: -1rem;
-      z-index: 10;
+    /* Eveline4 - Make it slightly larger and more rectangular */
+    .profile-image.eveline4 {
+      width: 400px;
+      height: 300px;
+      border-radius: 20px; /* Less rounded for eveline4 */
     }
 
-    /* Profile Grid */
-    .profile-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-      position: relative;
-      padding-top: 60px;
-      padding-left: 60px;
-      padding-right: 100px;
-    }
-
-    /* Eveline2 - Second most important */
-    .eveline2-image {
-      width: 200px;
-      height: 200px;
-      top: -90px;
-      left: -90px;
-      z-index: 5;
-    }
-
-    /* Eveline3 - Third most important */
-    .eveline3-image {
-      width: 200px;
-      height: 200px;
-      position: absolute;
-      top: 190px;
-      right: -140px;
-      left: auto;
-      z-index: 5;
-    }
-
-    /* Eveline4 - Least important, bigger and rectangular */
-    .eveline4-image {
-      width: 500px;
-      height: auto;
-      border-radius: 50%; /* Make eveline4 oval on desktop */
-      position: absolute;
-      top: calc(100% + 2rem);
-      right: auto;
-      left: 700px;
-      z-index: 3;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    }
-
-    /* Card Styles */
+    /* Card Styles - Simplified and centered */
     .profile-card {
       background: var(--card-bg);
       border-radius: 20px;
-      padding: 2rem;
+      padding: 2.5rem;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      z-index: 2;
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
     }
     .profile-card:hover {
       transform: translateY(-5px);
@@ -303,8 +269,6 @@
     .profile-card.intro {
       background: linear-gradient(135deg, var(--primary), #ff5252);
       color: var(--light);
-      padding-right: 80px;
-      padding-left: 2rem;
     }
     .profile-card.intro h2 {
       color: var(--light);
@@ -313,16 +277,11 @@
     .profile-card.passion {
       background: linear-gradient(135deg, #ff9800, #ffc107);
       color: var(--secondary);
-      position: relative;
-      padding-right: 80px;
-      padding-left: 2rem;
     }
 
     .profile-card.personal {
       background: linear-gradient(135deg, #2196f3, #03a9f4);
       color: var(--light);
-      padding-left: 80px;
-      padding-right: 2rem;
     }
     .profile-card.personal h2 {
       color: var(--light);
@@ -336,30 +295,17 @@
     .profile-card p {
       font-size: 1.1rem;
       line-height: 1.8;
+      margin-bottom: 1rem;
     }
 
-    /* Bottom section - Revert padding */
-    .bottom-section {
-      margin-top: 3rem;
-      padding: 2rem;
-      text-align: center;
-      padding-right: 1.5rem;
-      padding-left: 1.5rem;
-    }
-
-    /* Hide mobile content on desktop */
-    .mobile-content {
+    /* Remove old styles */
+    .image-gallery {
       display: none;
     }
-
-    /* Remove old styles that are no longer needed */
-    .profile-image {
+    .image-item {
       display: none;
     }
-    .content-section {
-      display: none;
-    }
-    .content-card {
+    .feature-image {
       display: none;
     }
 
@@ -874,105 +820,57 @@
         50% { transform: translateY(-20px) rotate(180deg); }
       }
       
-      /* Hide desktop floating images */
-      .floating-image {
-        display: none;
+      @keyframes dropdownGlow {
+        0% { box-shadow: 0 0 0 rgba(211, 47, 47, 0.3); }
+        50% { box-shadow: 0 0 20px rgba(211, 47, 47, 0.6); }
+        100% { box-shadow: 0 0 0 rgba(211, 47, 47, 0.3); }
       }
-
-      /* Hide desktop profile grid on mobile */
-      .profile-grid {
-        display: none;
+      
+      /* Mobile responsive adjustments */
+      main {
+        padding: 1rem 0.5rem;
       }
-
-      /* Show mobile content */
-      .mobile-content {
-        display: block;
-      }
-
-      /* Mobile profile header adjustments */
-      .profile-header {
-        margin-bottom: 1rem;
-      }
-
-      /* Mobile images */
-      .mobile-image {
-        width: 100%;
-        max-width: 300px;
-        height: auto;
-        border-radius: 50%;
-        margin: 1rem auto;
-        display: block;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-      }
-
-      .mobile-image.eveline1 {
-        max-width: 250px;
-        border-radius: 50%;
-      }
-
-      .mobile-image.eveline2 {
-        max-width: 280px;
-        border-radius: 50%;
-      }
-
-      .mobile-image.eveline3 {
-        max-width: 280px;
-        border-radius: 50%;
-      }
-
-      .mobile-image.eveline4 {
-        max-width: 320px;
-        border-radius: 50%;
-      }
-
-      /* Mobile cards */
-      .mobile-card {
-        background: var(--card-bg);
-        padding: 1.5rem;
-        margin: 1rem auto;
-        border-radius: 15px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      
+      .content-container {
+        gap: 2rem;
         max-width: 350px;
       }
-
-      .mobile-card.intro {
-        background: linear-gradient(135deg, #ffebee, #ffcdd2);
+      
+      .profile-header {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
       }
-
-      .mobile-card.intro h2 {
-        color: var(--primary);
+      
+      .profile-header h1 {
+        font-size: 2.2rem;
       }
-
-      .mobile-card.passion {
-        background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+      
+      .profile-header .subtitle {
+        font-size: 1rem;
       }
-
-      .mobile-card.personal {
-        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      
+      .profile-image {
+        width: 200px;
+        height: 200px;
       }
-
-      .mobile-card.personal h2 {
-        color: #1976d2;
+      
+      .profile-image.eveline4 {
+        width: 280px;
+        height: 200px;
       }
-
-      .mobile-card h2 {
-        font-size: 1.3rem;
-        margin-bottom: 0.75rem;
+      
+      .profile-card {
+        padding: 1.5rem;
+        max-width: 100%;
       }
-
-      .mobile-card p {
-        font-size: 0.95rem;
-        line-height: 1.5;
+      
+      .profile-card h2 {
+        font-size: 1.5rem;
       }
-
-      /* Adjust padding on cards for mobile */
-      .mobile-card {
-        padding: 1.25rem;
-      }
-
-      /* CRITICAL: Show mobile content on mobile devices - must override desktop hide */
-      .mobile-content {
-        display: block !important;
+      
+      .profile-card p {
+        font-size: 1rem;
+        line-height: 1.6;
       }
 
       /* Mobile breadcrumb adjustments */
@@ -1160,71 +1058,39 @@
     <div class="profile-header">
       <h1>Eveline Miedema #22</h1>
       <p class="subtitle">🎉 Socials Lead | 🎯 Dodgeball Enthusiast | 🏛️ Classics Studies</p>
-      
-      <!-- Eveline1 - Most important, prominent position -->
-      <img src="pics/Eveline/eveline1.png" alt="Eveline Miedema Portrait" class="floating-image eveline1-image">
     </div>
 
-    <!-- Profile Grid -->
-    <div class="profile-grid">
-      <!-- Eveline2 - Second most important -->
-      <img src="pics/Eveline/eveline2.png" alt="Eveline Miedema Action Shot" class="floating-image eveline2-image">
-
-      <!-- Introduction Card -->
+    <!-- Centered Content Layout -->
+    <div class="content-container">
+      <!-- Eveline1 - First main image -->
+      <img src="pics/Eveline/eveline1.png" alt="Eveline Miedema Portrait" class="profile-image eveline1">
+      
+      <!-- First text box -->
       <div class="profile-card intro">
         <h2>Meet Our Socials Lead! 🎉</h2>
         <p>Hi DCA! I'm Eveline, I'm 21 years old and I started playing dodgeball in 2021. I joined the DCA board in 2023. I am focussing on Recruitment, Promo, Socials and Youth in the board🔥</p>
       </div>
-
-      <!-- Role Card -->
+      
+      <!-- Eveline2 - Second image -->
+      <img src="pics/Eveline/eveline2.png" alt="Eveline Miedema Action Shot" class="profile-image eveline2">
+      
+      <!-- Second text box -->
       <div class="profile-card passion">
         <h2>Creating Connections 🤝</h2>
         <p>I actually went to my first training as a joke, but fell in love and never left again. Now this sport is my obsession hahaha. I really want to grow the sport and ofcourse win some international medals for The Netherlands🏆</p>
-        <!-- Eveline3 - Third most important -->
-        <img src="pics/Eveline/eveline3.png" alt="Eveline Miedema Social Event" class="floating-image eveline3-image">
       </div>
-
-      <!-- Personal Card -->
+      
+      <!-- Eveline3 - Third image -->
+      <img src="pics/Eveline/eveline3.png" alt="Eveline Miedema Social Event" class="profile-image eveline3">
+      
+      <!-- Third text box -->
       <div class="profile-card personal">
         <h2>Beyond Dodgeball 🌟</h2>
         <p>When I'm not on a dodgeball court, I study Classics here in Amsterdam and read a lot of books🤓</p>
       </div>
-    </div>
-
-    <!-- Eveline4 - Least important, bigger and rectangular -->
-    <img src="pics/Eveline/eveline4.png" alt="Eveline Miedema with Team" class="floating-image eveline4-image">
-
-    <!-- Mobile Content - Only visible on mobile -->
-    <div class="mobile-content">
-      <!-- Mobile: Eveline1 Image -->
-      <img src="pics/Eveline/eveline1.png" alt="Eveline Miedema Portrait" class="mobile-image eveline1">
       
-      <!-- Mobile: Red Text Box -->
-      <div class="mobile-card intro">
-        <h2>Meet Our Socials Lead! 🎉</h2>
-        <p>Hi DCA! I'm Eveline, I'm 21 years old and I started playing dodgeball in 2021. I joined the DCA board in 2023. I am focussing on Recruitment, Promo, Socials and Youth in the board🔥</p>
-      </div>
-      
-      <!-- Mobile: Eveline2 Image -->
-      <img src="pics/Eveline/eveline2.png" alt="Eveline Miedema Action Shot" class="mobile-image eveline2">
-      
-      <!-- Mobile: Yellow Text Box -->
-      <div class="mobile-card passion">
-        <h2>Creating Connections 🤝</h2>
-        <p>I actually went to my first training as a joke, but fell in love and never left again. Now this sport is my obsession hahaha. I really want to grow the sport and ofcourse win some international medals for The Netherlands🏆</p>
-      </div>
-      
-      <!-- Mobile: Eveline3 Image -->
-      <img src="pics/Eveline/eveline3.png" alt="Eveline Miedema Social Event" class="mobile-image eveline3">
-      
-      <!-- Mobile: Blue Text Box -->
-      <div class="mobile-card personal">
-        <h2>Beyond Dodgeball 🌟</h2>
-        <p>When I'm not on a dodgeball court, I study Classics here in Amsterdam and read a lot of books🤓</p>
-      </div>
-      
-      <!-- Mobile: Eveline4 Image -->
-      <img src="pics/Eveline/eveline4.png" alt="Eveline Miedema with Team" class="mobile-image eveline4">
+      <!-- Eveline4 - Fourth image -->
+      <img src="pics/Eveline/eveline4.png" alt="Eveline Miedema with Team" class="profile-image eveline4">
     </div>
 
   </main>

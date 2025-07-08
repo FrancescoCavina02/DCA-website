@@ -189,6 +189,126 @@
       transform: translateY(-50%) scale(1);
     }
 
+    /* — Main Content — */
+    main {
+      padding: 2rem 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Profile Header */
+    .profile-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+    .profile-header h1 {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    .profile-header .subtitle {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    /* Centered Content Layout */
+    .content-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Profile Images - Now centered and responsive */
+    .profile-image {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: block;
+      margin: 0 auto;
+    }
+    .profile-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    /* Rick4 - Make it slightly larger and more rectangular */
+    .profile-image.rick4 {
+      width: 400px;
+      height: 300px;
+      border-radius: 20px; /* Less rounded for rick4 */
+    }
+
+    /* Card Styles - Simplified and centered */
+    .profile-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+    }
+    .profile-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    .profile-card.intro {
+      background: linear-gradient(135deg, var(--primary), #ff5252);
+      color: var(--light);
+    }
+    .profile-card.intro h2 {
+      color: var(--light);
+    }
+
+    .profile-card.passion {
+      background: linear-gradient(135deg, #ff9800, #ffc107);
+      color: var(--secondary);
+    }
+
+    .profile-card.personal {
+      background: linear-gradient(135deg, #2196f3, #03a9f4);
+      color: var(--light);
+    }
+    .profile-card.personal h2 {
+      color: var(--light);
+    }
+
+    .profile-card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    .profile-card p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    /* Remove old styles */
+    .image-gallery {
+      display: none;
+    }
+    .image-item {
+      display: none;
+    }
+    .feature-image {
+      display: none;
+    }
+
     /* — Mobile Styles — */
     @media (max-width: 768px) {
       /* Hide adam image on mobile */
@@ -1169,72 +1289,39 @@
     <div class="profile-header">
       <h1>Rick Linnebank #41</h1>
       <p class="subtitle">🍎 PE Teacher | 🛹 Longboarder | 🛡️ Youth Training Focus</p>
-      <!-- Rick1 - Most important, prominent position -->
-      <img src="pics/Rick/rick1.png" alt="Rick Linnebank Portrait" class="floating-image ties1-image">
     </div>
 
-    <!-- Profile Grid -->
-    <div class="profile-grid">
-      <!-- Rick2 - Second most important -->
-      <img src="pics/Rick/rick2.png" alt="Rick Linnebank Action Shot" class="floating-image ties2-image">
+    <!-- Centered Content Layout -->
+    <div class="content-container">
+      <!-- Rick1 - First main image -->
+      <img src="pics/Rick/rick1.png" alt="Rick Linnebank Portrait" class="profile-image rick1">
       
-      <!-- Intro Card -->
+      <!-- First text box -->
       <div class="profile-card intro">
         <h2>Hey DCA! 👋</h2>
         <p>Hey DCA! I'm Rick, 25 years old. I started playing near the end of 2022. I will focus on the youth trainings.</p>
       </div>
-
-      <!-- Passion Card -->
+      
+      <!-- Rick2 - Second image -->
+      <img src="pics/Rick/rick2.png" alt="Rick Linnebank Action Shot" class="profile-image rick2">
+      
+      <!-- Second text box -->
       <div class="profile-card passion">
         <h2>Why Dodgeball? 🎯</h2>
         <p>I started playing dodgeball because me and Tyciano were looking for a new and fun teamsport. And so we came to dodgeball!</p>
-        <!-- Rick3 - Third most important -->
-        <img src="pics/Rick/rick3.png" alt="Rick Linnebank Dodgeball" class="floating-image ties3-image">
       </div>
-
-      <!-- Personal Card -->
+      
+      <!-- Rick3 - Third image -->
+      <img src="pics/Rick/rick3.png" alt="Rick Linnebank Dodgeball" class="profile-image rick3">
+      
+      <!-- Third text box -->
       <div class="profile-card personal">
         <h2>Beyond Dodgeball 🌟</h2>
         <p>Besides dodgeball I am a PE teacher at primary schools. In my spare time I love to longboard in the sun.</p>
       </div>
-    </div>
-
-    <!-- Rick4 - Least important, bigger and rectangular -->
-    <img src="pics/Rick/rick4.png" alt="Rick Linnebank with Team" class="floating-image ties4-image">
-
-    <!-- Bottom section removed -->
-    
-    <!-- Mobile Content - Only visible on mobile -->
-    <div class="mobile-content">
-      <!-- Mobile: Rick1 Image -->
-      <img src="pics/Rick/rick1.png" alt="Rick Linnebank Portrait" class="mobile-image rick1">
       
-      <!-- Mobile: Red Text Box -->
-      <div class="mobile-card intro">
-        <h2>Hey DCA! 👋</h2>
-        <p>Hey DCA! I'm Rick, 25 years old. I started playing near the end of 2022. I will focus on the youth trainings.</p>
-      </div>
-      
-      <!-- Mobile: Rick2 Image -->
-      <img src="pics/Rick/rick2.png" alt="Rick Linnebank Action Shot" class="mobile-image rick2">
-      
-      <!-- Mobile: Yellow Text Box -->
-      <div class="mobile-card passion">
-        <h2>Why Dodgeball? 🎯</h2>
-        <p>I started playing dodgeball because me and Tyciano were looking for a new and fun teamsport. And so we came to dodgeball!</p>
-      </div>
-      
-      <!-- Mobile: Rick3 Image -->
-      <img src="pics/Rick/rick3.png" alt="Rick Linnebank Dodgeball" class="mobile-image rick3">
-      
-      <!-- Mobile: Blue Text Box -->
-      <div class="mobile-card personal">
-        <h2>Beyond Dodgeball 🌟</h2>
-        <p>Besides dodgeball I am a PE teacher at primary schools. In my spare time I love to longboard in the sun.</p>
-      </div>
-      
-      <!-- Mobile: Rick4 Image -->
-      <img src="pics/Rick/rick4.png" alt="Rick Linnebank with Team" class="mobile-image rick4">
+      <!-- Rick4 - Fourth image -->
+      <img src="pics/Rick/rick4.png" alt="Rick Linnebank with Team" class="profile-image rick4">
     </div>
 
   </main>

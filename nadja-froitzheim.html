@@ -119,7 +119,7 @@
     /* — Main Content — */
     main {
       padding: 2rem 1rem;
-      max-width: 1000px;
+      max-width: 800px;
       margin: 0 auto;
     }
 
@@ -131,7 +131,6 @@
       padding: 2rem;
       border-radius: 20px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      position: relative;
     }
     .profile-header h1 {
       font-size: 3rem;
@@ -143,6 +142,98 @@
       font-size: 1.2rem;
       color: var(--accent);
       margin-bottom: 1rem;
+    }
+
+    /* Centered Content Layout */
+    .content-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Profile Images - Now centered and responsive */
+    .profile-image {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: block;
+      margin: 0 auto;
+    }
+    .profile-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    /* Nadja4 - Make it slightly larger and more rectangular */
+    .profile-image.nadja4 {
+      width: 400px;
+      height: 300px;
+      border-radius: 20px; /* Less rounded for nadja4 */
+    }
+
+    /* Card Styles - Simplified and centered */
+    .profile-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+    }
+    .profile-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    .profile-card.intro {
+      background: linear-gradient(135deg, var(--primary), #ff5252);
+      color: var(--light);
+    }
+    .profile-card.intro h2 {
+      color: var(--light);
+    }
+
+    .profile-card.passion {
+      background: linear-gradient(135deg, #ff9800, #ffc107);
+      color: var(--secondary);
+    }
+
+    .profile-card.personal {
+      background: linear-gradient(135deg, #2196f3, #03a9f4);
+      color: var(--light);
+    }
+    .profile-card.personal h2 {
+      color: var(--light);
+    }
+
+    .profile-card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    .profile-card p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    /* Remove old styles */
+    .image-gallery {
+      display: none;
+    }
+    .image-item {
+      display: none;
+    }
+    .feature-image {
+      display: none;
     }
 
     /* Floating circular images */
@@ -1169,72 +1260,39 @@
     <div class="profile-header">
       <h1>Nadja Froitzheim #82</h1>
       <p class="subtitle">🎉 Socials | 👩‍🔬 Population Biologist</p>
-      <!-- Nadja1 - Most important, prominent position -->
-      <img src="pics/Nadja/nadja1.png" alt="Nadja Froitzheim Portrait" class="floating-image ties1-image">
     </div>
 
-    <!-- Profile Grid -->
-    <div class="profile-grid">
-      <!-- Nadja2 - Second most important -->
-      <img src="pics/Nadja/nadja2.png" alt="Nadja Froitzheim Action Shot" class="floating-image ties2-image">
+    <!-- Centered Content Layout -->
+    <div class="content-container">
+      <!-- Nadja1 - First main image -->
+      <img src="pics/Nadja/nadja1.png" alt="Nadja Froitzheim Portrait" class="profile-image nadja1">
       
-      <!-- Intro Card -->
+      <!-- First text box -->
       <div class="profile-card intro">
         <h2>Hey DCA! 👋</h2>
         <p>Hey DCA! I'm Nadja (30) and playing dodgeball since 2022. I'm jumping into all things social & promo – with a special focus on boosting female representation in our club, yeah! 🥳</p>
       </div>
-
-      <!-- Passion Card -->
+      
+      <!-- Nadja2 - Second image -->
+      <img src="pics/Nadja/nadja2.png" alt="Nadja Froitzheim Action Shot" class="profile-image nadja2">
+      
+      <!-- Second text box -->
       <div class="profile-card passion">
         <h2>My Dodgeball Journey 🎯</h2>
         <p>Started playing in Sweden (2022), continued in NL (2024), and honestly? The game's extremely fun – but the community? Chef's kiss!</p>
-        <!-- Nadja3 - Third most important -->
-        <img src="pics/Nadja/nadja3.png" alt="Nadja Froitzheim Dodgeball" class="floating-image ties3-image">
       </div>
-
-      <!-- Personal Card -->
+      
+      <!-- Nadja3 - Third image -->
+      <img src="pics/Nadja/nadja3.png" alt="Nadja Froitzheim Dodgeball" class="profile-image nadja3">
+      
+      <!-- Third text box -->
       <div class="profile-card personal">
         <h2>Beyond Dodgeball 🌟</h2>
         <p>Besides dodgeball, I work as a population biologist, focusing on the conservation of endangered animal species – think snow leopards, manatees & co. I love dancing, cooking, spending time in nature, and curling up with a good book.</p>
       </div>
-    </div>
-
-    <!-- Nadja4 - Least important, bigger and rectangular -->
-    <img src="pics/Nadja/nadja4.png" alt="Nadja Froitzheim with Team" class="floating-image ties4-image">
-
-    <!-- Bottom section removed -->
-    
-    <!-- Mobile Content - Only visible on mobile -->
-    <div class="mobile-content">
-      <!-- Mobile: Nadja1 Image -->
-      <img src="pics/Nadja/nadja1.png" alt="Nadja Froitzheim Portrait" class="mobile-image ties1">
       
-      <!-- Mobile: Red Text Box -->
-      <div class="mobile-card intro">
-        <h2>Hey DCA! 👋</h2>
-        <p>Hey DCA! I'm Nadja (30) and playing dodgeball since 2022. I'm jumping into all things social & promo – with a special focus on boosting female representation in our club, yeah! 🥳</p>
-      </div>
-      
-      <!-- Mobile: Nadja2 Image -->
-      <img src="pics/Nadja/nadja2.png" alt="Nadja Froitzheim Action Shot" class="mobile-image ties2">
-      
-      <!-- Mobile: Yellow Text Box -->
-      <div class="mobile-card passion">
-        <h2>My Dodgeball Journey 🎯</h2>
-        <p>Started playing in Sweden (2022), continued in NL (2024), and honestly? The game's extremely fun – but the community? Chef's kiss!</p>
-      </div>
-      
-      <!-- Mobile: Nadja3 Image -->
-      <img src="pics/Nadja/nadja3.png" alt="Nadja Froitzheim Dodgeball" class="mobile-image ties3">
-      
-      <!-- Mobile: Blue Text Box -->
-      <div class="mobile-card personal">
-        <h2>Beyond Dodgeball 🌟</h2>
-        <p>Besides dodgeball, I work as a population biologist, focusing on the conservation of endangered animal species – think snow leopards, manatees & co. I love dancing, cooking, spending time in nature, and curling up with a good book.</p>
-      </div>
-      
-      <!-- Mobile: Nadja4 Image -->
-      <img src="pics/Nadja/nadja4.png" alt="Nadja Froitzheim with Team" class="mobile-image ties4">
+      <!-- Nadja4 - Fourth image -->
+      <img src="pics/Nadja/nadja4.png" alt="Nadja Froitzheim with Team" class="profile-image nadja4">
     </div>
 
   </main>
