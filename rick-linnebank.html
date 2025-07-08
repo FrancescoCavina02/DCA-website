@@ -540,10 +540,9 @@
         50% { transform: translateY(-20px) rotate(180deg); }
       }
       
-      /* CRITICAL: Hide ALL desktop content on mobile */
+      /* CRITICAL: Hide ALL desktop floating images and grid on mobile */
       .floating-image,
       .profile-grid,
-      .profile-card,
       .ties1-image,
       .ties2-image,
       .ties3-image,
@@ -663,10 +662,14 @@
       display: none;
     }
 
-    /* Hide mobile content on desktop */
+    /* Ensure desktop profile cards are visible */
     @media (min-width: 769px) {
       .mobile-content {
         display: none;
+      }
+      
+      .profile-card {
+        display: block;
       }
     }
 
@@ -678,7 +681,7 @@
     /* — Main Content — */
     main {
       padding: 2rem 1rem;
-      max-width: 1000px;
+      max-width: 800px;
       margin: 0 auto;
     }
 
@@ -704,125 +707,9 @@
       margin-bottom: 1rem;
     }
 
-    /* Floating circular images */
-    .floating-image {
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: absolute;
-    }
-    .floating-image:hover {
-      transform: scale(1.1);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-    }
 
-    /* Ties1 - Most important, prominent position */
-    .ties1-image {
-      width: 240px;
-      height: 240px;
-      top: 5rem;
-      right: -1rem;
-      z-index: 10;
-    }
 
-    /* Profile Grid */
-    .profile-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-      position: relative;
-      padding-top: 60px;
-      padding-left: 60px;
-      padding-right: 100px;
-    }
 
-    /* Ties2 - Second most important */
-    .ties2-image {
-      width: 200px;
-      height: 200px;
-      top: -90px;
-      left: -90px;
-      z-index: 5;
-    }
-
-    /* Ties3 - Third most important */
-    .ties3-image {
-      width: 200px;
-      height: 200px;
-      position: absolute;
-      top: 190px;
-      right: -140px;
-      left: auto;
-      z-index: 5;
-    }
-
-    /* Ties4 - Least important, bigger and rectangular */
-    .ties4-image {
-      width: 500px;
-      height: auto;
-      border-radius: 50%; /* Make ties4 oval on desktop */
-      position: absolute;
-      top: calc(100% + 2rem);
-      right: auto;
-      left: 700px;
-      z-index: 3;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    }
-
-    /* Card Styles */
-    .profile-card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 2rem;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      z-index: 2;
-    }
-    .profile-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-    }
-
-    .profile-card.intro {
-      background: linear-gradient(135deg, var(--primary), #ff5252);
-      color: var(--light);
-      padding-right: 80px;
-      padding-left: 2rem;
-    }
-    .profile-card.intro h2 {
-      color: var(--light);
-    }
-
-    .profile-card.passion {
-      background: linear-gradient(135deg, #ff9800, #ffc107);
-      color: var(--secondary);
-      position: relative;
-      padding-right: 80px;
-      padding-left: 2rem;
-    }
-
-    .profile-card.personal {
-      background: linear-gradient(135deg, #2196f3, #03a9f4);
-      color: var(--light);
-      padding-left: 80px;
-      padding-right: 2rem;
-    }
-    .profile-card.personal h2 {
-      color: var(--light);
-    }
-
-    .profile-card h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      color: var(--primary);
-    }
-    .profile-card p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-    }
 
     /* Bottom section - Revert padding */
     .bottom-section {
