@@ -303,6 +303,16 @@
       transform: scale(1.1);
     }
 
+    .tiktok-logo {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .social-link:hover .tiktok-logo {
+      transform: scale(1.1);
+    }
+
     .footer-heading {
       font-size: 1.2rem;
       font-weight: 700;
@@ -871,6 +881,81 @@
     .pricing-card:hover::before {
       height: 100%;
       opacity: 0.05;
+    }
+
+    /* Mobile Contact Section */
+    .mobile-contact-section {
+      display: none;
+      padding: 2rem 0;
+      text-align: center;
+    }
+    
+    .mobile-contact-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, var(--primary), #ff6b6b, #e91e63);
+      color: var(--light);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 8px 30px rgba(211, 47, 47, 0.3);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+    }
+    
+    .mobile-contact-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .mobile-contact-btn:hover::before {
+      left: 100%;
+    }
+    
+    .mobile-contact-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 12px 40px rgba(211, 47, 47, 0.4);
+      text-decoration: none;
+    }
+    
+    .mobile-contact-btn:active {
+      transform: translateY(-1px) scale(1.02);
+    }
+    
+    .btn-icon {
+      font-size: 1.2rem;
+      animation: iconPulse 2s ease-in-out infinite;
+    }
+    
+    .btn-text {
+      font-weight: 700;
+    }
+    
+    .btn-arrow {
+      font-size: 1.1rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .mobile-contact-btn:hover .btn-arrow {
+      transform: translateX(5px);
+    }
+    
+    @keyframes iconPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
     }
 
     .card-header {
@@ -1463,6 +1548,18 @@
       .pricing-card {
         padding: 1.5rem;
         margin-bottom: 0;
+        cursor: default;
+        pointer-events: none;
+      }
+      
+      .pricing-card:hover {
+        transform: none;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      }
+      
+      /* Show mobile contact button on mobile only */
+      .mobile-contact-section {
+        display: block !important;
       }
       
       .card-title {
@@ -1686,7 +1783,7 @@
         </div>
 
         <div class="pricing-cards">
-          <div class="pricing-card yearly">
+          <div class="pricing-card yearly" onclick="window.location.href='contact.html'">
             <div class="card-header">
               <div class="card-title">🏆 1-Year Membership</div>
               <div class="card-price">€220</div>
@@ -1700,7 +1797,7 @@
             </ul>
           </div>
 
-          <div class="pricing-card strip">
+          <div class="pricing-card strip" onclick="window.location.href='contact.html'">
             <div class="card-header">
               <div class="card-title">📝 Strip Card</div>
               <div class="card-price">€50</div>
@@ -1714,7 +1811,7 @@
             </ul>
           </div>
 
-          <div class="pricing-card dropin">
+          <div class="pricing-card dropin" onclick="window.location.href='contact.html'">
             <div class="card-header">
               <div class="card-title">⚡ Drop-In</div>
               <div class="card-price">€7</div>
@@ -1727,6 +1824,15 @@
               <li>Pay as you play</li>
             </ul>
           </div>
+        </div>
+        
+        <!-- Mobile Contact Button -->
+        <div class="mobile-contact-section">
+          <a href="contact.html" class="mobile-contact-btn">
+            <span class="btn-icon">💬</span>
+            <span class="btn-text">Interested? Contact us!</span>
+            <span class="btn-arrow">→</span>
+          </a>
         </div>
       </div>
     </div>
@@ -1754,7 +1860,7 @@
             <div class="social-links">
               <a href="moments.html" class="social-link" title="Our Moments">📸</a>
               <a href="social.html" class="social-link" title="Social Events">🎉</a>
-              <a href="competitions.html" class="social-link" title="Competitions">🏆</a>
+              <a href="https://www.tiktok.com/@dodgeballamsterdam?_t=ZG-8xrTnrmMLQG&_r=1" class="social-link" title="Follow us on TikTok" target="_blank"><img src="pics/tiktok.png" alt="TikTok" class="tiktok-logo"></a>
               <a href="https://www.instagram.com/dodgeballamsterdam?utm_source=ig_web_button_share_sheet&igsh=MWl1ZmU1Z3FmYzg2Mw==" class="social-link" title="Follow us on Instagram" target="_blank"><img src="pics/insta.png" alt="Instagram" class="instagram-logo"></a>
             </div>
           </div>

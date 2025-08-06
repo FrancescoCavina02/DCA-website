@@ -755,8 +755,8 @@
       overflow: hidden;
     }
 
-    .whatsapp-link {
-      background: linear-gradient(45deg, #25d366, #128c7e);
+    .tiktok-link {
+      background: linear-gradient(45deg, #000000, #ff0050);
       color: var(--light);
     }
 
@@ -790,7 +790,7 @@
       z-index: -1;
     }
 
-    .whatsapp-glow { background: radial-gradient(circle, rgba(37,211,102,0.2) 0%, transparent 70%); }
+    .tiktok-glow { background: radial-gradient(circle, rgba(255,0,80,0.2) 0%, transparent 70%); }
     .instagram-glow { background: radial-gradient(circle, rgba(228,64,95,0.2) 0%, transparent 70%); }
     .email-glow { background: radial-gradient(circle, rgba(211,47,47,0.2) 0%, transparent 70%); }
 
@@ -1064,7 +1064,7 @@
     }
 
     .cta-button.primary {
-      background: linear-gradient(45deg, #25d366, #128c7e);
+      background: linear-gradient(45deg, #000000, #ff0050);
       color: var(--light);
     }
 
@@ -1444,6 +1444,16 @@
       transform: scale(1.1);
     }
 
+    .tiktok-logo {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .social-link:hover .tiktok-logo {
+      transform: scale(1.1);
+    }
+
     .footer-heading {
       font-size: 1.2rem;
       font-weight: 700;
@@ -1800,15 +1810,15 @@
         <h2 class="section-title">How to Reach Us</h2>
         <div class="methods-grid">
           
-          <!-- WhatsApp Card -->
-          <div class="contact-card whatsapp-card" data-delay="0">
-            <div class="card-icon">💬</div>
-            <h3>Join Our WhatsApp</h3>
-            <p>The fastest way to connect! Get instant updates, chat with members, and never miss a training session or social event.</p>
-            <a href="https://chat.whatsapp.com/JUQuZMycWxSLmSR39ZgDhs" target="_blank" class="contact-link whatsapp-link">
-              Join the Chat
+          <!-- TikTok Card -->
+          <div class="contact-card tiktok-card" data-delay="0">
+            <div class="card-icon">🎵</div>
+            <h3>Follow Us on TikTok</h3>
+            <p>Watch our epic dodgeball moves, behind-the-scenes fun, and viral moments! Join our TikTok community for the latest content.</p>
+            <a href="https://www.tiktok.com/@dodgeballamsterdam?_t=ZG-8xrTnrmMLQG&_r=1" target="_blank" class="contact-link tiktok-link">
+              Follow @dodgeballamsterdam
             </a>
-            <div class="card-glow whatsapp-glow"></div>
+            <div class="card-glow tiktok-glow"></div>
           </div>
 
           <!-- Instagram Card -->
@@ -1926,8 +1936,8 @@
           <h2>Ready to Dodge, Duck, Dip, Dive, and... Dodge?</h2>
           <p>Join the most fun-loving, competitive, and welcoming dodgeball community in Amsterdam!</p>
           <div class="cta-buttons">
-            <a href="https://chat.whatsapp.com/JUQuZMycWxSLmSR39ZgDhs" target="_blank" class="cta-button primary">
-              Join WhatsApp Group
+            <a href="https://www.tiktok.com/@dodgeballamsterdam?_t=ZG-8xrTnrmMLQG&_r=1" target="_blank" class="cta-button primary">
+              Follow on TikTok
             </a>
             <a href="practice-prices.html" class="cta-button secondary">
               View Membership Options
@@ -1961,7 +1971,7 @@
             <div class="social-links">
               <a href="moments.html" class="social-link" title="Our Moments">📸</a>
               <a href="social.html" class="social-link" title="Social Events">🎉</a>
-              <a href="competitions.html" class="social-link" title="Competitions">🏆</a>
+              <a href="https://www.tiktok.com/@dodgeballamsterdam?_t=ZG-8xrTnrmMLQG&_r=1" class="social-link" title="Follow us on TikTok" target="_blank"><img src="pics/tiktok.png" alt="TikTok" class="tiktok-logo"></a>
               <a href="https://www.instagram.com/dodgeballamsterdam?utm_source=ig_web_button_share_sheet&igsh=MWl1ZmU1Z3FmYzg2Mw==" class="social-link" title="Follow us on Instagram" target="_blank"><img src="pics/insta.png" alt="Instagram" class="instagram-logo"></a>
             </div>
           </div>
