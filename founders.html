@@ -1470,6 +1470,15 @@
       transform: scale(1.05);
       background-color: rgba(211, 47, 47, 0.1);
     }
+    .dropdown > span::after {
+      content: '▼';
+      float: right;
+      transition: transform 0.3s ease;
+      font-size: 0.8rem;
+    }
+    .dropdown.active > span::after {
+      transform: rotate(180deg);
+    }
     .dropdown > span::before {
       content: '';
       position: absolute;
