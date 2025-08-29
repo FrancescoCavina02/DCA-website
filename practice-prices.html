@@ -146,25 +146,7 @@
       transform: scale(1.05);
       background-color: rgba(211, 47, 47, 0.1);
     }
-    nav#nav-menu a::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 0.2rem;
-      width: 25px;
-      height: 25px;
-      background-image: url('pics/Ball.jpg');
-      background-size: cover;
-      background-position: center;
-      transform: translateY(-50%) scale(0);
-      transition: transform 0.3s ease;
-      z-index: -1;
-      opacity: 0.8;
-      border-radius: 50%;
-    }
-    nav#nav-menu a:hover::before {
-      transform: translateY(-50%) scale(1);
-    }
+
     .menu-toggle {
       display: none;
       background: none;
@@ -1107,28 +1089,8 @@
     .dropdown.active > span::after {
       transform: rotate(180deg);
     }
-    .dropdown > span::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 0.2rem;
-      width: 25px;
-      height: 25px;
-      background-image: url('pics/Ball.jpg');
-      background-size: cover;
-      background-position: center;
-      transform: translateY(-50%) scale(0);
-      transition: transform 0.3s ease;
-      z-index: -1;
-      opacity: 0.8;
-      border-radius: 50%;
-    }
-    .dropdown > span:hover::before {
-      left: 0;
-    }
-    .dropdown.active > span::before {
-      left: 0;
-    }
+
+
     .dropdown > span:hover {
       color: var(--light);
       transform: translateX(10px);
@@ -1351,21 +1313,7 @@
         overflow: hidden;
       }
       
-      nav#nav-menu a::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(45deg, var(--primary), #ff6b6b);
-        transition: left 0.3s ease;
-        z-index: -1;
-      }
-      
-      nav#nav-menu a:hover::before {
-        left: 0;
-      }
+
       
       nav#nav-menu a:hover {
         color: var(--light);
@@ -1393,25 +1341,7 @@
         overflow: hidden;
       }
       
-      .dropdown > span::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(45deg, #ff9800, #ffc107);
-        transition: left 0.3s ease;
-        z-index: -1;
-      }
-      
-      .dropdown > span:hover::before {
-        left: 0;
-      }
-      
-      .dropdown.active > span::before {
-        left: 0;
-      }
+
       
       .dropdown > span::after {
         content: '▼';
