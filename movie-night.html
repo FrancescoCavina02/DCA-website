@@ -1935,7 +1935,8 @@
         const dropdownSpan = dropdown.querySelector('span');
         const dropdownContent = dropdown.querySelector('.dropdown-content');
         
-        dropdownSpan.addEventListener('click', function(e) {
+        if (dropdownSpan) {
+          dropdownSpan.addEventListener('click', function(e) {
           if (window.innerWidth <= 768) {
             e.preventDefault();
             e.stopPropagation();
@@ -2031,7 +2032,8 @@
               }, 150);
             }
           }
-        });
+          });
+        }
       });
 
       // Enhanced Gallery Video Player Functionality with Optimized Loading
