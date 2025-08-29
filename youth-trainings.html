@@ -202,6 +202,15 @@
       transform: scale(1.05);
       background-color: rgba(211, 47, 47, 0.1);
     }
+    .dropdown > span::after {
+      content: '▼';
+      float: right;
+      transition: transform 0.3s ease;
+      font-size: 0.8rem;
+    }
+    .dropdown.active > span::after {
+      transform: rotate(180deg);
+    }
 
     header .logo a {
       color: var(--light);
@@ -930,6 +939,17 @@
         color: var(--light);
       }
       
+      .dropdown > span::after {
+        content: '▼';
+        float: right;
+        transition: transform 0.3s ease;
+        font-size: 0.8rem;
+      }
+      
+      .dropdown.active > span::after {
+        transform: rotate(180deg);
+      }
+      
       .dropdown-content {
         position: static;
         display: block;
@@ -1377,7 +1397,13 @@
           <a href="board.html">The Board</a>
         </div>
       </div>
-      <a href="practice-prices.html">Practice & Prices</a>
+      <div class="dropdown">
+        <span>Trainings</span>
+        <div class="dropdown-content">
+          <a href="practice-prices.html">Practice & Prices</a>
+          <a href="youth-trainings.html">Youth Trainings</a>
+        </div>
+      </div>
       <a href="competitions.html">Competitions</a>
       <div class="dropdown">
         <span>Social</span>
