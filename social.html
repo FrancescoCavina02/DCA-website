@@ -827,6 +827,345 @@
     .activity-card[data-delay="4"] { animation-delay: 3.3s; }
     .activity-card[data-delay="5"] { animation-delay: 3.5s; }
     .activity-card[data-delay="6"] { animation-delay: 3.7s; }
+
+    /* 🎉 Fun Coming Soon Section Styles 🎉 */
+    .coming-soon-section {
+      margin: 4rem 0;
+      padding: 3rem 1rem;
+      background: linear-gradient(135deg, 
+        rgba(211, 47, 47, 0.05) 0%, 
+        rgba(255, 107, 107, 0.08) 50%, 
+        rgba(211, 47, 47, 0.05) 100%);
+      border-radius: 30px;
+      position: relative;
+      overflow: hidden;
+      animation: sectionPulse 4s ease-in-out infinite;
+    }
+
+    .coming-soon-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, 
+        transparent, 
+        rgba(211, 47, 47, 0.1), 
+        transparent, 
+        rgba(255, 107, 107, 0.1),
+        transparent);
+      animation: rotateBackground 20s linear infinite;
+      z-index: 0;
+    }
+
+    .coming-soon-container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .mystery-box {
+      position: relative;
+      transform-style: preserve-3d;
+      animation: mysteryFloat 3s ease-in-out infinite;
+    }
+
+    .mystery-icon {
+      font-size: 4rem;
+      filter: drop-shadow(0 10px 20px rgba(211, 47, 47, 0.3));
+      animation: mysteryBounce 2s ease-in-out infinite;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .mystery-icon:hover {
+      transform: scale(1.2) rotateY(20deg);
+      filter: drop-shadow(0 15px 30px rgba(211, 47, 47, 0.5));
+    }
+
+    .sparkles {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .sparkle {
+      position: absolute;
+      font-size: 1.5rem;
+      opacity: 0;
+      animation: sparkleFloat 3s ease-in-out infinite;
+    }
+
+    .sparkle-1 { top: -40px; left: -30px; animation-delay: 0s; }
+    .sparkle-2 { top: -30px; right: -40px; animation-delay: 0.5s; }
+    .sparkle-3 { bottom: -35px; left: -35px; animation-delay: 1s; }
+    .sparkle-4 { bottom: -40px; right: -30px; animation-delay: 1.5s; }
+    .sparkle-5 { top: -20px; left: 40px; animation-delay: 2s; }
+    .sparkle-6 { bottom: -20px; right: 40px; animation-delay: 2.5s; }
+
+    .coming-soon-text {
+      text-align: center;
+      animation: textGlow 3s ease-in-out infinite;
+    }
+
+    .soon-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(45deg, 
+        var(--primary), 
+        #ff6b6b, 
+        #ffa726, 
+        var(--primary));
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 3s ease-in-out infinite;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .emoji-line {
+      font-size: 3rem;
+      margin: 1rem 0;
+      animation: emojiWiggle 2s ease-in-out infinite;
+      letter-spacing: 1rem;
+    }
+
+    .tease-text {
+      font-size: 1.3rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      opacity: 0.9;
+      animation: teaseGlow 2s ease-in-out infinite alternate;
+    }
+
+    .loading-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .dot {
+      font-size: 2rem;
+      color: var(--primary);
+      animation: dotBounce 1.4s ease-in-out infinite;
+    }
+
+    .dot-1 { animation-delay: 0s; }
+    .dot-2 { animation-delay: 0.2s; }
+    .dot-3 { animation-delay: 0.4s; }
+
+    .hype-meter {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+      min-width: 300px;
+      animation: hypePulse 2s ease-in-out infinite;
+    }
+
+    .hype-label {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: var(--secondary);
+    }
+
+    .hype-bar {
+      width: 100%;
+      height: 15px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 0.8rem;
+      position: relative;
+    }
+
+    .hype-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        var(--primary), 
+        #ff6b6b, 
+        #ffa726, 
+        #66bb6a);
+      border-radius: 10px;
+      animation: hypeFill 3s ease-out infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hype-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.6), 
+        transparent);
+      animation: hypeShine 2s ease-in-out infinite;
+    }
+
+    .hype-text {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      animation: hypeTextBounce 1s ease-in-out infinite;
+    }
+
+    /* 🎨 Awesome Animations 🎨 */
+    @keyframes sectionPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(211, 47, 47, 0.4); }
+      50% { transform: scale(1.02); box-shadow: 0 0 30px rgba(211, 47, 47, 0.2); }
+    }
+
+    @keyframes rotateBackground {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes mysteryFloat {
+      0%, 100% { transform: translateY(0px) rotateY(0deg); }
+      50% { transform: translateY(-20px) rotateY(180deg); }
+    }
+
+    @keyframes mysteryBounce {
+      0%, 100% { transform: scale(1) rotateZ(0deg); }
+      50% { transform: scale(1.1) rotateZ(5deg); }
+    }
+
+    @keyframes sparkleFloat {
+      0%, 100% { opacity: 0; transform: translateY(0px) scale(0.5); }
+      50% { opacity: 1; transform: translateY(-15px) scale(1.2); }
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes textGlow {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.2); }
+    }
+
+    @keyframes emojiWiggle {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-5deg) scale(1.05); }
+      75% { transform: rotate(5deg) scale(0.95); }
+    }
+
+    @keyframes teaseGlow {
+      0% { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.02); }
+    }
+
+    @keyframes dotBounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+      30% { transform: translateY(-15px); opacity: 1; }
+    }
+
+    @keyframes hypePulse {
+      0%, 100% { transform: scale(1); border-color: rgba(255, 255, 255, 0.2); }
+      50% { transform: scale(1.03); border-color: rgba(211, 47, 47, 0.4); }
+    }
+
+    @keyframes hypeFill {
+      0% { width: 0%; }
+      70% { width: 100%; }
+      100% { width: 100%; }
+    }
+
+    @keyframes hypeShine {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    @keyframes hypeTextBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* 📱 Mobile Responsiveness for Coming Soon Section 📱 */
+    @media (max-width: 768px) {
+      .coming-soon-section {
+        margin: 2rem 0;
+        padding: 2rem 1rem;
+      }
+
+      .coming-soon-container {
+        gap: 1.5rem;
+        max-width: 100%;
+        padding: 0 0.5rem;
+      }
+
+      .mystery-icon {
+        font-size: 3rem;
+      }
+
+      .sparkle {
+        font-size: 1.2rem;
+      }
+
+      .soon-title {
+        font-size: 2rem;
+      }
+
+      .emoji-line {
+        font-size: 2.5rem;
+        letter-spacing: 0.5rem;
+      }
+
+      .tease-text {
+        font-size: 1.1rem;
+      }
+
+      .hype-meter {
+        min-width: 250px;
+        padding: 1rem;
+      }
+
+      .hype-label,
+      .hype-text {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .soon-title {
+        font-size: 1.8rem;
+      }
+
+      .emoji-line {
+        font-size: 2rem;
+        letter-spacing: 0.3rem;
+      }
+
+      .mystery-icon {
+        font-size: 2.5rem;
+      }
+
+      .hype-meter {
+        min-width: 200px;
+        padding: 0.8rem;
+      }
+    }
     .activity-card[data-delay="7"] { animation-delay: 3.9s; }
 
     /* Animations */
@@ -1505,13 +1844,40 @@
         <div class="agenda-grid">
 
 
-          <div class="agenda-card" data-delay="2">
-            <div class="card-date">06-07/09</div>
-            <div class="card-icon">🏠</div>
-            <div class="card-content">
-              <h3>Weekend Sleepover</h3>
-              <p>The ultimate bonding experience! Games, movies, and memories that will last a lifetime.</p>
+
+        </div>
+      </div>
+
+      <!-- Fun Coming Soon Section -->
+      <div class="coming-soon-section">
+        <div class="coming-soon-container">
+          <div class="mystery-box">
+            <div class="mystery-icon">📦</div>
+            <div class="sparkles">
+              <span class="sparkle sparkle-1">✨</span>
+              <span class="sparkle sparkle-2">⭐</span>
+              <span class="sparkle sparkle-3">💫</span>
+              <span class="sparkle sparkle-4">🌟</span>
+              <span class="sparkle sparkle-5">✨</span>
+              <span class="sparkle sparkle-6">⭐</span>
             </div>
+          </div>
+          <div class="coming-soon-text">
+            <h2 class="soon-title">New agenda coming soon</h2>
+            <div class="emoji-line">🔜 👀</div>
+            <p class="tease-text">Something EPIC is brewing... 🎉</p>
+            <div class="loading-dots">
+              <span class="dot dot-1">•</span>
+              <span class="dot dot-2">•</span>
+              <span class="dot dot-3">•</span>
+            </div>
+          </div>
+          <div class="hype-meter">
+            <div class="hype-label">Hype Level:</div>
+            <div class="hype-bar">
+              <div class="hype-fill"></div>
+            </div>
+            <div class="hype-text">MAXIMUM! 🔥</div>
           </div>
         </div>
       </div>
