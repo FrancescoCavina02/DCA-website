@@ -865,6 +865,83 @@
       opacity: 0.05;
     }
 
+    /* Student Discount Badge */
+    .student-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(135deg, #ff6b6b, #e91e63);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+      animation: badgePulse 2s ease-in-out infinite;
+      z-index: 10;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4); }
+      50% { transform: scale(1.05); box-shadow: 0 6px 20px rgba(233, 30, 99, 0.6); }
+    }
+
+    /* Price Display with Student Discount */
+    .price-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.25rem;
+    }
+
+    .original-price {
+      font-size: 1.2rem;
+      color: var(--accent);
+      opacity: 0.6;
+      text-decoration: line-through;
+      font-weight: 500;
+    }
+
+    .student-price {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #e91e63, #ff6b6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: priceShine 3s ease-in-out infinite;
+      position: relative;
+    }
+
+    .student-price::after {
+      content: '🎓';
+      position: absolute;
+      right: -25px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      animation: graduationFloat 2s ease-in-out infinite;
+    }
+
+    @keyframes priceShine {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    @keyframes graduationFloat {
+      0%, 100% { transform: translateY(-50%) rotate(0deg); }
+      50% { transform: translateY(-60%) rotate(15deg); }
+    }
+
+    .student-note {
+      font-size: 0.75rem;
+      color: #e91e63;
+      font-weight: 600;
+      text-align: right;
+      margin-top: 0.25rem;
+      font-style: italic;
+    }
+
     /* Mobile Contact Section */
     .mobile-contact-section {
       display: none;
@@ -1496,6 +1573,36 @@
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       }
       
+      /* Mobile student badge */
+      .student-badge {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+        top: 10px;
+        right: 10px;
+      }
+      
+      /* Mobile price container */
+      .price-container {
+        align-items: flex-end;
+      }
+      
+      .student-price {
+        font-size: 1.5rem;
+      }
+      
+      .student-price::after {
+        right: -20px;
+        font-size: 0.9rem;
+      }
+      
+      .original-price {
+        font-size: 1rem;
+      }
+      
+      .student-note {
+        font-size: 0.65rem;
+      }
+      
       /* Show mobile contact button on mobile only */
       .mobile-contact-section {
         display: block !important;
@@ -1729,9 +1836,14 @@
 
         <div class="pricing-cards">
           <div class="pricing-card yearly" onclick="window.location.href='contact.html'">
+            <div class="student-badge">11% OFF for Students!</div>
             <div class="card-header">
               <div class="card-title">🏆 1-Year Membership</div>
-              <div class="card-price">€220</div>
+              <div class="price-container">
+                <div class="original-price">€220</div>
+                <div class="student-price">€195.80</div>
+                <div class="student-note">with student discount</div>
+              </div>
             </div>
             <div class="card-description">The ultimate dodgeball commitment!</div>
             <ul class="card-features">
@@ -1739,6 +1851,7 @@
               <li>Priority in tournaments</li>
               <li>Member-exclusive social events</li>
               <li>Best value for serious dodgers</li>
+              <li>SSA student discount available 🎓</li>
             </ul>
           </div>
 
