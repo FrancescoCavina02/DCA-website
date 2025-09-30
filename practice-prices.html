@@ -867,9 +867,7 @@
 
     /* Student Discount Badge */
     .student-badge {
-      position: absolute;
-      top: 15px;
-      right: 15px;
+      display: inline-block;
       background: linear-gradient(135deg, #ff6b6b, #e91e63);
       color: var(--light);
       padding: 0.5rem 1rem;
@@ -878,7 +876,7 @@
       font-weight: 700;
       box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
       animation: badgePulse 2s ease-in-out infinite;
-      z-index: 10;
+      margin-bottom: 0.5rem;
     }
 
     @keyframes badgePulse {
@@ -1610,8 +1608,7 @@
       .student-badge {
         font-size: 0.75rem;
         padding: 0.4rem 0.8rem;
-        top: 10px;
-        right: 10px;
+        margin-bottom: 0.4rem;
       }
       
       /* Mobile student discount box */
@@ -1880,7 +1877,6 @@
 
         <div class="pricing-cards">
           <div class="pricing-card yearly" onclick="window.location.href='contact.html'">
-            <div class="student-badge">11% OFF for Students!</div>
             <div class="card-header">
               <div class="card-title">🏆 1-Year Membership</div>
               <div class="card-price">€220</div>
@@ -1892,6 +1888,7 @@
               <li>Member-exclusive social events</li>
               <li>Best value for serious dodgers</li>
             </ul>
+            <div class="student-badge">11% OFF for Students!</div>
             <div class="student-discount-box">
               <div class="student-discount-header">Student Discount</div>
               <div class="student-price-display">
