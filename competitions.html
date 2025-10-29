@@ -1806,6 +1806,59 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.1); }
     }
+
+    /* Previous Season Button */
+    .show-previous-season-btn {
+      background: linear-gradient(135deg, var(--accent), var(--secondary));
+      color: var(--light);
+      border: 2px solid var(--primary);
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .show-previous-season-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s;
+    }
+
+    .show-previous-season-btn:hover::before {
+      left: 100%;
+    }
+
+    .show-previous-season-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(211, 47, 47, 0.4);
+      border-color: var(--gold);
+      background: linear-gradient(135deg, var(--primary), #ff6b6b);
+    }
+
+    .show-previous-season-btn:active {
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    /* Mobile button adjustments */
+    @media (max-width: 768px) {
+      .show-previous-season-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+      }
+    }
   </style>
 </head>
 
@@ -2434,169 +2487,227 @@
 
         <!-- Mixed 1 Timeline -->
         <div class="timeline" id="timeline-mixed1" style="display: none;">
-          <!-- March 2025 -->
+          <!-- October 2025 - NEW SEASON -->
           <div class="timeline-item" data-delay="0">
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">09 March 2025</div>
-              </div>
-              <div class="competition-header">
-                <div class="trophy-icon">🏆</div>
-                <div class="competition-info">
-                  <h3>4th Competition Day of the Season</h3>
-                  <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
-                </div>
-              </div>
-              <div class="competition-details">
-                <div class="result-badge wins-losses">
-                  <span>⚡</span>
-                  <span>2 Wins, 1 Loss</span>
-                </div>
-                <div class="results-list">
-                  <h4 class="results-title">Match Results</h4>
-                  <ul class="match-results">
-                    <li class="match-item win">
-                      <span class="teams">DCA1 vs Drachten</span>
-                      <span class="score">26 - 10</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA1 vs Utrecht</span>
-                      <span class="score">24 - 8</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item loss">
-                      <span class="teams">DCA1 vs Haarlem</span>
-                      <span class="score">4 - 30</span>
-                      <span class="result-icon">❌</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- January 2025 -->
-          <div class="timeline-item" data-delay="1">
-            <div class="timeline-content">
-              <div class="date-medal-container">
-                <div class="competition-date">18 January 2025</div>
-              </div>
-              <div class="competition-header">
-                <div class="trophy-icon">🏆</div>
-                <div class="competition-info">
-                  <h3>3rd Competition Day of the Season</h3>
-                  <p class="venue">Sportzaal Het Zand, Utrecht</p>
-                </div>
-              </div>
-              <div class="competition-details">
-                <div class="result-badge wins-losses">
-                  <span>⚡</span>
-                  <span>3 Wins</span>
-                </div>
-                <div class="results-list">
-                  <h4 class="results-title">Match Results</h4>
-                  <ul class="match-results">
-                    <li class="match-item win">
-                      <span class="teams">DCA1 vs Haarlem</span>
-                      <span class="score">16 - 14</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA1 vs Drachten</span>
-                      <span class="score">18 - 12</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA1 vs Utrecht</span>
-                      <span class="score">18 - 8</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- November 2024 -->
-          <div class="timeline-item" data-delay="2">
-            <div class="timeline-content">
-              <div class="date-medal-container">
-                <div class="competition-date">24 November 2024</div>
-              </div>
-              <div class="competition-header">
-                <div class="trophy-icon">🏆</div>
-                <div class="competition-info">
-                  <h3>2nd Competition Day of the Season</h3>
-                  <p class="venue">Sporthal CT stork, Hengelo</p>
-                </div>
-              </div>
-              <div class="competition-details">
-                <div class="result-badge wins-losses">
-                  <span>⚡</span>
-                  <span>2 Wins, 1 Loss</span>
-                </div>
-                <div class="results-list">
-                  <h4 class="results-title">Match Results</h4>
-                  <ul class="match-results">
-                    <li class="match-item win">
-                      <span class="teams">DCA1 vs Utrecht</span>
-                      <span class="score">18 - 10</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA1 vs Drachten</span>
-                      <span class="score">28 - 6</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item loss">
-                      <span class="teams">DCA1 vs Haarlem</span>
-                      <span class="score">9 - 19</span>
-                      <span class="result-icon">❌</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- October 2024 -->
-          <div class="timeline-item" data-delay="3">
-            <div class="timeline-content">
-              <div class="date-medal-container">
-                <div class="competition-date">12 October 2024</div>
+                <div class="competition-date">11 October 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
                   <h3>1st Competition Day of the Season</h3>
-                  <p class="venue">Kennemer Sportcenter, Haarlem</p>
+                  <p class="venue">Sportcentrum Drachten, Drachten</p>
                 </div>
               </div>
               <div class="competition-details">
                 <div class="result-badge wins-losses">
                   <span>⚡</span>
-                  <span>3 Wins</span>
+                  <span>1 Win, 1 Draw, 1 Loss</span>
                 </div>
                 <div class="results-list">
                   <h4 class="results-title">Match Results</h4>
                   <ul class="match-results">
-                    <li class="match-item win">
+                    <li class="match-item loss">
                       <span class="teams">DCA1 vs Haarlem</span>
-                      <span class="score">24 - 10</span>
-                      <span class="result-icon">✅</span>
+                      <span class="score">7 - 23</span>
+                      <span class="result-icon">❌</span>
                     </li>
                     <li class="match-item win">
+                      <span class="teams">DCA1 vs Delft</span>
+                      <span class="score">25 - 13</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item draw">
                       <span class="teams">DCA1 vs Drachten</span>
-                      <span class="score">20 - 12</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA1 vs Utrecht</span>
-                      <span class="score">36 - 2</span>
-                      <span class="result-icon">✅</span>
+                      <span class="score">19 - 19</span>
+                      <span class="result-icon">⚖️</span>
                     </li>
                   </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Button to show previous season -->
+          <div style="text-align: center; margin: 3rem 0;">
+            <button id="show-previous-mixed1" class="show-previous-season-btn">
+              <span>📜</span>
+              View Previous Season (2024/2025)
+              <span>📜</span>
+            </button>
+          </div>
+
+          <!-- Previous Season Timeline (2024/2025) - Initially Hidden -->
+          <div id="previous-season-mixed1" style="display: none;">
+            <h3 style="text-align: center; color: var(--accent); margin: 2rem 0 3rem 0; font-size: 1.8rem;">
+              🏆 Season 2024/2025 Results 🏆
+            </h3>
+
+            <!-- March 2025 -->
+            <div class="timeline-item" data-delay="0">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">09 March 2025</div>
+                </div>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>4th Competition Day of the Season</h3>
+                    <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
+                  </div>
+                </div>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>2 Wins, 1 Loss</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Drachten</span>
+                        <span class="score">26 - 10</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Utrecht</span>
+                        <span class="score">24 - 8</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item loss">
+                        <span class="teams">DCA1 vs Haarlem</span>
+                        <span class="score">4 - 30</span>
+                        <span class="result-icon">❌</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- January 2025 -->
+            <div class="timeline-item" data-delay="1">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">18 January 2025</div>
+                </div>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>3rd Competition Day of the Season</h3>
+                    <p class="venue">Sportzaal Het Zand, Utrecht</p>
+                  </div>
+                </div>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>3 Wins</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Haarlem</span>
+                        <span class="score">16 - 14</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Drachten</span>
+                        <span class="score">18 - 12</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Utrecht</span>
+                        <span class="score">18 - 8</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- November 2024 -->
+            <div class="timeline-item" data-delay="2">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">24 November 2024</div>
+                </div>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>2nd Competition Day of the Season</h3>
+                    <p class="venue">Sporthal CT stork, Hengelo</p>
+                  </div>
+                </div>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>2 Wins, 1 Loss</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Utrecht</span>
+                        <span class="score">18 - 10</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Drachten</span>
+                        <span class="score">28 - 6</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item loss">
+                        <span class="teams">DCA1 vs Haarlem</span>
+                        <span class="score">9 - 19</span>
+                        <span class="result-icon">❌</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- October 2024 -->
+            <div class="timeline-item" data-delay="3">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">12 October 2024</div>
+                </div>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>1st Competition Day of the Season</h3>
+                    <p class="venue">Kennemer Sportcenter, Haarlem</p>
+                  </div>
+                </div>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>3 Wins</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Haarlem</span>
+                        <span class="score">24 - 10</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Drachten</span>
+                        <span class="score">20 - 12</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Utrecht</span>
+                        <span class="score">36 - 2</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2605,149 +2716,207 @@
 
         <!-- Mixed 2 Timeline -->
         <div class="timeline" id="timeline-mixed2" style="display: none;">
-          <!-- March 2025 -->
+          <!-- October 2025 - NEW SEASON -->
           <div class="timeline-item" data-delay="0">
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">09 March 2025</div>
-              </div>
-              <div class="competition-header">
-                <div class="trophy-icon">🏆</div>
-                <div class="competition-info">
-                  <h3>4th Competition Day of the Season</h3>
-                  <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
-                </div>
-              </div>
-              <div class="competition-details">
-                <div class="result-badge wins-losses">
-                  <span>⚡</span>
-                  <span>2 Wins</span>
-                </div>
-                <div class="results-list">
-                  <h4 class="results-title">Match Results</h4>
-                  <ul class="match-results">
-                    <li class="match-item win">
-                      <span class="teams">DCA2 vs Eindhoven</span>
-                      <span class="score">19 - 7</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA2 vs Hengelo</span>
-                      <span class="score">18 - 14</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- January 2025 -->
-          <div class="timeline-item" data-delay="1">
-            <div class="timeline-content">
-              <div class="date-medal-container">
-                <div class="competition-date">18 January 2025</div>
-              </div>
-              <div class="competition-header">
-                <div class="trophy-icon">🏆</div>
-                <div class="competition-info">
-                  <h3>3rd Competition Day of the Season</h3>
-                  <p class="venue">Sportzaal Het Zand, Utrecht</p>
-                </div>
-              </div>
-              <div class="competition-details">
-                <div class="result-badge wins-losses">
-                  <span>⚡</span>
-                  <span>2 Wins</span>
-                </div>
-                <div class="results-list">
-                  <h4 class="results-title">Match Results</h4>
-                  <ul class="match-results">
-                    <li class="match-item win">
-                      <span class="teams">DCA2 vs Eindhoven</span>
-                      <span class="score">16 - 12</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA2 vs Hengelo</span>
-                      <span class="score">17 - 9</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- November 2024 -->
-          <div class="timeline-item" data-delay="2">
-            <div class="timeline-content">
-              <div class="date-medal-container">
-                <div class="competition-date">24 November 2024</div>
-              </div>
-              <div class="competition-header">
-                <div class="trophy-icon">🏆</div>
-                <div class="competition-info">
-                  <h3>2nd Competition Day of the Season</h3>
-                  <p class="venue">Sporthal CT stork, Hengelo</p>
-                </div>
-              </div>
-              <div class="competition-details">
-                <div class="result-badge wins-losses">
-                  <span>⚡</span>
-                  <span>1 Win, 1 Loss</span>
-                </div>
-                <div class="results-list">
-                  <h4 class="results-title">Match Results</h4>
-                  <ul class="match-results">
-                    <li class="match-item loss">
-                      <span class="teams">DCA2 vs Eindhoven</span>
-                      <span class="score">15 - 13</span>
-                      <span class="result-icon">❌</span>
-                    </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA2 vs Hengelo</span>
-                      <span class="score">18 - 12</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- October 2024 -->
-          <div class="timeline-item" data-delay="3">
-            <div class="timeline-content">
-              <div class="date-medal-container">
-                <div class="competition-date">12 October 2024</div>
+                <div class="competition-date">11 October 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
                   <h3>1st Competition Day of the Season</h3>
-                  <p class="venue">Kennemer Sportcenter, Haarlem</p>
+                  <p class="venue">Sportcentrum Drachten, Drachten</p>
                 </div>
               </div>
               <div class="competition-details">
                 <div class="result-badge wins-losses">
                   <span>⚡</span>
-                  <span>2 Wins</span>
+                  <span>1 Win, 2 Losses</span>
                 </div>
                 <div class="results-list">
                   <h4 class="results-title">Match Results</h4>
                   <ul class="match-results">
-                    <li class="match-item win">
+                    <li class="match-item loss">
+                      <span class="teams">DCA2 vs Hengelo</span>
+                      <span class="score">7 - 29</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item loss">
                       <span class="teams">DCA2 vs Eindhoven</span>
-                      <span class="score">26 - 6</span>
-                      <span class="result-icon">✅</span>
+                      <span class="score">10 - 20</span>
+                      <span class="result-icon">❌</span>
                     </li>
                     <li class="match-item win">
-                      <span class="teams">DCA2 vs Hengelo</span>
-                      <span class="score">18 - 12</span>
+                      <span class="teams">DCA2 vs Utrecht</span>
+                      <span class="score">22 - 8</span>
                       <span class="result-icon">✅</span>
                     </li>
                   </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Button to show previous season -->
+          <div style="text-align: center; margin: 3rem 0;">
+            <button id="show-previous-mixed2" class="show-previous-season-btn">
+              <span>📜</span>
+              View Previous Season (2024/2025)
+              <span>📜</span>
+            </button>
+          </div>
+
+          <!-- Previous Season Timeline (2024/2025) - Initially Hidden -->
+          <div id="previous-season-mixed2" style="display: none;">
+            <h3 style="text-align: center; color: var(--accent); margin: 2rem 0 3rem 0; font-size: 1.8rem;">
+              🏆 Season 2024/2025 Results 🏆
+            </h3>
+
+            <!-- March 2025 -->
+            <div class="timeline-item" data-delay="0">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">09 March 2025</div>
+                </div>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>4th Competition Day of the Season</h3>
+                    <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
+                  </div>
+                </div>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>2 Wins</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA2 vs Eindhoven</span>
+                        <span class="score">19 - 7</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA2 vs Hengelo</span>
+                        <span class="score">18 - 14</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- January 2025 -->
+            <div class="timeline-item" data-delay="1">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">18 January 2025</div>
+                </div>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>3rd Competition Day of the Season</h3>
+                    <p class="venue">Sportzaal Het Zand, Utrecht</p>
+                  </div>
+                </div>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>2 Wins</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA2 vs Eindhoven</span>
+                        <span class="score">16 - 12</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA2 vs Hengelo</span>
+                        <span class="score">17 - 9</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- November 2024 -->
+            <div class="timeline-item" data-delay="2">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">24 November 2024</div>
+                </div>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>2nd Competition Day of the Season</h3>
+                    <p class="venue">Sporthal CT stork, Hengelo</p>
+                  </div>
+                </div>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>1 Win, 1 Loss</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item loss">
+                        <span class="teams">DCA2 vs Eindhoven</span>
+                        <span class="score">15 - 13</span>
+                        <span class="result-icon">❌</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA2 vs Hengelo</span>
+                        <span class="score">18 - 12</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- October 2024 -->
+            <div class="timeline-item" data-delay="3">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">12 October 2024</div>
+                </div>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>1st Competition Day of the Season</h3>
+                    <p class="venue">Kennemer Sportcenter, Haarlem</p>
+                  </div>
+                </div>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>2 Wins</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA2 vs Eindhoven</span>
+                        <span class="score">26 - 6</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA2 vs Hengelo</span>
+                        <span class="score">18 - 12</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -3012,8 +3181,8 @@
             'man1': 'Man 1 - Hall of Glory 2024/2025',
             'man2': 'Man 2 - Hall of Glory 2024/2025', 
             'women': 'Women - Hall of Glory 2024/2025',
-            'mixed1': 'Mixed 1 - Hall of Glory 2024/2025',
-            'mixed2': 'Mixed 2 - Hall of Glory 2024/2025'
+            'mixed1': 'Mixed 1 - Hall of Glory 2025/2026',
+            'mixed2': 'Mixed 2 - Hall of Glory 2025/2026'
           };
           
           timelineTitle.textContent = teamTitles[teamName];
@@ -3028,6 +3197,46 @@
           }
         });
       });
+
+      // Previous Season Button Functionality for Mixed 1
+      const showPreviousMixed1Btn = document.getElementById('show-previous-mixed1');
+      const previousSeasonMixed1 = document.getElementById('previous-season-mixed1');
+      
+      if (showPreviousMixed1Btn && previousSeasonMixed1) {
+        showPreviousMixed1Btn.addEventListener('click', function() {
+          if (previousSeasonMixed1.style.display === 'none') {
+            previousSeasonMixed1.style.display = 'block';
+            this.textContent = '🔼 Hide Previous Season (2024/2025) 🔼';
+            previousSeasonMixed1.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'start' 
+            });
+          } else {
+            previousSeasonMixed1.style.display = 'none';
+            this.innerHTML = '<span>📜</span> View Previous Season (2024/2025) <span>📜</span>';
+          }
+        });
+      }
+
+      // Previous Season Button Functionality for Mixed 2
+      const showPreviousMixed2Btn = document.getElementById('show-previous-mixed2');
+      const previousSeasonMixed2 = document.getElementById('previous-season-mixed2');
+      
+      if (showPreviousMixed2Btn && previousSeasonMixed2) {
+        showPreviousMixed2Btn.addEventListener('click', function() {
+          if (previousSeasonMixed2.style.display === 'none') {
+            previousSeasonMixed2.style.display = 'block';
+            this.textContent = '🔼 Hide Previous Season (2024/2025) 🔼';
+            previousSeasonMixed2.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'start' 
+            });
+          } else {
+            previousSeasonMixed2.style.display = 'none';
+            this.innerHTML = '<span>📜</span> View Previous Season (2024/2025) <span>📜</span>';
+          }
+        });
+      }
     });
   </script>
 </body>
