@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Dodgeball Amsterdam Competitions | DCA Tournament Results | Dutch Dodgeball</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Dodgeball Amsterdam competitions and tournaments! See DCA's wins, results, and achievements in Dutch dodgeball leagues. Join Amsterdam's most successful dodgeball team!">
-  <meta name="keywords" content="dodgeball amsterdam competitions, dodgeball tournaments amsterdam, DCA results, amsterdam dodgeball league, dutch dodgeball, dodgeball wins amsterdam, competitive dodgeball amsterdam">
+  <meta name="description"
+    content="Dodgeball Amsterdam competitions and tournaments! See DCA's wins, results, and achievements in Dutch dodgeball leagues. Join Amsterdam's most successful dodgeball team!">
+  <meta name="keywords"
+    content="dodgeball amsterdam competitions, dodgeball tournaments amsterdam, DCA results, amsterdam dodgeball league, dutch dodgeball, dodgeball wins amsterdam, competitive dodgeball amsterdam">
   <meta name="author" content="Dodgeball Club Amsterdam">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.dodgeballclubamsterdam.com/competitions.html">
-  
+
   <!-- Sitemap Reference -->
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-  
+
   <!-- Open Graph Meta Tags for Social Media -->
   <meta property="og:title" content="Dodgeball Amsterdam Competitions | DCA Tournament Results">
-  <meta property="og:description" content="Dodgeball Amsterdam competitions and tournaments! See DCA's wins, results, and achievements in Dutch dodgeball leagues. Join Amsterdam's most successful dodgeball team!">
+  <meta property="og:description"
+    content="Dodgeball Amsterdam competitions and tournaments! See DCA's wins, results, and achievements in Dutch dodgeball leagues. Join Amsterdam's most successful dodgeball team!">
   <meta property="og:url" content="https://www.dodgeballclubamsterdam.com/competitions.html">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://www.dodgeballclubamsterdam.com/pics/Ball.png">
   <meta property="og:site_name" content="Dodgeball Club Amsterdam">
   <meta property="og:locale" content="en_US">
-  
+
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Dodgeball Amsterdam Competitions | DCA Tournament Results">
-  <meta name="twitter:description" content="Dodgeball Amsterdam competitions and tournaments! See DCA's wins, results, and achievements in Dutch dodgeball leagues.">
+  <meta name="twitter:description"
+    content="Dodgeball Amsterdam competitions and tournaments! See DCA's wins, results, and achievements in Dutch dodgeball leagues.">
   <meta name="twitter:image" content="https://www.dodgeballclubamsterdam.com/pics/Ball.png">
-  
+
   <!-- Local Business Meta Tags -->
   <meta name="geo.region" content="NL-NH">
   <meta name="geo.placename" content="Amsterdam">
@@ -38,7 +43,7 @@
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  
+
   <!-- Performance and SEO hints -->
   <link rel="dns-prefetch" href="//fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,19 +86,26 @@
       --silver: #c0c0c0;
       --bronze: #cd7f32;
     }
-    *, *::before, *::after {
+
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
     }
+
     body {
       font-family: 'Roboto', sans-serif;
       color: var(--secondary);
       line-height: 1.6;
     }
+
     a {
       color: var(--primary);
       text-decoration: none;
     }
+
     a:hover {
       text-decoration: underline;
     }
@@ -110,29 +122,35 @@
       top: 0;
       z-index: 1002;
     }
+
     .logo {
       font-size: 1.5rem;
       font-weight: 700;
     }
+
     .logo img {
       height: 2.8rem;
       vertical-align: middle;
       margin-left: 0.5rem;
     }
+
     .logo .ball-logo {
       height: 2.8rem;
       vertical-align: middle;
       margin-right: 0.5rem;
     }
+
     .adam-image {
       height: 3.5rem;
       vertical-align: middle;
       margin-left: 1rem;
     }
+
     nav#nav-menu {
       display: flex;
       align-items: center;
     }
+
     nav#nav-menu a {
       margin-left: 1.5rem;
       font-weight: 500;
@@ -143,11 +161,13 @@
       overflow: hidden;
       color: var(--primary);
     }
+
     nav#nav-menu a:hover {
       color: var(--light);
       transform: scale(1.05);
       background-color: rgba(211, 47, 47, 0.1);
     }
+
     nav#nav-menu a::before {
       content: '';
       position: absolute;
@@ -164,9 +184,11 @@
       opacity: 0.8;
       border-radius: 50%;
     }
+
     nav#nav-menu a:hover::before {
       transform: translateY(-50%) scale(1);
     }
+
     .menu-toggle {
       display: none;
       background: none;
@@ -224,10 +246,21 @@
       opacity: 0;
     }
 
-    .footer-section:nth-child(1) { animation-delay: 0.1s; }
-    .footer-section:nth-child(2) { animation-delay: 0.2s; }
-    .footer-section:nth-child(3) { animation-delay: 0.3s; }
-    .footer-section:nth-child(4) { animation-delay: 0.4s; }
+    .footer-section:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .footer-section:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .footer-section:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .footer-section:nth-child(4) {
+      animation-delay: 0.4s;
+    }
 
     .footer-logo {
       display: flex;
@@ -459,19 +492,22 @@
     #overlay {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
       z-index: 1000;
     }
 
     /* — Mobile Styles — */
     @media (max-width: 768px) {
+
       /* Hide adam image on mobile */
       .adam-image {
         display: none;
       }
-      
+
       /* Modern Hamburger Menu */
       .menu-toggle {
         display: block;
@@ -487,7 +523,7 @@
         position: relative;
         overflow: hidden;
       }
-      
+
       .menu-toggle::before {
         content: '';
         position: absolute;
@@ -495,64 +531,72 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
         transition: left 0.5s;
       }
-      
+
       .menu-toggle:hover::before {
         left: 100%;
       }
-      
+
       .menu-toggle:hover {
         transform: scale(1.05) rotate(5deg);
         box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
       }
-      
+
       .menu-toggle:active {
         transform: scale(0.95);
       }
-      
+
       /* Modern Sidebar Navigation */
       nav#nav-menu {
         display: flex;
         flex-direction: column;
         background: linear-gradient(135deg, var(--secondary), #1a1a1a, var(--secondary));
         position: fixed;
-        top: 0; 
+        top: 0;
         left: -60%;
-        width: 60%; 
+        width: 60%;
         height: 100%;
         padding-top: 4rem;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         z-index: 1001;
-        box-shadow: 5px 0 25px rgba(0,0,0,0.3);
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
         backdrop-filter: blur(10px);
       }
-      
+
       /* Slide in when active with bounce */
       nav#nav-menu.active {
         left: 0;
         animation: slideInBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
-      
+
       @keyframes slideInBounce {
-        0% { left: -60%; }
-        70% { left: 2%; }
-        100% { left: 0; }
+        0% {
+          left: -60%;
+        }
+
+        70% {
+          left: 2%;
+        }
+
+        100% {
+          left: 0;
+        }
       }
-      
+
       /* Modern Navigation Links */
       nav#nav-menu a {
         margin: 0;
         padding: 1rem 2rem;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         color: var(--light);
         font-weight: 500;
         transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
       }
-      
+
       nav#nav-menu a::before {
         content: '';
         position: absolute;
@@ -564,27 +608,27 @@
         transition: left 0.3s ease;
         z-index: -1;
       }
-      
+
       nav#nav-menu a:hover::before {
         left: 0;
       }
-      
+
       nav#nav-menu a:hover {
         color: var(--light);
         transform: translateX(10px);
-        text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
       }
-      
+
       /* Modern Dropdown Styles */
       .dropdown {
         display: block;
         width: 100%;
       }
-      
-      .dropdown > span {
+
+      .dropdown>span {
         margin: 0;
         padding: 1rem 2rem;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         display: block;
         width: 100%;
         color: var(--light);
@@ -594,8 +638,8 @@
         position: relative;
         overflow: hidden;
       }
-      
-      .dropdown > span::before {
+
+      .dropdown>span::before {
         content: '';
         position: absolute;
         top: 0;
@@ -606,34 +650,34 @@
         transition: left 0.3s ease;
         z-index: -1;
       }
-      
-      .dropdown > span:hover::before {
+
+      .dropdown>span:hover::before {
         left: 0;
       }
-      
-      .dropdown.active > span::before {
+
+      .dropdown.active>span::before {
         left: 0;
       }
-      
-      .dropdown > span::after {
+
+      .dropdown>span::after {
         content: '▼';
         float: right;
         transition: transform 0.3s ease;
         font-size: 0.8rem;
       }
-      
-      .dropdown.active > span::after {
+
+      .dropdown.active>span::after {
         transform: rotate(180deg);
       }
-      
+
       .dropdown-content {
         position: static;
         display: block;
         box-shadow: none;
-        background: linear-gradient(135deg, 
-          rgba(42,42,42,0.95) 0%, 
-          rgba(26,26,26,0.98) 50%, 
-          rgba(42,42,42,0.95) 100%);
+        background: linear-gradient(135deg,
+            rgba(42, 42, 42, 0.95) 0%,
+            rgba(26, 26, 26, 0.98) 50%,
+            rgba(42, 42, 42, 0.95) 100%);
         border-radius: 0;
         overflow: hidden;
         max-height: 0;
@@ -642,40 +686,45 @@
         border-left: 3px solid transparent;
         backdrop-filter: blur(10px);
       }
-      
+
       /* Remove auto-expansion - JavaScript will control this */
       .dropdown.active .dropdown-content {
         /* Don't auto-expand - let JavaScript handle it */
         border-left-color: var(--primary);
         animation: dropdownGlow 0.6s ease-out;
       }
-      
+
       .dropdown-content a {
         padding: 0.8rem 3rem;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-        color: rgba(255,255,255,0.8);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        color: rgba(255, 255, 255, 0.8);
         background: none;
         transition: all 0.3s ease;
       }
-      
+
       .dropdown-content a:hover {
         background: linear-gradient(45deg, var(--primary), #ff6b6b);
         color: var(--light);
         transform: translateX(15px);
         padding-left: 3.5rem;
       }
-      
+
       /* Enhanced Overlay */
       #overlay.active {
         display: block;
         animation: overlayFadeIn 0.3s ease;
       }
-      
+
       @keyframes overlayFadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
       }
-      
+
       /* Floating Menu Decoration */
       nav#nav-menu::before {
         content: '';
@@ -690,23 +739,31 @@
         opacity: 0.3;
         animation: menuFloat 6s ease-in-out infinite;
       }
-      
+
       @keyframes menuFloat {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-20px) rotate(180deg); }
+
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+
+        50% {
+          transform: translateY(-20px) rotate(180deg);
+        }
       }
-      
+
       /* Mobile breadcrumb adjustments */
       .breadcrumb-container {
-        top: 80px; /* Increased spacing from menu bar */
+        top: 80px;
+        /* Increased spacing from menu bar */
         padding: 0.75rem 0;
       }
-      
+
       .breadcrumb {
         padding: 0 1rem;
         font-size: 0.8rem;
       }
-      
+
       .breadcrumb-item {
         padding: 0.3rem 0.4rem;
       }
@@ -737,12 +794,12 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
       animation: rotateBackground 25s linear infinite;
       z-index: 1;
     }
 
-    .section-header-area > * {
+    .section-header-area>* {
       position: relative;
       z-index: 2;
     }
@@ -751,7 +808,7 @@
       font-size: 4rem;
       margin-bottom: 1rem;
       font-weight: 700;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
       opacity: 0;
       transform: translateY(-30px);
       animation: heroTitleEnter 1s ease-out forwards 0.3s;
@@ -762,7 +819,7 @@
       opacity: 0;
       transform: translateY(30px);
       animation: heroSubtitleEnter 1s ease-out forwards 0.6s;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     }
 
     /* Floating Competition Elements */
@@ -886,9 +943,9 @@
     }
 
     .team-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.25));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.25));
       backdrop-filter: blur(15px);
-      border: 2px solid rgba(255,255,255,0.2);
+      border: 2px solid rgba(255, 255, 255, 0.2);
       border-radius: 25px;
       padding: 2rem;
       text-align: center;
@@ -899,7 +956,7 @@
       animation: teamCardEnter 0.8s ease-out forwards;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       cursor: pointer;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     }
 
     .team-card::before {
@@ -909,7 +966,7 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
       transition: left 0.5s;
     }
 
@@ -925,7 +982,7 @@
 
     .team-card.active {
       border-color: var(--primary);
-      background: linear-gradient(135deg, rgba(211,47,47,0.1), rgba(255,107,107,0.1));
+      background: linear-gradient(135deg, rgba(211, 47, 47, 0.1), rgba(255, 107, 107, 0.1));
       transform: translateY(-10px) scale(1.02);
       box-shadow: 0 20px 40px rgba(211, 47, 47, 0.3);
     }
@@ -980,11 +1037,25 @@
     }
 
     /* Staggered animation delays for team cards */
-    .team-card[data-delay="0"] { animation-delay: 1.6s; }
-    .team-card[data-delay="1"] { animation-delay: 1.8s; }
-    .team-card[data-delay="2"] { animation-delay: 2.0s; }
-    .team-card[data-delay="3"] { animation-delay: 2.2s; }
-    .team-card[data-delay="4"] { animation-delay: 2.4s; }
+    .team-card[data-delay="0"] {
+      animation-delay: 1.6s;
+    }
+
+    .team-card[data-delay="1"] {
+      animation-delay: 1.8s;
+    }
+
+    .team-card[data-delay="2"] {
+      animation-delay: 2.0s;
+    }
+
+    .team-card[data-delay="3"] {
+      animation-delay: 2.2s;
+    }
+
+    .team-card[data-delay="4"] {
+      animation-delay: 2.4s;
+    }
 
     /* Competition Timeline - Vertical Layout */
     .timeline {
@@ -1017,9 +1088,17 @@
       width: 100%;
     }
 
-    .timeline-item[data-delay="0"] { animation-delay: 1.5s; }
-    .timeline-item[data-delay="1"] { animation-delay: 1.8s; }
-    .timeline-item[data-delay="2"] { animation-delay: 2.1s; }
+    .timeline-item[data-delay="0"] {
+      animation-delay: 1.5s;
+    }
+
+    .timeline-item[data-delay="1"] {
+      animation-delay: 1.8s;
+    }
+
+    .timeline-item[data-delay="2"] {
+      animation-delay: 2.1s;
+    }
 
     /* Odd items (left side) */
     .timeline-item:nth-child(odd) .timeline-content {
@@ -1054,7 +1133,7 @@
       justify-content: center;
       font-size: 1.8rem;
       z-index: 10;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
       animation: markerPulse 2s ease-in-out infinite;
     }
 
@@ -1077,31 +1156,34 @@
     }
 
     @keyframes markerPulse {
-      0%, 100% { 
+
+      0%,
+      100% {
         transform: translateX(-50%) scale(1);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
       }
-      50% { 
+
+      50% {
         transform: translateX(-50%) scale(1.1);
-        box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
       }
     }
 
     .timeline-content {
-      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
       backdrop-filter: blur(15px);
-      border: 1px solid rgba(255,255,255,0.3);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 25px;
       padding: 2.5rem;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .timeline-content:hover {
       transform: translateY(-10px);
-      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
     }
 
     .timeline-content::before {
@@ -1111,7 +1193,7 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
       transition: left 0.6s;
     }
 
@@ -1132,13 +1214,13 @@
     /* Left side items - arrow points right */
     .timeline-item:nth-child(odd) .timeline-content::after {
       right: -24px;
-      border-left-color: rgba(255,255,255,0.9);
+      border-left-color: rgba(255, 255, 255, 0.9);
     }
 
     /* Right side items - arrow points left */
     .timeline-item:nth-child(even) .timeline-content::after {
       left: -24px;
-      border-right-color: rgba(255,255,255,0.9);
+      border-right-color: rgba(255, 255, 255, 0.9);
     }
 
     /* Date and Medal Container */
@@ -1190,7 +1272,7 @@
       justify-content: center;
       font-size: 1.2rem;
       color: var(--light);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       animation: medalFloat 3s ease-in-out infinite;
     }
 
@@ -1257,7 +1339,7 @@
       border-radius: 25px;
       font-weight: 600;
       margin-bottom: 1rem;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 
     .result-badge.gold {
@@ -1296,7 +1378,7 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
       transition: left 0.6s;
     }
 
@@ -1437,7 +1519,7 @@
       display: inline-block;
       vertical-align: middle;
       border-radius: 50%;
-      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
       aspect-ratio: 1/1;
       flex-shrink: 0;
     }
@@ -1475,25 +1557,51 @@
     }
 
     @keyframes resultIconPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
     }
 
     /* Medal float animation */
     @keyframes medalFloat {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-5px) rotate(5deg); }
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-5px) rotate(5deg);
+      }
     }
 
     /* Animations */
     @keyframes competitionGradient {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
     }
 
     @keyframes rotateBackground {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     @keyframes heroTitleEnter {
@@ -1525,10 +1633,23 @@
     }
 
     @keyframes competitionFloat {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      25% { transform: translateY(-40px) rotate(90deg); }
-      50% { transform: translateY(0px) rotate(180deg); }
-      75% { transform: translateY(-25px) rotate(270deg); }
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      25% {
+        transform: translateY(-40px) rotate(90deg);
+      }
+
+      50% {
+        transform: translateY(0px) rotate(180deg);
+      }
+
+      75% {
+        transform: translateY(-25px) rotate(270deg);
+      }
     }
 
     @keyframes teamCardEnter {
@@ -1539,10 +1660,23 @@
     }
 
     @keyframes teamIconFloat {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      25% { transform: translateY(-10px) rotate(15deg); }
-      50% { transform: translateY(0px) rotate(30deg); }
-      75% { transform: translateY(-5px) rotate(45deg); }
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      25% {
+        transform: translateY(-10px) rotate(15deg);
+      }
+
+      50% {
+        transform: translateY(0px) rotate(30deg);
+      }
+
+      75% {
+        transform: translateY(-5px) rotate(45deg);
+      }
     }
 
     /* Footer Animations */
@@ -1551,6 +1685,7 @@
         opacity: 0;
         transform: translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -1558,18 +1693,37 @@
     }
 
     @keyframes footerBallSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     @keyframes footerBalls {
-      from { transform: translateX(0); }
-      to { transform: translateX(-80px); }
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-80px);
+      }
     }
 
     @keyframes dividerPulse {
-      0%, 100% { transform: scale(1); opacity: 0.6; }
-      50% { transform: scale(1.2); opacity: 1; }
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
     }
 
     /* Breadcrumb Navigation */
@@ -1630,12 +1784,12 @@
         top: 50px;
         padding: 0.5rem 0;
       }
-      
+
       .breadcrumb {
         padding: 0 1rem;
         font-size: 0.8rem;
       }
-      
+
       .breadcrumb-item {
         padding: 0.2rem 0.3rem;
       }
@@ -1725,17 +1879,19 @@
       display: inline-flex;
       align-items: center;
     }
+
     .dropdown-content {
       display: none;
       position: absolute;
       background-color: var(--secondary);
       min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       z-index: 1003;
       border-radius: 4px;
       top: 100%;
       left: 0;
     }
+
     .dropdown-content a {
       color: var(--light);
       padding: 12px 16px;
@@ -1745,18 +1901,22 @@
       border-radius: 0;
       transition: background-color 0.3s ease;
     }
+
     .dropdown-content a:hover {
       background-color: var(--primary);
       transform: none;
       text-decoration: underline;
     }
+
     .dropdown-content a::before {
       display: none;
     }
+
     .dropdown:hover .dropdown-content {
       display: block;
     }
-    .dropdown > span {
+
+    .dropdown>span {
       margin-left: 1.5rem;
       font-weight: 500;
       transition: all 0.3s ease;
@@ -1767,21 +1927,25 @@
       color: var(--primary);
       cursor: pointer;
     }
-    .dropdown > span:hover {
+
+    .dropdown>span:hover {
       color: var(--light);
       transform: scale(1.05);
       background-color: rgba(211, 47, 47, 0.1);
     }
-    .dropdown > span::after {
+
+    .dropdown>span::after {
       content: '▼';
       float: right;
       transition: transform 0.3s ease;
       font-size: 0.8rem;
     }
-    .dropdown.active > span::after {
+
+    .dropdown.active>span::after {
       transform: rotate(180deg);
     }
-    .dropdown > span::before {
+
+    .dropdown>span::before {
       content: '';
       position: absolute;
       top: 50%;
@@ -1797,14 +1961,22 @@
       opacity: 0.8;
       border-radius: 50%;
     }
-    .dropdown > span:hover::before {
+
+    .dropdown>span:hover::before {
       transform: translateY(-50%) scale(1);
     }
 
     /* Trophy glow animation */
     @keyframes trophyGlow {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
     }
 
     /* Previous Season Button */
@@ -1928,7 +2100,7 @@
       <div class="section-header-area">
         <h2>Competitions</h2>
         <p>Where legends are forged and glory is earned!</p>
-        
+
         <!-- Floating Competition Elements -->
         <div class="floating-competition-elements">
           <div class="floating-element element-1">🏆</div>
@@ -1942,14 +2114,16 @@
     <!-- Competition Content -->
     <div class="competition-content">
       <p class="intro-text">
-        From nail-biting victories to heart-stopping comebacks, DCA competitions showcase the very best of dodgeball excellence. Every throw, every dodge, every moment of pure adrenaline contributes to our legacy of competitive spirit and sportsmanship.
+        From nail-biting victories to heart-stopping comebacks, DCA competitions showcase the very best of dodgeball
+        excellence. Every throw, every dodge, every moment of pure adrenaline contributes to our legacy of competitive
+        spirit and sportsmanship.
       </p>
 
       <!-- Team Selection Section -->
       <div class="team-selection-section">
         <h2 class="team-selection-title">Choose Your Team</h2>
         <p class="team-selection-subtitle">Select a DCA team to view their competition timeline</p>
-        
+
         <div class="team-grid">
           <div class="team-card" data-team="man1" data-delay="0">
             <div class="team-icon">🏆</div>
@@ -1957,28 +2131,28 @@
             <p>Elite competitive team</p>
             <div class="team-badge premium">Check League</div>
           </div>
-          
+
           <div class="team-card" data-team="man2" data-delay="1">
             <div class="team-icon">⚡</div>
             <h3>Man 2</h3>
             <p>Passionate competitors</p>
             <div class="team-badge standard">Check League</div>
           </div>
-          
+
           <div class="team-card" data-team="women" data-delay="2">
             <div class="team-icon">💪</div>
             <h3>Women 1</h3>
             <p>Fierce and unstoppable</p>
             <div class="team-badge premium">Check League</div>
           </div>
-          
+
           <div class="team-card" data-team="mixed1" data-delay="3">
             <div class="team-icon">🌟</div>
             <h3>Mixed 1</h3>
             <p>Perfect balance</p>
             <div class="team-badge standard">Check League</div>
           </div>
-          
+
           <div class="team-card" data-team="mixed2" data-delay="4">
             <div class="team-icon">🎯</div>
             <h3>Mixed 2</h3>
@@ -1991,43 +2165,43 @@
       <!-- Competition Timeline (initially hidden) -->
       <div class="timeline-section" id="timeline-section" style="display: none;">
         <h2 class="timeline-title" id="timeline-title">Hall of Glory</h2>
-        
+
         <!-- Man 1 Timeline -->
         <div class="timeline" id="timeline-man1" style="display: none;">
-          <!-- March 2025 - Silver -->
+          <!-- November 2025 - 2nd Competition Day of new season -->
           <div class="timeline-item" data-delay="0">
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">23 March 2025</div>
+                <div class="competition-date">23 November 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>4th Competition Day of the Season</h3>
+                  <h3>2nd Competition Day of the Season</h3>
                   <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
                 </div>
               </div>
               <div class="competition-details">
                 <div class="result-badge wins-losses">
                   <span>⚡</span>
-                  <span>3 Wins</span>
+                  <span>2 Wins, 1 Loss</span>
                 </div>
                 <div class="results-list">
                   <h4 class="results-title">Match Results</h4>
                   <ul class="match-results">
                     <li class="match-item win">
-                      <span class="teams">DCA1 vs Utrecht</span>
-                      <span class="score">23 - 13</span>
+                      <span class="teams">DCA 1 vs Utrecht</span>
+                      <span class="score">22 - 12</span>
                       <span class="result-icon">✅</span>
                     </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA1 vs Haarlem</span>
-                      <span class="score">17 - 13</span>
-                      <span class="result-icon">✅</span>
+                    <li class="match-item loss">
+                      <span class="teams">DCA 1 vs Haarlem</span>
+                      <span class="score">13 - 15</span>
+                      <span class="result-icon">❌</span>
                     </li>
                     <li class="match-item win">
-                      <span class="teams">DCA1 vs Hacten</span>
-                      <span class="score">22 - 14</span>
+                      <span class="teams">DCA 1 vs Hacten</span>
+                      <span class="score">24 - 10</span>
                       <span class="result-icon">✅</span>
                     </li>
                   </ul>
@@ -2036,127 +2210,232 @@
             </div>
           </div>
 
-          <!-- February 2025 -->
+          <!-- November 2025 - 1st Competition Day of new season -->
           <div class="timeline-item" data-delay="1">
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">08 February 2025</div>
+                <div class="competition-date">02 November 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>3rd Competition Day of the Season</h3>
+                  <h3>1st Competition Day of the Season</h3>
                   <p class="venue">Augustinianum, Eindhoven</p>
                 </div>
               </div>
               <div class="competition-details">
                 <div class="result-badge wins-losses">
                   <span>⚡</span>
-                  <span>3 Wins, 1 Loss</span>
+                  <span>4 Wins</span>
                 </div>
                 <div class="results-list">
                   <h4 class="results-title">Match Results</h4>
                   <ul class="match-results">
                     <li class="match-item win">
-                      <span class="teams">DCA1 vs Utrecht</span>
+                      <span class="teams">DCA 1 vs Utrecht</span>
+                      <span class="score">21 - 9</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA 1 vs Delft</span>
+                      <span class="score">26 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA 1 vs Haarlem</span>
+                      <span class="score">19 - 15</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA 1 vs Hacten</span>
                       <span class="score">23 - 9</span>
                       <span class="result-icon">✅</span>
                     </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA1 vs Delft</span>
-                      <span class="score">26 - 6</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item loss">
-                      <span class="teams">DCA1 vs Haarlem</span>
-                      <span class="score">12 - 16</span>
-                      <span class="result-icon">❌</span>
-                    </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA1 vs Hacten</span>
-                      <span class="score">14 - 10</span>
-                      <span class="result-icon">✅</span>
-                    </li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- December 2024 -->
-          <div class="timeline-item" data-delay="2">
-            <div class="timeline-content">
-              <div class="date-medal-container">
-                <div class="competition-date">15 December 2024</div>
-              </div>
-              <div class="competition-header">
-                <div class="trophy-icon">🏆</div>
-                <div class="competition-info">
-                  <h3>2nd Competition Day of the Season</h3>
-                  <p class="venue">Sportcentrum Drachten, Drachten</p>
+          <!-- Button to show previous season -->
+          <div style="text-align: center; margin: 3rem 0;">
+            <button id="show-previous-man1" class="show-previous-season-btn">
+              <span>📜</span>
+              View Previous Season (2024/2025)
+              <span>📜</span>
+            </button>
+          </div>
+
+          <!-- Previous Season Timeline (2024/2025) - Initially Hidden -->
+          <div id="previous-season-man1" style="display: none;">
+            <h3 style="text-align: center; color: var(--accent); margin: 2rem 0 3rem 0; font-size: 1.8rem;">
+              🏆 Season 2024/2025 Results 🏆
+            </h3>
+
+            <!-- March 2025 - Silver -->
+            <div class="timeline-item" data-delay="0">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">23 March 2025</div>
                 </div>
-              </div>
-              <div class="competition-details">
-                <div class="result-badge wins-losses">
-                  <span>⚡</span>
-                  <span>3 Wins</span>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>4th Competition Day of the Season</h3>
+                    <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
+                  </div>
                 </div>
-                <div class="results-list">
-                  <h4 class="results-title">Match Results</h4>
-                  <ul class="match-results">
-                    <li class="match-item win">
-                      <span class="teams">DCA1 vs Utrecht</span>
-                      <span class="score">26 - 8</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA1 vs Delft</span>
-                      <span class="score">27 - 3</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA1 vs Hacten</span>
-                      <span class="score">24 - 4</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                  </ul>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>3 Wins</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Utrecht</span>
+                        <span class="score">23 - 13</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Haarlem</span>
+                        <span class="score">17 - 13</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Hacten</span>
+                        <span class="score">22 - 14</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- November 2024 - Additional Competition -->
-          <div class="timeline-item" data-delay="3">
-            <div class="timeline-content">
-              <div class="date-medal-container">
-                <div class="competition-date">09 November 2024</div>
+            <!-- February 2025 -->
+            <div class="timeline-item" data-delay="1">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">08 February 2025</div>
+                </div>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>3rd Competition Day of the Season</h3>
+                    <p class="venue">Augustinianum, Eindhoven</p>
+                  </div>
+                </div>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>3 Wins, 1 Loss</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Utrecht</span>
+                        <span class="score">23 - 9</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Delft</span>
+                        <span class="score">26 - 6</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item loss">
+                        <span class="teams">DCA1 vs Haarlem</span>
+                        <span class="score">12 - 16</span>
+                        <span class="result-icon">❌</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Hacten</span>
+                        <span class="score">14 - 10</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-              <div class="competition-header">
-                <div class="trophy-icon">🏆</div>
-                <div class="competition-info">
+            </div>
+
+            <!-- December 2024 -->
+            <div class="timeline-item" data-delay="2">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">15 December 2024</div>
+                </div>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>2nd Competition Day of the Season</h3>
+                    <p class="venue">Sportcentrum Drachten, Drachten</p>
+                  </div>
+                </div>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>3 Wins</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Utrecht</span>
+                        <span class="score">26 - 8</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Delft</span>
+                        <span class="score">27 - 3</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Hacten</span>
+                        <span class="score">24 - 4</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- November 2024 - Additional Competition -->
+            <div class="timeline-item" data-delay="3">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">09 November 2024</div>
+                </div>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
                     <h3>1st Competition Day of the Season</h3>
-                  <p class="venue">Sports Center Olympos, Utrecht</p>
+                    <p class="venue">Sports Center Olympos, Utrecht</p>
+                  </div>
                 </div>
-              </div>
-              <div class="competition-details">
-                <div class="result-badge wins-losses">
-                  <span>⚡</span>
-                  <span>1 Win, 1 Loss</span>
-                </div>
-                <div class="results-list">
-                  <h4 class="results-title">Match Results</h4>
-                  <ul class="match-results">
-                    <li class="match-item win">
-                      <span class="teams">DCA1 vs Delft</span>
-                      <span class="score">18 - 10</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item loss">
-                      <span class="teams">DCA1 vs Haarlem</span>
-                      <span class="score">9 - 21</span>
-                      <span class="result-icon">❌</span>
-                    </li>
-                  </ul>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>1 Win, 1 Loss</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA1 vs Delft</span>
+                        <span class="score">18 - 10</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item loss">
+                        <span class="teams">DCA1 vs Haarlem</span>
+                        <span class="score">9 - 21</span>
+                        <span class="result-icon">❌</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2165,36 +2444,41 @@
 
         <!-- Man 2 Timeline -->
         <div class="timeline" id="timeline-man2" style="display: none;">
-          <!-- March 2025 - Silver -->
+          <!-- November 2025 - 2nd Competition Day of new season -->
           <div class="timeline-item" data-delay="0">
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">23 March 2025</div>
+                <div class="competition-date">23 November 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>4th Competition Day of the Season</h3>
+                  <h3>2nd Competition Day of the Season</h3>
                   <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
                 </div>
               </div>
               <div class="competition-details">
                 <div class="result-badge wins-losses">
                   <span>⚡</span>
-                  <span>1 Win, 1 Draw</span>
+                  <span>3 Wins</span>
                 </div>
                 <div class="results-list">
                   <h4 class="results-title">Match Results</h4>
                   <ul class="match-results">
                     <li class="match-item win">
-                      <span class="teams">DCA2 vs Eindhoven</span>
-                      <span class="score">25 - 7</span>
+                      <span class="teams">DCA 2 vs Utrecht 2</span>
+                      <span class="score">16 - 12</span>
                       <span class="result-icon">✅</span>
                     </li>
-                    <li class="match-item draw">
-                      <span class="teams">DCA2 vs Utrecht</span>
-                      <span class="score">15 - 15</span>
-                      <span class="result-icon">⚖️</span>
+                    <li class="match-item win">
+                      <span class="teams">DCA 2 vs Delft 2</span>
+                      <span class="score">18 - 12</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA 2 vs Eindhoven</span>
+                      <span class="score">20 - 14</span>
+                      <span class="result-icon">✅</span>
                     </li>
                   </ul>
                 </div>
@@ -2202,36 +2486,41 @@
             </div>
           </div>
 
-          <!-- February 2025 -->
+          <!-- November 2025 - 1st Competition Day of new season -->
           <div class="timeline-item" data-delay="1">
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">08 February 2025</div>
+                <div class="competition-date">02 November 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>3rd Competition Day of the Season</h3>
+                  <h3>1st Competition Day of the Season</h3>
                   <p class="venue">Augustinianum, Eindhoven</p>
                 </div>
               </div>
               <div class="competition-details">
                 <div class="result-badge wins-losses">
                   <span>⚡</span>
-                  <span>2 Wins</span>
+                  <span>2 Wins, 1 Loss</span>
                 </div>
                 <div class="results-list">
                   <h4 class="results-title">Match Results</h4>
                   <ul class="match-results">
                     <li class="match-item win">
-                      <span class="teams">DCA2 vs Utrecht</span>
-                      <span class="score">20 - 10</span>
+                      <span class="teams">DCA 2 vs Utrecht 2</span>
+                      <span class="score">16 - 12</span>
                       <span class="result-icon">✅</span>
                     </li>
                     <li class="match-item win">
-                      <span class="teams">DCA2 vs Delft</span>
-                      <span class="score">21 - 11</span>
+                      <span class="teams">DCA 2 vs Delft 2</span>
+                      <span class="score">29 - 7</span>
                       <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA 2 vs Eindhoven</span>
+                      <span class="score">14 - 18</span>
+                      <span class="result-icon">❌</span>
                     </li>
                   </ul>
                 </div>
@@ -2239,75 +2528,165 @@
             </div>
           </div>
 
-          <!-- December 2024 -->
-          <div class="timeline-item" data-delay="2">
-            <div class="timeline-content">
-              <div class="date-medal-container">
-                <div class="competition-date">15 December 2024</div>
-              </div>
-              <div class="competition-header">
-                <div class="trophy-icon">🏆</div>
-                <div class="competition-info">
-                  <h3>2nd Competition Day of the Season</h3>
-                  <p class="venue">Sportcentrum Drachten, Drachten</p>
+          <!-- Button to show previous season -->
+          <div style="text-align: center; margin: 3rem 0;">
+            <button id="show-previous-man2" class="show-previous-season-btn">
+              <span>📜</span>
+              View Previous Season (2024/2025)
+              <span>📜</span>
+            </button>
+          </div>
+
+          <!-- Previous Season Timeline (2024/2025) - Initially Hidden -->
+          <div id="previous-season-man2" style="display: none;">
+            <h3 style="text-align: center; color: var(--accent); margin: 2rem 0 3rem 0; font-size: 1.8rem;">
+              🏆 Season 2024/2025 Results 🏆
+            </h3>
+
+            <!-- March 2025 - Silver -->
+            <div class="timeline-item" data-delay="0">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">23 March 2025</div>
                 </div>
-              </div>
-              <div class="competition-details">
-                <div class="result-badge wins-losses">
-                  <span>⚡</span>
-                  <span>2 Wins</span>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>4th Competition Day of the Season</h3>
+                    <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
+                  </div>
                 </div>
-                <div class="results-list">
-                  <h4 class="results-title">Match Results</h4>
-                  <ul class="match-results">
-                    <li class="match-item win">
-                      <span class="teams">DCA2 vs Utrecht</span>
-                      <span class="score">20 - 6</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA2 vs Eindhoven</span>
-                      <span class="score">21 - 9</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                  </ul>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>1 Win, 1 Draw</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA2 vs Eindhoven</span>
+                        <span class="score">25 - 7</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item draw">
+                        <span class="teams">DCA2 vs Utrecht</span>
+                        <span class="score">15 - 15</span>
+                        <span class="result-icon">⚖️</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- November 2024 - Additional Competition -->
-          <div class="timeline-item" data-delay="3">
-            <div class="timeline-content">
-              <div class="date-medal-container">
-                <div class="competition-date">09 November 2024</div>
-              </div>
-              <div class="competition-header">
-                <div class="trophy-icon">🏆</div>
-                <div class="competition-info">
-                  <h3>1st Competition Day of the Season</h3>
-                  <p class="venue">Sports Center Olympos, Utrecht</p>
+            <!-- February 2025 -->
+            <div class="timeline-item" data-delay="1">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">08 February 2025</div>
+                </div>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>3rd Competition Day of the Season</h3>
+                    <p class="venue">Augustinianum, Eindhoven</p>
+                  </div>
+                </div>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>2 Wins</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA2 vs Utrecht</span>
+                        <span class="score">20 - 10</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA2 vs Delft</span>
+                        <span class="score">21 - 11</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-              <div class="competition-details">
-                <div class="result-badge wins-losses">
-                  <span>⚡</span>
-                  <span>2 Wins</span>
+            </div>
+
+            <!-- December 2024 -->
+            <div class="timeline-item" data-delay="2">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">15 December 2024</div>
                 </div>
-                <div class="results-list">
-                  <h4 class="results-title">Match Results</h4>
-                  <ul class="match-results">
-                    <li class="match-item win">
-                      <span class="teams">DCA2 vs Utrecht</span>
-                      <span class="score">17 - 9</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA2 vs Eindhoven</span>
-                      <span class="score">22 - 10</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                  </ul>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>2nd Competition Day of the Season</h3>
+                    <p class="venue">Sportcentrum Drachten, Drachten</p>
+                  </div>
+                </div>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>2 Wins</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA2 vs Utrecht</span>
+                        <span class="score">20 - 6</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA2 vs Eindhoven</span>
+                        <span class="score">21 - 9</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- November 2024 - Additional Competition -->
+            <div class="timeline-item" data-delay="3">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">09 November 2024</div>
+                </div>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>1st Competition Day of the Season</h3>
+                    <p class="venue">Sports Center Olympos, Utrecht</p>
+                  </div>
+                </div>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>2 Wins</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA2 vs Utrecht</span>
+                        <span class="score">17 - 9</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA2 vs Eindhoven</span>
+                        <span class="score">22 - 10</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2316,40 +2695,40 @@
 
         <!-- Women Timeline -->
         <div class="timeline" id="timeline-women" style="display: none;">
-          <!-- March 2025 -->
+          <!-- November 2025 - 2nd Competition Day of new season -->
           <div class="timeline-item" data-delay="0">
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">23 March 2025</div>
+                <div class="competition-date">23 November 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>4th Competition Day of the Season</h3>
+                  <h3>2nd Competition Day of the Season</h3>
                   <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
                 </div>
               </div>
               <div class="competition-details">
                 <div class="result-badge wins-losses">
                   <span>⚡</span>
-                  <span>1 Win, 2 Losses</span>
+                  <span>3 Losses</span>
                 </div>
                 <div class="results-list">
                   <h4 class="results-title">Match Results</h4>
                   <ul class="match-results">
-                    <li class="match-item win">
-                      <span class="teams">DCA Women vs Utrecht</span>
-                      <span class="score">21 - 11</span>
-                      <span class="result-icon">✅</span>
-                    </li>
                     <li class="match-item loss">
-                      <span class="teams">DCA Women vs Haarlem</span>
-                      <span class="score">11 - 21</span>
+                      <span class="teams">DamDelftDames vs Utrecht</span>
+                      <span class="score">15 - 17</span>
                       <span class="result-icon">❌</span>
                     </li>
                     <li class="match-item loss">
-                      <span class="teams">DCA Women vs Drengelo</span>
-                      <span class="score">16 - 20</span>
+                      <span class="teams">DamDelftDames vs Haarlem</span>
+                      <span class="score">6 - 32</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DamDelftDames vs Drengelhoven</span>
+                      <span class="score">10 - 24</span>
                       <span class="result-icon">❌</span>
                     </li>
                   </ul>
@@ -2358,41 +2737,41 @@
             </div>
           </div>
 
-          <!-- February 2025 -->
+          <!-- November 2025 - 1st Competition Day of new season -->
           <div class="timeline-item" data-delay="1">
             <div class="timeline-content">
               <div class="date-medal-container">
-                <div class="competition-date">08 February 2025</div>
+                <div class="competition-date">02 November 2025</div>
               </div>
               <div class="competition-header">
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
-                  <h3>3rd Competition Day of the Season</h3>
+                  <h3>1st Competition Day of the Season</h3>
                   <p class="venue">Augustinianum, Eindhoven</p>
                 </div>
               </div>
               <div class="competition-details">
                 <div class="result-badge wins-losses">
                   <span>⚡</span>
-                  <span>2 Wins, 1 Loss</span>
+                  <span>1 Win, 1 Draw, 1 Loss</span>
                 </div>
                 <div class="results-list">
                   <h4 class="results-title">Match Results</h4>
                   <ul class="match-results">
                     <li class="match-item win">
-                      <span class="teams">DCA Women vs Utrecht</span>
-                      <span class="score">18 - 12</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA Women vs Drengelo</span>
-                      <span class="score">16 - 14</span>
+                      <span class="teams">DamDelftDames vs Utrecht</span>
+                      <span class="score">17 - 13</span>
                       <span class="result-icon">✅</span>
                     </li>
                     <li class="match-item loss">
-                      <span class="teams">DCA Women vs Haarlem</span>
-                      <span class="score">5 - 27</span>
+                      <span class="teams">DamDelftDames vs Haarlem</span>
+                      <span class="score">6 - 30</span>
                       <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item draw">
+                      <span class="teams">DamDelftDames vs Drengelhoven</span>
+                      <span class="score">16 - 16</span>
+                      <span class="result-icon">⚖️</span>
                     </li>
                   </ul>
                 </div>
@@ -2400,85 +2779,185 @@
             </div>
           </div>
 
-          <!-- December 2024 -->
-          <div class="timeline-item" data-delay="2">
-            <div class="timeline-content">
-              <div class="date-medal-container">
-                <div class="competition-date">15 December 2024</div>
-              </div>
-              <div class="competition-header">
-                <div class="trophy-icon">🏆</div>
-                <div class="competition-info">
-                  <h3>2nd Competition Day of the Season</h3>
-                  <p class="venue">Sportcentrum Drachten, Drachten</p>
+          <!-- Button to show previous season -->
+          <div style="text-align: center; margin: 3rem 0;">
+            <button id="show-previous-women" class="show-previous-season-btn">
+              <span>📜</span>
+              View Previous Season (2024/2025)
+              <span>📜</span>
+            </button>
+          </div>
+
+          <!-- Previous Season Timeline (2024/2025) - Initially Hidden -->
+          <div id="previous-season-women" style="display: none;">
+            <h3 style="text-align: center; color: var(--accent); margin: 2rem 0 3rem 0; font-size: 1.8rem;">
+              🏆 Season 2024/2025 Results 🏆
+            </h3>
+
+            <!-- March 2025 -->
+            <div class="timeline-item" data-delay="0">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">23 March 2025</div>
                 </div>
-              </div>
-              <div class="competition-details">
-                <div class="result-badge wins-losses">
-                  <span>⚡</span>
-                  <span>2 Wins, 1 Loss</span>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>4th Competition Day of the Season</h3>
+                    <p class="venue">USC Sportcentrum Universum, Amsterdam</p>
+                  </div>
                 </div>
-                <div class="results-list">
-                  <h4 class="results-title">Match Results</h4>
-                  <ul class="match-results">
-                    <li class="match-item win">
-                      <span class="teams">DCA Women vs Utrecht</span>
-                      <span class="score">20 - 10</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA Women vs Drengelo</span>
-                      <span class="score">24 - 8</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item loss">
-                      <span class="teams">DCA Women vs Haarlem</span>
-                      <span class="score">12 - 18</span>
-                      <span class="result-icon">❌</span>
-                    </li>
-                  </ul>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>1 Win, 2 Losses</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA Women vs Utrecht</span>
+                        <span class="score">21 - 11</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item loss">
+                        <span class="teams">DCA Women vs Haarlem</span>
+                        <span class="score">11 - 21</span>
+                        <span class="result-icon">❌</span>
+                      </li>
+                      <li class="match-item loss">
+                        <span class="teams">DCA Women vs Drengelo</span>
+                        <span class="score">16 - 20</span>
+                        <span class="result-icon">❌</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- November 2024 -->
-          <div class="timeline-item" data-delay="3">
-            <div class="timeline-content">
-              <div class="date-medal-container">
-                <div class="competition-date">09 November 2024</div>
-              </div>
-              <div class="competition-header">
-                <div class="trophy-icon">🏆</div>
-                <div class="competition-info">
-                  <h3>1st Competition Day of the Season</h3>
-                  <p class="venue">Sports Center Olympos, Utrecht</p>
+            <!-- February 2025 -->
+            <div class="timeline-item" data-delay="1">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">08 February 2025</div>
+                </div>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>3rd Competition Day of the Season</h3>
+                    <p class="venue">Augustinianum, Eindhoven</p>
+                  </div>
+                </div>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>2 Wins, 1 Loss</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA Women vs Utrecht</span>
+                        <span class="score">18 - 12</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA Women vs Drengelo</span>
+                        <span class="score">16 - 14</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item loss">
+                        <span class="teams">DCA Women vs Haarlem</span>
+                        <span class="score">5 - 27</span>
+                        <span class="result-icon">❌</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-              <div class="competition-details">
-                <div class="result-badge wins-losses">
-                  <span>⚡</span>
-                  <span>2 Wins, 1 Loss</span>
+            </div>
+
+            <!-- December 2024 -->
+            <div class="timeline-item" data-delay="2">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">15 December 2024</div>
                 </div>
-                <div class="results-list">
-                  <h4 class="results-title">Match Results</h4>
-                  <ul class="match-results">
-                    <li class="match-item win">
-                      <span class="teams">DCA Women vs Utrecht</span>
-                      <span class="score">21 - 7</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item win">
-                      <span class="teams">DCA Women vs Drengelo</span>
-                      <span class="score">20 - 8</span>
-                      <span class="result-icon">✅</span>
-                    </li>
-                    <li class="match-item loss">
-                      <span class="teams">DCA Women vs Haarlem</span>
-                      <span class="score">7 - 21</span>
-                      <span class="result-icon">❌</span>
-                    </li>
-                  </ul>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>2nd Competition Day of the Season</h3>
+                    <p class="venue">Sportcentrum Drachten, Drachten</p>
+                  </div>
+                </div>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>2 Wins, 1 Loss</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA Women vs Utrecht</span>
+                        <span class="score">20 - 10</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA Women vs Drengelo</span>
+                        <span class="score">24 - 8</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item loss">
+                        <span class="teams">DCA Women vs Haarlem</span>
+                        <span class="score">12 - 18</span>
+                        <span class="result-icon">❌</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- November 2024 -->
+            <div class="timeline-item" data-delay="3">
+              <div class="timeline-content">
+                <div class="date-medal-container">
+                  <div class="competition-date">09 November 2024</div>
+                </div>
+                <div class="competition-header">
+                  <div class="trophy-icon">🏆</div>
+                  <div class="competition-info">
+                    <h3>1st Competition Day of the Season</h3>
+                    <p class="venue">Sports Center Olympos, Utrecht</p>
+                  </div>
+                </div>
+                <div class="competition-details">
+                  <div class="result-badge wins-losses">
+                    <span>⚡</span>
+                    <span>2 Wins, 1 Loss</span>
+                  </div>
+                  <div class="results-list">
+                    <h4 class="results-title">Match Results</h4>
+                    <ul class="match-results">
+                      <li class="match-item win">
+                        <span class="teams">DCA Women vs Utrecht</span>
+                        <span class="score">21 - 7</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item win">
+                        <span class="teams">DCA Women vs Drengelo</span>
+                        <span class="score">20 - 8</span>
+                        <span class="result-icon">✅</span>
+                      </li>
+                      <li class="match-item loss">
+                        <span class="teams">DCA Women vs Haarlem</span>
+                        <span class="score">7 - 21</span>
+                        <span class="result-icon">❌</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2487,8 +2966,50 @@
 
         <!-- Mixed 1 Timeline -->
         <div class="timeline" id="timeline-mixed1" style="display: none;">
-          <!-- October 2025 - NEW SEASON -->
+          <!-- November 2025 - 2nd Competition Day -->
           <div class="timeline-item" data-delay="0">
+            <div class="timeline-content">
+              <div class="date-medal-container">
+                <div class="competition-date">23 November 2025</div>
+              </div>
+              <div class="competition-header">
+                <div class="trophy-icon">🏆</div>
+                <div class="competition-info">
+                  <h3>2nd Competition Day of the Season</h3>
+                  <p class="venue">Sportzaal Het Zand, Utrecht</p>
+                </div>
+              </div>
+              <div class="competition-details">
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>3 Wins</span>
+                </div>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA 1 vs Drachten</span>
+                      <span class="score">28 - 10</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA 1 vs Rhineland Wolves</span>
+                      <span class="score">20 - 12</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item win">
+                      <span class="teams">DCA 1 vs Utrecht</span>
+                      <span class="score">19 - 11</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- October 2025 - 1st Competition Day -->
+          <div class="timeline-item" data-delay="1">
             <div class="timeline-content">
               <div class="date-medal-container">
                 <div class="competition-date">11 October 2025</div>
@@ -2716,8 +3237,50 @@
 
         <!-- Mixed 2 Timeline -->
         <div class="timeline" id="timeline-mixed2" style="display: none;">
-          <!-- October 2025 - NEW SEASON -->
+          <!-- November 2025 - 2nd Competition Day -->
           <div class="timeline-item" data-delay="0">
+            <div class="timeline-content">
+              <div class="date-medal-container">
+                <div class="competition-date">23 November 2025</div>
+              </div>
+              <div class="competition-header">
+                <div class="trophy-icon">🏆</div>
+                <div class="competition-info">
+                  <h3>2nd Competition Day of the Season</h3>
+                  <p class="venue">Sportzaal Het Zand, Utrecht</p>
+                </div>
+              </div>
+              <div class="competition-details">
+                <div class="result-badge wins-losses">
+                  <span>⚡</span>
+                  <span>1 Win, 2 Losses</span>
+                </div>
+                <div class="results-list">
+                  <h4 class="results-title">Match Results</h4>
+                  <ul class="match-results">
+                    <li class="match-item win">
+                      <span class="teams">DCA 2 vs Utrecht 2</span>
+                      <span class="score">16 - 12</span>
+                      <span class="result-icon">✅</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA 2 vs Hengelo</span>
+                      <span class="score">6 - 26</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                    <li class="match-item loss">
+                      <span class="teams">DCA 2 vs Eindhoven</span>
+                      <span class="score">8 - 28</span>
+                      <span class="result-icon">❌</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- October 2025 - 1st Competition Day -->
+          <div class="timeline-item" data-delay="1">
             <div class="timeline-content">
               <div class="date-medal-container">
                 <div class="competition-date">11 October 2025</div>
@@ -2942,8 +3505,12 @@
             <div class="social-links">
               <a href="moments.html" class="social-link" title="Our Moments">📸</a>
               <a href="social.html" class="social-link" title="Social Events">🎉</a>
-              <a href="https://www.tiktok.com/@dodgeballamsterdam?_t=ZG-8xrTnrmMLQG&_r=1" class="social-link" title="Follow us on TikTok" target="_blank"><img src="pics/tiktok.png" alt="TikTok" class="tiktok-logo"></a>
-              <a href="https://www.instagram.com/dodgeballamsterdam?utm_source=ig_web_button_share_sheet&igsh=MWl1ZmU1Z3FmYzg2Mw==" class="social-link" title="Follow us on Instagram" target="_blank"><img src="pics/insta.png" alt="Instagram" class="instagram-logo"></a>
+              <a href="https://www.tiktok.com/@dodgeballamsterdam?_t=ZG-8xrTnrmMLQG&_r=1" class="social-link"
+                title="Follow us on TikTok" target="_blank"><img src="pics/tiktok.png" alt="TikTok"
+                  class="tiktok-logo"></a>
+              <a href="https://www.instagram.com/dodgeballamsterdam?utm_source=ig_web_button_share_sheet&igsh=MWl1ZmU1Z3FmYzg2Mw=="
+                class="social-link" title="Follow us on Instagram" target="_blank"><img src="pics/insta.png"
+                  alt="Instagram" class="instagram-logo"></a>
             </div>
           </div>
         </div>
@@ -3013,12 +3580,12 @@
 
   <!-- Inline JS for Hamburger + Overlay -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const btn = document.getElementById('menu-toggle');
       const nav = document.getElementById('nav-menu');
       const overlay = document.getElementById('overlay');
       const dropdowns = nav.querySelectorAll('.dropdown');
-      
+
       // Toggle menu function
       function toggleMenu() {
         nav.classList.toggle('active');
@@ -3026,12 +3593,12 @@
       }
 
       // Event listeners
-      btn.addEventListener('click', function(e) {
+      btn.addEventListener('click', function (e) {
         e.preventDefault();
         toggleMenu();
       });
 
-      overlay.addEventListener('click', function() {
+      overlay.addEventListener('click', function () {
         toggleMenu();
       });
 
@@ -3039,14 +3606,14 @@
       dropdowns.forEach(dropdown => {
         const dropdownSpan = dropdown.querySelector('span');
         const dropdownContent = dropdown.querySelector('.dropdown-content');
-        
-        dropdownSpan.addEventListener('click', function(e) {
+
+        dropdownSpan.addEventListener('click', function (e) {
           if (window.innerWidth <= 768) {
             e.preventDefault();
             e.stopPropagation();
-            
+
             const isCurrentlyActive = dropdown.classList.contains('active');
-            
+
             // First, close all dropdowns and reset all positions immediately
             dropdowns.forEach(otherDropdown => {
               otherDropdown.classList.remove('active');
@@ -3061,65 +3628,65 @@
                 });
               }
             });
-            
+
             // Reset ALL menu item positions immediately
             const allMenuItems = Array.from(nav.children);
             allMenuItems.forEach(item => {
               item.style.transform = '';
               item.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
             });
-            
+
             // Force layout recalculation
             nav.offsetHeight;
-            
+
             // If clicking on an inactive dropdown, open it
             if (!isCurrentlyActive) {
-              
+
               // Step 1: Measure content height while completely hidden
               dropdownContent.style.position = 'absolute';
               dropdownContent.style.visibility = 'hidden';
               dropdownContent.style.maxHeight = 'none';
               dropdownContent.style.opacity = '1';
               const contentHeight = dropdownContent.scrollHeight;
-              
+
               // Step 2: Hide it again immediately
               dropdownContent.style.position = '';
               dropdownContent.style.visibility = '';
               dropdownContent.style.maxHeight = '0px';
               dropdownContent.style.opacity = '0';
-              
+
               // Step 3: Find items to move
               const currentDropdownIndex = allMenuItems.indexOf(dropdown);
               const itemsToMove = allMenuItems.slice(currentDropdownIndex + 1);
-              
+
               // Step 4: Use requestAnimationFrame to ensure proper timing
               requestAnimationFrame(() => {
                 // FIRST: Move items down (content pushing)
                 itemsToMove.forEach(item => {
                   item.style.transform = `translateY(${contentHeight}px)`;
                 });
-                
+
                 // SECOND: Activate dropdown class for styling
                 dropdown.classList.add('active');
-                
+
                 // THIRD: Make dropdown content visible
                 requestAnimationFrame(() => {
                   dropdownContent.style.maxHeight = contentHeight + 'px';
                   dropdownContent.style.opacity = '1';
-                  
+
                   // Celebration effect
                   dropdownSpan.style.transform = 'scale(1.05)';
                   setTimeout(() => {
                     dropdownSpan.style.transform = '';
                   }, 200);
-                  
+
                   // Animate dropdown items
                   const dropdownLinks = dropdownContent.querySelectorAll('a');
                   dropdownLinks.forEach((link, index) => {
                     link.style.opacity = '0';
                     link.style.transform = 'translateX(-20px)';
                     link.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                    
+
                     setTimeout(() => {
                       link.style.opacity = '1';
                       link.style.transform = 'translateX(0)';
@@ -3127,7 +3694,7 @@
                   });
                 });
               });
-              
+
             } else {
               // Just add bounce effect for closing
               dropdownSpan.style.transform = 'scale(0.95)';
@@ -3142,9 +3709,9 @@
       // Close menu when clicking a link
       const navLinks = nav.getElementsByTagName('a');
       for (let link of navLinks) {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function () {
           if (link.getAttribute('href').startsWith('#') || link.getAttribute('href').endsWith('.html')) {
-              toggleMenu();
+            toggleMenu();
           }
         });
       }
@@ -3153,63 +3720,123 @@
       const teamCards = document.querySelectorAll('.team-card');
       const timelineSection = document.getElementById('timeline-section');
       const timelineTitle = document.getElementById('timeline-title');
-      
+
       teamCards.forEach(card => {
-        card.addEventListener('click', function() {
+        card.addEventListener('click', function () {
           const teamName = this.dataset.team;
-          
+
           // Remove active class from all cards
           teamCards.forEach(c => c.classList.remove('active'));
-          
+
           // Add active class to clicked card
           this.classList.add('active');
-          
+
           // Hide all timelines first
           const allTimelines = document.querySelectorAll('.timeline');
           allTimelines.forEach(timeline => {
             timeline.style.display = 'none';
           });
-          
+
           // Show the selected team's timeline
           const selectedTimeline = document.getElementById(`timeline-${teamName}`);
           if (selectedTimeline) {
             selectedTimeline.style.display = 'block';
           }
-          
+
           // Update timeline title based on team
           const teamTitles = {
-            'man1': 'Man 1 - Hall of Glory 2024/2025',
-            'man2': 'Man 2 - Hall of Glory 2024/2025', 
-            'women': 'Women - Hall of Glory 2024/2025',
+            'man1': 'Man 1 - Hall of Glory 2025/2026',
+            'man2': 'Man 2 - Hall of Glory 2025/2026',
+            'women': 'Women - Hall of Glory 2025/2026',
             'mixed1': 'Mixed 1 - Hall of Glory 2025/2026',
             'mixed2': 'Mixed 2 - Hall of Glory 2025/2026'
           };
-          
+
           timelineTitle.textContent = teamTitles[teamName];
-          
+
           // Show timeline section with smooth animation
           if (timelineSection.style.display === 'none') {
             timelineSection.style.display = 'block';
-            timelineSection.scrollIntoView({ 
-              behavior: 'smooth', 
-              block: 'start' 
+            timelineSection.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
             });
           }
         });
       });
 
+      // Previous Season Button Functionality for Man 1
+      const showPreviousMan1Btn = document.getElementById('show-previous-man1');
+      const previousSeasonMan1 = document.getElementById('previous-season-man1');
+
+      if (showPreviousMan1Btn && previousSeasonMan1) {
+        showPreviousMan1Btn.addEventListener('click', function () {
+          if (previousSeasonMan1.style.display === 'none') {
+            previousSeasonMan1.style.display = 'block';
+            this.textContent = '🔼 Hide Previous Season (2024/2025) 🔼';
+            previousSeasonMan1.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          } else {
+            previousSeasonMan1.style.display = 'none';
+            this.innerHTML = '<span>📜</span> View Previous Season (2024/2025) <span>📜</span>';
+          }
+        });
+      }
+
+      // Previous Season Button Functionality for Man 2
+      const showPreviousMan2Btn = document.getElementById('show-previous-man2');
+      const previousSeasonMan2 = document.getElementById('previous-season-man2');
+
+      if (showPreviousMan2Btn && previousSeasonMan2) {
+        showPreviousMan2Btn.addEventListener('click', function () {
+          if (previousSeasonMan2.style.display === 'none') {
+            previousSeasonMan2.style.display = 'block';
+            this.textContent = '🔼 Hide Previous Season (2024/2025) 🔼';
+            previousSeasonMan2.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          } else {
+            previousSeasonMan2.style.display = 'none';
+            this.innerHTML = '<span>📜</span> View Previous Season (2024/2025) <span>📜</span>';
+          }
+        });
+      }
+
+      // Previous Season Button Functionality for Women
+      const showPreviousWomenBtn = document.getElementById('show-previous-women');
+      const previousSeasonWomen = document.getElementById('previous-season-women');
+
+      if (showPreviousWomenBtn && previousSeasonWomen) {
+        showPreviousWomenBtn.addEventListener('click', function () {
+          if (previousSeasonWomen.style.display === 'none') {
+            previousSeasonWomen.style.display = 'block';
+            this.textContent = '🔼 Hide Previous Season (2024/2025) 🔼';
+            previousSeasonWomen.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          } else {
+            previousSeasonWomen.style.display = 'none';
+            this.innerHTML = '<span>📜</span> View Previous Season (2024/2025) <span>📜</span>';
+          }
+        });
+      }
+
       // Previous Season Button Functionality for Mixed 1
       const showPreviousMixed1Btn = document.getElementById('show-previous-mixed1');
       const previousSeasonMixed1 = document.getElementById('previous-season-mixed1');
-      
+
       if (showPreviousMixed1Btn && previousSeasonMixed1) {
-        showPreviousMixed1Btn.addEventListener('click', function() {
+        showPreviousMixed1Btn.addEventListener('click', function () {
           if (previousSeasonMixed1.style.display === 'none') {
             previousSeasonMixed1.style.display = 'block';
             this.textContent = '🔼 Hide Previous Season (2024/2025) 🔼';
-            previousSeasonMixed1.scrollIntoView({ 
-              behavior: 'smooth', 
-              block: 'start' 
+            previousSeasonMixed1.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
             });
           } else {
             previousSeasonMixed1.style.display = 'none';
@@ -3221,15 +3848,15 @@
       // Previous Season Button Functionality for Mixed 2
       const showPreviousMixed2Btn = document.getElementById('show-previous-mixed2');
       const previousSeasonMixed2 = document.getElementById('previous-season-mixed2');
-      
+
       if (showPreviousMixed2Btn && previousSeasonMixed2) {
-        showPreviousMixed2Btn.addEventListener('click', function() {
+        showPreviousMixed2Btn.addEventListener('click', function () {
           if (previousSeasonMixed2.style.display === 'none') {
             previousSeasonMixed2.style.display = 'block';
             this.textContent = '🔼 Hide Previous Season (2024/2025) 🔼';
-            previousSeasonMixed2.scrollIntoView({ 
-              behavior: 'smooth', 
-              block: 'start' 
+            previousSeasonMixed2.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
             });
           } else {
             previousSeasonMixed2.style.display = 'none';
@@ -3240,4 +3867,5 @@
     });
   </script>
 </body>
-</html> 
+
+</html>

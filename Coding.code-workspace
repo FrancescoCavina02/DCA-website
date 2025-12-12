@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../NLP Chatbot"
+		},
+		{
+			"path": "../../../../Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Books"
+		}
+	],
+	"settings": {
+		"dataWrangler.columnInsights.displayOnOpen": true,
+		"git.ignoreLimitWarning": true
+	}
+}
