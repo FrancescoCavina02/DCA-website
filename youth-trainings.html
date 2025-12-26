@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Youth Trainings | DCA's Revolutionary Program for Future Dodgeball Stars</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Join DCA's groundbreaking Youth Trainings - the first dodgeball program for young athletes (12-17) in the Netherlands! Learn technique, tactics, and teamwork from expert coaches.">
-  <meta name="keywords" content="youth dodgeball amsterdam, kids dodgeball training, teenage sports amsterdam, DCA youth program, dodgeball lessons amsterdam, young athletes training">
+  <meta name="description"
+    content="Join DCA's groundbreaking Youth Trainings - the first dodgeball program for young athletes (12-17) in the Netherlands! Learn technique, tactics, and teamwork from expert coaches.">
+  <meta name="keywords"
+    content="youth dodgeball amsterdam, kids dodgeball training, teenage sports amsterdam, DCA youth program, dodgeball lessons amsterdam, young athletes training">
   <meta name="author" content="Dodgeball Club Amsterdam">
   <meta name="robots" content="index, follow">
-  
+
   <!-- Open Graph Meta Tags for Social Media -->
   <meta property="og:title" content="Youth Trainings | DCA's Revolutionary Program for Future Stars">
-  <meta property="og:description" content="The Netherlands' first youth dodgeball program! Training future champions aged 12-17 every Tuesday at DCA.">
+  <meta property="og:description"
+    content="The Netherlands' first youth dodgeball program! Training future champions aged 12-17 every Tuesday at DCA.">
   <meta property="og:url" content="https://www.dodgeballclubamsterdam.com/youth-trainings.html">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://www.dodgeballclubamsterdam.com/pics/Ball.png">
   <meta property="og:site_name" content="Dodgeball Club Amsterdam">
-  
+
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Youth Trainings | DCA's Revolutionary Program">
@@ -27,7 +31,7 @@
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  
+
   <!-- Performance and SEO hints -->
   <link rel="dns-prefetch" href="//fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,19 +67,26 @@
       --youth-cyan: #00BCD4;
       --youth-lime: #CDDC39;
     }
-    *, *::before, *::after {
+
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
     }
+
     body {
       font-family: 'Roboto', sans-serif;
       color: var(--secondary);
       line-height: 1.6;
     }
+
     a {
       color: var(--primary);
       text-decoration: none;
     }
+
     a:hover {
       text-decoration: underline;
     }
@@ -92,29 +103,35 @@
       top: 0;
       z-index: 1002;
     }
+
     .logo {
       font-size: 1.5rem;
       font-weight: 700;
     }
+
     .logo img {
       height: 2.8rem;
       vertical-align: middle;
       margin-left: 0.5rem;
     }
+
     .logo .ball-logo {
       height: 2.8rem;
       vertical-align: middle;
       margin-right: 0.5rem;
     }
+
     .adam-image {
       height: 3.5rem;
       vertical-align: middle;
       margin-left: 1rem;
     }
+
     nav#nav-menu {
       display: flex;
       align-items: center;
     }
+
     nav#nav-menu a {
       margin-left: 1.5rem;
       font-weight: 500;
@@ -125,11 +142,13 @@
       overflow: hidden;
       color: var(--primary);
     }
+
     nav#nav-menu a:hover {
       color: var(--light);
       transform: scale(1.05);
       background-color: rgba(211, 47, 47, 0.1);
     }
+
     .menu-toggle {
       display: none;
       background: none;
@@ -143,9 +162,11 @@
     #overlay {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
       z-index: 1000;
     }
 
@@ -155,17 +176,19 @@
       display: inline-flex;
       align-items: center;
     }
+
     .dropdown-content {
       display: none;
       position: absolute;
       background-color: var(--secondary);
       min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       z-index: 1003;
       border-radius: 4px;
       top: 100%;
       left: 0;
     }
+
     .dropdown-content a {
       color: var(--light);
       padding: 12px 16px;
@@ -175,18 +198,22 @@
       border-radius: 0;
       transition: background-color 0.3s ease;
     }
+
     .dropdown-content a:hover {
       background-color: var(--primary);
       transform: none;
       text-decoration: underline;
     }
+
     .dropdown-content a::before {
       display: none;
     }
+
     .dropdown:hover .dropdown-content {
       display: block;
     }
-    .dropdown > span {
+
+    .dropdown>span {
       margin-left: 1.5rem;
       font-weight: 500;
       transition: all 0.3s ease;
@@ -197,18 +224,21 @@
       color: var(--primary);
       cursor: pointer;
     }
-    .dropdown > span:hover {
+
+    .dropdown>span:hover {
       color: var(--light);
       transform: scale(1.05);
       background-color: rgba(211, 47, 47, 0.1);
     }
-    .dropdown > span::after {
+
+    .dropdown>span::after {
       content: '▼';
       float: right;
       transition: transform 0.3s ease;
       font-size: 0.8rem;
     }
-    .dropdown.active > span::after {
+
+    .dropdown.active>span::after {
       transform: rotate(180deg);
     }
 
@@ -244,8 +274,13 @@
     }
 
     @keyframes floatingBalls {
-      from { transform: translateY(100vh) rotate(0deg); }
-      to { transform: translateY(-100vh) rotate(360deg); }
+      from {
+        transform: translateY(100vh) rotate(0deg);
+      }
+
+      to {
+        transform: translateY(-100vh) rotate(360deg);
+      }
     }
 
     .hero-content {
@@ -256,7 +291,7 @@
 
     .hero-badge {
       display: inline-block;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
       color: var(--light);
       padding: 0.5rem 1.5rem;
       border-radius: 25px;
@@ -266,13 +301,22 @@
       letter-spacing: 0.5px;
       margin-bottom: 2rem;
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.3);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       animation: badgePulse 3s ease-in-out infinite;
     }
 
     @keyframes badgePulse {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
-      50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255,255,255,0); }
+
+      0%,
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+      }
+
+      50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+      }
     }
 
     .hero-title {
@@ -287,8 +331,15 @@
     }
 
     @keyframes titleShimmer {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
     }
 
     .hero-subtitle {
@@ -338,7 +389,7 @@
       font-size: 1.2rem;
       text-decoration: none;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       position: relative;
       overflow: hidden;
     }
@@ -350,7 +401,7 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(123,31,162,0.1), transparent);
+      background: linear-gradient(90deg, transparent, rgba(123, 31, 162, 0.1), transparent);
       transition: left 0.5s;
     }
 
@@ -360,7 +411,7 @@
 
     .cta-button:hover {
       transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
       text-decoration: none;
     }
 
@@ -407,10 +458,23 @@
     }
 
     @keyframes floatAround {
-      0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
-      25% { transform: translateY(-30px) rotate(90deg) scale(1.1); }
-      50% { transform: translateY(0px) rotate(180deg) scale(0.9); }
-      75% { transform: translateY(-20px) rotate(270deg) scale(1.1); }
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg) scale(1);
+      }
+
+      25% {
+        transform: translateY(-30px) rotate(90deg) scale(1.1);
+      }
+
+      50% {
+        transform: translateY(0px) rotate(180deg) scale(0.9);
+      }
+
+      75% {
+        transform: translateY(-20px) rotate(270deg) scale(1.1);
+      }
     }
 
     /* — Dutch Announcement Section — */
@@ -435,8 +499,13 @@
     }
 
     @keyframes floatPattern {
-      from { transform: translateX(0) translateY(0) rotate(0deg); }
-      to { transform: translateX(-60px) translateY(-60px) rotate(360deg); }
+      from {
+        transform: translateX(0) translateY(0) rotate(0deg);
+      }
+
+      to {
+        transform: translateX(-60px) translateY(-60px) rotate(360deg);
+      }
     }
 
     .announcement-container {
@@ -447,15 +516,15 @@
     }
 
     .announcement-content {
-      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
       backdrop-filter: blur(15px);
-      border: 1px solid rgba(255,255,255,0.3);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 30px;
       padding: 3rem;
       display: flex;
       align-items: center;
       gap: 2rem;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
       position: relative;
       overflow: hidden;
       transition: all 0.4s ease;
@@ -473,27 +542,47 @@
     }
 
     @keyframes dutchFlag {
-      0%, 100% { background: linear-gradient(45deg, #FF6B35, #F7931E, #FFD23F); }
-      33% { background: linear-gradient(45deg, #FFFFFF, #FFFFFF, #FFFFFF); }
-      66% { background: linear-gradient(45deg, #21468B, #AE1C28, #21468B); }
+
+      0%,
+      100% {
+        background: linear-gradient(45deg, #FF6B35, #F7931E, #FFD23F);
+      }
+
+      33% {
+        background: linear-gradient(45deg, #FFFFFF, #FFFFFF, #FFFFFF);
+      }
+
+      66% {
+        background: linear-gradient(45deg, #21468B, #AE1C28, #21468B);
+      }
     }
 
     .announcement-content:hover {
       transform: translateY(-5px);
-      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
     }
 
     .announcement-flag {
       font-size: 4rem;
       text-align: center;
       animation: flagWave 2s ease-in-out infinite;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
     }
 
     @keyframes flagWave {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      25% { transform: scale(1.1) rotate(5deg); }
-      75% { transform: scale(1.1) rotate(-5deg); }
+
+      0%,
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+
+      25% {
+        transform: scale(1.1) rotate(5deg);
+      }
+
+      75% {
+        transform: scale(1.1) rotate(-5deg);
+      }
     }
 
     .announcement-text {
@@ -556,8 +645,15 @@
     }
 
     @keyframes iconBounce {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-15px); }
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
     }
 
     .section-title {
@@ -586,16 +682,16 @@
     }
 
     .info-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
       backdrop-filter: blur(15px);
-      border: 1px solid rgba(255,255,255,0.3);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 25px;
       padding: 2.5rem;
       text-align: center;
       position: relative;
       overflow: hidden;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
     .info-card::before {
@@ -607,11 +703,12 @@
       height: 4px;
       background: linear-gradient(45deg, var(--youth-purple), var(--youth-cyan));
       transition: height 0.3s ease;
+      pointer-events: none;
     }
 
     .info-card:hover {
       transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
     }
 
     .info-card:hover::before {
@@ -670,14 +767,20 @@
       animation: slideInTimeline 1s ease-out forwards;
     }
 
-    .timeline-item:nth-child(1) { animation-delay: 0.2s; }
-    .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+    .timeline-item:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .timeline-item:nth-child(2) {
+      animation-delay: 0.4s;
+    }
 
     @keyframes slideInTimeline {
       from {
         opacity: 0;
         transform: translateY(50px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -689,7 +792,7 @@
       background: var(--light);
       border-radius: 20px;
       padding: 2rem;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
       width: 45%;
       margin-left: 55%;
     }
@@ -714,8 +817,15 @@
     }
 
     @keyframes dotPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(255,112,67,0.4); }
-      50% { box-shadow: 0 0 0 10px rgba(255,112,67,0); }
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 112, 67, 0.4);
+      }
+
+      50% {
+        box-shadow: 0 0 0 10px rgba(255, 112, 67, 0);
+      }
     }
 
     .timeline-date {
@@ -761,8 +871,13 @@
     }
 
     @keyframes rotatePattern {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .apply-content {
@@ -794,7 +909,7 @@
       font-size: 1.3rem;
       text-decoration: none;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       position: relative;
       overflow: hidden;
     }
@@ -806,7 +921,7 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(123,31,162,0.1), transparent);
+      background: linear-gradient(90deg, transparent, rgba(123, 31, 162, 0.1), transparent);
       transition: left 0.5s;
     }
 
@@ -816,7 +931,7 @@
 
     .apply-button:hover {
       transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
       text-decoration: none;
     }
 
@@ -835,19 +950,19 @@
     }
 
     .faq-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
       backdrop-filter: blur(15px);
-      border: 1px solid rgba(255,255,255,0.3);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 20px;
       padding: 2rem;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
     }
 
     .faq-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
     }
 
     .faq-icon {
@@ -872,7 +987,7 @@
       .adam-image {
         display: none;
       }
-      
+
       .menu-toggle {
         display: block;
         font-size: 1.8rem;
@@ -885,88 +1000,88 @@
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
       }
-      
+
       .menu-toggle:hover {
         transform: scale(1.05) rotate(5deg);
         box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
       }
-      
+
       nav#nav-menu {
         display: flex;
         flex-direction: column;
         background: linear-gradient(135deg, var(--secondary), #1a1a1a, var(--secondary));
         position: fixed;
-        top: 0; 
+        top: 0;
         left: -60%;
-        width: 60%; 
+        width: 60%;
         height: 100%;
         padding-top: 4rem;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         z-index: 1001;
-        box-shadow: 5px 0 25px rgba(0,0,0,0.3);
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
         backdrop-filter: blur(10px);
       }
-      
+
       nav#nav-menu.active {
         left: 0;
       }
-      
+
       nav#nav-menu a {
         margin: 0;
         padding: 1rem 2rem;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         color: var(--light);
         font-weight: 500;
         transition: all 0.3s ease;
       }
-      
+
       nav#nav-menu a:hover {
         color: var(--light);
         transform: translateX(10px);
       }
-      
+
       .dropdown {
         display: block;
         width: 100%;
       }
-      
-      .dropdown > span {
+
+      .dropdown>span {
         margin: 0;
         padding: 1rem 2rem;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         display: block;
         width: 100%;
         color: var(--light);
       }
-      
-      .dropdown > span::after {
+
+      .dropdown>span::after {
         content: '▼';
         float: right;
         transition: transform 0.3s ease;
         font-size: 0.8rem;
       }
-      
-      .dropdown.active > span::after {
+
+      .dropdown.active>span::after {
         transform: rotate(180deg);
       }
-      
+
       .dropdown-content {
         position: static;
         display: block;
         box-shadow: none;
-        background: rgba(42,42,42,0.95);
+        background: rgba(42, 42, 42, 0.95);
         border-radius: 0;
         overflow: hidden;
         max-height: 0;
         opacity: 0;
         transition: all 0.5s ease;
       }
-      
+
       .dropdown.active .dropdown-content {
         max-height: 500px;
         opacity: 1;
       }
-      
+
       #overlay.active {
         display: block;
       }
@@ -1050,6 +1165,7 @@
         opacity: 0;
         transform: translateY(30px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -1079,8 +1195,13 @@
     }
 
     @keyframes footerBalls {
-      from { transform: translateX(0); }
-      to { transform: translateX(-80px); }
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-80px);
+      }
     }
 
     .footer-content {
@@ -1103,10 +1224,21 @@
       opacity: 0;
     }
 
-    .footer-section:nth-child(1) { animation-delay: 0.1s; }
-    .footer-section:nth-child(2) { animation-delay: 0.2s; }
-    .footer-section:nth-child(3) { animation-delay: 0.3s; }
-    .footer-section:nth-child(4) { animation-delay: 0.4s; }
+    .footer-section:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .footer-section:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .footer-section:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .footer-section:nth-child(4) {
+      animation-delay: 0.4s;
+    }
 
     .footer-logo {
       display: flex;
@@ -1173,7 +1305,8 @@
       box-shadow: 0 8px 20px rgba(211, 47, 47, 0.4);
     }
 
-    .instagram-logo, .tiktok-logo {
+    .instagram-logo,
+    .tiktok-logo {
       width: 20px;
       height: 20px;
       transition: transform 0.3s ease;
@@ -1287,8 +1420,17 @@
     }
 
     @keyframes dividerPulse {
-      0%, 100% { transform: scale(1); opacity: 0.6; }
-      50% { transform: scale(1.2); opacity: 1; }
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
     }
 
     .footer-bottom {
@@ -1334,6 +1476,7 @@
         opacity: 0;
         transform: translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -1341,8 +1484,13 @@
     }
 
     @keyframes footerBallSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     /* Mobile footer adjustments */
@@ -1384,7 +1532,8 @@
 <body>
   <!-- Header + Nav -->
   <header>
-    <div class="logo"><a href="index.html"><img src="pics/Ball.png" alt="Ball Logo" class="ball-logo">DCA <img src="pics/XXX.png" alt="DCA Logo"></a></div>
+    <div class="logo"><a href="index.html"><img src="pics/Ball.png" alt="Ball Logo" class="ball-logo">DCA <img
+          src="pics/XXX.png" alt="DCA Logo"></a></div>
     <img src="pics/adam.png" alt="Adam" class="adam-image">
     <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
     <nav id="nav-menu">
@@ -1429,12 +1578,13 @@
       <div class="floating-element element-3">🚀</div>
       <div class="floating-element element-4">💫</div>
     </div>
-    
+
     <div class="hero-content">
       <div class="hero-badge">🇳🇱 First in the Netherlands</div>
       <h1 class="hero-title">Youth Dodgeball Revolution</h1>
-      <p class="hero-subtitle">Training the next generation of dodgeball champions! Ages 12-17 welcome to join the future of the sport.</p>
-      
+      <p class="hero-subtitle">Training the next generation of dodgeball champions! Ages 12-17 welcome to join the
+        future of the sport.</p>
+
       <div class="hero-stats">
         <div class="stat-item">
           <span class="stat-number">12-17</span>
@@ -1449,7 +1599,7 @@
           <span class="stat-label">In Netherlands</span>
         </div>
       </div>
-      
+
       <div class="hero-cta">
         <a href="#apply" class="cta-button">Join the Revolution 🚀</a>
       </div>
@@ -1463,7 +1613,9 @@
         <div class="announcement-flag">🇳🇱</div>
         <div class="announcement-text">
           <p class="dutch-text">
-            <strong>Eindelijk komt dodgeball ook voor de jeugd!</strong> DCA is de eerste club van Nederland die trainingen voor de jeugd zal organiseren. Bij deze trainingen gaan we de sport dodgeball aan de volgende generatie sporters leren van de techniek tot tactiek. 
+            <strong>Eindelijk komt dodgeball ook voor de jeugd!</strong> DCA is de eerste club van Nederland die
+            trainingen voor de jeugd zal organiseren. Bij deze trainingen gaan we de sport dodgeball aan de volgende
+            generatie sporters leren van de techniek tot tactiek.
           </p>
           <p class="call-to-action-dutch">
             Wil je graag meespelen? <a href="#apply" class="dutch-link">Vul dan de formulieren hieronder in!</a>
@@ -1478,44 +1630,95 @@
     <div class="section-header">
       <div class="section-icon">🌟</div>
       <h2 class="section-title">Why Choose DCA Youth?</h2>
-      <p class="section-subtitle">We're pioneering youth dodgeball in the Netherlands with professional coaching and fun-first approach</p>
+      <p class="section-subtitle">We're pioneering youth dodgeball in the Netherlands with professional coaching and
+        fun-first approach</p>
     </div>
 
     <div class="info-grid">
       <div class="info-card">
         <div class="card-icon">🥇</div>
         <h3 class="card-title">First Ever Program</h3>
-        <p class="card-description">DCA proudly presents the Netherlands' very first dedicated youth dodgeball training program. Be part of history!</p>
+        <p class="card-description">DCA proudly presents the Netherlands' very first dedicated youth dodgeball training
+          program. Be part of history!</p>
       </div>
 
       <div class="info-card">
         <div class="card-icon">👨‍🏫</div>
         <h3 class="card-title">Expert Coaching</h3>
-        <p class="card-description">Learn from experienced DCA coaches who'll teach you everything from basic techniques to advanced tactics and teamwork.</p>
+        <p class="card-description">Learn from experienced DCA coaches who'll teach you everything from basic techniques
+          to advanced tactics and teamwork.</p>
       </div>
 
       <div class="info-card">
         <div class="card-icon">🏟️</div>
         <h3 class="card-title">Professional Venue</h3>
-        <p class="card-description">Train at the same location as our championship teams - St Nicolaaslyceum, with all professional equipment provided.</p>
+        <p class="card-description">Train at Hubertus and Berkhoff High School near Amsterdam RAI, with all
+          professional equipment provided.</p>
       </div>
 
       <div class="info-card">
         <div class="card-icon">🤝</div>
         <h3 class="card-title">Build Friendships</h3>
-        <p class="card-description">Join a community of young athletes, make lasting friendships, and develop teamwork skills that go beyond the court.</p>
+        <p class="card-description">Join a community of young athletes, make lasting friendships, and develop teamwork
+          skills that go beyond the court.</p>
       </div>
 
       <div class="info-card">
         <div class="card-icon">💪</div>
         <h3 class="card-title">Skill Development</h3>
-        <p class="card-description">From dodging and throwing to strategic thinking - develop physical fitness, reflexes, and tactical awareness.</p>
+        <p class="card-description">From dodging and throwing to strategic thinking - develop physical fitness,
+          reflexes, and tactical awareness.</p>
       </div>
 
       <div class="info-card">
         <div class="card-icon">🎉</div>
         <h3 class="card-title">Fun Guaranteed</h3>
-        <p class="card-description">Our youth program focuses on enjoyment first - learn through games, challenges, and exciting drills that keep you engaged.</p>
+        <p class="card-description">Our youth program focuses on enjoyment first - learn through games, challenges, and
+          exciting drills that keep you engaged.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meet Your Coaches Section -->
+  <section class="content-section" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+    <div class="section-header">
+      <div class="section-icon">👨‍🏫</div>
+      <h2 class="section-title">Meet Your Coaches</h2>
+      <p class="section-subtitle">Our experienced coaches are dedicated to helping young athletes develop their skills
+        and have fun!</p>
+    </div>
+
+    <div class="info-grid" style="margin-top: 3rem;">
+      <div class="info-card" style="text-align: center;">
+        <div
+          style="width: 150px; height: 150px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 4px solid var(--youth-purple); box-shadow: 0 8px 25px rgba(123, 31, 162, 0.3);">
+          <div
+            style="width: 100%; height: 100%; background: linear-gradient(135deg, var(--youth-purple), var(--youth-cyan)); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+            👤</div>
+        </div>
+        <h3 class="card-title">Melle</h3>
+        <p class="card-description">Youth Coach<br><em style="opacity: 0.7;">Photo coming soon!</em></p>
+      </div>
+
+      <div class="info-card" style="text-align: center;">
+        <div
+          style="width: 150px; height: 150px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 4px solid var(--youth-orange); box-shadow: 0 8px 25px rgba(255, 112, 67, 0.3);">
+          <div
+            style="width: 100%; height: 100%; background: linear-gradient(135deg, var(--youth-orange), var(--youth-lime)); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+            👤</div>
+        </div>
+        <h3 class="card-title">Eveline</h3>
+        <p class="card-description">Youth Coach<br><em style="opacity: 0.7;">Photo coming soon!</em></p>
+      </div>
+
+      <div class="info-card" style="text-align: center;">
+        <div
+          style="width: 150px; height: 150px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 4px solid var(--youth-cyan); box-shadow: 0 8px 25px rgba(0, 188, 212, 0.3);">
+          <img src="pics/Youth coaches/rick.jpeg" alt="Rick - Youth Coach"
+            style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <h3 class="card-title">Rick</h3>
+        <p class="card-description">Youth Coach<br><em style="opacity: 0.7;">Bringing energy & expertise!</em></p>
       </div>
     </div>
   </section>
@@ -1533,18 +1736,31 @@
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
-            <div class="timeline-date">September 9th, 2024</div>
+            <div class="timeline-date">September 2025</div>
             <h3 class="timeline-title">🚀 Pilot Training Session</h3>
-            <p class="timeline-description">Join our test run! This special pilot session lets us fine-tune the program based on feedback from players and parents. Help us shape the future of youth dodgeball!</p>
+            <p class="timeline-description">We kicked off our youth program with a pilot session! This special test run
+              helped us fine-tune the program based on feedback from players and parents.</p>
           </div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
-            <div class="timeline-date">September 23rd, 2024</div>
-            <h3 class="timeline-title">🎯 Regular Training Begins</h3>
-            <p class="timeline-description">The official start of our weekly youth training program! Every Tuesday from 17:30-19:00, young athletes will train alongside our experienced coaches.</p>
+            <div class="timeline-date">Fall 2025</div>
+            <h3 class="timeline-title">🎯 Growing With Our Small Group</h3>
+            <p class="timeline-description">We've started and are progressing with a small group of enthusiastic kids!
+              Every session, we're building skills, teamwork, and having a blast together. The program is growing
+              organically as word spreads!</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">Ongoing 2025</div>
+            <h3 class="timeline-title">📈 Regular Training Continues</h3>
+            <p class="timeline-description">Weekly youth training sessions are in full swing! Every Tuesday from
+              17:30-19:00, our young athletes train with experienced coaches at our new location near Amsterdam RAI.</p>
           </div>
         </div>
       </div>
@@ -1563,19 +1779,29 @@
       <div class="info-card">
         <div class="card-icon">📍</div>
         <h3 class="card-title">Location</h3>
-        <p class="card-description"><strong>St Nicolaaslyceum</strong><br>Beethovenplein 2<br>1077 WM Amsterdam<br>Same venue as our championship teams!</p>
+        <p class="card-description">
+          <strong>Hubertus and Berkhoff High School</strong><br>
+          Near Amsterdam RAI<br>
+          Easy to reach by public transport!
+        </p>
+        <a href="https://www.google.com/maps/search/Hubertus+en+Berkhoff+Amsterdam+RAI" target="_blank" rel="noopener"
+          class="location-map-link"
+          style="display: inline-block; margin-top: 1rem; padding: 0.5rem 1rem; background: linear-gradient(45deg, var(--youth-orange), var(--youth-purple)); color: white; border-radius: 20px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">📍
+          View on Google Maps</a>
       </div>
 
       <div class="info-card">
         <div class="card-icon">🕕</div>
         <h3 class="card-title">Schedule</h3>
-        <p class="card-description"><strong>Every Tuesday</strong><br>18:00 - 19:30 (90 minutes)<br>Dressing rooms open at 17:45<br>Weekly consistent training</p>
+        <p class="card-description"><strong>Every Tuesday</strong><br>18:00 - 19:30 (90 minutes)<br>Dressing rooms open
+          at 17:45<br>Weekly consistent training</p>
       </div>
 
       <div class="info-card">
         <div class="card-icon">👨‍👩‍👧‍👦</div>
         <h3 class="card-title">Age Group</h3>
-        <p class="card-description"><strong>12-17 years old</strong><br>Perfect for teenagers who want to try something new and exciting<br>All skill levels welcome</p>
+        <p class="card-description"><strong>12-17 years old</strong><br>Perfect for teenagers who want to try something
+          new and exciting<br>All skill levels welcome</p>
       </div>
     </div>
   </section>
@@ -1592,25 +1818,29 @@
       <div class="faq-card">
         <div class="faq-icon">🎯</div>
         <h3 class="faq-question">What is a pilot training?</h3>
-        <p class="faq-answer">A pilot training is a practice run that helps us test and refine the program. We'll gather feedback from players and parents to make adjustments before the regular sessions begin.</p>
+        <p class="faq-answer">A pilot training is a practice run that helps us test and refine the program. We'll gather
+          feedback from players and parents to make adjustments before the regular sessions begin.</p>
       </div>
 
       <div class="faq-card">
         <div class="faq-icon">👕</div>
         <h3 class="faq-question">What should my child bring?</h3>
-        <p class="faq-answer">Just comfortable sports clothes, indoor sports shoes, and a water bottle. All dodgeball equipment is provided by DCA!</p>
+        <p class="faq-answer">Just comfortable sports clothes, indoor sports shoes, and a water bottle. All dodgeball
+          equipment is provided by DCA!</p>
       </div>
 
       <div class="faq-card">
         <div class="faq-icon">🆕</div>
         <h3 class="faq-question">Never played dodgeball before?</h3>
-        <p class="faq-answer">Perfect! Our program is designed for all skill levels. Our coaches will teach everything from the basics to advanced strategies.</p>
+        <p class="faq-answer">Perfect! Our program is designed for all skill levels. Our coaches will teach everything
+          from the basics to advanced strategies.</p>
       </div>
 
       <div class="faq-card">
         <div class="faq-icon">👥</div>
         <h3 class="faq-question">Can parents watch?</h3>
-        <p class="faq-answer">Absolutely! Parents are welcome to observe training sessions and see their young athletes develop their dodgeball skills.</p>
+        <p class="faq-answer">Absolutely! Parents are welcome to observe training sessions and see their young athletes
+          develop their dodgeball skills.</p>
       </div>
     </div>
   </section>
@@ -1619,7 +1849,8 @@
   <section class="apply-section" id="apply">
     <div class="apply-content">
       <h2 class="apply-title">Ready to Make History?</h2>
-      <p class="apply-description">Join the Netherlands' first youth dodgeball program and be part of something legendary. Fill out our application form and let your dodgeball journey begin!</p>
+      <p class="apply-description">Join the Netherlands' first youth dodgeball program and be part of something
+        legendary. Fill out our application form and let your dodgeball journey begin!</p>
       <a href="https://forms.gle/ox2H5StuGK7erbEp7" target="_blank" class="apply-button">Apply Now! 🚀</a>
     </div>
   </section>
@@ -1640,8 +1871,12 @@
             <div class="social-links">
               <a href="moments.html" class="social-link" title="Our Moments">📸</a>
               <a href="social.html" class="social-link" title="Social Events">🎉</a>
-              <a href="https://www.tiktok.com/@dodgeballamsterdam?_t=ZG-8xrTnrmMLQG&_r=1" class="social-link" title="Follow us on TikTok" target="_blank"><img src="pics/tiktok.png" alt="TikTok" class="tiktok-logo"></a>
-              <a href="https://www.instagram.com/dodgeballamsterdam?utm_source=ig_web_button_share_sheet&igsh=MWl1ZmU1Z3FmYzg2Mw==" class="social-link" title="Follow us on Instagram" target="_blank"><img src="pics/insta.png" alt="Instagram" class="instagram-logo"></a>
+              <a href="https://www.tiktok.com/@dodgeballamsterdam?_t=ZG-8xrTnrmMLQG&_r=1" class="social-link"
+                title="Follow us on TikTok" target="_blank"><img src="pics/tiktok.png" alt="TikTok"
+                  class="tiktok-logo"></a>
+              <a href="https://www.instagram.com/dodgeballamsterdam?utm_source=ig_web_button_share_sheet&igsh=MWl1ZmU1Z3FmYzg2Mw=="
+                class="social-link" title="Follow us on Instagram" target="_blank"><img src="pics/insta.png"
+                  alt="Instagram" class="instagram-logo"></a>
             </div>
           </div>
         </div>
@@ -1711,12 +1946,12 @@
 
   <!-- JavaScript -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const btn = document.getElementById('menu-toggle');
       const nav = document.getElementById('nav-menu');
       const overlay = document.getElementById('overlay');
       const dropdowns = nav.querySelectorAll('.dropdown');
-      
+
       // Toggle menu function
       function toggleMenu() {
         nav.classList.toggle('active');
@@ -1724,12 +1959,12 @@
       }
 
       // Event listeners
-      btn.addEventListener('click', function(e) {
+      btn.addEventListener('click', function (e) {
         e.preventDefault();
         toggleMenu();
       });
 
-      overlay.addEventListener('click', function() {
+      overlay.addEventListener('click', function () {
         toggleMenu();
       });
 
@@ -1737,104 +1972,104 @@
       dropdowns.forEach(dropdown => {
         const dropdownSpan = dropdown.querySelector('span');
         const dropdownContent = dropdown.querySelector('.dropdown-content');
-        
+
         if (dropdownSpan) {
-          dropdownSpan.addEventListener('click', function(e) {
-          if (window.innerWidth <= 768) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const isCurrentlyActive = dropdown.classList.contains('active');
-            
-            // First, close all dropdowns and reset all positions immediately
-            dropdowns.forEach(otherDropdown => {
-              otherDropdown.classList.remove('active');
-              const otherContent = otherDropdown.querySelector('.dropdown-content');
-              if (otherContent) {
-                otherContent.style.maxHeight = '0px';
-                otherContent.style.opacity = '0';
-                // Reset child links
-                otherContent.querySelectorAll('a').forEach(link => {
-                  link.style.opacity = '0';
-                  link.style.transform = 'translateX(-20px)';
-                });
-              }
-            });
-            
-            // Reset ALL menu item positions immediately
-            const allMenuItems = Array.from(nav.children);
-            allMenuItems.forEach(item => {
-              item.style.transform = '';
-              item.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            });
-            
-            // Force layout recalculation
-            nav.offsetHeight;
-            
-            // If clicking on an inactive dropdown, open it
-            if (!isCurrentlyActive) {
-              
-              // Step 1: Measure content height while completely hidden
-              dropdownContent.style.position = 'absolute';
-              dropdownContent.style.visibility = 'hidden';
-              dropdownContent.style.maxHeight = 'none';
-              dropdownContent.style.opacity = '1';
-              const contentHeight = dropdownContent.scrollHeight;
-              
-              // Step 2: Hide it again immediately
-              dropdownContent.style.position = '';
-              dropdownContent.style.visibility = '';
-              dropdownContent.style.maxHeight = '0px';
-              dropdownContent.style.opacity = '0';
-              
-              // Step 3: Find items to move
-              const currentDropdownIndex = allMenuItems.indexOf(dropdown);
-              const itemsToMove = allMenuItems.slice(currentDropdownIndex + 1);
-              
-              // Step 4: Use requestAnimationFrame to ensure proper timing
-              requestAnimationFrame(() => {
-                // FIRST: Move items down (content pushing)
-                itemsToMove.forEach(item => {
-                  item.style.transform = `translateY(${contentHeight}px)`;
-                });
-                
-                // SECOND: Activate dropdown class for styling
-                dropdown.classList.add('active');
-                
-                // THIRD: Make dropdown content visible
-                requestAnimationFrame(() => {
-                  dropdownContent.style.maxHeight = contentHeight + 'px';
-                  dropdownContent.style.opacity = '1';
-                  
-                  // Celebration effect
-                  dropdownSpan.style.transform = 'scale(1.05)';
-                  setTimeout(() => {
-                    dropdownSpan.style.transform = '';
-                  }, 200);
-                  
-                  // Animate dropdown items
-                  const dropdownLinks = dropdownContent.querySelectorAll('a');
-                  dropdownLinks.forEach((link, index) => {
+          dropdownSpan.addEventListener('click', function (e) {
+            if (window.innerWidth <= 768) {
+              e.preventDefault();
+              e.stopPropagation();
+
+              const isCurrentlyActive = dropdown.classList.contains('active');
+
+              // First, close all dropdowns and reset all positions immediately
+              dropdowns.forEach(otherDropdown => {
+                otherDropdown.classList.remove('active');
+                const otherContent = otherDropdown.querySelector('.dropdown-content');
+                if (otherContent) {
+                  otherContent.style.maxHeight = '0px';
+                  otherContent.style.opacity = '0';
+                  // Reset child links
+                  otherContent.querySelectorAll('a').forEach(link => {
                     link.style.opacity = '0';
                     link.style.transform = 'translateX(-20px)';
-                    link.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                    
+                  });
+                }
+              });
+
+              // Reset ALL menu item positions immediately
+              const allMenuItems = Array.from(nav.children);
+              allMenuItems.forEach(item => {
+                item.style.transform = '';
+                item.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+              });
+
+              // Force layout recalculation
+              nav.offsetHeight;
+
+              // If clicking on an inactive dropdown, open it
+              if (!isCurrentlyActive) {
+
+                // Step 1: Measure content height while completely hidden
+                dropdownContent.style.position = 'absolute';
+                dropdownContent.style.visibility = 'hidden';
+                dropdownContent.style.maxHeight = 'none';
+                dropdownContent.style.opacity = '1';
+                const contentHeight = dropdownContent.scrollHeight;
+
+                // Step 2: Hide it again immediately
+                dropdownContent.style.position = '';
+                dropdownContent.style.visibility = '';
+                dropdownContent.style.maxHeight = '0px';
+                dropdownContent.style.opacity = '0';
+
+                // Step 3: Find items to move
+                const currentDropdownIndex = allMenuItems.indexOf(dropdown);
+                const itemsToMove = allMenuItems.slice(currentDropdownIndex + 1);
+
+                // Step 4: Use requestAnimationFrame to ensure proper timing
+                requestAnimationFrame(() => {
+                  // FIRST: Move items down (content pushing)
+                  itemsToMove.forEach(item => {
+                    item.style.transform = `translateY(${contentHeight}px)`;
+                  });
+
+                  // SECOND: Activate dropdown class for styling
+                  dropdown.classList.add('active');
+
+                  // THIRD: Make dropdown content visible
+                  requestAnimationFrame(() => {
+                    dropdownContent.style.maxHeight = contentHeight + 'px';
+                    dropdownContent.style.opacity = '1';
+
+                    // Celebration effect
+                    dropdownSpan.style.transform = 'scale(1.05)';
                     setTimeout(() => {
-                      link.style.opacity = '1';
-                      link.style.transform = 'translateX(0)';
-                    }, 100 + (index * 80));
+                      dropdownSpan.style.transform = '';
+                    }, 200);
+
+                    // Animate dropdown items
+                    const dropdownLinks = dropdownContent.querySelectorAll('a');
+                    dropdownLinks.forEach((link, index) => {
+                      link.style.opacity = '0';
+                      link.style.transform = 'translateX(-20px)';
+                      link.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+
+                      setTimeout(() => {
+                        link.style.opacity = '1';
+                        link.style.transform = 'translateX(0)';
+                      }, 100 + (index * 80));
+                    });
                   });
                 });
-              });
-              
-            } else {
-              // Just add bounce effect for closing
-              dropdownSpan.style.transform = 'scale(0.95)';
-              setTimeout(() => {
-                dropdownSpan.style.transform = '';
-              }, 150);
+
+              } else {
+                // Just add bounce effect for closing
+                dropdownSpan.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                  dropdownSpan.style.transform = '';
+                }, 150);
+              }
             }
-          }
           });
         }
       });
@@ -1842,7 +2077,7 @@
       // Close menu when clicking a link
       const navLinks = nav.getElementsByTagName('a');
       for (let link of navLinks) {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function () {
           if (link.getAttribute('href').startsWith('#') || link.getAttribute('href').endsWith('.html')) {
             toggleMenu();
           }
@@ -1869,7 +2104,7 @@
         rootMargin: '0px 0px -50px 0px'
       };
 
-      const observer = new IntersectionObserver(function(entries) {
+      const observer = new IntersectionObserver(function (entries) {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
@@ -1888,4 +2123,5 @@
     });
   </script>
 </body>
+
 </html>
