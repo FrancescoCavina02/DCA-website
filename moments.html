@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>DCA Moments</title>
@@ -16,19 +17,26 @@
       --light: #fff;
       --accent: #333;
     }
-    *, *::before, *::after {
+
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
     }
+
     body {
       font-family: 'Roboto', sans-serif;
       color: var(--secondary);
       line-height: 1.6;
     }
+
     a {
       color: var(--primary);
       text-decoration: none;
     }
+
     a:hover {
       text-decoration: underline;
     }
@@ -43,31 +51,46 @@
       padding: 0.3rem 1.5rem;
       position: sticky;
       top: 0;
-      z-index: 1002; /* above overlay & nav */
+      z-index: 1002;
+      /* above overlay & nav */
     }
+
     .logo {
       font-size: 1.5rem;
       font-weight: 700;
     }
+
     .logo img {
-      height: 2.8rem; /* Make logo image bigger to almost fill header height */
-      vertical-align: middle; /* Align image with text vertically */
-      margin-left: 0.5rem; /* Add some space between text and image */
+      height: 2.8rem;
+      /* Make logo image bigger to almost fill header height */
+      vertical-align: middle;
+      /* Align image with text vertically */
+      margin-left: 0.5rem;
+      /* Add some space between text and image */
     }
+
     .logo .ball-logo {
-      height: 2.8rem; /* Same size as XXX.png */
+      height: 2.8rem;
+      /* Same size as XXX.png */
       vertical-align: middle;
-      margin-right: 0.5rem; /* Space between ball and DCA text */
+      margin-right: 0.5rem;
+      /* Space between ball and DCA text */
     }
+
     .adam-image {
-      height: 3.5rem; /* Set specific height to fit original menu bar */
+      height: 3.5rem;
+      /* Set specific height to fit original menu bar */
       vertical-align: middle;
-      margin-left: 1rem; /* Close to logo but with some space */
+      margin-left: 1rem;
+      /* Close to logo but with some space */
     }
+
     nav#nav-menu {
       display: flex;
-      align-items: center; /* Align items to center vertically */
+      align-items: center;
+      /* Align items to center vertically */
     }
+
     nav#nav-menu a {
       margin-left: 1.5rem;
       font-weight: 500;
@@ -76,10 +99,13 @@
       padding: 0.5rem 1rem;
       border-radius: 4px;
       overflow: hidden;
-      color: var(--primary); /* Default red color */
+      color: var(--primary);
+      /* Default red color */
     }
+
     nav#nav-menu a:hover {
-      color: var(--light); /* Turn white on hover */
+      color: var(--light);
+      /* Turn white on hover */
       transform: scale(1.05);
       background-color: rgba(211, 47, 47, 0.1);
     }
@@ -91,17 +117,19 @@
       display: inline-flex;
       align-items: center;
     }
+
     .dropdown-content {
       display: none;
       position: absolute;
       background-color: var(--secondary);
       min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       z-index: 1003;
       border-radius: 4px;
       top: 100%;
       left: 0;
     }
+
     .dropdown-content a {
       color: var(--light);
       padding: 12px 16px;
@@ -111,18 +139,22 @@
       border-radius: 0;
       transition: background-color 0.3s ease;
     }
+
     .dropdown-content a:hover {
       background-color: var(--primary);
       transform: none;
       text-decoration: underline;
     }
+
     .dropdown-content a::before {
       display: none;
     }
+
     .dropdown:hover .dropdown-content {
       display: block;
     }
-    .dropdown > span {
+
+    .dropdown>span {
       margin-left: 1.5rem;
       font-weight: 500;
       transition: all 0.3s ease;
@@ -133,21 +165,25 @@
       color: var(--primary);
       cursor: pointer;
     }
-    .dropdown > span:hover {
+
+    .dropdown>span:hover {
       color: var(--light);
       transform: scale(1.05);
       background-color: rgba(211, 47, 47, 0.1);
     }
-    .dropdown > span::after {
+
+    .dropdown>span::after {
       content: '▼';
       float: right;
       transition: transform 0.3s ease;
       font-size: 0.8rem;
     }
-    .dropdown.active > span::after {
+
+    .dropdown.active>span::after {
       transform: rotate(180deg);
     }
-    .dropdown > span::before {
+
+    .dropdown>span::before {
       content: '';
       position: absolute;
       top: 50%;
@@ -163,7 +199,8 @@
       opacity: 0.8;
       border-radius: 50%;
     }
-    .dropdown > span:hover::before {
+
+    .dropdown>span:hover::before {
       transform: translateY(-50%) scale(1);
     }
 
@@ -181,6 +218,7 @@
       padding: 0;
       margin: 0;
     }
+
     section {
       margin-bottom: 3rem;
     }
@@ -227,10 +265,21 @@
       opacity: 0;
     }
 
-    .footer-section:nth-child(1) { animation-delay: 0.1s; }
-    .footer-section:nth-child(2) { animation-delay: 0.2s; }
-    .footer-section:nth-child(3) { animation-delay: 0.3s; }
-    .footer-section:nth-child(4) { animation-delay: 0.4s; }
+    .footer-section:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .footer-section:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .footer-section:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .footer-section:nth-child(4) {
+      animation-delay: 0.4s;
+    }
 
     .footer-logo {
       display: flex;
@@ -464,6 +513,7 @@
         opacity: 0;
         transform: translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -471,18 +521,37 @@
     }
 
     @keyframes footerBallSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     @keyframes footerBalls {
-      from { transform: translateX(0); }
-      to { transform: translateX(-80px); }
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-80px);
+      }
     }
 
     @keyframes dividerPulse {
-      0%, 100% { transform: scale(1); opacity: 0.6; }
-      50% { transform: scale(1.2); opacity: 1; }
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
     }
 
     /* Mobile Footer Styles */
@@ -525,24 +594,28 @@
     #overlay {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
       z-index: 1000;
     }
 
     /* Gallery Styles */
     .gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 1rem;
-        margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
     }
-    .gallery img, .gallery video {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        border-radius: 8px;
+
+    .gallery img,
+    .gallery video {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 8px;
     }
 
     /* Hero Section with Enhanced Design */
@@ -566,12 +639,12 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
       animation: rotateBackground 20s linear infinite;
       z-index: 1;
     }
 
-    .section-header-area > * {
+    .section-header-area>* {
       position: relative;
       z-index: 2;
     }
@@ -580,7 +653,7 @@
       font-size: 4rem;
       margin-bottom: 1rem;
       font-weight: 700;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
       opacity: 0;
       transform: translateY(-30px);
       animation: heroTitleEnter 1s ease-out forwards 0.3s;
@@ -591,7 +664,7 @@
       opacity: 0;
       transform: translateY(30px);
       animation: heroSubtitleEnter 1s ease-out forwards 0.6s;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     }
 
     /* Floating Moments Elements */
@@ -702,19 +775,19 @@
       position: relative;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       opacity: 0;
       transform: translateY(30px) scale(0.9);
       animation: mediaItemEnter 0.8s ease-out forwards;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .media-item:hover {
       transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
     }
 
     .media-item img {
@@ -743,7 +816,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+      background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
       opacity: 0;
       transition: opacity 0.3s ease;
       display: flex;
@@ -759,7 +832,7 @@
       color: var(--light);
       font-size: 1rem;
       font-weight: 500;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     }
 
     /* Category Icons */
@@ -789,12 +862,12 @@
       right: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(211,47,47,0.05) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(211, 47, 47, 0.05) 0%, transparent 70%);
       animation: rotateReverse 25s linear infinite;
       z-index: 1;
     }
 
-    .upload-section > * {
+    .upload-section>* {
       position: relative;
       z-index: 2;
     }
@@ -835,31 +908,69 @@
     }
 
     /* Staggered animation delays */
-    .media-item[data-delay="0"] { animation-delay: 1.2s; }
-    .media-item[data-delay="1"] { animation-delay: 1.4s; }
-    .media-item[data-delay="2"] { animation-delay: 1.6s; }
-    .media-item[data-delay="3"] { animation-delay: 1.8s; }
+    .media-item[data-delay="0"] {
+      animation-delay: 1.2s;
+    }
 
-    .category-section[data-category="training"] .category-title { animation-delay: 1.0s; }
-    .category-section[data-category="training"] .category-description { animation-delay: 1.1s; }
+    .media-item[data-delay="1"] {
+      animation-delay: 1.4s;
+    }
 
-    .category-section[data-category="events"] .category-title { animation-delay: 2.0s; }
-    .category-section[data-category="events"] .category-description { animation-delay: 2.1s; }
+    .media-item[data-delay="2"] {
+      animation-delay: 1.6s;
+    }
+
+    .media-item[data-delay="3"] {
+      animation-delay: 1.8s;
+    }
+
+    .category-section[data-category="training"] .category-title {
+      animation-delay: 1.0s;
+    }
+
+    .category-section[data-category="training"] .category-description {
+      animation-delay: 1.1s;
+    }
+
+    .category-section[data-category="events"] .category-title {
+      animation-delay: 2.0s;
+    }
+
+    .category-section[data-category="events"] .category-description {
+      animation-delay: 2.1s;
+    }
 
     /* Animations */
     @keyframes momentsGradient {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
     }
 
     @keyframes rotateBackground {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     @keyframes rotateReverse {
-      from { transform: rotate(360deg); }
-      to { transform: rotate(0deg); }
+      from {
+        transform: rotate(360deg);
+      }
+
+      to {
+        transform: rotate(0deg);
+      }
     }
 
     @keyframes heroTitleEnter {
@@ -891,15 +1002,35 @@
     }
 
     @keyframes momentsFloat {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      25% { transform: translateY(-30px) rotate(90deg); }
-      50% { transform: translateY(0px) rotate(180deg); }
-      75% { transform: translateY(-20px) rotate(270deg); }
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      25% {
+        transform: translateY(-30px) rotate(90deg);
+      }
+
+      50% {
+        transform: translateY(0px) rotate(180deg);
+      }
+
+      75% {
+        transform: translateY(-20px) rotate(270deg);
+      }
     }
 
     @keyframes iconFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
     }
 
     /* See More Button Styles */
@@ -936,7 +1067,7 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
       transition: left 0.6s;
     }
 
@@ -1191,13 +1322,27 @@
 
     /* Animations */
     @keyframes buttonGradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
     }
 
     @keyframes iconPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
     }
 
     /* Mobile Responsive */
@@ -1363,7 +1508,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
       padding: 1rem;
       opacity: 0;
       transition: opacity 0.3s ease;
@@ -1389,7 +1534,7 @@
     }
 
     .control-btn:hover {
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
     }
 
     .progress-container {
@@ -1398,7 +1543,7 @@
 
     .progress-bar {
       height: 4px;
-      background: rgba(255,255,255,0.3);
+      background: rgba(255, 255, 255, 0.3);
       border-radius: 2px;
       cursor: pointer;
       position: relative;
@@ -1424,7 +1569,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       color: white;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0, 0, 0, 0.7);
       padding: 1rem 2rem;
       border-radius: 25px;
       opacity: 0;
@@ -1444,7 +1589,7 @@
       transform: translate(-50%, -50%);
       width: 40px;
       height: 40px;
-      border: 3px solid rgba(255,255,255,0.3);
+      border: 3px solid rgba(255, 255, 255, 0.3);
       border-top: 3px solid white;
       border-radius: 50%;
       animation: spin 1s linear infinite;
@@ -1452,8 +1597,13 @@
     }
 
     @keyframes spin {
-      0% { transform: translate(-50%, -50%) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) rotate(360deg); }
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
     }
 
     /* Breadcrumb Navigation */
@@ -1510,11 +1660,12 @@
 
     /* Mobile styles */
     @media (max-width: 768px) {
+
       /* Hide adam image on mobile */
       .adam-image {
         display: none;
       }
-      
+
       /* Ultra-Modern Hamburger Menu with Glow Effect */
       .menu-toggle {
         display: block;
@@ -1524,17 +1675,17 @@
         background-size: 200% 200%;
         border-radius: 20px;
         color: var(--light);
-        border: 2px solid rgba(255,255,255,0.2);
+        border: 2px solid rgba(255, 255, 255, 0.2);
         cursor: pointer;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        box-shadow: 
+        box-shadow:
           0 8px 25px rgba(211, 47, 47, 0.4),
-          inset 0 1px 0 rgba(255,255,255,0.2);
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
         position: relative;
         overflow: hidden;
         animation: menuPulse 3s ease-in-out infinite;
       }
-      
+
       .menu-toggle::before {
         content: '🎯';
         position: absolute;
@@ -1543,7 +1694,7 @@
         font-size: 1rem;
         animation: targetSpin 4s linear infinite;
       }
-      
+
       .menu-toggle::after {
         content: '';
         position: absolute;
@@ -1551,79 +1702,81 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
         transition: left 0.6s;
       }
-      
+
       .menu-toggle:hover::after {
         left: 100%;
       }
-      
+
       .menu-toggle:hover {
         transform: scale(1.1) rotate(-5deg);
-        box-shadow: 
+        box-shadow:
           0 12px 35px rgba(211, 47, 47, 0.6),
-          inset 0 1px 0 rgba(255,255,255,0.3);
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
         background-position: 100% 100%;
       }
-      
+
       .menu-toggle:active {
         transform: scale(0.95) rotate(5deg);
       }
-      
+
       /* Revolutionary Sidebar Navigation */
       nav#nav-menu {
         display: flex;
         flex-direction: column;
-        background: linear-gradient(135deg, 
-          rgba(0,0,0,0.95) 0%, 
-          rgba(26,26,26,0.98) 30%, 
-          rgba(0,0,0,0.95) 100%);
+        background: linear-gradient(135deg,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(26, 26, 26, 0.98) 30%,
+            rgba(0, 0, 0, 0.95) 100%);
         position: fixed;
-        top: 0; 
+        top: 0;
         left: -70%;
-        width: 70%; 
+        width: 70%;
         height: 100%;
         padding: 5rem 0 2rem 0;
         transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         z-index: 1001;
-        box-shadow: 
-          10px 0 40px rgba(0,0,0,0.5),
+        box-shadow:
+          10px 0 40px rgba(0, 0, 0, 0.5),
           inset -1px 0 0 rgba(211, 47, 47, 0.3);
         backdrop-filter: blur(20px);
         border-right: 2px solid rgba(211, 47, 47, 0.2);
         overflow-y: auto;
       }
-      
+
       /* Epic Slide-in Animation */
       nav#nav-menu.active {
         left: 0;
         animation: epicSlideIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
-      
+
       @keyframes epicSlideIn {
-        0% { 
-          left: -70%; 
+        0% {
+          left: -70%;
           opacity: 0;
           transform: rotateY(-15deg);
         }
-        70% { 
-          left: 3%; 
+
+        70% {
+          left: 3%;
           transform: rotateY(2deg);
         }
-        100% { 
-          left: 0; 
+
+        100% {
+          left: 0;
           opacity: 1;
           transform: rotateY(0deg);
         }
       }
-      
+
       /* Stunning Navigation Links */
-      nav#nav-menu > a {
+      nav#nav-menu>a {
         margin: 0;
         padding: 1.2rem 2rem;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-        color: rgba(255,255,255,0.9);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.9);
         font-weight: 600;
         font-size: 1.1rem;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -1633,8 +1786,8 @@
         align-items: center;
         letter-spacing: 0.5px;
       }
-      
-      nav#nav-menu > a::before {
+
+      nav#nav-menu>a::before {
         content: '';
         position: absolute;
         top: 0;
@@ -1647,8 +1800,8 @@
         z-index: -1;
         animation: gradientShift 3s ease-in-out infinite;
       }
-      
-      nav#nav-menu > a::after {
+
+      nav#nav-menu>a::after {
         content: '⚡';
         opacity: 0;
         transform: translateX(-20px);
@@ -1656,38 +1809,38 @@
         margin-left: auto;
         font-size: 1.2rem;
       }
-      
-      nav#nav-menu > a:hover::before {
+
+      nav#nav-menu>a:hover::before {
         left: 0;
       }
-      
-      nav#nav-menu > a:hover::after {
+
+      nav#nav-menu>a:hover::after {
         opacity: 1;
         transform: translateX(0);
       }
-      
-      nav#nav-menu > a:hover {
+
+      nav#nav-menu>a:hover {
         color: var(--light);
         transform: translateX(15px) scale(1.02);
-        text-shadow: 0 0 20px rgba(255,255,255,0.5);
-        border-color: rgba(255,255,255,0.3);
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        border-color: rgba(255, 255, 255, 0.3);
       }
-      
+
       /* Revolutionary Dropdown System */
       .dropdown {
         display: block;
         width: 100%;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       }
-      
-      .dropdown > span {
+
+      .dropdown>span {
         margin: 0;
         padding: 1.2rem 2rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        color: rgba(255,255,255,0.9);
+        color: rgba(255, 255, 255, 0.9);
         font-weight: 600;
         font-size: 1.1rem;
         cursor: pointer;
@@ -1697,8 +1850,8 @@
         letter-spacing: 0.5px;
         background: transparent;
       }
-      
-      .dropdown > span::before {
+
+      .dropdown>span::before {
         content: '';
         position: absolute;
         top: 0;
@@ -1711,41 +1864,41 @@
         z-index: -1;
         animation: goldShift 3s ease-in-out infinite;
       }
-      
-      .dropdown > span:hover::before,
-      .dropdown.active > span::before {
+
+      .dropdown>span:hover::before,
+      .dropdown.active>span::before {
         left: 0;
       }
-      
-      .dropdown > span::after {
+
+      .dropdown>span::after {
         content: '▼';
         font-size: 0.9rem;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         color: var(--primary);
         font-weight: bold;
       }
-      
-      .dropdown.active > span::after {
+
+      .dropdown.active>span::after {
         transform: rotate(180deg);
         color: var(--light);
       }
-      
-      .dropdown > span:hover,
-      .dropdown.active > span {
+
+      .dropdown>span:hover,
+      .dropdown.active>span {
         color: var(--light);
         transform: translateX(10px) scale(1.02);
-        text-shadow: 0 0 15px rgba(255,255,255,0.4);
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
       }
-      
+
       /* Mind-Blowing Accordion Dropdown Content */
       .dropdown-content {
         position: static;
         display: block;
         box-shadow: none;
-        background: linear-gradient(135deg, 
-          rgba(42,42,42,0.95) 0%, 
-          rgba(26,26,26,0.98) 50%, 
-          rgba(42,42,42,0.95) 100%);
+        background: linear-gradient(135deg,
+            rgba(42, 42, 42, 0.95) 0%,
+            rgba(26, 26, 26, 0.98) 50%,
+            rgba(42, 42, 42, 0.95) 100%);
         border-radius: 0;
         overflow: hidden;
         max-height: 0;
@@ -1754,30 +1907,32 @@
         border-left: 3px solid transparent;
         backdrop-filter: blur(10px);
       }
-      
+
       .dropdown.active .dropdown-content {
         max-height: 300px;
         opacity: 1;
         border-left-color: var(--primary);
         animation: dropdownGlow 0.6s ease-out;
       }
-      
+
       @keyframes dropdownGlow {
-        0% { 
+        0% {
           box-shadow: inset 0 0 0 rgba(211, 47, 47, 0.5);
         }
-        50% { 
+
+        50% {
           box-shadow: inset 5px 0 20px rgba(211, 47, 47, 0.3);
         }
-        100% { 
+
+        100% {
           box-shadow: inset 3px 0 10px rgba(211, 47, 47, 0.2);
         }
       }
-      
+
       .dropdown-content a {
         padding: 1rem 3rem 1rem 4rem;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-        color: rgba(255,255,255,0.8);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        color: rgba(255, 255, 255, 0.8);
         background: none;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         font-size: 1rem;
@@ -1790,18 +1945,26 @@
         transform: translateX(-20px);
         animation: slideInStagger 0.4s ease-out forwards;
       }
-      
-      .dropdown.active .dropdown-content a:nth-child(1) { animation-delay: 0.1s; }
-      .dropdown.active .dropdown-content a:nth-child(2) { animation-delay: 0.2s; }
-      .dropdown.active .dropdown-content a:nth-child(3) { animation-delay: 0.3s; }
-      
+
+      .dropdown.active .dropdown-content a:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+
+      .dropdown.active .dropdown-content a:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .dropdown.active .dropdown-content a:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
       @keyframes slideInStagger {
         to {
           opacity: 1;
           transform: translateX(0);
         }
       }
-      
+
       .dropdown-content a::before {
         content: '🎯';
         margin-right: 1rem;
@@ -1810,7 +1973,7 @@
         transform: scale(0);
         transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
-      
+
       .dropdown-content a::after {
         content: '→';
         margin-left: auto;
@@ -1820,45 +1983,46 @@
         color: var(--primary);
         font-weight: bold;
       }
-      
+
       .dropdown-content a:hover {
         background: linear-gradient(45deg, var(--primary), #ff6b6b);
         color: var(--light);
         transform: translateX(20px) scale(1.02);
         padding-left: 4.5rem;
-        text-shadow: 0 0 10px rgba(255,255,255,0.3);
-        border-color: rgba(255,255,255,0.2);
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.2);
       }
-      
+
       .dropdown-content a:hover::before {
         opacity: 1;
         transform: scale(1) rotate(360deg);
       }
-      
+
       .dropdown-content a:hover::after {
         opacity: 1;
         transform: translateX(0);
       }
-      
+
       /* Enhanced Overlay with Blur Effect */
       #overlay.active {
         display: block;
         animation: overlayBlurIn 0.4s ease;
         backdrop-filter: blur(8px);
-        background: rgba(0,0,0,0.7);
+        background: rgba(0, 0, 0, 0.7);
       }
-      
+
       @keyframes overlayBlurIn {
-        from { 
-          opacity: 0; 
+        from {
+          opacity: 0;
           backdrop-filter: blur(0px);
         }
-        to { 
-          opacity: 1; 
+
+        to {
+          opacity: 1;
           backdrop-filter: blur(8px);
         }
       }
-      
+
       /* Floating Menu Decorations */
       nav#nav-menu::before {
         content: '';
@@ -1873,7 +2037,7 @@
         animation: menuFloat 8s ease-in-out infinite;
         box-shadow: 0 0 30px rgba(211, 47, 47, 0.3);
       }
-      
+
       nav#nav-menu::after {
         content: '⚡';
         position: absolute;
@@ -1884,70 +2048,113 @@
         animation: lightningFlash 4s ease-in-out infinite;
         color: #ffc107;
       }
-      
+
       @keyframes menuFloat {
-        0%, 100% { 
-          transform: translateY(0px) scale(1) rotate(0deg); 
+
+        0%,
+        100% {
+          transform: translateY(0px) scale(1) rotate(0deg);
           opacity: 0.1;
         }
-        25% { 
-          transform: translateY(-15px) scale(1.1) rotate(90deg); 
+
+        25% {
+          transform: translateY(-15px) scale(1.1) rotate(90deg);
           opacity: 0.2;
         }
-        50% { 
-          transform: translateY(-25px) scale(0.9) rotate(180deg); 
+
+        50% {
+          transform: translateY(-25px) scale(0.9) rotate(180deg);
           opacity: 0.15;
         }
-        75% { 
-          transform: translateY(-10px) scale(1.05) rotate(270deg); 
+
+        75% {
+          transform: translateY(-10px) scale(1.05) rotate(270deg);
           opacity: 0.25;
         }
       }
-      
+
       @keyframes lightningFlash {
-        0%, 90%, 100% { opacity: 0.2; transform: scale(1); }
-        5%, 15% { opacity: 0.8; transform: scale(1.2); }
-        10% { opacity: 0.4; transform: scale(0.9); }
+
+        0%,
+        90%,
+        100% {
+          opacity: 0.2;
+          transform: scale(1);
+        }
+
+        5%,
+        15% {
+          opacity: 0.8;
+          transform: scale(1.2);
+        }
+
+        10% {
+          opacity: 0.4;
+          transform: scale(0.9);
+        }
       }
-      
+
       /* Additional Animations */
       @keyframes menuPulse {
-        0%, 100% { 
+
+        0%,
+        100% {
           box-shadow: 0 8px 25px rgba(211, 47, 47, 0.4);
           background-position: 0% 50%;
         }
-        50% { 
+
+        50% {
           box-shadow: 0 12px 35px rgba(211, 47, 47, 0.6);
           background-position: 100% 50%;
         }
       }
-      
+
       @keyframes targetSpin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
       }
-      
+
       @keyframes gradientShift {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
+
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
       }
-      
+
       @keyframes goldShift {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
+
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
       }
-      
+
       /* Mobile breadcrumb adjustments */
       .breadcrumb-container {
-        top: 80px; /* Increased spacing from menu bar */
+        top: 80px;
+        /* Increased spacing from menu bar */
         padding: 0.75rem 0;
       }
-      
+
       .breadcrumb {
         padding: 0 1rem;
         font-size: 0.8rem;
       }
-      
+
       .breadcrumb-item {
         padding: 0.3rem 0.4rem;
       }
@@ -1979,7 +2186,8 @@
 <body>
   <!-- Header + Nav -->
   <header>
-    <div class="logo"><a href="index.html"><img src="pics/Ball.png" alt="Ball Logo" class="ball-logo">DCA <img src="pics/XXX.png" alt="DCA Logo"></a></div>
+    <div class="logo"><a href="index.html"><img src="pics/Ball.png" alt="Ball Logo" class="ball-logo">DCA <img
+          src="pics/XXX.png" alt="DCA Logo"></a></div>
     <img src="pics/adam.png" alt="Adam" class="adam-image">
     <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
     <nav id="nav-menu">
@@ -2042,7 +2250,7 @@
       <div class="section-header-area">
         <h2>DCA Moments</h2>
         <p>Capturing the spirit, passion, and pure joy of dodgeball!</p>
-        
+
         <!-- Floating Moments Elements -->
         <div class="floating-moments-elements">
           <div class="floating-element element-1">📸</div>
@@ -2056,7 +2264,9 @@
     <!-- Moments Content -->
     <div class="moments-content">
       <p class="intro-text">
-        Every throw, every dodge, every celebration - these are the moments that define DCA! From intense training sessions to epic social gatherings, our photo and video collection captures the heart and soul of our amazing dodgeball community.
+        Every throw, every dodge, every celebration - these are the moments that define DCA! From intense training
+        sessions to epic social gatherings, our photo and video collection captures the heart and soul of our amazing
+        dodgeball community.
       </p>
 
       <!-- Training Moments Section -->
@@ -2064,14 +2274,15 @@
         <div class="category-icon">🎯</div>
         <h2 class="category-title">Training Intensity</h2>
         <p class="category-description">
-          Where skills are forged and legends are born. Witness the dedication, focus, and pure determination that drives our team to excellence.
+          Where skills are forged and legends are born. Witness the dedication, focus, and pure determination that
+          drives our team to excellence.
         </p>
-        
+
         <div class="media-gallery">
           <div class="media-item" data-delay="0">
             <img src="pics/Random/IMG_2627.jpg" alt="DCA Training Session">
           </div>
-          
+
           <div class="media-item" data-delay="1">
             <div class="video-container">
               <video preload="metadata">
@@ -2091,7 +2302,7 @@
               <div class="video-loading">Loading...</div>
             </div>
           </div>
-          
+
           <div class="media-item" data-delay="2">
             <div class="video-container">
               <video preload="metadata">
@@ -2130,7 +2341,7 @@
           <div class="gallery-container">
             <button class="gallery-nav gallery-prev">‹</button>
             <div class="gallery-track">
-              
+
               <div class="gallery-item">
                 <img src="pics/Moments/Trainings/nick2.png" alt="DCA Training Session">
               </div>
@@ -2175,6 +2386,25 @@
                   <div class="video-loading">Loading...</div>
                 </div>
               </div>
+              <div class="gallery-item">
+                <div class="video-container">
+                  <video preload="metadata">
+                    <source src="pics/Moments/Trainings/WhatsApp Video 2026-01-14 at 11.28.32.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                  <div class="custom-play-button"></div>
+                  <div class="video-controls">
+                    <button class="control-btn play-pause">▶</button>
+                    <div class="progress-container">
+                      <div class="progress-bar">
+                        <div class="progress"></div>
+                      </div>
+                    </div>
+                    <button class="control-btn fullscreen">⛶</button>
+                  </div>
+                  <div class="video-loading">Loading...</div>
+                </div>
+              </div>
             </div>
             <button class="gallery-nav gallery-next">›</button>
           </div>
@@ -2187,18 +2417,19 @@
         <div class="category-icon">🎉</div>
         <h2 class="category-title">Team Spirit</h2>
         <p class="category-description">
-          Beyond the court, we're a family. These moments showcase the bonds, friendships, and unforgettable memories we create together.
+          Beyond the court, we're a family. These moments showcase the bonds, friendships, and unforgettable memories we
+          create together.
         </p>
-        
+
         <div class="media-gallery">
           <div class="media-item" data-delay="0">
             <img src="pics/Moments/Team/nick3.png" alt="DCA Team Moment">
           </div>
-          
+
           <div class="media-item" data-delay="0">
             <img src="pics/Moments/Team/pablo1.jpeg" alt="DCA Team Moment">
           </div>
-          
+
           <div class="media-item" data-delay="0">
             <img src="pics/Moments/Team/pablo2.jpeg" alt="DCA Team Moment">
           </div>
@@ -2265,7 +2496,8 @@
       <div class="upload-section">
         <h2>Share Your DCA Moments!</h2>
         <p>
-          Got an epic dodgeball photo or video? We'd love to feature your moments! Whether it's from training, competitions, or social events, every memory helps tell our story.
+          Got an epic dodgeball photo or video? We'd love to feature your moments! Whether it's from training,
+          competitions, or social events, every memory helps tell our story.
         </p>
         <a href="https://chat.whatsapp.com/JUQuZMycWxSLmSR39ZgDhs" target="_blank" class="upload-button">
           Share via WhatsApp
@@ -2290,8 +2522,12 @@
             <div class="social-links">
               <a href="moments.html" class="social-link" title="Our Moments">📸</a>
               <a href="social.html" class="social-link" title="Social Events">🎉</a>
-              <a href="https://www.tiktok.com/@dodgeballamsterdam?_t=ZG-8xrTnrmMLQG&_r=1" class="social-link" title="Follow us on TikTok" target="_blank"><img src="pics/tiktok.png" alt="TikTok" class="tiktok-logo"></a>
-              <a href="https://www.instagram.com/dodgeballamsterdam?utm_source=ig_web_button_share_sheet&igsh=MWl1ZmU1Z3FmYzg2Mw==" class="social-link" title="Follow us on Instagram" target="_blank"><img src="pics/insta.png" alt="Instagram" class="instagram-logo"></a>
+              <a href="https://www.tiktok.com/@dodgeballamsterdam?_t=ZG-8xrTnrmMLQG&_r=1" class="social-link"
+                title="Follow us on TikTok" target="_blank"><img src="pics/tiktok.png" alt="TikTok"
+                  class="tiktok-logo"></a>
+              <a href="https://www.instagram.com/dodgeballamsterdam?utm_source=ig_web_button_share_sheet&igsh=MWl1ZmU1Z3FmYzg2Mw=="
+                class="social-link" title="Follow us on Instagram" target="_blank"><img src="pics/insta.png"
+                  alt="Instagram" class="instagram-logo"></a>
             </div>
           </div>
         </div>
@@ -2361,12 +2597,12 @@
 
   <!-- Inline JS for Hamburger + Overlay -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const btn = document.getElementById('menu-toggle');
       const nav = document.getElementById('nav-menu');
       const overlay = document.getElementById('overlay');
       const dropdowns = nav.querySelectorAll('.dropdown');
-      
+
       // Toggle menu function
       function toggleMenu() {
         nav.classList.toggle('active');
@@ -2374,12 +2610,12 @@
       }
 
       // Event listeners
-      btn.addEventListener('click', function(e) {
+      btn.addEventListener('click', function (e) {
         e.preventDefault();
         toggleMenu();
       });
 
-      overlay.addEventListener('click', function() {
+      overlay.addEventListener('click', function () {
         toggleMenu();
       });
 
@@ -2387,104 +2623,104 @@
       dropdowns.forEach(dropdown => {
         const dropdownSpan = dropdown.querySelector('span');
         const dropdownContent = dropdown.querySelector('.dropdown-content');
-        
+
         if (dropdownSpan) {
-          dropdownSpan.addEventListener('click', function(e) {
-          if (window.innerWidth <= 768) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const isCurrentlyActive = dropdown.classList.contains('active');
-            
-            // First, close all dropdowns and reset all positions immediately
-            dropdowns.forEach(otherDropdown => {
-              otherDropdown.classList.remove('active');
-              const otherContent = otherDropdown.querySelector('.dropdown-content');
-              if (otherContent) {
-                otherContent.style.maxHeight = '0px';
-                otherContent.style.opacity = '0';
-                // Reset child links
-                otherContent.querySelectorAll('a').forEach(link => {
-                  link.style.opacity = '0';
-                  link.style.transform = 'translateX(-20px)';
-                });
-              }
-            });
-            
-            // Reset ALL menu item positions immediately
-            const allMenuItems = Array.from(nav.children);
-            allMenuItems.forEach(item => {
-              item.style.transform = '';
-              item.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            });
-            
-            // Force layout recalculation
-            nav.offsetHeight;
-            
-            // If clicking on an inactive dropdown, open it
-            if (!isCurrentlyActive) {
-              
-              // Step 1: Measure content height while completely hidden
-              dropdownContent.style.position = 'absolute';
-              dropdownContent.style.visibility = 'hidden';
-              dropdownContent.style.maxHeight = 'none';
-              dropdownContent.style.opacity = '1';
-              const contentHeight = dropdownContent.scrollHeight;
-              
-              // Step 2: Hide it again immediately
-              dropdownContent.style.position = '';
-              dropdownContent.style.visibility = '';
-              dropdownContent.style.maxHeight = '0px';
-              dropdownContent.style.opacity = '0';
-              
-              // Step 3: Find items to move
-              const currentDropdownIndex = allMenuItems.indexOf(dropdown);
-              const itemsToMove = allMenuItems.slice(currentDropdownIndex + 1);
-              
-              // Step 4: Use requestAnimationFrame to ensure proper timing
-              requestAnimationFrame(() => {
-                // FIRST: Move items down (content pushing)
-                itemsToMove.forEach(item => {
-                  item.style.transform = `translateY(${contentHeight}px)`;
-                });
-                
-                // SECOND: Activate dropdown class for styling
-                dropdown.classList.add('active');
-                
-                // THIRD: Make dropdown content visible
-                requestAnimationFrame(() => {
-                  dropdownContent.style.maxHeight = contentHeight + 'px';
-                  dropdownContent.style.opacity = '1';
-                  
-                  // Celebration effect
-                  dropdownSpan.style.transform = 'scale(1.05)';
-                  setTimeout(() => {
-                    dropdownSpan.style.transform = '';
-                  }, 200);
-                  
-                  // Animate dropdown items
-                  const dropdownLinks = dropdownContent.querySelectorAll('a');
-                  dropdownLinks.forEach((link, index) => {
+          dropdownSpan.addEventListener('click', function (e) {
+            if (window.innerWidth <= 768) {
+              e.preventDefault();
+              e.stopPropagation();
+
+              const isCurrentlyActive = dropdown.classList.contains('active');
+
+              // First, close all dropdowns and reset all positions immediately
+              dropdowns.forEach(otherDropdown => {
+                otherDropdown.classList.remove('active');
+                const otherContent = otherDropdown.querySelector('.dropdown-content');
+                if (otherContent) {
+                  otherContent.style.maxHeight = '0px';
+                  otherContent.style.opacity = '0';
+                  // Reset child links
+                  otherContent.querySelectorAll('a').forEach(link => {
                     link.style.opacity = '0';
                     link.style.transform = 'translateX(-20px)';
-                    link.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                    
+                  });
+                }
+              });
+
+              // Reset ALL menu item positions immediately
+              const allMenuItems = Array.from(nav.children);
+              allMenuItems.forEach(item => {
+                item.style.transform = '';
+                item.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+              });
+
+              // Force layout recalculation
+              nav.offsetHeight;
+
+              // If clicking on an inactive dropdown, open it
+              if (!isCurrentlyActive) {
+
+                // Step 1: Measure content height while completely hidden
+                dropdownContent.style.position = 'absolute';
+                dropdownContent.style.visibility = 'hidden';
+                dropdownContent.style.maxHeight = 'none';
+                dropdownContent.style.opacity = '1';
+                const contentHeight = dropdownContent.scrollHeight;
+
+                // Step 2: Hide it again immediately
+                dropdownContent.style.position = '';
+                dropdownContent.style.visibility = '';
+                dropdownContent.style.maxHeight = '0px';
+                dropdownContent.style.opacity = '0';
+
+                // Step 3: Find items to move
+                const currentDropdownIndex = allMenuItems.indexOf(dropdown);
+                const itemsToMove = allMenuItems.slice(currentDropdownIndex + 1);
+
+                // Step 4: Use requestAnimationFrame to ensure proper timing
+                requestAnimationFrame(() => {
+                  // FIRST: Move items down (content pushing)
+                  itemsToMove.forEach(item => {
+                    item.style.transform = `translateY(${contentHeight}px)`;
+                  });
+
+                  // SECOND: Activate dropdown class for styling
+                  dropdown.classList.add('active');
+
+                  // THIRD: Make dropdown content visible
+                  requestAnimationFrame(() => {
+                    dropdownContent.style.maxHeight = contentHeight + 'px';
+                    dropdownContent.style.opacity = '1';
+
+                    // Celebration effect
+                    dropdownSpan.style.transform = 'scale(1.05)';
                     setTimeout(() => {
-                      link.style.opacity = '1';
-                      link.style.transform = 'translateX(0)';
-                    }, 100 + (index * 80));
+                      dropdownSpan.style.transform = '';
+                    }, 200);
+
+                    // Animate dropdown items
+                    const dropdownLinks = dropdownContent.querySelectorAll('a');
+                    dropdownLinks.forEach((link, index) => {
+                      link.style.opacity = '0';
+                      link.style.transform = 'translateX(-20px)';
+                      link.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+
+                      setTimeout(() => {
+                        link.style.opacity = '1';
+                        link.style.transform = 'translateX(0)';
+                      }, 100 + (index * 80));
+                    });
                   });
                 });
-              });
-              
-            } else {
-              // Just add bounce effect for closing
-              dropdownSpan.style.transform = 'scale(0.95)';
-              setTimeout(() => {
-                dropdownSpan.style.transform = '';
-              }, 150);
+
+              } else {
+                // Just add bounce effect for closing
+                dropdownSpan.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                  dropdownSpan.style.transform = '';
+                }, 150);
+              }
             }
-          }
           });
         }
       });
@@ -2492,9 +2728,9 @@
       // Close menu when clicking a link
       const navLinks = nav.getElementsByTagName('a');
       for (let link of navLinks) {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function () {
           if (link.getAttribute('href').startsWith('#') || link.getAttribute('href').endsWith('.html')) {
-              toggleMenu();
+            toggleMenu();
           }
         });
       }
@@ -2502,7 +2738,7 @@
       // Enhanced Video Player Functionality
       function initializeVideoPlayers() {
         const videos = document.querySelectorAll('.video-container video');
-        
+
         videos.forEach(video => {
           const container = video.closest('.video-container');
           const playPauseBtn = container.querySelector('.play-pause');
@@ -2510,11 +2746,11 @@
           const progressBar = container.querySelector('.progress');
           const progressContainer = container.querySelector('.progress-container');
           const fullscreenBtn = container.querySelector('.fullscreen');
-          
+
           // Detect video orientation and apply appropriate class
           video.addEventListener('loadedmetadata', () => {
             const aspectRatio = video.videoWidth / video.videoHeight;
-            
+
             if (aspectRatio > 1.2) {
               // Horizontal video
               container.classList.add('horizontal');
@@ -2533,7 +2769,7 @@
             video.currentTime = 0.1;
             container.classList.remove('loading');
           });
-          
+
           // Play/Pause functionality
           function togglePlay() {
             if (video.paused) {
@@ -2557,7 +2793,7 @@
               if (playPauseBtn) playPauseBtn.textContent = '▶';
             }
           }
-          
+
           // Update progress bar
           function updateProgress() {
             if (video.duration) {
@@ -2565,7 +2801,7 @@
               if (progressBar) progressBar.style.width = `${progressPercent}%`;
             }
           }
-          
+
           // Seek functionality
           function seek(e) {
             if (video.duration) {
@@ -2575,7 +2811,7 @@
               video.currentTime = clickPercent * video.duration;
             }
           }
-          
+
           // Fullscreen functionality
           function toggleFullscreen() {
             if (document.fullscreenElement) {
@@ -2584,7 +2820,7 @@
               container.requestFullscreen();
             }
           }
-          
+
           // Event listeners
           if (customPlayButton) customPlayButton.addEventListener('click', togglePlay);
           if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlay);
@@ -2592,12 +2828,12 @@
           video.addEventListener('timeupdate', updateProgress);
           if (progressContainer) progressContainer.addEventListener('click', seek);
           if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
-          
+
           // Loading states
           video.addEventListener('loadstart', () => {
             container.classList.add('loading');
           });
-          
+
           video.addEventListener('canplay', () => {
             container.classList.remove('loading');
           });
@@ -2605,7 +2841,7 @@
           video.addEventListener('waiting', () => {
             container.classList.add('loading');
           });
-          
+
           // Reset on video end
           video.addEventListener('ended', () => {
             container.classList.remove('playing');
@@ -2620,15 +2856,15 @@
           });
         });
       }
-      
+
       // Extended Gallery Functionality
       function initializeExtendedGalleries() {
         const seeMoreBtns = document.querySelectorAll('.see-more-btn');
         const galleries = document.querySelectorAll('.extended-gallery');
-        
+
         // Gallery state
         const galleryStates = new Map();
-        
+
         // Initialize each gallery
         galleries.forEach(gallery => {
           const galleryId = gallery.id;
@@ -2638,14 +2874,14 @@
           const nextBtn = gallery.querySelector('.gallery-next');
           const closeBtn = gallery.querySelector('.gallery-close');
           const indicators = gallery.querySelector('.gallery-indicators');
-          
+
           // Initialize gallery state
           galleryStates.set(galleryId, {
             currentIndex: 0,
             totalItems: items.length,
             isOpen: false
           });
-          
+
           // Create indicators
           for (let i = 0; i < items.length; i++) {
             const indicator = document.createElement('div');
@@ -2654,25 +2890,25 @@
             indicator.addEventListener('click', () => goToSlide(galleryId, i));
             indicators.appendChild(indicator);
           }
-          
+
           // Set initial active item
           if (items[0]) items[0].classList.add('active');
-          
+
           // Navigation event listeners
           prevBtn.addEventListener('click', () => previousSlide(galleryId));
           nextBtn.addEventListener('click', () => nextSlide(galleryId));
           closeBtn.addEventListener('click', () => closeGallery(galleryId));
-          
+
           // Close on escape key
           document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && galleryStates.get(galleryId).isOpen) {
               closeGallery(galleryId);
             }
           });
-          
-                     // Close on background click (removed for inline gallery)
+
+          // Close on background click (removed for inline gallery)
         });
-        
+
         // See more button functionality
         seeMoreBtns.forEach(btn => {
           btn.addEventListener('click', () => {
@@ -2681,106 +2917,106 @@
             openGallery(galleryId);
           });
         });
-        
-                 function openGallery(galleryId) {
-           const gallery = document.getElementById(galleryId);
-           const state = galleryStates.get(galleryId);
-           
-           if (gallery && state) {
-             gallery.classList.add('active');
-             state.isOpen = true;
-             
-             // Reinitialize video players in gallery
-             setTimeout(() => {
-               initializeVideoPlayersInGallery(gallery);
-             }, 300);
-             
-             // Smooth scroll to gallery
-             setTimeout(() => {
-               gallery.scrollIntoView({ 
-                 behavior: 'smooth', 
-                 block: 'start' 
-               });
-             }, 200);
-           }
-         }
-        
-                 function closeGallery(galleryId) {
-           const gallery = document.getElementById(galleryId);
-           const state = galleryStates.get(galleryId);
-           
-           if (gallery && state) {
-             gallery.classList.remove('active');
-             state.isOpen = false;
-             
-             // Pause all videos in gallery
-             const videos = gallery.querySelectorAll('video');
-             videos.forEach(video => {
-               video.pause();
-               const container = video.closest('.video-container');
-               if (container) {
-                 container.classList.remove('playing');
-                 const playBtn = container.querySelector('.play-pause');
-                 if (playBtn) playBtn.textContent = '▶';
-               }
-             });
-           }
-         }
-        
+
+        function openGallery(galleryId) {
+          const gallery = document.getElementById(galleryId);
+          const state = galleryStates.get(galleryId);
+
+          if (gallery && state) {
+            gallery.classList.add('active');
+            state.isOpen = true;
+
+            // Reinitialize video players in gallery
+            setTimeout(() => {
+              initializeVideoPlayersInGallery(gallery);
+            }, 300);
+
+            // Smooth scroll to gallery
+            setTimeout(() => {
+              gallery.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }, 200);
+          }
+        }
+
+        function closeGallery(galleryId) {
+          const gallery = document.getElementById(galleryId);
+          const state = galleryStates.get(galleryId);
+
+          if (gallery && state) {
+            gallery.classList.remove('active');
+            state.isOpen = false;
+
+            // Pause all videos in gallery
+            const videos = gallery.querySelectorAll('video');
+            videos.forEach(video => {
+              video.pause();
+              const container = video.closest('.video-container');
+              if (container) {
+                container.classList.remove('playing');
+                const playBtn = container.querySelector('.play-pause');
+                if (playBtn) playBtn.textContent = '▶';
+              }
+            });
+          }
+        }
+
         function goToSlide(galleryId, index) {
           const gallery = document.getElementById(galleryId);
           const state = galleryStates.get(galleryId);
-          
+
           if (!gallery || !state || index < 0 || index >= state.totalItems) return;
-          
+
           state.currentIndex = index;
           updateGalleryDisplay(galleryId);
         }
-        
+
         function previousSlide(galleryId) {
           const state = galleryStates.get(galleryId);
           if (!state) return;
-          
+
           const newIndex = state.currentIndex === 0 ? state.totalItems - 1 : state.currentIndex - 1;
           goToSlide(galleryId, newIndex);
         }
-        
+
         function nextSlide(galleryId) {
           const state = galleryStates.get(galleryId);
           if (!state) return;
-          
+
           const newIndex = state.currentIndex === state.totalItems - 1 ? 0 : state.currentIndex + 1;
           goToSlide(galleryId, newIndex);
         }
-        
+
         function updateGalleryDisplay(galleryId) {
           const gallery = document.getElementById(galleryId);
           const state = galleryStates.get(galleryId);
-          
+
           if (!gallery || !state) return;
-          
+
           const track = gallery.querySelector('.gallery-track');
           const items = gallery.querySelectorAll('.gallery-item');
           const indicators = gallery.querySelectorAll('.gallery-indicator');
-          
+
           // Update track position
           track.style.transform = `translateX(-${state.currentIndex * 100}%)`;
-          
+
           // Update active states
           items.forEach((item, index) => {
             item.classList.toggle('active', index === state.currentIndex);
           });
-          
+
           indicators.forEach((indicator, index) => {
             indicator.classList.toggle('active', index === state.currentIndex);
           });
-          
+
           // Pause all videos except current
           const videos = gallery.querySelectorAll('video');
           videos.forEach((video, videoIndex) => {
             const container = video.closest('.video-container');
             const itemIndex = Array.from(items).findIndex(item => item.contains(video));
-            
+
             if (itemIndex !== state.currentIndex && !video.paused) {
               video.pause();
               if (container) {
@@ -2791,133 +3027,133 @@
             }
           });
         }
-        
-                 function initializeVideoPlayersInGallery(gallery) {
-           const videos = gallery.querySelectorAll('.video-container video');
-           
-           videos.forEach(video => {
-             const container = video.closest('.video-container');
-             const playPauseBtn = container.querySelector('.play-pause');
-             const customPlayButton = container.querySelector('.custom-play-button');
-             const progressBar = container.querySelector('.progress');
-             const progressContainer = container.querySelector('.progress-container');
-             const fullscreenBtn = container.querySelector('.fullscreen');
-             
-             // Remove any existing event listeners to prevent duplicates
-             const newVideo = video.cloneNode(true);
-             video.parentNode.replaceChild(newVideo, video);
-             video = newVideo;
-             
-             // Simple video orientation detection
-             video.addEventListener('loadedmetadata', () => {
-               const aspectRatio = video.videoWidth / video.videoHeight;
-               
-               if (aspectRatio > 1.2) {
-                 container.classList.add('horizontal');
-                 container.classList.remove('vertical');
-               } else if (aspectRatio < 0.8) {
-                 container.classList.add('vertical');
-                 container.classList.remove('horizontal');
-               } else {
-                 container.classList.add('horizontal');
-                 container.classList.remove('vertical');
-               }
-               
-               // Show first frame
-               video.currentTime = 0.1;
-               container.classList.remove('loading');
-             });
-             
-             // Play/Pause functionality
-             function togglePlay() {
-               if (video.paused) {
-                 // Pause all other videos first
-                 videos.forEach(otherVideo => {
-                   if (otherVideo !== video && !otherVideo.paused) {
-                     otherVideo.pause();
-                     const otherContainer = otherVideo.closest('.video-container');
-                     otherContainer.classList.remove('playing');
-                     const otherPlayBtn = otherContainer.querySelector('.play-pause');
-                     if (otherPlayBtn) otherPlayBtn.textContent = '▶';
-                   }
-                 });
 
-                 video.play();
-                 container.classList.add('playing');
-                 if (playPauseBtn) playPauseBtn.textContent = '⏸';
-               } else {
-                 video.pause();
-                 container.classList.remove('playing');
-                 if (playPauseBtn) playPauseBtn.textContent = '▶';
-               }
-             }
-             
-             // Update progress bar
-             function updateProgress() {
-               if (video.duration) {
-                 const progressPercent = (video.currentTime / video.duration) * 100;
-                 if (progressBar) progressBar.style.width = `${progressPercent}%`;
-               }
-             }
-             
-             // Seek functionality
-             function seek(e) {
-               if (video.duration) {
-                 const rect = progressContainer.getBoundingClientRect();
-                 const clickX = e.clientX - rect.left;
-                 const clickPercent = clickX / rect.width;
-                 video.currentTime = clickPercent * video.duration;
-               }
-             }
-             
-             // Fullscreen functionality
-             function toggleFullscreen() {
-               if (document.fullscreenElement) {
-                 document.exitFullscreen();
-               } else {
-                 container.requestFullscreen();
-               }
-             }
-             
-             // Event listeners
-             if (customPlayButton) customPlayButton.addEventListener('click', togglePlay);
-             if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlay);
-             video.addEventListener('click', togglePlay);
-             video.addEventListener('timeupdate', updateProgress);
-             if (progressContainer) progressContainer.addEventListener('click', seek);
-             if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
-             
-             // Loading states
-             video.addEventListener('loadstart', () => {
-               container.classList.add('loading');
-             });
-             
-             video.addEventListener('canplay', () => {
-               container.classList.remove('loading');
-             });
+        function initializeVideoPlayersInGallery(gallery) {
+          const videos = gallery.querySelectorAll('.video-container video');
 
-             video.addEventListener('waiting', () => {
-               container.classList.add('loading');
-             });
-             
-             // Reset on video end
-             video.addEventListener('ended', () => {
-               container.classList.remove('playing');
-               if (playPauseBtn) playPauseBtn.textContent = '▶';
-               video.currentTime = 0.1; // Return to first frame
-             });
+          videos.forEach(video => {
+            const container = video.closest('.video-container');
+            const playPauseBtn = container.querySelector('.play-pause');
+            const customPlayButton = container.querySelector('.custom-play-button');
+            const progressBar = container.querySelector('.progress');
+            const progressContainer = container.querySelector('.progress-container');
+            const fullscreenBtn = container.querySelector('.fullscreen');
 
-             // Error handling
-             video.addEventListener('error', (e) => {
-               console.error('Video error:', e);
-               container.classList.remove('loading');
-             });
-           });
-         }
-        
+            // Remove any existing event listeners to prevent duplicates
+            const newVideo = video.cloneNode(true);
+            video.parentNode.replaceChild(newVideo, video);
+            video = newVideo;
+
+            // Simple video orientation detection
+            video.addEventListener('loadedmetadata', () => {
+              const aspectRatio = video.videoWidth / video.videoHeight;
+
+              if (aspectRatio > 1.2) {
+                container.classList.add('horizontal');
+                container.classList.remove('vertical');
+              } else if (aspectRatio < 0.8) {
+                container.classList.add('vertical');
+                container.classList.remove('horizontal');
+              } else {
+                container.classList.add('horizontal');
+                container.classList.remove('vertical');
+              }
+
+              // Show first frame
+              video.currentTime = 0.1;
+              container.classList.remove('loading');
+            });
+
+            // Play/Pause functionality
+            function togglePlay() {
+              if (video.paused) {
+                // Pause all other videos first
+                videos.forEach(otherVideo => {
+                  if (otherVideo !== video && !otherVideo.paused) {
+                    otherVideo.pause();
+                    const otherContainer = otherVideo.closest('.video-container');
+                    otherContainer.classList.remove('playing');
+                    const otherPlayBtn = otherContainer.querySelector('.play-pause');
+                    if (otherPlayBtn) otherPlayBtn.textContent = '▶';
+                  }
+                });
+
+                video.play();
+                container.classList.add('playing');
+                if (playPauseBtn) playPauseBtn.textContent = '⏸';
+              } else {
+                video.pause();
+                container.classList.remove('playing');
+                if (playPauseBtn) playPauseBtn.textContent = '▶';
+              }
+            }
+
+            // Update progress bar
+            function updateProgress() {
+              if (video.duration) {
+                const progressPercent = (video.currentTime / video.duration) * 100;
+                if (progressBar) progressBar.style.width = `${progressPercent}%`;
+              }
+            }
+
+            // Seek functionality
+            function seek(e) {
+              if (video.duration) {
+                const rect = progressContainer.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const clickPercent = clickX / rect.width;
+                video.currentTime = clickPercent * video.duration;
+              }
+            }
+
+            // Fullscreen functionality
+            function toggleFullscreen() {
+              if (document.fullscreenElement) {
+                document.exitFullscreen();
+              } else {
+                container.requestFullscreen();
+              }
+            }
+
+            // Event listeners
+            if (customPlayButton) customPlayButton.addEventListener('click', togglePlay);
+            if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlay);
+            video.addEventListener('click', togglePlay);
+            video.addEventListener('timeupdate', updateProgress);
+            if (progressContainer) progressContainer.addEventListener('click', seek);
+            if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+            // Loading states
+            video.addEventListener('loadstart', () => {
+              container.classList.add('loading');
+            });
+
+            video.addEventListener('canplay', () => {
+              container.classList.remove('loading');
+            });
+
+            video.addEventListener('waiting', () => {
+              container.classList.add('loading');
+            });
+
+            // Reset on video end
+            video.addEventListener('ended', () => {
+              container.classList.remove('playing');
+              if (playPauseBtn) playPauseBtn.textContent = '▶';
+              video.currentTime = 0.1; // Return to first frame
+            });
+
+            // Error handling
+            video.addEventListener('error', (e) => {
+              console.error('Video error:', e);
+              container.classList.remove('loading');
+            });
+          });
+        }
+
 
       }
-      
+
       // Initialize video players
       initializeVideoPlayers();
 
@@ -2926,4 +3162,5 @@
     });
   </script>
 </body>
-</html> 
+
+</html>
