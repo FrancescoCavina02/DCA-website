@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DCArt Afternoon - Where Dodgeball Meets Creativity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* — CSS Variables & Reset — */
+        :root {
+            --primary: #d32f2f;
+            --secondary: #000;
+            --light: #fff;
+            --accent: #333;
+            --art-purple: #9c27b0;
+            --art-blue: #673ab7;
+            --art-pink: #e91e63;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* — Header & Nav — */
+        header {
+            background: var(--secondary);
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.3rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 1002;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo img {
+            height: 2.8rem;
+            vertical-align: middle;
+            margin-left: 0.5rem;
+        }
+
+        .logo .ball-logo {
+            height: 2.8rem;
+            vertical-align: middle;
+            margin-right: 0.5rem;
+        }
+
+        .adam-image {
+            height: 3.5rem;
+            vertical-align: middle;
+            margin-left: 1rem;
+        }
+
+        nav#nav-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        nav#nav-menu a {
+            margin-left: 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            overflow: hidden;
+            color: var(--primary);
+        }
+
+        nav#nav-menu a:hover {
+            color: var(--light);
+            transform: scale(1.05);
+            background-color: rgba(211, 47, 47, 0.1);
+        }
+
+        nav#nav-menu a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0.2rem;
+            width: 25px;
+            height: 25px;
+            background-image: url('pics/Ball.jpg');
+            background-size: cover;
+            background-position: center;
+            transform: translateY(-50%) scale(0);
+            transition: transform 0.3s ease;
+            z-index: -1;
+            opacity: 0.8;
+            border-radius: 50%;
+        }
+
+        nav#nav-menu a:hover::before {
+            transform: translateY(-50%) scale(1);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.75rem;
+            color: var(--light);
+            cursor: pointer;
+        }
+
+        header .logo a {
+            color: var(--light);
+        }
+
+        /* — Mobile Styles — */
+        @media (max-width: 768px) {
+            .adam-image {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+                font-size: 1.8rem;
+                padding: 0.8rem;
+                background: linear-gradient(45deg, var(--primary), #ff6b6b);
+                border-radius: 12px;
+                color: var(--light);
+                border: none;
+                cursor: pointer;
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .menu-toggle::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                transition: left 0.5s;
+            }
+
+            .menu-toggle:hover::before {
+                left: 100%;
+            }
+
+            .menu-toggle:hover {
+                transform: scale(1.05) rotate(5deg);
+                box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
+            }
+
+            .menu-toggle:active {
+                transform: scale(0.95);
+            }
+
+            nav#nav-menu {
+                display: flex;
+                flex-direction: column;
+                background: linear-gradient(135deg, var(--secondary), #1a1a1a, var(--secondary));
+                position: fixed;
+                top: 0;
+                left: -60%;
+                width: 60%;
+                height: 100%;
+                padding-top: 4rem;
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                z-index: 1001;
+                box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
+                backdrop-filter: blur(10px);
+            }
+
+            nav#nav-menu.active {
+                left: 0;
+                animation: slideInBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+
+            @keyframes slideInBounce {
+                0% {
+                    left: -60%;
+                }
+
+                70% {
+                    left: 2%;
+                }
+
+                100% {
+                    left: 0;
+                }
+            }
+
+            nav#nav-menu a {
+                margin: 0;
+                padding: 1rem 2rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                color: var(--light);
+                font-weight: 500;
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+            }
+
+            nav#nav-menu a::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(45deg, var(--primary), #ff6b6b);
+                transition: left 0.3s ease;
+                z-index: -1;
+            }
+
+            nav#nav-menu a:hover::before {
+                left: 0;
+            }
+
+            nav#nav-menu a:hover {
+                color: var(--light);
+                transform: translateX(10px);
+                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            .dropdown {
+                display: block;
+                width: 100%;
+            }
+
+            .dropdown>span {
+                margin: 0;
+                padding: 1rem 2rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                display: block;
+                width: 100%;
+                color: var(--light);
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .dropdown>span::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(45deg, #ff9800, #ffc107);
+                transition: left 0.3s ease;
+                z-index: -1;
+            }
+
+            .dropdown>span:hover::before {
+                left: 0;
+            }
+
+            .dropdown.active>span::before {
+                left: 0;
+            }
+
+            .dropdown>span::after {
+                content: '▼';
+                float: right;
+                transition: transform 0.3s ease;
+                font-size: 0.8rem;
+            }
+
+            .dropdown.active>span::after {
+                transform: rotate(180deg);
+            }
+
+            .dropdown-content {
+                position: static;
+                display: block;
+                box-shadow: none;
+                background: linear-gradient(135deg,
+                        rgba(42, 42, 42, 0.95) 0%,
+                        rgba(26, 26, 26, 0.98) 50%,
+                        rgba(42, 42, 42, 0.95) 100%);
+                border-radius: 0;
+                overflow: hidden;
+                max-height: 0;
+                opacity: 0;
+                transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                border-left: 3px solid transparent;
+                backdrop-filter: blur(10px);
+            }
+
+            .dropdown.active .dropdown-content {
+                border-left-color: var(--primary);
+                animation: dropdownGlow 0.6s ease-out;
+            }
+
+            .dropdown-content a {
+                padding: 0.8rem 3rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                color: rgba(255, 255, 255, 0.8);
+                background: none;
+                transition: all 0.3s ease;
+            }
+
+            .dropdown-content a:hover {
+                background: linear-gradient(45deg, var(--primary), #ff6b6b);
+                color: var(--light);
+                transform: translateX(15px);
+                padding-left: 3.5rem;
+            }
+
+            #overlay.active {
+                display: block;
+                animation: overlayFadeIn 0.3s ease;
+            }
+
+            @keyframes overlayFadeIn {
+                from {
+                    opacity: 0;
+                }
+
+                to {
+                    opacity: 1;
+                }
+            }
+
+            nav#nav-menu::before {
+                content: '';
+                position: absolute;
+                top: 20%;
+                right: 10%;
+                width: 40px;
+                height: 40px;
+                background-image: url('pics/Ball.png');
+                background-size: cover;
+                border-radius: 50%;
+                opacity: 0.3;
+                animation: menuFloat 6s ease-in-out infinite;
+            }
+
+            @keyframes menuFloat {
+
+                0%,
+                100% {
+                    transform: translateY(0px) rotate(0deg);
+                }
+
+                50% {
+                    transform: translateY(-20px) rotate(180deg);
+                }
+            }
+
+            .breadcrumb-container {
+                top: 65px;
+                padding: 0.5rem 0;
+            }
+
+            .breadcrumb {
+                padding: 0 1rem;
+                font-size: 0.8rem;
+            }
+
+            .breadcrumb-item {
+                padding: 0.2rem 0.3rem;
+            }
+        }
+
+        @keyframes dropdownGlow {
+            0% {
+                box-shadow: 0 0 0 rgba(211, 47, 47, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(211, 47, 47, 0.6);
+            }
+
+            100% {
+                box-shadow: 0 0 0 rgba(211, 47, 47, 0.3);
+            }
+        }
+
+        /* Dropdown styles */
+        .dropdown {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--secondary);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1003;
+            border-radius: 4px;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown-content a {
+            color: var(--light);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            margin: 0;
+            border-radius: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--primary);
+            transform: none;
+            text-decoration: underline;
+        }
+
+        .dropdown-content a::before {
+            display: none;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown>span {
+            margin-left: 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            overflow: hidden;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .dropdown>span:hover {
+            color: var(--light);
+            transform: scale(1.05);
+            background-color: rgba(211, 47, 47, 0.1);
+        }
+
+        .dropdown>span::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0.2rem;
+            width: 25px;
+            height: 25px;
+            background-image: url('pics/Ball.jpg');
+            background-size: cover;
+            background-position: center;
+            transform: translateY(-50%) scale(0);
+            transition: transform 0.3s ease;
+            z-index: -1;
+            opacity: 0.8;
+            border-radius: 50%;
+        }
+
+        .dropdown>span:hover::before {
+            left: 0;
+        }
+
+        .dropdown.active>span::before {
+            left: 0;
+        }
+
+        .dropdown>span:hover {
+            transform: translateX(10px);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .dropdown>span::after {
+            content: '▼';
+            float: right;
+            transition: transform 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .dropdown.active>span::after {
+            transform: rotate(180deg);
+        }
+
+        /* — Main Content Sections — */
+        main {
+            padding: 0;
+            margin: 0;
+        }
+
+        /* — Overlay — */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        /* Art Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--art-purple) 0%, var(--art-blue) 50%, var(--art-pink) 100%);
+            color: var(--light);
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="20">🎨</text></svg>');
+            background-size: 100px 100px;
+            opacity: 0.15;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: heroEnter 1s ease-out forwards 0.3s;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: heroEnter 1s ease-out forwards 0.6s;
+        }
+
+        .art-emoji-float {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.7;
+            animation: artFloat 8s ease-in-out infinite;
+        }
+
+        .art-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .art-2 {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .art-3 {
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        /* Story Section */
+        .story-section {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .story-title {
+            font-size: 2.5rem;
+            color: var(--art-purple);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .story-content {
+            background: linear-gradient(135deg, rgba(156, 39, 176, 0.05), rgba(103, 58, 183, 0.1));
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(156, 39, 176, 0.2);
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: var(--accent);
+            white-space: pre-line;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            margin: 6rem 0;
+            padding: 0 2rem;
+        }
+
+        .gallery-title {
+            font-size: 2.5rem;
+            color: var(--art-purple);
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+            animation: galleryItemEnter 0.8s ease-out forwards;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 280px;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(156, 39, 176, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item video {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: var(--light);
+            padding: 2rem 1.5rem 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-caption {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Animation delays for gallery items */
+        .gallery-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .gallery-item:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .gallery-item:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .gallery-item:nth-child(4) {
+            animation-delay: 0.25s;
+        }
+
+        .gallery-item:nth-child(5) {
+            animation-delay: 0.3s;
+        }
+
+        .gallery-item:nth-child(6) {
+            animation-delay: 0.35s;
+        }
+
+        .gallery-item:nth-child(7) {
+            animation-delay: 0.4s;
+        }
+
+        .gallery-item:nth-child(8) {
+            animation-delay: 0.45s;
+        }
+
+        .gallery-item:nth-child(9) {
+            animation-delay: 0.5s;
+        }
+
+        .gallery-item:nth-child(10) {
+            animation-delay: 0.55s;
+        }
+
+        .gallery-item:nth-child(11) {
+            animation-delay: 0.6s;
+        }
+
+        .gallery-item:nth-child(12) {
+            animation-delay: 0.65s;
+        }
+
+        .gallery-item:nth-child(13) {
+            animation-delay: 0.7s;
+        }
+
+        .gallery-item:nth-child(14) {
+            animation-delay: 0.75s;
+        }
+
+        .gallery-item:nth-child(15) {
+            animation-delay: 0.8s;
+        }
+
+        .gallery-item:nth-child(16) {
+            animation-delay: 0.85s;
+        }
+
+        .gallery-item:nth-child(17) {
+            animation-delay: 0.9s;
+        }
+
+        .gallery-item:nth-child(18) {
+            animation-delay: 0.95s;
+        }
+
+        .gallery-item:nth-child(19) {
+            animation-delay: 1.0s;
+        }
+
+        .gallery-item:nth-child(20) {
+            animation-delay: 1.05s;
+        }
+
+        .gallery-item:nth-child(21) {
+            animation-delay: 1.1s;
+        }
+
+        .gallery-item:nth-child(22) {
+            animation-delay: 1.15s;
+        }
+
+        /* Animations */
+        @keyframes heroEnter {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes galleryItemEnter {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes artFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+
+            25% {
+                transform: translateY(-20px) rotate(90deg);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(0px) rotate(180deg);
+                opacity: 0.7;
+            }
+
+            75% {
+                transform: translateY(-15px) rotate(270deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Breadcrumb Navigation */
+        .breadcrumb-container {
+            background: rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(211, 47, 47, 0.1);
+            padding: 0.75rem 0;
+            position: sticky;
+            top: 60px;
+            z-index: 999;
+            backdrop-filter: blur(5px);
+        }
+
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+            color: var(--accent);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .breadcrumb-item:hover {
+            color: var(--primary);
+            background: rgba(211, 47, 47, 0.1);
+        }
+
+        .breadcrumb-item.active {
+            color: var(--primary);
+            font-weight: 600;
+            pointer-events: none;
+        }
+
+        .breadcrumb-separator {
+            margin: 0 0.5rem;
+            color: var(--accent);
+            opacity: 0.6;
+        }
+
+        .breadcrumb-icon {
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        /* — Footer — */
+        footer {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: var(--light);
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('pics/Ball.png');
+            background-size: 80px 80px;
+            opacity: 0.03;
+            animation: footerBalls 60s linear infinite;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 1rem;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-section {
+            animation: footerFadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .footer-section:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .footer-section:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .footer-section:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .footer-section:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .footer-ball {
+            width: 40px;
+            height: 40px;
+            margin-right: 0.75rem;
+            animation: footerBallSpin 8s linear infinite;
+            filter: drop-shadow(0 4px 8px rgba(211, 47, 47, 0.3));
+        }
+
+        .footer-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--light), #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-tagline {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .footer-social {
+            margin-bottom: 1rem;
+        }
+
+        .social-text {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(211, 47, 47, 0.4);
+        }
+
+        .instagram-logo,
+        .tiktok-logo {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover .instagram-logo,
+        .social-link:hover .tiktok-logo {
+            transform: scale(1.1);
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            color: #ff6b6b;
+            position: relative;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 30px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--primary), #ff6b6b);
+            border-radius: 2px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--light);
+            transform: translateX(5px);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-icon {
+            font-size: 1.1rem;
+        }
+
+        .footer-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            animation: statPulse 3s ease-in-out infinite;
+        }
+
+        .stat-item:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .stat-item:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .stat-item:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff6b6b;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1rem;
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .footer-bottom-content span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @keyframes footerBalls {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: 1000px 1000px;
+            }
+        }
+
+        @keyframes footerBallSpin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes footerFadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes statPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Footer Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .footer-content {
+                padding: 2rem 1rem 1rem;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-logo {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .footer-tagline,
+            .social-text {
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .footer-stats {
+                flex-wrap: wrap;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .footer-bottom-content {
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .story-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .story-text {
+                font-size: 1rem;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header + Nav -->
+    <header>
+        <div class="logo"><a href="index.html"><img src="pics/Ball.png" alt="Ball Logo" class="ball-logo">DCA <img
+                    src="pics/XXX.png" alt="DCA Logo"></a></div>
+        <img src="pics/adam.png" alt="Adam" class="adam-image">
+        <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
+        <nav id="nav-menu">
+            <a href="index.html">Home</a>
+            <div class="dropdown">
+                <span>About</span>
+                <div class="dropdown-content">
+                    <a href="about.html">About DCA</a>
+                    <a href="founders.html">Founders</a>
+                    <a href="board.html">The Board</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <span>Trainings</span>
+                <div class="dropdown-content">
+                    <a href="practice-prices.html">Practice & Prices</a>
+                    <a href="youth-trainings.html">Youth Trainings</a>
+                    <a href="group-events.html">Group Events</a>
+                </div>
+            </div>
+            <a href="competitions.html">Competitions</a>
+            <div class="dropdown">
+                <span>Social</span>
+                <div class="dropdown-content">
+                    <a href="social.html">Activities</a>
+                    <a href="moments.html">Moments</a>
+                    <a href="testimonials.html">Testimonials</a>
+                </div>
+            </div>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Overlay -->
+    <div id="overlay"></div>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb-container">
+        <nav class="breadcrumb">
+            <a href="index.html" class="breadcrumb-item">
+                <span class="breadcrumb-icon">🏠</span>
+                Home
+            </a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="social.html" class="breadcrumb-item">
+                <span class="breadcrumb-icon">🎉</span>
+                Social
+            </a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item active">
+                <span class="breadcrumb-icon">🎨</span>
+                DCArt Afternoon
+            </span>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="art-emoji-float art-1">🎨</div>
+            <div class="art-emoji-float art-2">🖌️</div>
+            <div class="art-emoji-float art-3">🗿</div>
+
+            <h1 class="hero-title">🎨 DCArt Afternoon 🎨</h1>
+            <p class="hero-subtitle">Where dodgeball skills meet artistic expression! 🖌️</p>
+        </section>
+
+        <!-- Story Section -->
+        <section class="story-section">
+            <h2 class="story-title">The Recap</h2>
+            <div class="story-content">
+                <p class="story-text">Last Sunday, a group of DCA-ers gathered to answer one important question:
+                    🤾‍♂️Do elite dodgeball skills translate into artistic genius?👩‍🎨
+                    (Spoiler: no… well, sometimes very abstractly 😅)
+
+                    We kicked things off with sculpture 🗿challenges worthy of a modern art museum 🖼️:
+                    – Making the DCA logo without looking, and without cheating (Looking at you Cesco 👀)
+                    – Capturing a dodgeballer mid-throw (occasionally with limbs falling off)🩼
+                    – Designing the Dodgeball Olympics Cup (in preparation for the day we get dodgeball into the
+                    olympics 🙏)
+
+                    Then came the real masterpiece: collaborative chaos.
+                    With canvases in play, we had 4 minutes per canvas per material before everything had to be passed
+                    on. 🎨🥅Brushes, styles and sanity rotating rapidly, resulting in bold mixed-media collages that
+                    display how much trust we have in each other 🎭
+
+                    Of course, teamwork was tested — especially when certain artists (cough Kiara cough) decided to
+                    raise the difficulty level to "expert mode" 😈🎨. But hey, as every artist knows: the creative
+                    process matters more than the end result… right?
+
+                    Please feel free to judge our artwork (especially those made by Cesco 😂). But, do know, the final
+                    pieces do not display how much fun it was to make 😊
+
+                    10/10 would exhibit again.</p>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section">
+            <h2 class="gallery-title">Art Gallery</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/head.jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">The DCA Art Squad! 🎨</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-11 at 17.32.02.jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Creative minds at work</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-11 at 17.32.02 (1).jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Sculpture challenge!</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-11 at 17.32.02 (2).jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Artistic expressions</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-11 at 17.32.02 (3).jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Masterpieces in progress</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-11 at 18.34.50.jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">The DCA logo attempt 👀</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-11 at 18.34.51.jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Abstract art vibes</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-13 at 10.32.33.jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Collaborative chaos 🎭</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-13 at 10.32.33 (1).jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Mixed-media magic</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-13 at 10.32.34.jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Brushes rotating!</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <video controls>
+                        <source src="pics/Activities/Art/WhatsApp Video 2026-01-13 at 10.32.37.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Art in action! 🎬</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-13 at 10.32.37.jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Creativity unleashed</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <video controls>
+                        <source src="pics/Activities/Art/WhatsApp Video 2026-01-13 at 10.32.43.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">The creative process 🎨</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-13 at 10.32.44.jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Teamwork makes the dream work</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-13 at 10.32.44 (1).jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Expert mode 😈</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-13 at 10.32.44 (2).jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Artistic genius... maybe?</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-13 at 10.32.45.jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Bold strokes</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-13 at 10.32.45 (1).jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Canvas rotation time</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-13 at 10.32.45 (2).jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Sanity rotating rapidly 😅</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-13 at 10.32.45 (3).jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Modern art museum worthy 🖼️</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-13 at 10.32.46.jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">The final pieces</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-13 at 10.32.46 (4).jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">10/10 would exhibit again!</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/Activities/Art/WhatsApp Image 2026-01-13 at 10.32.47.jpeg" alt="DCArt Photo">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">DCArt memories 💜</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <!-- Footer Top Section -->
+            <div class="footer-top">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="pics/Ball.png" alt="DCA Ball" class="footer-ball">
+                        <span class="footer-title">Dodgeball Club Amsterdam</span>
+                    </div>
+                    <p class="footer-tagline">Where dodgeball dreams come to life! 🎯</p>
+                    <div class="footer-social">
+                        <span class="social-text">Follow the action:</span>
+                        <div class="social-links">
+                            <a href="moments.html" class="social-link" title="Our Moments">📸</a>
+                            <a href="social.html" class="social-link" title="Social Events">🎉</a>
+                            <a href="https://www.tiktok.com/@dodgeballamsterdam?_t=ZG-8xrTnrmMLQG&_r=1"
+                                class="social-link" title="Follow us on TikTok" target="_blank"><img
+                                    src="pics/tiktok.png" alt="TikTok" class="tiktok-logo"></a>
+                            <a href="https://www.instagram.com/dodgeballamsterdam?utm_source=ig_web_button_share_sheet&igsh=MWl1ZmU1Z3FmYzg2Mw=="
+                                class="social-link" title="Follow us on Instagram" target="_blank"><img
+                                    src="pics/insta.png" alt="Instagram" class="instagram-logo"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-heading">Quick Start</h4>
+                    <ul class="footer-links">
+                        <li><a href="practice-prices.html">🎯 Join DCA</a></li>
+                        <li><a href="practice-prices.html">💰 Prices & Training</a></li>
+                        <li><a href="contact.html">📞 Get in Touch</a></li>
+                        <li><a href="competitions.html">🏆 Competitions</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-heading">Discover DCA</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">ℹ️ About Us</a></li>
+                        <li><a href="founders.html">💡 Meet the Founders</a></li>
+                        <li><a href="board.html">👥 The Board</a></li>
+                        <li><a href="social.html">🎉 Social Activities</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-heading">Stay Connected</h4>
+                    <div class="contact-info">
+                        <p class="contact-item">
+                            <span class="contact-icon">📍</span>
+                            <span>Amsterdam, Netherlands</span>
+                        </p>
+                        <p class="contact-item">
+                            <span class="contact-icon">⏰</span>
+                            <span>Training: Tue & Thu</span>
+                        </p>
+                        <p class="contact-item">
+                            <span class="contact-icon">📧</span>
+                            <a href="mailto:dodgeballamsterdam@gmail.com"
+                                style="color: rgba(255,255,255,0.8);">dodgeballamsterdam@gmail.com</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Stats -->
+            <div class="footer-stats">
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Active Members</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Training Sessions</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Fun Moments</span>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p class="footer-bottom-content">
+                    <span>🏐 Made with ❤️ by the DCA Team</span>
+                    <span>|</span>
+                    <span>© 2025 Dodgeball Club Amsterdam</span>
+                    <span>|</span>
+                    <span>🎯 Let's Play!</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const overlay = document.getElementById('overlay');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Dropdown functionality for mobile
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const dropdownSpan = dropdown.querySelector('span');
+            const dropdownContent = dropdown.querySelector('.dropdown-content');
+
+            dropdownSpan.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+
+                    // Toggle content height for animation
+                    if (dropdown.classList.contains('active')) {
+                        dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+                        dropdownContent.style.opacity = '1';
+                    } else {
+                        dropdownContent.style.maxHeight = '0';
+                        dropdownContent.style.opacity = '0';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
