@@ -905,6 +905,32 @@
       animation: fadeInUp 0.8s ease-out forwards 1.2s;
     }
 
+    /* Team Photo Styles */
+    .team-photo-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+      padding: 0 1rem;
+      position: relative;
+      z-index: 2;
+      background: #fff;
+    }
+
+    .team-photo {
+      max-width: 600px;
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      object-fit: contain;
+    }
+
+    @media (max-width: 768px) {
+      .team-photo {
+        max-width: 100%;
+      }
+    }
+
     /* Team Selection Section */
     .team-selection-section {
       margin-bottom: 4rem;
@@ -2168,6 +2194,10 @@
 
         <!-- Man 1 Timeline -->
         <div class="timeline" id="timeline-man1" style="display: none;">
+          <!-- Team Photo -->
+          <div class="team-photo-container">
+            <img src="pics/Teams/gents1.jpeg" alt="Man 1 Team Photo" class="team-photo">
+          </div>
           <!-- November 2025 - 2nd Competition Day of new season -->
           <div class="timeline-item" data-delay="0">
             <div class="timeline-content">
@@ -2966,6 +2996,10 @@
 
         <!-- Mixed 1 Timeline -->
         <div class="timeline" id="timeline-mixed1" style="display: none;">
+          <!-- Team Photo -->
+          <div class="team-photo-container">
+            <img src="pics/Teams/mixed1.jpeg" alt="Mixed 1 Team Photo" class="team-photo">
+          </div>
           <!-- November 2025 - 2nd Competition Day -->
           <div class="timeline-item" data-delay="0">
             <div class="timeline-content">
@@ -3237,6 +3271,10 @@
 
         <!-- Mixed 2 Timeline -->
         <div class="timeline" id="timeline-mixed2" style="display: none;">
+          <!-- Team Photo -->
+          <div class="team-photo-container">
+            <img src="pics/Teams/mixed2.jpeg" alt="Mixed 2 Team Photo" class="team-photo">
+          </div>
           <!-- November 2025 - 2nd Competition Day -->
           <div class="timeline-item" data-delay="0">
             <div class="timeline-content">
