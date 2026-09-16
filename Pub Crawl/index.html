@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodgeball Pub Dash | Amsterdam Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        /* Custom Font Import - Noto Sans for clean, report-style look */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: #F5F5F0;
+            /* Warm neutral background */
+            color: #2D2D2D;
+            /* Dark grey for text */
+        }
+
+        /* Chart Container Styling - Mandatory per instructions */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            /* Constrain width */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            /* Base height */
+            max-height: 350px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Custom Scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #E5E5E5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #A0A096;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7D7D75;
+        }
+
+        /* Utility for transition effects */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .active-tab {
+            border-bottom: 2px solid #BC4749;
+            /* Rust accent */
+            color: #BC4749;
+            font-weight: 700;
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals (Background: #F5F5F0) with Earthy Accents. Primary: #2D2D2D (Charcoal), Secondary: #BC4749 (Rust Red - Amsterdam Brick/Red Light nod), Accent: #6A994E (Sage Green - Canal water). -->
+    <!-- Application Structure Plan: Dashboard Layout.
+         1. Header: Event summary and countdown.
+         2. Navigation: Tabs for "Master Schedule", "Team Routes" (Interactive Filter), "Challenge Manual" (Accordion), "Reunion Intel".
+         3. Dynamic Content Area: Central visualization of the selected team's path + context specific challenges.
+         4. Footer: Emergency contacts and final instructions.
+         Why: A tabbed dashboard allows quick access to specific intel (Where do I go? What do I do?) without scrolling through a long PDF. The Team filter creates a personalized view. -->
+    <!-- Visualization & Content Choices:
+         1. Master Schedule -> Goal: Inform -> Viz: Timeline/Gantt-style representation (Chart.js Bar Chart) -> Interaction: Hover for details. -> Confirmed NO SVG.
+         2. Challenge Difficulty -> Goal: Inform -> Viz: Donut Chart showing point distribution types -> Interaction: Click legend to filter list.
+         3. Pacing Guide -> Goal: Change -> Viz: Line Chart showing "Energy vs. Sobriety" targets -> Interaction: None/Static context.
+         4. Route Cards -> Goal: Organize -> Viz: Styled Cards with Unicode Icons -> Interaction: JS Team Selection updates the DOM. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-stone-800 tracking-tight">DODGEBALL PUB DASH</h1>
+                    <p class="text-sm text-stone-500 uppercase tracking-wider mt-1">Amsterdam Centre • Friday Night
+                        Operation</p>
+                </div>
+                <div class="bg-stone-100 px-4 py-2 rounded-lg text-center border border-stone-200">
+                    <span class="block text-xs text-stone-500 font-semibold">EVENT WINDOW</span>
+                    <span class="text-lg font-bold text-[#BC4749]">20:00 - 23:30</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- Intro / Briefing -->
+        <section class="mb-10 max-w-4xl mx-auto text-center">
+            <h2 class="text-2xl font-bold text-stone-800 mb-3">Mission Briefing</h2>
+            <p class="text-stone-600 leading-relaxed">
+                Welcome to the digital command center for the Dodgeball Club's Friday Night Scavenger Hunt.
+                Below you will find your team's designated route, the challenge manifest, and the master timeline.
+                <strong class="text-[#BC4749]">Objective:</strong> Complete the route, score maximum points, and
+                reconvene at the extraction point without losing any squad members.
+            </p>
+        </section>
+
+        <!-- Navigation Tabs -->
+        <div class="flex flex-wrap justify-center border-b border-stone-300 mb-8" id="nav-tabs">
+            <button onclick="switchTab('schedule')" id="tab-schedule"
+                class="px-4 py-3 text-stone-600 hover:text-stone-800 font-medium transition-colors active-tab">Schedule</button>
+            <button onclick="switchTab('routes')" id="tab-routes"
+                class="px-4 py-3 text-stone-600 hover:text-stone-800 font-medium transition-colors">Team Routes</button>
+            <button onclick="switchTab('payload')" id="tab-payload"
+                class="px-4 py-3 text-stone-600 hover:text-stone-800 font-medium transition-colors">Payload</button>
+            <button onclick="switchTab('sabotage')" id="tab-sabotage"
+                class="px-4 py-3 text-stone-600 hover:text-stone-800 font-medium transition-colors">Sabotage</button>
+            <button onclick="switchTab('sniper')" id="tab-sniper"
+                class="px-4 py-3 text-stone-600 hover:text-stone-800 font-medium transition-colors">Sniper</button>
+            <button onclick="switchTab('challenges')" id="tab-challenges"
+                class="px-4 py-3 text-stone-600 hover:text-stone-800 font-medium transition-colors">Challenges</button>
+            <button onclick="switchTab('reunion')" id="tab-reunion"
+                class="px-4 py-3 text-stone-600 hover:text-stone-800 font-medium transition-colors">Reunion</button>
+        </div>
+
+        <!-- VIEW: MASTER SCHEDULE -->
+        <div id="view-schedule" class="fade-in space-y-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold text-stone-800">Operational Timeline</h3>
+                    <p class="text-stone-500 text-sm">Visualizing the flow of movement for all 3 teams across the
+                        3.5-hour window.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <!-- Chart Container 1 -->
+                    <div class="w-full">
+                        <div class="chart-container">
+                            <canvas id="scheduleChart"></canvas>
+                        </div>
+                    </div>
+                    <!-- Context Text -->
+                    <div class="space-y-4">
+                        <div class="p-4 bg-stone-50 rounded-lg border-l-4 border-[#BC4749]">
+                            <h4 class="font-bold text-stone-800">20:00 • Deployment</h4>
+                            <p class="text-sm text-stone-600">All units muster at Amsterdam Centraal (Piano Area).
+                                Briefing and team splitting immediately follows.</p>
+                        </div>
+                        <div class="p-4 bg-stone-50 rounded-lg border-l-4 border-stone-400">
+                            <h4 class="font-bold text-stone-800">20:15 - 22:15 • The Scramble</h4>
+                            <p class="text-sm text-stone-600">Teams split to distinct sectors. 2 stops per team. 45-60
+                                mins per venue allows for "In-Pub" challenges.</p>
+                        </div>
+                        <div class="p-4 bg-stone-50 rounded-lg border-l-4 border-[#6A994E]">
+                            <h4 class="font-bold text-stone-800">~23:00 • Convergence</h4>
+                            <p class="text-sm text-stone-600">All teams make their way to the Reunion Point. Relaxed
+                                timing—enjoy your route! Score tallying begins when everyone arrives.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW: ROUTES -->
+        <div id="view-routes" class="hidden fade-in">
+
+            <div class="text-center mb-8">
+                <p class="text-stone-600 mb-4">Select your squad to view route preview, or click "View Full Route" for
+                    complete mission details.</p>
+                <div class="inline-flex bg-stone-100 rounded-lg p-1 border border-stone-200">
+                    <button onclick="updateRoute('A')"
+                        class="px-6 py-2 rounded-md text-sm font-bold transition-all bg-white shadow-sm text-[#BC4749]"
+                        id="btn-team-a">TEAM A</button>
+                    <button onclick="updateRoute('B')"
+                        class="px-6 py-2 rounded-md text-sm font-bold text-stone-500 hover:text-stone-700 transition-all"
+                        id="btn-team-b">TEAM B</button>
+                    <button onclick="updateRoute('C')"
+                        class="px-6 py-2 rounded-md text-sm font-bold text-stone-500 hover:text-stone-700 transition-all"
+                        id="btn-team-c">TEAM C</button>
+                </div>
+            </div>
+
+            <!-- Team Page Links -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <a href="team-alpha.html"
+                    class="block bg-gradient-to-br from-red-600 to-red-700 text-white p-6 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all text-center">
+                    <span class="text-3xl mb-2 block">🏴‍☠️</span>
+                    <h3 class="text-xl font-bold mb-1">Team Alpha</h3>
+                    <p class="text-red-200 text-sm">"The Privateers"</p>
+                    <p class="text-white text-xs mt-2 opacity-90">Zeedijk North • Maritime History</p>
+                    <span class="inline-block mt-3 px-4 py-1 bg-white/20 rounded-full text-sm font-semibold">View Full
+                        Route →</span>
+                </a>
+                <a href="team-bravo.html"
+                    class="block bg-gradient-to-br from-blue-600 to-blue-700 text-white p-6 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all text-center">
+                    <span class="text-3xl mb-2 block">⚔️</span>
+                    <h3 class="text-xl font-bold mb-1">Team Bravo</h3>
+                    <p class="text-blue-200 text-sm">"The Guildmasters"</p>
+                    <p class="text-white text-xs mt-2 opacity-90">Nieuwmarkt • Trade & Commerce</p>
+                    <span class="inline-block mt-3 px-4 py-1 bg-white/20 rounded-full text-sm font-semibold">View Full
+                        Route →</span>
+                </a>
+                <a href="team-charlie.html"
+                    class="block bg-gradient-to-br from-green-600 to-green-700 text-white p-6 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all text-center">
+                    <span class="text-3xl mb-2 block">💎</span>
+                    <h3 class="text-xl font-bold mb-1">Team Charlie</h3>
+                    <p class="text-green-200 text-sm">"The Merchants"</p>
+                    <p class="text-white text-xs mt-2 opacity-90">Canal Sector • Hidden Wealth</p>
+                    <span class="inline-block mt-3 px-4 py-1 bg-white/20 rounded-full text-sm font-semibold">View Full
+                        Route →</span>
+                </a>
+            </div>
+
+            <div class="mt-8 bg-blue-50 p-6 rounded-xl border border-blue-100">
+                <h4 class="font-bold text-blue-900 mb-2">📍 Navigation Rules</h4>
+                <ul class="list-disc list-inside text-blue-800 text-sm space-y-1">
+                    <li>Do not deviate from the assigned order. This prevents overcrowding.</li>
+                    <li>Walking between venues is "Game Time" for Transit Challenges.</li>
+                    <li>If a venue is unexpectedly full, wait 5 mins or move to the nearest "Brown Cafe" for a quick
+                        shot, then return.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- VIEW: PAYLOAD PROTOCOL -->
+        <div id="view-payload" class="hidden fade-in space-y-6">
+            <div class="bg-gradient-to-r from-stone-800 to-stone-900 text-white p-8 rounded-xl shadow-lg">
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="text-5xl">🏐</span>
+                    <div>
+                        <h2 class="text-2xl font-bold">The Payload Protocol</h2>
+                        <p class="text-stone-400">Protect the ball. Protect your honor.</p>
+                    </div>
+                </div>
+                <p class="text-stone-300 mb-6">
+                    To thematically link the pub crawl to the team's dodgeball identity, each squad is issued a <strong
+                        class="text-white">Payload</strong>—a foam dodgeball (or distinctively marked object).
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <div class="text-3xl mb-3">👐</div>
+                    <h3 class="font-bold text-stone-800 mb-2">Rule 1: Possession</h3>
+                    <p class="text-stone-600 text-sm">The Payload must be in the <strong>physical possession</strong> of
+                        a team member at all times. No leaving it behind!</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <div class="text-3xl mb-3">🚫</div>
+                    <h3 class="font-bold text-stone-800 mb-2">Rule 2: No Grounding</h3>
+                    <p class="text-stone-600 text-sm">The Payload <strong>cannot touch the ground</strong> or a table
+                        surface. It must be held, balanced, or passed between members.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <div class="text-3xl mb-3">⚠️</div>
+                    <h3 class="font-bold text-stone-800 mb-2">Rule 3: Fouls</h3>
+                    <p class="text-stone-600 text-sm">If the Payload is dropped or set down, the team incurs a
+                        <strong>"Foul"</strong> and must perform a penalty.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-amber-50 p-6 rounded-xl border border-amber-200">
+                <h3 class="font-bold text-amber-900 mb-2">⏱️ Penalty: "Bottoms Up"</h3>
+                <p class="text-amber-800 text-sm">
+                    A Foul requires the <strong>whole team to down whichever drink they have right now</strong> in that
+                    moment, or the next drink they are going to buy!
+                </p>
+            </div>
+        </div>
+
+        <!-- VIEW: SABOTAGE MECHANICS -->
+        <div id="view-sabotage" class="hidden fade-in space-y-6">
+            <div class="bg-gradient-to-r from-purple-900 to-purple-800 text-white p-8 rounded-xl shadow-lg">
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="text-5xl">💣</span>
+                    <div>
+                        <h2 class="text-2xl font-bold">Sabotage Mechanics</h2>
+                        <p class="text-purple-300">The art of strategic interference.</p>
+                    </div>
+                </div>
+                <p class="text-purple-200 mb-4">
+                    At <strong class="text-white">21:30</strong>, the "Sabotage Window" opens. Each team has already
+                    been assigned a unique Sabotage Card. Deploy it via the group WhatsApp chat!
+                </p>
+                <div class="bg-purple-950/50 rounded-lg p-4 mt-4">
+                    <p class="text-purple-200 text-sm mb-2"><strong class="text-red-400">⚠️ If the targeted team fails
+                            to complete the challenge:</strong> They lose <strong class="text-white">20 VP</strong></p>
+                    <p class="text-purple-200 text-sm"><strong class="text-green-400">✅ If the targeted team
+                            successfully completes the challenge:</strong> They earn <strong class="text-white">10
+                            VP</strong></p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-2 border-red-200">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="px-2 py-1 bg-red-100 text-red-700 text-xs font-bold rounded">ALPHA</span>
+                        <span class="text-2xl">🎬</span>
+                    </div>
+                    <h3 class="font-bold text-stone-800 mb-2">"The Slow-Mo Replay"</h3>
+                    <p class="text-stone-600 text-sm">Target team must film a <strong>15-second video</strong> moving in
+                        dramatic slow motion through a busy area. Cannot advance until uploaded.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-2 border-blue-200">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded">BRAVO</span>
+                        <span class="text-2xl">🤕</span>
+                    </div>
+                    <h3 class="font-bold text-stone-800 mb-2">"The Injury Reserve"</h3>
+                    <p class="text-stone-600 text-sm">Target team must choose one "injured" member who must be
+                        <strong>physically supported</strong> (carried/linked arms) for 10 minutes.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-2 border-green-200">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded">CHARLIE</span>
+                        <span class="text-2xl">🔄</span>
+                    </div>
+                    <h3 class="font-bold text-stone-800 mb-2">"The Rosters Switch"</h3>
+                    <p class="text-stone-600 text-sm">Target team must find a stranger, put <strong>team gear on
+                            them</strong>, and photo them holding the Payload.</p>
+                </div>
+            </div>
+
+            <div class="bg-stone-100 p-6 rounded-xl border border-stone-200">
+                <h4 class="font-bold text-stone-800 mb-2">📋 Sabotage Rules</h4>
+                <ul class="text-stone-600 text-sm space-y-1 list-disc list-inside">
+                    <li>Each team can only use their sabotage <strong>once</strong> during the event</li>
+                    <li>Sabotages must be deployed via the official WhatsApp group</li>
+                    <li>Target team must complete the challenge before continuing their route</li>
+                    <li>Photo/video proof required for verification</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- VIEW: SNIPER PHOTO CHALLENGES -->
+        <div id="view-sniper" class="hidden fade-in space-y-6">
+            <div class="bg-gradient-to-r from-amber-600 to-orange-600 text-white p-8 rounded-xl shadow-lg">
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="text-5xl">📸</span>
+                    <div>
+                        <h2 class="text-2xl font-bold">Sniper Photo Challenges</h2>
+                        <p class="text-amber-200">Capture the moment. Score the points.</p>
+                    </div>
+                </div>
+                <p class="text-amber-100">
+                    Each completed Sniper challenge is worth <strong class="text-white">15 VP</strong>. Creativity is
+                    judged by the Game Master!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div
+                    class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-bold text-stone-800">🎨 The "Rembrandt"</h3>
+                        <span class="px-2 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded">15 VP</span>
+                    </div>
+                    <p class="text-stone-600 text-sm">Recreate the pose of the surgeons in <em>The Anatomy Lesson</em>
+                        (painted at De Waag) using a park bench or table. Dramatic expressions encouraged!</p>
+                </div>
+                <div
+                    class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-bold text-stone-800">⚡ The "Dodge"</h3>
+                        <span class="px-2 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded">15 VP</span>
+                    </div>
+                    <p class="text-stone-600 text-sm">Photo of the team "dodging" a stationary object (lamppost, statue,
+                        bollard) as if it were a high-speed projectile. Show those reflexes!</p>
+                </div>
+                <div
+                    class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-bold text-stone-800">🛋️ The "Gezelligheid"</h3>
+                        <span class="px-2 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded">15 VP</span>
+                    </div>
+                    <p class="text-stone-600 text-sm">Capture the "coziest" possible moment with a local (with their
+                        permission). Show genuine warmth and connection!</p>
+                </div>
+                <div
+                    class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-bold text-stone-800">🚦 The "Red Light" (Safe)</h3>
+                        <span class="px-2 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded">15 VP</span>
+                    </div>
+                    <p class="text-stone-600 text-sm">Photo of a red light that is <strong>NOT</strong> a window.
+                        Traffic signals, bicycle lights, neon beer signs all count. Tests your awareness of photography
+                        rules!</p>
+                </div>
+                <div
+                    class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 hover:shadow-md transition-shadow md:col-span-2">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-bold text-stone-800">🍺 The "Kopstootje"</h3>
+                        <span class="px-2 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded">15 VP</span>
+                    </div>
+                    <p class="text-stone-600 text-sm">
+                        <strong>VIDEO required!</strong> A team member performs the traditional Dutch "Kopstootje"
+                        (Little Headbutt): Order a Jenever filled to the convex meniscus. You cannot lift it without
+                        spilling—so you must <strong>bow down and slurp the top off hands-free</strong>. Pure
+                        vulnerability. Pure tradition.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-red-50 p-6 rounded-xl border border-red-200">
+                <h4 class="font-bold text-red-900 mb-2">⚠️ Photo Rules in Red Light District</h4>
+                <p class="text-red-800 text-sm">
+                    Taking photos of sex workers in windows is <strong>strictly prohibited</strong>. Violations can
+                    result in phone confiscation or confrontation. All Sniper challenges are designed to avoid
+                    this—focus only on permitted subjects.
+                </p>
+            </div>
+        </div>
+
+        <!-- VIEW: GAME MANUAL -->
+        <div id="view-challenges" class="hidden fade-in space-y-6">
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Point Distribution Chart -->
+                <div class="lg:col-span-1 bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">Scoring Matrix</h3>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="scoreChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-stone-500 mt-2">Total Points Available: 1000</p>
+                </div>
+
+                <!-- Challenges List -->
+                <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">The Challenge Menu</h3>
+                    <div class="space-y-3" id="challenge-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Impossible Question -->
+            <div class="bg-stone-800 text-stone-100 p-8 rounded-xl shadow-md border-l-8 border-[#BC4749]">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-2">💀 The "Impossible" Question</h3>
+                        <p class="text-stone-400 mb-4">Worth 200 Points. Requires research and calculation.</p>
+                        <p class="italic text-lg text-white">"Amsterdam's canal belt has three main canals. If you add
+                            together the number of bridges in central Amsterdam, divide by the number of UNESCO World
+                            Heritage sites in the city, and then multiply by the number of letters in the Dutch word for
+                            'tolerance'... what is the result?"</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 md:pl-6">
+                        <span class="text-4xl">?</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW: REUNION -->
+        <div id="view-reunion" class="hidden fade-in">
+            <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden border border-stone-200">
+                <div class="bg-[#BC4749] px-6 py-4">
+                    <h2 class="text-2xl font-bold text-white">Target: Molly Malone's</h2>
+                    <p class="text-stone-100 opacity-90">Oudezijds Kolk 9, 1012 AL Amsterdam</p>
+                </div>
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <span
+                                class="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-bold mb-2">CAPACITY:
+                                HIGH</span>
+                            <h3 class="text-xl font-bold text-stone-800">Why here?</h3>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-3xl font-bold text-stone-800">~23:00</span>
+                            <span class="text-xs text-stone-500 uppercase">Target Arrival</span>
+                        </div>
+                    </div>
+
+                    <p class="text-stone-600 mb-6">
+                        Located just off the Zeedijk and a 3-minute walk from Centraal Station, Molly's offers large
+                        wooden tables perfect for a group of 12. Unlike many tiny Dutch bars, they can accommodate a
+                        reunion without reservation. It serves as the neutral ground for the final score tally.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 border-t border-stone-100 pt-6">
+                        <div class="text-center">
+                            <div class="text-2xl mb-1">🍺</div>
+                            <p class="text-sm font-medium text-stone-800">Wide Selection</p>
+                            <p class="text-xs text-stone-500">Guinness & Local Brews</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl mb-1">🚉</div>
+                            <p class="text-sm font-medium text-stone-800">Logistics</p>
+                            <p class="text-xs text-stone-500">Close to Trains/Trams</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-sm">
+            <p>&copy; 2026 Dodgeball Club Events Committee.</p>
+            <p class="mt-2 text-xs">Drink responsibly. Respect the neighborhood. Don't fall in the canals.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA STORE ---
+
+        const routeData = {
+            'A': [
+                {
+                    time: "20:15",
+                    name: "Café The Globe",
+                    address: "Nieuwezijds Voorburgwal / Zeedijk Area",
+                    note: "Largest sports bar in the center. Easy start, plenty of space to strategize.",
+                    type: "Start"
+                },
+                {
+                    time: "21:15",
+                    name: "Café Fonteyn",
+                    address: "Nieuwmarkt 13-15",
+                    note: "Classic 'Brown Cafe' vibe but with a massive terrace. Great for people watching.",
+                    type: "Midpoint"
+                },
+                {
+                    time: "~23:00",
+                    name: "Molly Malone's",
+                    address: "Oudezijds Kolk 9",
+                    note: "The Reunion Point. Large tables, near station.",
+                    type: "End"
+                }
+            ],
+            'B': [
+                {
+                    time: "20:15",
+                    name: "Batavia 1920",
+                    address: "Prins Hendrikkade 85",
+                    note: "Directly opposite the station. Art deco style, spacious booths.",
+                    type: "Start"
+                },
+                {
+                    time: "21:15",
+                    name: "Stone's Café",
+                    address: "Warmoesstraat 91",
+                    note: "Dive bar energy in the heart of the action. A bit grittier, very memorable.",
+                    type: "Midpoint"
+                },
+                {
+                    time: "~23:00",
+                    name: "Molly Malone's",
+                    address: "Oudezijds Kolk 9",
+                    note: "The Reunion Point. Large tables, near station.",
+                    type: "End"
+                }
+            ],
+            'C': [
+                {
+                    time: "20:15",
+                    name: "Belushi's",
+                    address: "Warmoesstraat 129",
+                    note: "Backpacker hub. Cheap drinks, loud music, huge space. High energy start.",
+                    type: "Start"
+                },
+                {
+                    time: "21:15",
+                    name: "Hill Street Blues",
+                    address: "Warmoesstraat 52A",
+                    note: "Famous for graffiti-covered interior. Balcony overlooks the water.",
+                    type: "Midpoint"
+                },
+                {
+                    time: "~23:00",
+                    name: "Molly Malone's",
+                    address: "Oudezijds Kolk 9",
+                    note: "The Reunion Point. Large tables, near station.",
+                    type: "End"
+                }
+            ]
+        };
+
+        const challenges = [
+            { id: 1, name: "The Stranger Pyramid", points: 150, type: "Social", desc: "Build a human pyramid with at least 1 stranger involved." },
+            { id: 2, name: "Coaster Castle", points: 75, type: "Skill", desc: "Build a house of cards using at least 10 beer coasters." },
+            { id: 3, name: "Dutch Order", points: 50, type: "Skill", desc: "One team member (non-Dutch speaker) must order a round entirely in Dutch (video proof)." },
+            { id: 4, name: "Date Hunter", points: 100, type: "Transit", desc: "Find a building facade date older than 1650. Photo required." },
+            { id: 5, name: "Reflective Glory", points: 75, type: "Transit", desc: "Take a team selfie in a canal reflection." },
+            { id: 6, name: "The Silent Toast", points: 50, type: "Social", desc: "Get the whole bar to cheer for your team (without being annoying)." },
+            { id: 7, name: "The Narrow Escape", points: 100, type: "Observation", desc: "Squeeze through the narrowest alley in the Zeedijk area (e.g. Trompettersteeg). Photo required." },
+            { id: 8, name: "Team Mascot", points: 50, type: "Mandatory", desc: "MANDATORY: Find an inanimate object to carry as your mascot for the entire night." }
+        ];
+
+        // --- CHART INITIALIZATION ---
+
+        function initCharts() {
+            // Schedule Gantt-ish Chart
+            const ctxSchedule = document.getElementById('scheduleChart').getContext('2d');
+            new Chart(ctxSchedule, {
+                type: 'bar',
+                data: {
+                    labels: ['Team A', 'Team B', 'Team C'],
+                    datasets: [
+                        {
+                            label: 'Leg 1 (Bar 1)',
+                            data: [60, 60, 60], // Minutes
+                            backgroundColor: '#E6B8A2', // Light Rust
+                            barThickness: 40
+                        },
+                        {
+                            label: 'Transit & Challenges',
+                            data: [15, 15, 15],
+                            backgroundColor: '#6A994E', // Sage
+                            barThickness: 40
+                        },
+                        {
+                            label: 'Leg 2 (Bar 2)',
+                            data: [60, 60, 60],
+                            backgroundColor: '#BC4749', // Rust
+                            barThickness: 40
+                        },
+                        {
+                            label: 'Reunion',
+                            data: [60, 60, 60],
+                            backgroundColor: '#2D2D2D', // Dark
+                            barThickness: 40
+                        }
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return context.dataset.label;
+                                }
+                            }
+                        },
+                        legend: { position: 'bottom' },
+                        title: { display: true, text: 'Time Allocation (Minutes)' }
+                    },
+                    scales: {
+                        x: { stacked: true, display: false },
+                        y: { stacked: true, grid: { display: false } }
+                    }
+                }
+            });
+
+            // Scoring Donut Chart
+            const ctxScore = document.getElementById('scoreChart').getContext('2d');
+            new Chart(ctxScore, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Social Tasks', 'Skill/Puzzle', 'Transit/Active', 'Impossible Q'],
+                    datasets: [{
+                        data: [250, 125, 175, 200], // Approximate points
+                        backgroundColor: ['#E6B8A2', '#CB997E', '#A5A58D', '#BC4749']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'right' } }
+                }
+            });
+        }
+
+        // --- APP LOGIC ---
+
+        function switchTab(tabName) {
+            // Hide all views
+            ['schedule', 'routes', 'payload', 'sabotage', 'sniper', 'challenges', 'reunion'].forEach(t => {
+                document.getElementById(`view-${t}`).classList.add('hidden');
+                document.getElementById(`tab-${t}`).classList.remove('active-tab');
+                document.getElementById(`tab-${t}`).classList.remove('text-[#BC4749]');
+                document.getElementById(`tab-${t}`).classList.add('text-stone-600');
+            });
+
+            // Show selected
+            document.getElementById(`view-${tabName}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-${tabName}`);
+            activeBtn.classList.add('active-tab');
+            activeBtn.classList.remove('text-stone-600');
+
+            // Trigger chart resize if needed
+            if (tabName === 'schedule') {
+                // minor timeout to ensure div is visible before chart renders
+                setTimeout(() => window.dispatchEvent(new Event('resize')), 100);
+            }
+        }
+
+        function updateRoute(teamId) {
+            // Update Buttons only - route display was removed
+            ['A', 'B', 'C'].forEach(id => {
+                const btn = document.getElementById(`btn-team-${id.toLowerCase()}`);
+                if (id === teamId) {
+                    btn.classList.remove('text-stone-500', 'bg-transparent');
+                    btn.classList.add('bg-white', 'text-[#BC4749]', 'shadow-sm');
+                } else {
+                    btn.classList.add('text-stone-500', 'bg-transparent');
+                    btn.classList.remove('bg-white', 'text-[#BC4749]', 'shadow-sm');
+                }
+            });
+        }
+
+        function renderChallenges() {
+            const list = document.getElementById('challenge-list');
+            challenges.forEach(c => {
+                const item = document.createElement('div');
+                item.className = "flex items-center justify-between p-4 bg-stone-50 rounded-lg border border-stone-200 hover:bg-stone-100 transition-colors";
+                item.innerHTML = `
+                    <div class="flex-grow">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="font-bold text-stone-800">${c.name}</span>
+                            <span class="px-2 py-0.5 bg-stone-200 text-stone-600 text-[10px] uppercase rounded font-bold">${c.type}</span>
+                        </div>
+                        <p class="text-sm text-stone-600">${c.desc}</p>
+                    </div>
+                    <div class="ml-4 font-bold text-[#BC4749] text-lg whitespace-nowrap">${c.points} pts</div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        // --- INIT ---
+        window.addEventListener('load', () => {
+            initCharts();
+            updateRoute('A'); // Default view
+            renderChallenges();
+        });
+
+    </script>
+</body>
+
+</html>

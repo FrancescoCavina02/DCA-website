@@ -1,0 +1,450 @@
+/* Amsterdam Pub Crawl - Shared Styles */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600;700&display=swap');
+
+:root {
+    --color-bg: #F5F5F0;
+    --color-text: #2D2D2D;
+    --color-rust: #BC4749;
+    --color-rust-light: #E6B8A2;
+    --color-sage: #6A994E;
+    --color-stone-50: #fafaf9;
+    --color-stone-100: #f5f5f4;
+    --color-stone-200: #e7e5e4;
+    --color-stone-300: #d6d3d1;
+    --color-stone-400: #a8a29e;
+    --color-stone-500: #78716c;
+    --color-stone-600: #57534e;
+    --color-stone-800: #292524;
+    --color-stone-900: #1c1917;
+}
+
+body {
+    font-family: 'Noto Sans', sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #E5E5E5; }
+::-webkit-scrollbar-thumb { background: #A0A096; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #7D7D75; }
+
+/* Animations */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header */
+.site-header {
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-bottom: 1px solid var(--color-stone-200);
+}
+
+.header-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.site-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-stone-800);
+    letter-spacing: -0.025em;
+    margin: 0;
+}
+
+.site-subtitle {
+    font-size: 0.75rem;
+    color: var(--color-stone-500);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.25rem;
+}
+
+.event-badge {
+    background: var(--color-stone-100);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    border: 1px solid var(--color-stone-200);
+}
+
+.event-label {
+    display: block;
+    font-size: 0.625rem;
+    color: var(--color-stone-500);
+    font-weight: 600;
+}
+
+.event-time {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-rust);
+}
+
+/* Main Container */
+.main-content {
+    flex-grow: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Cards */
+.card {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid var(--color-stone-200);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-header {
+    margin-bottom: 1rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-stone-800);
+    margin: 0 0 0.25rem 0;
+}
+
+.card-subtitle {
+    font-size: 0.875rem;
+    color: var(--color-stone-500);
+}
+
+/* Checkpoint Cards */
+.checkpoint {
+    background: var(--color-stone-50);
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-stone-200);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.checkpoint:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.checkpoint-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: var(--color-rust);
+    color: white;
+    font-weight: 700;
+    border-radius: 50%;
+    margin-right: 0.75rem;
+}
+
+.checkpoint-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-stone-800);
+    display: inline;
+}
+
+.checkpoint-type {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background: var(--color-stone-200);
+    color: var(--color-stone-600);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    margin-left: 0.5rem;
+}
+
+.checkpoint-address {
+    font-size: 0.75rem;
+    color: var(--color-stone-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0.5rem 0 1rem 0;
+}
+
+.checkpoint-history {
+    background: white;
+    border-left: 4px solid var(--color-sage);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.checkpoint-history-label {
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-sage);
+    margin-bottom: 0.5rem;
+}
+
+.checkpoint-task {
+    background: var(--color-rust-light);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+}
+
+.checkpoint-task-label {
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-rust);
+    margin-bottom: 0.5rem;
+}
+
+.checkpoint-riddle {
+    background: var(--color-stone-800);
+    color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+/* Warning Box */
+.warning-box {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    border-left: 4px solid #EF4444;
+    padding: 1rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    margin-top: 1rem;
+}
+
+.warning-box-title {
+    font-weight: 700;
+    color: #B91C1C;
+    margin-bottom: 0.5rem;
+}
+
+.warning-box p {
+    color: #991B1B;
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+/* Info Box */
+.info-box {
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.info-box-title {
+    font-weight: 700;
+    color: #1E40AF;
+    margin-bottom: 0.5rem;
+}
+
+.info-box ul {
+    color: #1E3A8A;
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.info-box li {
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+}
+
+/* Sabotage Card */
+.sabotage-card {
+    background: linear-gradient(135deg, #1c1917 0%, #292524 100%);
+    color: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    border-left: 4px solid var(--color-rust);
+}
+
+.sabotage-title {
+    color: var(--color-rust);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+}
+
+.sabotage-subtitle {
+    color: var(--color-stone-400);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Team Badge */
+.team-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 0.875rem;
+}
+
+.team-badge-alpha {
+    background: #FEE2E2;
+    color: #B91C1C;
+}
+
+.team-badge-bravo {
+    background: #DBEAFE;
+    color: #1E40AF;
+}
+
+.team-badge-charlie {
+    background: #D1FAE5;
+    color: #047857;
+}
+
+/* Footer */
+.site-footer {
+    background: var(--color-stone-900);
+    color: var(--color-stone-400);
+    padding: 1.5rem;
+    margin-top: auto;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+.footer-note {
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--color-rust);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #a33d3f;
+}
+
+.btn-secondary {
+    background: var(--color-stone-200);
+    color: var(--color-stone-800);
+}
+
+.btn-secondary:hover {
+    background: var(--color-stone-300);
+}
+
+.btn-team {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    border-radius: 0.75rem;
+}
+
+/* Grid Layouts */
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Back Link */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-stone-600);
+    text-decoration: none;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: var(--color-rust);
+}
+
+/* Timeline/Route Display */
+.route-timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.route-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.9rem;
+    top: 2rem;
+    bottom: 2rem;
+    width: 2px;
+    background: var(--color-stone-300);
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.text-rust { color: var(--color-rust); }
+.text-sage { color: var(--color-sage); }
+.text-stone-500 { color: var(--color-stone-500); }
+.font-bold { font-weight: 700; }
+.mt-4 { margin-top: 1rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-8 { margin-bottom: 2rem; }
+.hidden { display: none; }
