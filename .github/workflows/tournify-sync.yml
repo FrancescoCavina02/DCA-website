@@ -1,0 +1,57 @@
+name: Tournify Results Sync
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 08:00 UTC on the day after each DBN match day and one week later.
+    # The script checks exact year-specific dates in data/dbn_competition_days.json;
+    # these calendar cron entries are only coarse triggers.
+    - cron: "0 8 12,19 10 *"
+    - cron: "0 8 15,22 11 *"
+    - cron: "0 8 10,17,24,31 1 *"
+    - cron: "0 8 8,15 2 *"
+    - cron: "0 8 8,15,28 3 *"
+    - cron: "0 8 4,19,26 4 *"
+    - cron: "0 8 9,16,31 5 *"
+    - cron: "0 8 7 6 *"
+
+jobs:
+  sync-results:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    timeout-minutes: 10
+    steps:
+      - name: Check out main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Stage Tournify fixtures (manual run)
+        if: github.event_name == 'workflow_dispatch'
+        run: python scripts/sync_tournify.py --site-file competitions.html
+
+      - name: Stage Tournify fixtures (match-day check)
+        if: github.event_name == 'schedule'
+        run: python scripts/sync_tournify.py --site-file competitions.html --scheduled-only
+
+      - name: Open or update results pull request
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ github.token }}
+          base: main
+          branch: automation/tournify-results
+          add-paths: competitions.html
+          commit-message: "Sync DCA competition results from Tournify"
+          title: "Sync DCA competition results from Tournify"
+          body: |
+            This pull request stages DCA fixtures and scores from the public Tournify league feed.
+            Only the next match day and posted results are shown in the competition timeline.
+            Review the results before merging.
