@@ -1,0 +1,97 @@
+{
+  "timezone": "Europe/Amsterdam",
+  "season": "2026/2027",
+  "check_offsets_days": [1, 8],
+  "events": [
+    {
+      "date": "2026-10-11",
+      "day": 1,
+      "division": "mixed",
+      "timelines": ["mixed1", "mixed2"],
+      "time": "11:00–17:00",
+      "location": "St. Nicolaaslyceum, Beethovenplein 2, 1077 WM Amsterdam",
+      "title": "DBN Mixed · day 1"
+    },
+    {
+      "date": "2026-11-14",
+      "day": 1,
+      "division": "men_women",
+      "timelines": ["man1", "man2", "women"],
+      "time": "10:00–17:00",
+      "location": "X TU Delft, Mekelweg 8–10, 2628 CD Delft",
+      "title": "DBN Men & Women · day 1"
+    },
+    {
+      "date": "2027-01-09",
+      "day": 2,
+      "division": "mixed",
+      "timelines": ["mixed1", "mixed2"],
+      "time": "11:00–17:00",
+      "location": "Venue to be announced",
+      "title": "DBN Mixed · day 2"
+    },
+    {
+      "date": "2027-01-23",
+      "day": 2,
+      "division": "men_women",
+      "timelines": ["man1", "man2", "women"],
+      "time": "10:00–17:00",
+      "location": "Venue to be announced",
+      "title": "DBN Men & Women · day 2"
+    },
+    {
+      "date": "2027-02-07",
+      "day": 3,
+      "division": "mixed",
+      "timelines": ["mixed1", "mixed2"],
+      "time": "11:00–17:00",
+      "location": "Venue to be announced",
+      "title": "DBN Mixed · day 3"
+    },
+    {
+      "date": "2027-03-07",
+      "day": 3,
+      "division": "men_women",
+      "timelines": ["man1", "man2", "women"],
+      "time": "10:00–17:00",
+      "location": "Venue to be announced",
+      "title": "DBN Men & Women · day 3"
+    },
+    {
+      "date": "2027-03-27",
+      "day": 4,
+      "division": "mixed",
+      "timelines": ["mixed1", "mixed2"],
+      "time": "11:00–17:00",
+      "location": "Venue to be announced",
+      "title": "DBN Mixed · day 4"
+    },
+    {
+      "date": "2027-04-18",
+      "day": 4,
+      "division": "men_women",
+      "timelines": ["man1", "man2", "women"],
+      "time": "10:00–17:00",
+      "location": "Venue to be announced",
+      "title": "DBN Men & Women · day 4"
+    },
+    {
+      "date": "2027-05-08",
+      "day": 5,
+      "division": "mixed",
+      "timelines": ["mixed1", "mixed2"],
+      "time": "11:00–17:00",
+      "location": "Venue to be announced",
+      "title": "DBN Mixed · day 5"
+    },
+    {
+      "date": "2027-05-30",
+      "day": 5,
+      "division": "men_women",
+      "timelines": ["man1", "man2", "women"],
+      "time": "10:00–17:00",
+      "location": "Venue to be announced",
+      "title": "DBN Men & Women · day 5"
+    }
+  ]
+}
