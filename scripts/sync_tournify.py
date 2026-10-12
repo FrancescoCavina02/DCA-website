@@ -708,7 +708,10 @@ def replace_managed_sections(
             elif fixture["date"] == next_date:
                 omitted_unscheduled += 1
             elif fixture["date"] == latest_pending_past:
-                visible_fixtures.append(fixture)
+                if fixture["time"]:
+                    visible_fixtures.append(fixture)
+                else:
+                    omitted_unscheduled += 1
             else:
                 omitted_later += 1
 
@@ -768,7 +771,7 @@ def summarize(fixtures: list[dict[str, Any]], grouped: dict[tuple[str, str | Non
         f"Existing matching site rows preserved: {report.get('duplicates', 0)}",
         f"Manual-result conflicts held for review: {len(report.get('conflicts', []))}",
         f"Undated upcoming fixtures kept off the page: {report.get('omitted_undated_upcoming', 0)}",
-        f"Next-day fixtures without a published start time kept off the page: {report.get('omitted_unscheduled_next_day', 0)}",
+        f"Fixtures without a published start time kept off the page: {report.get('omitted_unscheduled_next_day', 0)}",
         f"Later-day upcoming fixtures kept off the page: {report.get('omitted_later_upcoming', 0)}",
     ]
     if report.get("placeholders"):
