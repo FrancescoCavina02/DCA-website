@@ -14,6 +14,7 @@ import html
 import json
 import os
 import re
+import stat
 import sys
 import tempfile
 import unicodedata
@@ -40,6 +41,7 @@ TEAM_NAME_TO_TIMELINE = {
     "damdelftdames": ("women", "DAM Delft Dames"),
 }
 TIMELINES = ("man1", "man2", "women", "mixed1", "mixed2")
+STANDINGS_TIMELINES = ("mixed1", "mixed2")
 SCHEDULE_FILE = Path(__file__).resolve().parents[1] / "data" / "dbn_competition_days.json"
 
 # Short labels already used on the DCA competition page. Unknown opponents keep
@@ -386,6 +388,288 @@ def extract_fixtures(
         )
     )
     return fixtures, mapped_timelines, sorted(set(unmapped_dca))
+
+
+def _ranking_number(rules: dict[str, Any], key: str, default: int) -> int:
+    value = rules.get(key)
+    if value is None or value is False or value == "":
+        return default
+    parsed = as_int(value)
+    return parsed if parsed is not None else default
+
+
+def _points_for_match(
+    rules: dict[str, Any], score_for: int, score_against: int, winner: str | None = None,
+    slot1: str | None = None, slot2: str | None = None,
+) -> tuple[int, int]:
+    advanced = bool(rules.get("advancedGroupRanking"))
+    if rules.get("goalsAsPoints") and advanced:
+        return score_for, score_against
+    if score_for > score_against:
+        margin = _ranking_number(rules, "pointsBigWinMargin", 2)
+        winner = _ranking_number(rules, "pointsWin", 3)
+        if advanced and score_for - score_against >= margin:
+            winner = _ranking_number(rules, "pointsBigWin", 3)
+        return winner, _ranking_number(rules, "pointsLoss", 0)
+    if score_for < score_against:
+        margin = _ranking_number(rules, "pointsBigWinMargin", 2)
+        winner = _ranking_number(rules, "pointsWin", 3)
+        if advanced and score_against - score_for >= margin:
+            winner = _ranking_number(rules, "pointsBigWin", 3)
+        return _ranking_number(rules, "pointsLoss", 0), winner
+    if advanced and rules.get("noDraw") and winner in {slot1, slot2}:
+        win_points = _ranking_number(rules, "pointsWinOnPenalties", 3)
+        loss_points = _ranking_number(rules, "pointsLossOnPenalties", 0)
+        return (win_points, loss_points) if winner == slot1 else (loss_points, win_points)
+    if advanced and score_for == 0:
+        draw_points = _ranking_number(rules, "pointsTieNoGoals", 1)
+    else:
+        draw_points = _ranking_number(rules, "pointsTie", 1)
+    return draw_points, draw_points
+
+
+def extract_standings(
+    tournament: dict[str, Any], collections: dict[str, list[dict[str, Any]]]
+) -> dict[str, list[dict[str, Any]]]:
+    """Recreate the active Mixed poule standings from Tournify's public Firestore data."""
+    if not collections.get("teams") or not collections.get("divisions") or not collections.get("matches"):
+        raise RuntimeError("Tournify returned an empty teams, divisions, or matches collection; kept existing standings")
+
+    division_names = {doc["id"]: str(doc.get("name", "")) for doc in collections["divisions"]}
+    mixed_divisions = {
+        normalized_division(name): (timeline, site_name)
+        for name, (timeline, site_name) in DIVISION_TO_TIMELINE.items()
+        if timeline in STANDINGS_TIMELINES
+    }
+    poules: dict[tuple[str, str, str], dict[str, dict[str, Any]]] = {}
+    target_poules: dict[str, set[tuple[str, str, str]]] = {
+        timeline: set() for timeline in STANDINGS_TIMELINES
+    }
+
+    for team in collections["teams"]:
+        division_id = str(team.get("division", ""))
+        division_name = division_names.get(division_id, "")
+        target = mixed_divisions.get(normalized_division(division_name))
+        if not target:
+            continue
+        timeline, site_name = target
+        is_dca = canonical_team_name(str(team.get("name", ""))).startswith("dca")
+        for field, poule_id in team.items():
+            phase_match = re.fullmatch(r"poule(\d+)", field)
+            if not phase_match or not poule_id:
+                continue
+            phase = phase_match.group(1)
+            slot = as_int(team.get(f"numInPoule{phase}"))
+            if slot is None:
+                raise RuntimeError(f"Tournify team {team.get('name', team.get('id'))} has a poule without a position")
+            key = (timeline, phase, str(poule_id))
+            members = poules.setdefault(key, {})
+            if str(slot) in members:
+                raise RuntimeError(f"Tournify returned duplicate team position {slot} in poule {poule_id}")
+            members[str(slot)] = {
+                "id": str(team["id"]),
+                "name": site_name if is_dca else clean_team_name(str(team.get("name", ""))),
+                "is_dca": is_dca,
+                "timeline": timeline,
+                "division_id": division_id,
+                "phase": phase,
+                "slot": str(slot),
+            }
+            if is_dca:
+                target_poules[timeline].add(key)
+
+    result: dict[str, list[dict[str, Any]]] = {}
+    scoring_types = tournament.get("scoringTypesPerDivisionPerPhase") or {}
+    alternate_rules = tournament.get("scoringTypes") or {}
+    for timeline in STANDINGS_TIMELINES:
+        groups = target_poules[timeline]
+        if len(groups) != 1:
+            raise RuntimeError(
+                f"Expected one active Mixed poule for {timeline}; found {len(groups)}. Kept existing standings"
+            )
+        key = next(iter(groups))
+        _, phase, poule_id = key
+        members = poules[key]
+        dca_members = [member for member in members.values() if member["is_dca"]]
+        if len(members) < 2 or len(dca_members) != 1:
+            raise RuntimeError(f"Tournify returned incomplete teams for {timeline}; kept existing standings")
+
+        division_id = dca_members[0]["division_id"]
+        type_name = str((scoring_types.get(division_id) or {}).get(phase, "default"))
+        rules = tournament if type_name == "default" else alternate_rules.get(type_name)
+        if not isinstance(rules, dict):
+            raise RuntimeError(f"Tournify has unsupported scoring rules for {timeline}; kept existing standings")
+        if rules.get("useSets") in (True, 1, "1"):
+            raise RuntimeError(f"Set-based standings are not supported for {timeline}; kept existing standings")
+        members_by_slot = members
+        stats = {
+            slot: {
+                **member,
+                "played": 0,
+                "won": 0,
+                "lost": 0,
+                "points": 0,
+                "score_for": 0,
+                "score_against": 0,
+                "point_difference": 0,
+            }
+            for slot, member in members_by_slot.items()
+        }
+        scored_matches: list[dict[str, Any]] = []
+        for match in collections["matches"]:
+            if str(match.get("poule", "")) != poule_id:
+                continue
+            slot1, slot2 = str(match.get("team1", "")), str(match.get("team2", ""))
+            if slot1 not in stats or slot2 not in stats:
+                raise RuntimeError(f"Tournify returned a match with unknown team positions in poule {poule_id}")
+            score1, score2 = as_int(match.get("score1")), as_int(match.get("score2"))
+            if score1 is None or score2 is None:
+                continue
+            winner = str(match.get("winner")) if match.get("winner") is not None else None
+            points1, points2 = _points_for_match(rules, score1, score2, winner, slot1, slot2)
+            goal1, goal2 = score1, score2
+            if (
+                score1 == score2
+                and rules.get("advancedGroupRanking")
+                and rules.get("noDraw")
+                and rules.get("enterPenaltyScores")
+                and rules.get("includePenaltiesInGoals")
+                and not rules.get("useSets")
+            ):
+                penalty1 = as_int(match.get("penalties1")) or 0
+                penalty2 = as_int(match.get("penalties2")) or 0
+                goal1 += penalty1
+                goal2 += penalty2
+            for slot, score_for, score_against, points in (
+                (slot1, goal1, goal2, points1),
+                (slot2, goal2, goal1, points2),
+            ):
+                row = stats[slot]
+                row["played"] += 1
+                row["points"] += points
+                row["score_for"] += score_for
+                row["score_against"] += score_against
+                row["point_difference"] += score_for - score_against
+            if score1 > score2:
+                stats[slot1]["won"] += 1
+                stats[slot2]["lost"] += 1
+            elif score1 < score2:
+                stats[slot2]["won"] += 1
+                stats[slot1]["lost"] += 1
+            else:
+                if rules.get("advancedGroupRanking") and rules.get("noDraw"):
+                    if winner == slot1:
+                        stats[slot1]["won"] += 1
+                        stats[slot2]["lost"] += 1
+                    elif winner == slot2:
+                        stats[slot2]["won"] += 1
+                        stats[slot1]["lost"] += 1
+            scored_matches.append({
+                "slot1": slot1,
+                "slot2": slot2,
+                "score1": goal1,
+                "score2": goal2,
+                "points1": points1,
+                "points2": points2,
+            })
+
+        if not scored_matches or stats[dca_members[0]["slot"]]["played"] == 0:
+            raise RuntimeError(f"Tournify has no completed Mixed results for {timeline}; kept existing standings")
+
+        points_groups: dict[int, list[str]] = defaultdict(list)
+        for slot, row in stats.items():
+            points_groups[row["points"]].append(slot)
+        ordered_slots: list[str] = []
+        for points_total in sorted(points_groups, reverse=True):
+            tied_slots = points_groups[points_total]
+            head_to_head = {
+                slot: {"points": 0, "difference": 0, "for": 0}
+                for slot in tied_slots
+            }
+            tied_set = set(tied_slots)
+            direct_matches = [
+                match for match in scored_matches
+                if match["slot1"] in tied_set and match["slot2"] in tied_set
+            ]
+            for match in direct_matches:
+                first, second = match["slot1"], match["slot2"]
+                # Tournify's recursive head-to-head tiebreak uses points, difference, then points scored.
+                score1, score2 = match["score1"], match["score2"]
+                head_to_head[first]["points"] += match["points1"]
+                head_to_head[second]["points"] += match["points2"]
+                head_to_head[first]["difference"] += score1 - score2
+                head_to_head[second]["difference"] += score2 - score1
+                head_to_head[first]["for"] += score1
+                head_to_head[second]["for"] += score2
+            has_head_to_head = bool(direct_matches)
+            tied_slots.sort(
+                key=lambda slot: (
+                    head_to_head[slot]["points"] if has_head_to_head else 0,
+                    head_to_head[slot]["difference"] if has_head_to_head else 0,
+                    head_to_head[slot]["for"] if has_head_to_head else 0,
+                    stats[slot]["won"],
+                    stats[slot]["point_difference"],
+                    stats[slot]["score_for"],
+                    stats[slot]["name"].casefold(),
+                ),
+                reverse=True,
+            )
+            ordered_slots.extend(tied_slots)
+
+        result[timeline] = []
+        for position, slot in enumerate(ordered_slots, start=1):
+            row = stats[slot]
+            result[timeline].append({**row, "position": position})
+    return result
+
+
+def render_standings_table(timeline: str, rows: list[dict[str, Any]]) -> str:
+    division = "1st Division" if timeline == "mixed1" else "2nd Division"
+    body = []
+    for row in rows:
+        css_class = ' class="dca-team-row"' if row["is_dca"] else ""
+        point_difference = int(row["point_difference"])
+        difference_label = f"+{point_difference}" if point_difference > 0 else str(point_difference)
+        body.append(
+            f"              <tr{css_class}>"
+            f"<th scope=\"row\">{row['position']}</th>"
+            f"<td class=\"standings-team\">{html.escape(row['name'])}</td>"
+            f"<td>{row['played']}</td><td>{row['won']}</td><td>{row['lost']}</td>"
+            f"<td>{row['points']}</td><td>{difference_label}</td></tr>"
+        )
+    table_rows = "\n".join(body)
+    return (
+        f'          <section class="dbn-standings" aria-labelledby="standings-{timeline}-title">\n'
+        f'            <h3 class="dbn-standings-title" id="standings-{timeline}-title">DBN Mixed Standings</h3>\n'
+        f'            <p class="dbn-standings-division">{division}</p>\n'
+        f'            <div class="dbn-standings-scroll" role="region" aria-label="{division} standings table" tabindex="0">\n'
+        f'              <table class="dbn-standings-table">\n'
+        f'                <caption class="visually-hidden">DBN Mixed {division} standings from Tournify</caption>\n'
+        f'                <thead><tr><th scope="col">Position</th><th scope="col" class="standings-team">Team</th>'
+        f'<th scope="col">Played</th><th scope="col">Won</th><th scope="col">Lost</th>'
+        f'<th scope="col">Points</th><th scope="col">PD</th></tr></thead>\n'
+        f'                <tbody>\n{table_rows}\n                </tbody>\n'
+        f'              </table>\n'
+        f'            </div>\n'
+        f'          </section>'
+    )
+
+
+def replace_standings_sections(
+    site_html: str, standings: dict[str, list[dict[str, Any]]]
+) -> str:
+    for timeline in STANDINGS_TIMELINES:
+        start = f"<!-- BEGIN TOURNIFY STANDINGS: {timeline} -->"
+        end = f"<!-- END TOURNIFY STANDINGS: {timeline} -->"
+        if site_html.count(start) != 1 or site_html.count(end) != 1:
+            raise RuntimeError(f"Expected exactly one managed standings marker pair for {timeline}")
+        start_index = site_html.index(start) + len(start)
+        end_index = site_html.index(end, start_index)
+        if end_index < start_index:
+            raise RuntimeError(f"Managed standings markers are out of order for {timeline}")
+        rendered = "\n" + render_standings_table(timeline, standings[timeline]) + "\n          "
+        site_html = site_html[:start_index] + rendered + site_html[end_index:]
+    return site_html
 
 
 class Element:
@@ -783,6 +1067,24 @@ def summarize(fixtures: list[dict[str, Any]], grouped: dict[tuple[str, str | Non
     return lines
 
 
+def atomic_write_text(path: Path, contents: str) -> None:
+    """Replace a text file atomically while retaining its existing mode."""
+    mode = stat.S_IMODE(path.stat().st_mode)
+    temporary_path: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", dir=path.parent, delete=False
+        ) as temporary:
+            temporary.write(contents)
+            temporary.flush()
+            os.fchmod(temporary.fileno(), mode)
+            temporary_path = Path(temporary.name)
+        temporary_path.replace(path)
+    finally:
+        if temporary_path is not None and temporary_path.exists():
+            temporary_path.unlink()
+
+
 def write_step_summary(lines: list[str]) -> None:
     path = os.environ.get("GITHUB_STEP_SUMMARY")
     if path:
@@ -821,6 +1123,7 @@ def main() -> int:
     original = args.site_file.read_text(encoding="utf-8")
     tournament, collections = fetch_tournify(args.live_url)
     fixtures, mapped_timelines, unmapped_dca = extract_fixtures(tournament, collections)
+    standings = extract_standings(tournament, collections)
     updated, grouped = replace_managed_sections(
         original,
         fixtures,
@@ -829,19 +1132,21 @@ def main() -> int:
         schedule,
         today,
     )
+    updated = replace_standings_sections(updated, standings)
     lines = [f"Tournify tournament: {tournament.get('name', 'unnamed')}", *summarize(fixtures, grouped)]
+    for timeline in STANDINGS_TIMELINES:
+        dca_row = next(row for row in standings[timeline] if row["is_dca"])
+        lines.append(
+            f"{dca_row['name']} standings: position {dca_row['position']}/{len(standings[timeline])}, "
+            f"{dca_row['played']} played, {dca_row['won']} won, {dca_row['lost']} lost, "
+            f"{dca_row['points']} points, point difference {dca_row['point_difference']:+d}"
+        )
     lines.extend("UNMAPPED DCA: " + item for item in unmapped_dca)
 
     changed = updated != original
     lines.append(f"Site HTML {'would change' if changed and args.dry_run else 'changed' if changed else 'unchanged'}: {args.site_file}")
     if changed and not args.dry_run:
-        args.site_file.parent.mkdir(parents=True, exist_ok=True)
-        with tempfile.NamedTemporaryFile(
-            mode="w", encoding="utf-8", dir=args.site_file.parent, delete=False
-        ) as temporary:
-            temporary.write(updated)
-            temporary_path = Path(temporary.name)
-        temporary_path.replace(args.site_file)
+        atomic_write_text(args.site_file, updated)
     for line in lines:
         print(line)
     write_step_summary(lines)
