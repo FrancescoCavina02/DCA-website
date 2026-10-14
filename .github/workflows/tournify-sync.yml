@@ -34,11 +34,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Stage Tournify fixtures (manual run)
+      - name: Stage Tournify results and Mixed standings (manual run)
         if: github.event_name == 'workflow_dispatch'
         run: python scripts/sync_tournify.py --site-file competitions.html
 
-      - name: Stage Tournify fixtures (match-day check)
+      - name: Stage Tournify results and Mixed standings (match-day check)
         if: github.event_name == 'schedule'
         run: python scripts/sync_tournify.py --site-file competitions.html --scheduled-only
 
@@ -49,9 +49,9 @@ jobs:
           base: main
           branch: automation/tournify-results
           add-paths: competitions.html
-          commit-message: "Sync DCA competition results from Tournify"
-          title: "Sync DCA competition results from Tournify"
+          commit-message: "Sync DCA competition results and Mixed standings from Tournify"
+          title: "Sync DCA competition results and Mixed standings from Tournify"
           body: |
-            This pull request stages DCA fixtures and scores from the public Tournify league feed.
-            Only the next match day and posted results are shown in the competition timeline.
-            Review the results before merging.
+            This pull request stages DCA fixtures and scores from the public Tournify league feed and refreshes the Mixed 1 and Mixed 2 poule standings.
+            Only the next match day and posted results are shown in each competition timeline. Empty or failed standings data aborts the update and preserves the current tables.
+            Review the scores and standings before merging.
