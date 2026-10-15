@@ -115,7 +115,8 @@ def parse_ics_events(ics_text: str, zone: ZoneInfo) -> tuple[str, list[dict[str,
         if line == "BEGIN:VEVENT":
             current = {}
         elif line == "END:VEVENT" and current is not None:
-            if "DTSTART" in current and "SUMMARY" in current:
+            status = current.get("STATUS", ("", ""))[1].strip().upper()
+            if status != "CANCELLED" and "DTSTART" in current and "SUMMARY" in current:
                 start_key, start_value = current["DTSTART"]
                 start = parse_ics_datetime(start_key, start_value, zone)
                 end = None
@@ -132,7 +133,7 @@ def parse_ics_events(ics_text: str, zone: ZoneInfo) -> tuple[str, list[dict[str,
         elif current is not None and ":" in line:
             key, value = line.split(":", 1)
             field = key.split(";", 1)[0]
-            if field in {"DTSTART", "DTEND", "SUMMARY", "LOCATION"}:
+            if field in {"DTSTART", "DTEND", "SUMMARY", "LOCATION", "STATUS"}:
                 current[field] = (key, value)
     return calendar_name, events
 
@@ -176,7 +177,7 @@ def build_schedule(calendar_payloads: list[str], as_of: date) -> dict[str, objec
                 if not season_start <= event_date < season_end:
                     continue
                 day_number = int(day_match.group(1))
-                if not 1 <= day_number <= 5:
+                if day_number < 1:
                     raise RuntimeError(f"DBN agenda has an invalid competition day number: {summary}")
                 categorized[kind].append({
                     "date": event_date.isoformat(),
@@ -211,14 +212,18 @@ def build_schedule(calendar_payloads: list[str], as_of: date) -> dict[str, objec
 
 
 def cron_entries(schedule: dict[str, object]) -> list[str]:
-    dates: set[date] = set()
+    days_by_month: dict[int, set[int]] = {
+        month: {1, 15} for month in (8, 9, 10)
+    }
     for event in schedule["events"]:
         event_day = date.fromisoformat(str(event["date"]))
-        dates.update(event_day + timedelta(days=int(offset)) for offset in schedule["check_offsets_days"])
-    by_month: dict[int, list[int]] = {}
-    for check_date in sorted(dates):
-        by_month.setdefault(check_date.month, []).append(check_date.day)
-    return [f'    - cron: "0 8 {",".join(map(str, days))} {month} *"' for month, days in sorted(by_month.items())]
+        for offset in schedule["check_offsets_days"]:
+            check_date = event_day + timedelta(days=int(offset))
+            days_by_month.setdefault(check_date.month, set()).add(check_date.day)
+    return [
+        f'    - cron: "0 8 {",".join(map(str, sorted(days)))} {month} *"'
+        for month, days in sorted(days_by_month.items())
+    ]
 
 
 def replace_workflow_schedules(workflow_text: str, schedule: dict[str, object]) -> str:

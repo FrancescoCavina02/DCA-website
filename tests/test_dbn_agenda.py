@@ -1,8 +1,11 @@
 import importlib.util
+import shutil
 import sys
+import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
+from unittest.mock import patch
 
 REPO = Path(__file__).resolve().parents[1]
 SCRIPTS = REPO / "scripts"
@@ -27,6 +30,24 @@ END:VCALENDAR
 """
 
 
+def calendar_with_events(name, events):
+    payload = ["BEGIN:VCALENDAR", f"X-WR-CALNAME:{name}"]
+    for summary, event_date, location, status in events:
+        escaped_location = location.replace(",", "\\,")
+        payload.extend([
+            "BEGIN:VEVENT",
+            f"DTSTART;VALUE=DATE:{event_date.replace('-', '')}",
+            f"DTEND;VALUE=DATE:{event_date.replace('-', '')}",
+            f"SUMMARY:{summary}",
+            f"LOCATION:{escaped_location}",
+        ])
+        if status:
+            payload.append(f"STATUS:{status}")
+        payload.append("END:VEVENT")
+    payload.append("END:VCALENDAR")
+    return "\n".join(payload)
+
+
 class DbNAgendaTests(unittest.TestCase):
     def setUp(self):
         self.feeds = [
@@ -44,17 +65,96 @@ class DbNAgendaTests(unittest.TestCase):
     def test_partial_agenda_keeps_existing_season_unchanged(self):
         self.assertIsNone(AGENDA.build_schedule(self.feeds[:1], date(2027, 8, 15)))
 
+    def test_partial_live_agenda_does_not_write_page_or_schedule(self):
+        with tempfile.TemporaryDirectory(dir=REPO.parent) as directory:
+            root = Path(directory)
+            schedule_file = root / "dbn_competition_days.json"
+            workflow_file = root / "tournify-sync.yml"
+            site_file = root / "competitions.html"
+            output_file = root / "github-output.txt"
+            shutil.copyfile(REPO / "data/dbn_competition_days.json", schedule_file)
+            shutil.copyfile(REPO / ".github/workflows/tournify-sync.yml", workflow_file)
+            shutil.copyfile(REPO / "competitions.html", site_file)
+            before = [path.read_bytes() for path in (schedule_file, workflow_file, site_file)]
+            agenda_page = '<iframe src="https://calendar.google.com/calendar/embed?src=mixed%40group.calendar.google.com"></iframe>'
+            argv = [
+                "sync_dbn_agenda.py",
+                "--schedule-file", str(schedule_file),
+                "--workflow-file", str(workflow_file),
+                "--site-file", str(site_file),
+                "--github-output", str(output_file),
+                "--as-of", "2027-08-15",
+            ]
+
+            with patch.object(sys, "argv", argv), patch.object(
+                AGENDA, "read_url", side_effect=[agenda_page, self.feeds[0]]
+            ):
+                AGENDA.main()
+
+            self.assertEqual(before, [path.read_bytes() for path in (schedule_file, workflow_file, site_file)])
+            self.assertIn("changed=false", output_file.read_text(encoding="utf-8"))
+
     def test_schedule_crons_cover_day_after_and_one_week_later(self):
         schedule = AGENDA.build_schedule(self.feeds, date(2026, 10, 15))
         self.assertEqual(
             AGENDA.cron_entries(schedule),
-            ['    - cron: "0 8 12,19 10 *"', '    - cron: "0 8 15,22 11 *"'],
+            [
+                '    - cron: "0 8 1,15 8 *"',
+                '    - cron: "0 8 1,15 9 *"',
+                '    - cron: "0 8 1,12,15,19 10 *"',
+                '    - cron: "0 8 15,22 11 *"',
+            ],
+        )
+
+    def test_agenda_crons_cover_future_seasons_with_more_than_five_days(self):
+        mixed = calendar_with_events(
+            "DBN | Competitie Mixed",
+            [(f"Competitie MIX dodgeball (dag {day})", f"2027-{day + 6:02d}-01", "Venue", "") for day in range(1, 7)],
+        )
+        men_women = calendar_with_events(
+            "DBN | Competitie Dames/Heren",
+            [(f"Competitie M/V dodgeball (dag {day})", f"2027-{day + 6:02d}-02", "Venue", "") for day in range(1, 7)],
+        )
+
+        schedule = AGENDA.build_schedule([mixed, men_women], date(2027, 8, 15))
+
+        self.assertEqual(len(schedule["events"]), 12)
+        self.assertEqual(max(event["day"] for event in schedule["events"]), 6)
+
+    def test_cancelled_agenda_events_are_ignored(self):
+        mixed = calendar_with_events(
+            "DBN | Competitie Mixed",
+            [
+                ("Competitie MIX dodgeball (dag 1)", "2026-10-11", "Venue", "CONFIRMED"),
+                ("Competitie MIX dodgeball (dag 2)", "2027-01-09", "Venue", "CANCELLED"),
+            ],
+        )
+
+        schedule = AGENDA.build_schedule([mixed, self.feeds[1]], date(2026, 10, 15))
+
+        self.assertEqual([event["day"] for event in schedule["events"]], [1, 1])
+
+    def test_cron_offsets_cross_calendar_year_boundaries(self):
+        schedule = {
+            "events": [{"date": "2026-12-28"}],
+            "check_offsets_days": [1, 8],
+        }
+
+        self.assertEqual(
+            AGENDA.cron_entries(schedule),
+            [
+                '    - cron: "0 8 5 1 *"',
+                '    - cron: "0 8 1,15 8 *"',
+                '    - cron: "0 8 1,15 9 *"',
+                '    - cron: "0 8 1,15 10 *"',
+                '    - cron: "0 8 29 12 *"',
+            ],
         )
 
     def test_replaces_only_generated_cron_block(self):
         workflow = "on:\\n  schedule:\\n    # BEGIN DBN AGENDA SCHEDULES\\n    - cron: old\\n    # END DBN AGENDA SCHEDULES\\n"
         updated = AGENDA.replace_workflow_schedules(workflow, AGENDA.build_schedule(self.feeds, date(2026, 10, 15)))
-        self.assertIn('    - cron: "0 8 12,19 10 *"', updated)
+        self.assertIn('    - cron: "0 8 1,12,15,19 10 *"', updated)
         self.assertNotIn("cron: old", updated)
 
     def test_rollover_archives_results_and_standings_and_sets_new_season(self):
