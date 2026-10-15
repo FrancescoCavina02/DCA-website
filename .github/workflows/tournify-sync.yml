@@ -3,17 +3,18 @@ name: Tournify Results Sync
 on:
   workflow_dispatch:
   schedule:
-    # 08:00 UTC on the day after each DBN match day and one week later.
-    # The script checks exact year-specific dates in data/dbn_competition_days.json;
-    # these calendar cron entries are only coarse triggers.
-    - cron: "0 8 12,19 10 *"
-    - cron: "0 8 15,22 11 *"
+    # Agenda generated checks: 08:00 UTC on day +1 and day +8 for each DBN event.
+    # The sync script validates exact dates against the season JSON before fetching Tournify.
+    # BEGIN DBN AGENDA SCHEDULES
     - cron: "0 8 10,17,24,31 1 *"
     - cron: "0 8 8,15 2 *"
     - cron: "0 8 8,15,28 3 *"
     - cron: "0 8 4,19,26 4 *"
     - cron: "0 8 9,16,31 5 *"
     - cron: "0 8 7 6 *"
+    - cron: "0 8 12,19 10 *"
+    - cron: "0 8 15,22 11 *"
+    # END DBN AGENDA SCHEDULES
 
 jobs:
   sync-results:
@@ -34,11 +35,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Stage Tournify results and Mixed standings (manual run)
+      - name: Stage Tournify results and team standings (manual run)
         if: github.event_name == 'workflow_dispatch'
         run: python scripts/sync_tournify.py --site-file competitions.html
 
-      - name: Stage Tournify results and Mixed standings (match-day check)
+      - name: Stage Tournify results and team standings (match-day check)
         if: github.event_name == 'schedule'
         run: python scripts/sync_tournify.py --site-file competitions.html --scheduled-only
 
@@ -49,9 +50,9 @@ jobs:
           base: main
           branch: automation/tournify-results
           add-paths: competitions.html
-          commit-message: "Sync DCA competition results and Mixed standings from Tournify"
-          title: "Sync DCA competition results and Mixed standings from Tournify"
+          commit-message: "Sync DCA competition results and standings from Tournify"
+          title: "Sync DCA competition results and standings from Tournify"
           body: |
-            This pull request stages DCA fixtures and scores from the public Tournify league feed and refreshes the Mixed 1 and Mixed 2 poule standings.
-            Only the next match day and posted results are shown in each competition timeline. Empty or failed standings data aborts the update and preserves the current tables.
+            This pull request stages DCA fixtures and scores from the public Tournify league feed and refreshes the standings for Man 1, Man 2, Women, Mixed 1, and Mixed 2.
+            Only the next match day and posted results are shown in each competition timeline. Failed or empty Tournify data aborts the update; a team with no completed results keeps its prior table or shows a waiting message.
             Review the scores and standings before merging.
