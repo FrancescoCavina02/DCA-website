@@ -1435,7 +1435,7 @@
     }
 
 
-    /* Live DBN Mixed poule standings */
+    /* Live DBN poule standings */
     .dbn-standings {
       position: relative;
       z-index: 2;
@@ -1473,6 +1473,30 @@
       color: #607080;
       font-size: 0.95rem;
       font-weight: 600;
+    }
+
+    .dbn-standings-empty {
+      margin: 0;
+      color: #607080;
+      line-height: 1.6;
+    }
+
+    .dbn-season-archive {
+      margin: 1.5rem 0;
+      padding: 1rem 1.25rem;
+      border: 1px solid rgba(45, 62, 80, 0.12);
+      border-radius: 12px;
+      background: #f8fafc;
+    }
+
+    .dbn-season-archive summary {
+      color: var(--secondary);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .dbn-season-archive-content {
+      padding-top: 1rem;
     }
 
     .dbn-standings-scroll {
@@ -2185,7 +2209,7 @@
   </style>
 </head>
 
-<body>
+<body data-current-season="2026/2027">
   <!-- Header + Nav -->
   <header>
     <div class="logo">
@@ -2332,13 +2356,20 @@
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
                   <h3>DBN Men &amp; Women · day 1</h3>
-                  <p class="venue">10:00–17:00 · X TU Delft, Mekelweg 8–10, 2628 CD Delft</p>
+                  <p class="venue">10:00–17:00 · X TU Delft, Mekelweg 8-10, 2628 CD Delft</p>
                   <p class="venue">Fixtures are warming up — they will land here when Tournify publishes the lineup.</p>
                 </div>
               </div>
             </div>
           </div>
           <!-- END TOURNIFY SYNC: man1 -->
+          <!-- BEGIN TOURNIFY STANDINGS: man1 -->
+          <section class="dbn-standings" aria-labelledby="standings-man1-title">
+            <h3 class="dbn-standings-title" id="standings-man1-title">DBN Standings</h3>
+            <p class="dbn-standings-division">1st Division</p>
+            <p class="dbn-standings-empty">Man 1 standings will appear after the first completed match day.</p>
+          </section>
+          <!-- END TOURNIFY STANDINGS: man1 -->
           <!-- Button to show previous season (2025/2026) -->
           <div style="text-align: center; margin: 3rem 0;">
             <button id="show-previous-2025-man1" class="show-previous-season-btn">
@@ -2721,13 +2752,20 @@
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
                   <h3>DBN Men &amp; Women · day 1</h3>
-                  <p class="venue">10:00–17:00 · X TU Delft, Mekelweg 8–10, 2628 CD Delft</p>
+                  <p class="venue">10:00–17:00 · X TU Delft, Mekelweg 8-10, 2628 CD Delft</p>
                   <p class="venue">Fixtures are warming up — they will land here when Tournify publishes the lineup.</p>
                 </div>
               </div>
             </div>
           </div>
           <!-- END TOURNIFY SYNC: man2 -->
+          <!-- BEGIN TOURNIFY STANDINGS: man2 -->
+          <section class="dbn-standings" aria-labelledby="standings-man2-title">
+            <h3 class="dbn-standings-title" id="standings-man2-title">DBN Standings</h3>
+            <p class="dbn-standings-division">2nd Division</p>
+            <p class="dbn-standings-empty">Man 2 standings will appear after the first completed match day.</p>
+          </section>
+          <!-- END TOURNIFY STANDINGS: man2 -->
           <!-- Button to show previous season (2025/2026) -->
           <div style="text-align: center; margin: 3rem 0;">
             <button id="show-previous-2025-man2" class="show-previous-season-btn">
@@ -3090,13 +3128,20 @@
                 <div class="trophy-icon">🏆</div>
                 <div class="competition-info">
                   <h3>DBN Men &amp; Women · day 1</h3>
-                  <p class="venue">10:00–17:00 · X TU Delft, Mekelweg 8–10, 2628 CD Delft</p>
+                  <p class="venue">10:00–17:00 · X TU Delft, Mekelweg 8-10, 2628 CD Delft</p>
                   <p class="venue">Fixtures are warming up — they will land here when Tournify publishes the lineup.</p>
                 </div>
               </div>
             </div>
           </div>
           <!-- END TOURNIFY SYNC: women -->
+          <!-- BEGIN TOURNIFY STANDINGS: women -->
+          <section class="dbn-standings" aria-labelledby="standings-women-title">
+            <h3 class="dbn-standings-title" id="standings-women-title">DBN Standings</h3>
+            <p class="dbn-standings-division">1st Division</p>
+            <p class="dbn-standings-empty">Women standings will appear after the first completed match day.</p>
+          </section>
+          <!-- END TOURNIFY STANDINGS: women -->
           <!-- Button to show previous season (2025/2026) -->
           <div style="text-align: center; margin: 3rem 0;">
             <button id="show-previous-2025-women" class="show-previous-season-btn">
@@ -3529,11 +3574,11 @@
           <!-- END TOURNIFY SYNC: mixed1 -->
           <!-- BEGIN TOURNIFY STANDINGS: mixed1 -->
           <section class="dbn-standings" aria-labelledby="standings-mixed1-title">
-            <h3 class="dbn-standings-title" id="standings-mixed1-title">DBN Mixed Standings</h3>
+            <h3 class="dbn-standings-title" id="standings-mixed1-title">DBN Standings</h3>
             <p class="dbn-standings-division">1st Division</p>
             <div class="dbn-standings-scroll" role="region" aria-label="1st Division standings table" tabindex="0">
               <table class="dbn-standings-table">
-                <caption class="visually-hidden">DBN Mixed 1st Division standings from Tournify</caption>
+                <caption class="visually-hidden">DBN Mixed 1 1st Division standings from Tournify</caption>
                 <thead><tr><th scope="col">Position</th><th scope="col" class="standings-team">Team</th><th scope="col">Played</th><th scope="col">Won</th><th scope="col">Lost</th><th scope="col">Points</th><th scope="col">PD</th></tr></thead>
                 <tbody>
               <tr><th scope="row">1</th><td class="standings-team">Haarlem Dodge</td><td>3</td><td>3</td><td>0</td><td>6</td><td>+105</td></tr>
@@ -3979,11 +4024,11 @@
           <!-- END TOURNIFY SYNC: mixed2 -->
           <!-- BEGIN TOURNIFY STANDINGS: mixed2 -->
           <section class="dbn-standings" aria-labelledby="standings-mixed2-title">
-            <h3 class="dbn-standings-title" id="standings-mixed2-title">DBN Mixed Standings</h3>
+            <h3 class="dbn-standings-title" id="standings-mixed2-title">DBN Standings</h3>
             <p class="dbn-standings-division">2nd Division</p>
             <div class="dbn-standings-scroll" role="region" aria-label="2nd Division standings table" tabindex="0">
               <table class="dbn-standings-table">
-                <caption class="visually-hidden">DBN Mixed 2nd Division standings from Tournify</caption>
+                <caption class="visually-hidden">DBN Mixed 2 2nd Division standings from Tournify</caption>
                 <thead><tr><th scope="col">Position</th><th scope="col" class="standings-team">Team</th><th scope="col">Played</th><th scope="col">Won</th><th scope="col">Lost</th><th scope="col">Points</th><th scope="col">PD</th></tr></thead>
                 <tbody>
               <tr><th scope="row">1</th><td class="standings-team">Dodgeball Eindhoven</td><td>3</td><td>3</td><td>0</td><td>6</td><td>+83</td></tr>
@@ -4604,12 +4649,13 @@
           }
 
           // Update timeline title based on team
+          const currentSeason = document.body.dataset.currentSeason || '2026/2027';
           const teamTitles = {
-            'man1': 'Man 1 - Hall of Glory 2026/2027',
-            'man2': 'Man 2 - Hall of Glory 2026/2027',
-            'women': 'Women - Hall of Glory 2026/2027',
-            'mixed1': 'Mixed 1 - Hall of Glory 2026/2027',
-            'mixed2': 'Mixed 2 - Hall of Glory 2026/2027'
+            'man1': `Man 1 - Hall of Glory ${currentSeason}`,
+            'man2': `Man 2 - Hall of Glory ${currentSeason}`,
+            'women': `Women - Hall of Glory ${currentSeason}`,
+            'mixed1': `Mixed 1 - Hall of Glory ${currentSeason}`,
+            'mixed2': `Mixed 2 - Hall of Glory ${currentSeason}`
           };
 
           timelineTitle.textContent = teamTitles[teamName];

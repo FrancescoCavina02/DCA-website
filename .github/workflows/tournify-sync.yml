@@ -1,57 +1,121 @@
-name: Tournify Results Sync
+name: DCA Competition Sync
 
 on:
   workflow_dispatch:
   schedule:
-    # 08:00 UTC on the day after each DBN match day and one week later.
-    # The script checks exact year-specific dates in data/dbn_competition_days.json;
-    # these calendar cron entries are only coarse triggers.
-    - cron: "0 8 12,19 10 *"
-    - cron: "0 8 15,22 11 *"
+    # The agenda script combines these seasonal refresh dates with generated match checks.
+    # BEGIN DBN AGENDA SCHEDULES
     - cron: "0 8 10,17,24,31 1 *"
     - cron: "0 8 8,15 2 *"
     - cron: "0 8 8,15,28 3 *"
     - cron: "0 8 4,19,26 4 *"
     - cron: "0 8 9,16,31 5 *"
     - cron: "0 8 7 6 *"
+    - cron: "0 8 1,15 8 *"
+    - cron: "0 8 1,15 9 *"
+    - cron: "0 8 1,12,15,19 10 *"
+    - cron: "0 8 15,22 11 *"
+    # END DBN AGENDA SCHEDULES
+
+concurrency:
+  group: dca-site-publish
+  cancel-in-progress: false
 
 jobs:
   sync-results:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Check out main
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: main
-          persist-credentials: false
+          fetch-depth: 0
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
 
-      - name: Stage Tournify results and Mixed standings (manual run)
-        if: github.event_name == 'workflow_dispatch'
+      - name: Check whether the DBN agenda refresh is due
+        id: agenda-window
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          python - <<'PY'
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          import os
+
+          now = datetime.now(ZoneInfo("Europe/Amsterdam"))
+          due = os.environ["EVENT_NAME"] == "workflow_dispatch" or (
+              now.month in {8, 9, 10} and now.day in {1, 15}
+          )
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"due={str(due).lower()}\n")
+          PY
+
+      - name: Read DBN agenda and refresh season data
+        id: agenda
+        if: steps.agenda-window.outputs.due == 'true'
+        continue-on-error: true
+        run: |
+          stage="$(mktemp -d "$RUNNER_TEMP/dbn-agenda.XXXXXX")"
+          mkdir -p "$stage/data" "$stage/.github/workflows"
+          cp data/dbn_competition_days.json "$stage/data/dbn_competition_days.json"
+          cp .github/workflows/tournify-sync.yml "$stage/.github/workflows/tournify-sync.yml"
+          cp competitions.html "$stage/competitions.html"
+          python scripts/sync_dbn_agenda.py \
+            --schedule-file "$stage/data/dbn_competition_days.json" \
+            --workflow-file "$stage/.github/workflows/tournify-sync.yml" \
+            --site-file "$stage/competitions.html"
+          cp "$stage/data/dbn_competition_days.json" data/dbn_competition_days.json
+          cp "$stage/.github/workflows/tournify-sync.yml" .github/workflows/tournify-sync.yml
+          cp "$stage/competitions.html" competitions.html
+
+      - name: Report agenda refresh failure and keep prior files
+        if: steps.agenda.outcome == 'failure'
+        run: echo "::warning title=DBN agenda refresh failed::Keeping the checked-in season data and continuing any due Tournify check."
+
+      - name: Sync results after an agenda update
+        if: steps.agenda.outputs.changed == 'true' && steps.agenda.outputs.season_changed != 'true'
         run: python scripts/sync_tournify.py --site-file competitions.html
 
-      - name: Stage Tournify results and Mixed standings (match-day check)
-        if: github.event_name == 'schedule'
+      - name: Sync results and standings (manual run)
+        if: github.event_name == 'workflow_dispatch' && steps.agenda.outputs.season_changed != 'true' && steps.agenda.outputs.changed != 'true'
+        run: python scripts/sync_tournify.py --site-file competitions.html
+
+      - name: Sync results and standings (match-day check)
+        if: github.event_name == 'schedule' && steps.agenda.outputs.changed != 'true'
         run: python scripts/sync_tournify.py --site-file competitions.html --scheduled-only
 
-      - name: Open or update results pull request
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
-        with:
-          token: ${{ github.token }}
-          base: main
-          branch: automation/tournify-results
-          add-paths: competitions.html
-          commit-message: "Sync DCA competition results and Mixed standings from Tournify"
-          title: "Sync DCA competition results and Mixed standings from Tournify"
-          body: |
-            This pull request stages DCA fixtures and scores from the public Tournify league feed and refreshes the Mixed 1 and Mixed 2 poule standings.
-            Only the next match day and posted results are shown in each competition timeline. Empty or failed standings data aborts the update and preserves the current tables.
-            Review the scores and standings before merging.
+      - name: Validate sync and generated files
+        run: |
+          python -m unittest discover -s tests -v
+          git diff --check
+
+      - name: Publish validated changes
+        run: |
+          git add -- .github/workflows/tournify-sync.yml data/dbn_competition_days.json competitions.html
+          if git diff --cached --quiet; then
+            echo "No validated changes to publish."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Sync DCA competition page from DBN and Tournify"
+          git fetch origin main
+          git rebase origin/main
+          python -m unittest discover -s tests -v
+          git diff --check origin/main...HEAD
+          git push origin HEAD:main
+
+      - name: Fail the run if the DBN agenda refresh failed
+        if: steps.agenda.outcome == 'failure'
+        run: |
+          echo "::error title=DBN agenda refresh failed::The previous season files were preserved; inspect the agenda refresh step and retry after DBN's feeds recover."
+          exit 1

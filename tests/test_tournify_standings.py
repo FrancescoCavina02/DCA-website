@@ -25,25 +25,41 @@ class TournifyStandingsTests(unittest.TestCase):
             "scoringTypesPerDivisionPerPhase": {
                 "mixed1": {"0": "default"},
                 "mixed2": {"0": "default"},
+                "men1": {"0": "default"},
+                "men2": {"0": "default"},
+                "women": {"0": "default"},
             },
         }
         self.collections = {
             "divisions": [
                 {"id": "mixed1", "name": "1e divisie | MIXED"},
                 {"id": "mixed2", "name": "2e divisie | MIXED"},
+                {"id": "men1", "name": "1e divisie | Heren"},
+                {"id": "men2", "name": "2e divisie | Heren"},
+                {"id": "women", "name": "1e divisie | Dames"},
             ],
+            "days": [],
             "teams": [
                 {"id": "dca1", "name": "DCA¹ ⚥¹", "division": "mixed1", "poule0": "p1", "numInPoule0": 0},
                 {"id": "haarlem", "name": "Haarlem Dodge ⚥¹", "division": "mixed1", "poule0": "p1", "numInPoule0": 1},
                 {"id": "spellen", "name": "SV Spellen ⚥¹", "division": "mixed1", "poule0": "p1", "numInPoule0": 2},
                 {"id": "dca2", "name": "DCA² ⚥²", "division": "mixed2", "poule0": "p2", "numInPoule0": 0},
                 {"id": "eindhoven", "name": "Dodgeball Eindhoven ⚥²", "division": "mixed2", "poule0": "p2", "numInPoule0": 1},
+                {"id": "man1", "name": "DCA 1", "division": "men1", "poule0": "p3", "numInPoule0": 0},
+                {"id": "man1-opponent", "name": "Men Opponent", "division": "men1", "poule0": "p3", "numInPoule0": 1},
+                {"id": "man2", "name": "DCA 2", "division": "men2", "poule0": "p4", "numInPoule0": 0},
+                {"id": "man2-opponent", "name": "Men 2 Opponent", "division": "men2", "poule0": "p4", "numInPoule0": 1},
+                {"id": "women", "name": "DAM Delft Dames", "division": "women", "poule0": "p5", "numInPoule0": 0},
+                {"id": "women-opponent", "name": "Women Opponent", "division": "women", "poule0": "p5", "numInPoule0": 1},
             ],
             "matches": [
                 {"poule": "p1", "team1": 0, "team2": 1, "score1": 12, "score2": 10},
                 {"poule": "p1", "team1": 1, "team2": 2, "score1": 14, "score2": 10},
                 {"poule": "p1", "team1": 2, "team2": 0, "score1": 20, "score2": 10},
                 {"poule": "p2", "team1": 0, "team2": 1, "score1": 30, "score2": 10},
+                {"poule": "p3", "team1": 0, "team2": 1, "score1": 20, "score2": 10},
+                {"poule": "p4", "team1": 0, "team2": 1, "score1": 20, "score2": 10},
+                {"poule": "p5", "team1": 0, "team2": 1, "score1": 20, "score2": 10},
             ],
         }
 
@@ -58,6 +74,47 @@ class TournifyStandingsTests(unittest.TestCase):
         rendered = SYNC.render_standings_table("mixed2", standings["mixed2"])
         self.assertIn('<tr class="dca-team-row">', rendered)
         self.assertIn("DCA 2", rendered)
+
+
+    def test_standings_cover_all_five_dca_teams_including_women_target(self):
+        divisions = [
+            {"id": "men1", "name": "1e divisie | Heren"},
+            {"id": "men2", "name": "2e divisie | Heren"},
+            {"id": "women", "name": "1e divisie | Dames"},
+            {"id": "mixed1", "name": "1e divisie | Mixed"},
+            {"id": "mixed2", "name": "2e divisie | Mixed"},
+        ]
+        targets = [
+            ("man1", "men1", "DCA 1"),
+            ("man2", "men2", "DCA 2"),
+            ("women", "women", "DAM Delft Dames"),
+            ("mixed1", "mixed1", "DCA 1"),
+            ("mixed2", "mixed2", "DCA 2"),
+        ]
+        teams = []
+        matches = []
+        scoring = {}
+        for timeline, division_id, dca_name in targets:
+            poule = f"poule-{timeline}"
+            opponent_id = f"opponent-{timeline}"
+            teams.extend([
+                {"id": f"dca-{timeline}", "name": dca_name, "division": division_id, "poule0": poule, "numInPoule0": 0},
+                {"id": opponent_id, "name": f"Opponent {timeline}", "division": division_id, "poule0": poule, "numInPoule0": 1},
+            ])
+            matches.append({"poule": poule, "team1": 0, "team2": 1, "score1": 20, "score2": 10})
+            scoring[division_id] = {"0": "default"}
+        tournament = {**self.tournament, "scoringTypesPerDivisionPerPhase": scoring}
+        collections = {"divisions": divisions, "days": [], "teams": teams, "matches": matches}
+
+        standings = SYNC.extract_standings(tournament, collections)
+
+        self.assertEqual(set(standings), {"man1", "man2", "women", "mixed1", "mixed2"})
+        for timeline, _, expected_name in targets:
+            dca_row = next(row for row in standings[timeline] if row["is_dca"])
+            self.assertEqual(dca_row["name"], expected_name)
+            self.assertEqual((dca_row["played"], dca_row["won"], dca_row["lost"]), (1, 1, 0))
+        women_row = next(row for row in standings["women"] if row["is_dca"])
+        self.assertEqual(women_row["name"], "DAM Delft Dames")
 
     def test_atomic_write_preserves_file_mode(self):
         with tempfile.TemporaryDirectory(dir=TEST_TMP) as directory:

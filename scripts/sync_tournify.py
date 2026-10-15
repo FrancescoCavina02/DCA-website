@@ -36,12 +36,14 @@ DIVISION_TO_TIMELINE = {
     "2e divisie | heren": ("man2", "DCA 2"),
     "1e divisie | mixed": ("mixed1", "DCA 1"),
     "2e divisie | mixed": ("mixed2", "DCA 2"),
+    "1e divisie | dames": ("women", "DAM Delft Dames"),
 }
 TEAM_NAME_TO_TIMELINE = {
     "damdelftdames": ("women", "DAM Delft Dames"),
 }
 TIMELINES = ("man1", "man2", "women", "mixed1", "mixed2")
-STANDINGS_TIMELINES = ("mixed1", "mixed2")
+STANDINGS_TIMELINES = TIMELINES
+TIMELINE_LABELS = {"man1": "Man 1", "man2": "Man 2", "women": "Women", "mixed1": "Mixed 1", "mixed2": "Mixed 2"}
 SCHEDULE_FILE = Path(__file__).resolve().parents[1] / "data" / "dbn_competition_days.json"
 
 # Short labels already used on the DCA competition page. Unknown opponents keep
@@ -429,17 +431,18 @@ def _points_for_match(
 
 
 def extract_standings(
-    tournament: dict[str, Any], collections: dict[str, list[dict[str, Any]]]
+    tournament: dict[str, Any],
+    collections: dict[str, list[dict[str, Any]]],
+    schedule: dict[str, Any] | None = None,
 ) -> dict[str, list[dict[str, Any]]]:
-    """Recreate the active Mixed poule standings from Tournify's public Firestore data."""
+    """Recreate each DCA team poule table from Tournify's public Firestore data."""
     if not collections.get("teams") or not collections.get("divisions") or not collections.get("matches"):
         raise RuntimeError("Tournify returned an empty teams, divisions, or matches collection; kept existing standings")
 
     division_names = {doc["id"]: str(doc.get("name", "")) for doc in collections["divisions"]}
-    mixed_divisions = {
+    target_divisions = {
         normalized_division(name): (timeline, site_name)
         for name, (timeline, site_name) in DIVISION_TO_TIMELINE.items()
-        if timeline in STANDINGS_TIMELINES
     }
     poules: dict[tuple[str, str, str], dict[str, dict[str, Any]]] = {}
     target_poules: dict[str, set[tuple[str, str, str]]] = {
@@ -449,11 +452,15 @@ def extract_standings(
     for team in collections["teams"]:
         division_id = str(team.get("division", ""))
         division_name = division_names.get(division_id, "")
-        target = mixed_divisions.get(normalized_division(division_name))
+        target = target_divisions.get(normalized_division(division_name))
         if not target:
             continue
         timeline, site_name = target
-        is_dca = canonical_team_name(str(team.get("name", ""))).startswith("dca")
+        canonical_name = canonical_team_name(str(team.get("name", "")))
+        named_target = TEAM_NAME_TO_TIMELINE.get(canonical_name)
+        is_dca = canonical_name.startswith("dca") or (
+            named_target is not None and named_target[0] == timeline
+        )
         for field, poule_id in team.items():
             phase_match = re.fullmatch(r"poule(\d+)", field)
             if not phase_match or not poule_id:
@@ -480,12 +487,14 @@ def extract_standings(
 
     result: dict[str, list[dict[str, Any]]] = {}
     scoring_types = tournament.get("scoringTypesPerDivisionPerPhase") or {}
+    days_by_id = {str(doc["id"]): doc for doc in collections["days"]}
+    active_dates = {str(event["date"]) for event in schedule["events"]} if schedule else None
     alternate_rules = tournament.get("scoringTypes") or {}
     for timeline in STANDINGS_TIMELINES:
         groups = target_poules[timeline]
         if len(groups) != 1:
             raise RuntimeError(
-                f"Expected one active Mixed poule for {timeline}; found {len(groups)}. Kept existing standings"
+                f"Expected one active DBN poule for {timeline}; found {len(groups)}. Kept existing standings"
             )
         key = next(iter(groups))
         _, phase, poule_id = key
@@ -518,6 +527,9 @@ def extract_standings(
         scored_matches: list[dict[str, Any]] = []
         for match in collections["matches"]:
             if str(match.get("poule", "")) != poule_id:
+                continue
+            match_day, _ = match_date(tournament, match, days_by_id)
+            if active_dates is not None and match_day not in active_dates:
                 continue
             slot1, slot2 = str(match.get("team1", "")), str(match.get("team2", ""))
             if slot1 not in stats or slot2 not in stats:
@@ -573,8 +585,9 @@ def extract_standings(
                 "points2": points2,
             })
 
-        if not scored_matches or stats[dca_members[0]["slot"]]["played"] == 0:
-            raise RuntimeError(f"Tournify has no completed Mixed results for {timeline}; kept existing standings")
+        if stats[dca_members[0]["slot"]]["played"] == 0:
+            result[timeline] = []
+            continue
 
         points_groups: dict[int, list[str]] = defaultdict(list)
         for slot, row in stats.items():
@@ -624,7 +637,7 @@ def extract_standings(
 
 
 def render_standings_table(timeline: str, rows: list[dict[str, Any]]) -> str:
-    division = "1st Division" if timeline == "mixed1" else "2nd Division"
+    division = "2nd Division" if timeline in ("man2", "mixed2") else "1st Division"
     body = []
     for row in rows:
         css_class = ' class="dca-team-row"' if row["is_dca"] else ""
@@ -640,17 +653,29 @@ def render_standings_table(timeline: str, rows: list[dict[str, Any]]) -> str:
     table_rows = "\n".join(body)
     return (
         f'          <section class="dbn-standings" aria-labelledby="standings-{timeline}-title">\n'
-        f'            <h3 class="dbn-standings-title" id="standings-{timeline}-title">DBN Mixed Standings</h3>\n'
+        f'            <h3 class="dbn-standings-title" id="standings-{timeline}-title">DBN Standings</h3>\n'
         f'            <p class="dbn-standings-division">{division}</p>\n'
         f'            <div class="dbn-standings-scroll" role="region" aria-label="{division} standings table" tabindex="0">\n'
         f'              <table class="dbn-standings-table">\n'
-        f'                <caption class="visually-hidden">DBN Mixed {division} standings from Tournify</caption>\n'
+        f'                <caption class="visually-hidden">DBN {TIMELINE_LABELS[timeline]} {division} standings from Tournify</caption>\n'
         f'                <thead><tr><th scope="col">Position</th><th scope="col" class="standings-team">Team</th>'
         f'<th scope="col">Played</th><th scope="col">Won</th><th scope="col">Lost</th>'
         f'<th scope="col">Points</th><th scope="col">PD</th></tr></thead>\n'
         f'                <tbody>\n{table_rows}\n                </tbody>\n'
         f'              </table>\n'
         f'            </div>\n'
+        f'          </section>'
+    )
+
+
+def render_standings_unavailable(timeline: str) -> str:
+    division = "2nd Division" if timeline in ("man2", "mixed2") else "1st Division"
+    label = TIMELINE_LABELS[timeline]
+    return (
+        f'          <section class="dbn-standings" aria-labelledby="standings-{timeline}-title">\n'
+        f'            <h3 class="dbn-standings-title" id="standings-{timeline}-title">DBN Standings</h3>\n'
+        f'            <p class="dbn-standings-division">{division}</p>\n'
+        f'            <p class="dbn-standings-empty">{label} standings will appear after the first completed match day.</p>\n'
         f'          </section>'
     )
 
@@ -667,8 +692,16 @@ def replace_standings_sections(
         end_index = site_html.index(end, start_index)
         if end_index < start_index:
             raise RuntimeError(f"Managed standings markers are out of order for {timeline}")
-        rendered = "\n" + render_standings_table(timeline, standings[timeline]) + "\n          "
-        site_html = site_html[:start_index] + rendered + site_html[end_index:]
+        existing = site_html[start_index:end_index]
+        rows = standings.get(timeline) or []
+        if rows:
+            rendered_body = "\n" + render_standings_table(timeline, rows) + "\n          "
+        elif "dbn-standings-table" in existing:
+            # An empty team-specific result set must never erase a published table.
+            continue
+        else:
+            rendered_body = "\n" + render_standings_unavailable(timeline) + "\n          "
+        site_html = site_html[:start_index] + rendered_body + site_html[end_index:]
     return site_html
 
 
@@ -1123,7 +1156,9 @@ def main() -> int:
     original = args.site_file.read_text(encoding="utf-8")
     tournament, collections = fetch_tournify(args.live_url)
     fixtures, mapped_timelines, unmapped_dca = extract_fixtures(tournament, collections)
-    standings = extract_standings(tournament, collections)
+    standings = extract_standings(tournament, collections, schedule)
+    if not any(standings.values()):
+        raise RuntimeError("Tournify has no completed results for any DCA team; kept existing standings")
     updated, grouped = replace_managed_sections(
         original,
         fixtures,
@@ -1135,7 +1170,11 @@ def main() -> int:
     updated = replace_standings_sections(updated, standings)
     lines = [f"Tournify tournament: {tournament.get('name', 'unnamed')}", *summarize(fixtures, grouped)]
     for timeline in STANDINGS_TIMELINES:
-        dca_row = next(row for row in standings[timeline] if row["is_dca"])
+        dca_rows = [row for row in standings.get(timeline, []) if row["is_dca"]]
+        if not dca_rows:
+            lines.append(f"{TIMELINE_LABELS[timeline]} standings: no completed DCA result yet; existing table preserved")
+            continue
+        dca_row = dca_rows[0]
         lines.append(
             f"{dca_row['name']} standings: position {dca_row['position']}/{len(standings[timeline])}, "
             f"{dca_row['played']} played, {dca_row['won']} won, {dca_row['lost']} lost, "
